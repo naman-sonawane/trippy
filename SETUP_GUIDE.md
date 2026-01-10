@@ -1,199 +1,113 @@
-# Backend Setup Guide - MongoDB & Google OAuth
+# Trippy - Setup Guide
 
-## Step-by-Step Instructions
+## Overview
+Your app now has:
+1. **User database** with fields: Username, Age, Budget, Walk, DayNight, Solo
+2. **Itinerary saving** (renamed from schedule)
+3. **Algorithm integration** with Tinder-style swipe interface
+4. **Tavus AI agent** that asks travel preference questions
 
-### 1. Set Up MongoDB Atlas (Free Database)
+## Database Structure
 
-1. **Go to MongoDB Atlas**: https://www.mongodb.com/cloud/atlas/register
-   
-2. **Create an account**:
-   - Sign up with your email or Google account
-   - Choose the FREE tier (M0 Sandbox)
+### User Model
+```
+- name (username)
+- email
+- age
+- budget (low/medium/high)
+- walk (minimal/moderate/a lot)
+- dayNight (day/night/both)
+- solo (true/false)
+- preferences:
+  - likedItems: [item IDs]
+  - dislikedItems: [item IDs]
+  - travelHistory: [destinations]
+```
 
-3. **Create a cluster**:
-   - Click "Build a Database"
-   - Select "M0 FREE" option
-   - Choose a cloud provider (AWS recommended)
-   - Pick a region close to you
-   - Click "Create Cluster"
+### Trip Model
+```
+- userId
+- destination
+- startDate
+- endDate
+- activities: [...]
+- itinerary: [schedule items]
+```
 
-4. **Set up database access**:
-   - Go to "Database Access" in the left sidebar
-   - Click "Add New Database User"
-   - Authentication Method: Password
-   - Username: choose any (e.g., `trippyuser`)
-   - Password: click "Autogenerate Secure Password" and SAVE IT
-   - Database User Privileges: select "Read and write to any database"
-   - Click "Add User"
+### Algorithm Data (Python)
+See algorithm/data/mock_db.json for Places, Activities, and Interactions
 
-5. **Set up network access**:
-   - Go to "Network Access" in the left sidebar
-   - Click "Add IP Address"
-   - Click "Allow Access from Anywhere" (for development)
-   - Confirm
+## Workflow
 
-6. **Get your connection string**:
-   - Go to "Database" in the left sidebar
-   - Click "Connect" on your cluster
-   - Choose "Connect your application"
-   - Driver: Node.js, Version: 5.5 or later
-   - Copy the connection string (looks like: `mongodb+srv://username:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority`)
-   - Replace `<password>` with your actual password from step 4
-   - Add your database name after `.net/` (e.g., `mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/trippy?retryWrites=true&w=majority`)
+1. **User visits /agent** → Tavus AI asks questions:
+   - Age
+   - Budget (low/medium/high)
+   - Walk preference (minimal/moderate/a lot)
+   - Day/Night preference
+   - Solo or group travel
 
-### 2. Set Up Google OAuth
+2. **After conversation** → Button to go to /recommendations
 
-1. **Go to Google Cloud Console**: https://console.cloud.google.com/
+3. **User swipes** on recommendations (Tinder-style)
+   - Algorithm provides personalized recommendations
+   - Likes/dislikes are saved to database
+   - Algorithm learns from preferences
 
-2. **Create a new project**:
-   - Click the project dropdown at the top
-   - Click "New Project"
-   - Name: "Trippy" (or whatever you want)
-   - Click "Create"
+4. **Itinerary creation** → User can build itinerary at /schedule?tripId=XXX&days=3
 
-3. **Enable Google+ API**:
-   - Select your project
-   - Go to "APIs & Services" > "Library"
-   - Search for "Google+ API"
-   - Click on it and click "Enable"
+## Setup Instructions
 
-4. **Configure OAuth consent screen**:
-   - Go to "APIs & Services" > "OAuth consent screen"
-   - User Type: Select "External"
-   - Click "Create"
-   - App name: "Trippy"
-   - User support email: your email
-   - Developer contact: your email
-   - Click "Save and Continue"
-   - Scopes: Click "Save and Continue" (skip for now)
-   - Test users: Click "Add Users" and add your email
-   - Click "Save and Continue"
+### 1. Install Python Dependencies
+```bash
+cd algorithm
+pip install -r requirements.txt
+```
 
-5. **Create OAuth credentials**:
-   - Go to "APIs & Services" > "Credentials"
-   - Click "Create Credentials" > "OAuth client ID"
-   - Application type: "Web application"
-   - Name: "Trippy Web Client"
-   - Authorized JavaScript origins:
-     - Add: `http://localhost:3000`
-   - Authorized redirect URIs:
-     - Add: `http://localhost:3000/api/auth/callback/google`
-   - Click "Create"
-   - **SAVE YOUR CLIENT ID AND CLIENT SECRET**
+### 2. Start Python API (Port 8000)
+```bash
+cd algorithm
+python api.py
+```
 
-### 3. Generate NextAuth Secret
+### 3. Environment Variables
+Add to your .env.local:
+```
+MONGODB_URI=your_mongodb_uri
+PYTHON_API_URL=http://localhost:8000
+TAVUS_API_KEY=your_tavus_key
+TAVUS_REPLICA_ID=your_replica_id
+TAVUS_PERSONA_ID=your_persona_id
+```
 
-1. **Open PowerShell** and run:
-   ```powershell
-   node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
-   ```
-   
-2. **Copy the output** - this is your NEXTAUTH_SECRET
+### 4. Start Next.js App (Port 3000)
+```bash
+npm run dev
+```
 
-### 4. Create Your .env.local File
+## API Endpoints
 
-1. **In your project root**, create a file named `.env.local`
+### Next.js Routes
+- POST /api/user/preferences - Update user preferences
+- POST /api/recommendations - Get personalized recommendations
+- POST /api/swipe - Record like/dislike
+- GET/POST /api/schedule - Load/save itinerary
 
-2. **Add these variables** (replace with your actual values):
-   ```env
-   MONGODB_URI=mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/trippy?retryWrites=true&w=majority
-   
-   NEXTAUTH_URL=http://localhost:3000
-   NEXTAUTH_SECRET=your_generated_secret_from_step_3
-   
-   GOOGLE_CLIENT_ID=your_google_client_id_from_step_2
-   GOOGLE_CLIENT_SECRET=your_google_client_secret_from_step_2
-   ```
+### Python API (Port 8000)
+- POST /api/recommendations - Get recommendations from algorithm
+- POST /api/swipe - Record user interactions
+- GET /api/health - Health check
 
-### 5. Run Your App
+## Testing the Flow
 
-1. **Install dependencies** (if not already done):
-   ```powershell
-   npm install
-   ```
+1. Visit http://localhost:3000/agent
+2. Talk to Tavus AI and answer the questions
+3. Click "Start Swiping" button
+4. Swipe through recommendations
+5. Create an itinerary at /schedule
 
-2. **Start the development server**:
-   ```powershell
-   npm run dev
-   ```
+## Notes
 
-3. **Open your browser**: http://localhost:3000
-
-4. **Test the login**:
-   - Click the "Login" button
-   - Sign in with Google
-   - You should see your profile picture and name appear
-   - Check MongoDB Atlas - you should see a new user in the database!
-
-## What I Created For You
-
-### Backend Files:
-- `lib/mongodb.ts` - Database connection with caching
-- `lib/auth.ts` - NextAuth configuration
-- `models/User.ts` - User database schema
-- `models/Trip.ts` - Trip database schema
-- `app/api/auth/[...nextauth]/route.ts` - Authentication endpoints
-- `app/api/trips/route.ts` - Get all trips, Create trip
-- `app/api/trips/[id]/route.ts` - Get, Update, Delete single trip
-
-### Frontend Files:
-- `components/AuthProvider.tsx` - Session provider wrapper
-- Updated `app/layout.tsx` - Added auth provider
-- Updated `app/page.tsx` - Added login/logout functionality with user profile
-
-### Config Files:
-- `types/next-auth.d.ts` - TypeScript types for NextAuth
-- `.env.example` - Template for environment variables
-
-## API Endpoints You Can Use
-
-### Authentication
-- Handled automatically by NextAuth at `/api/auth/*`
-
-### Trips
-- `GET /api/trips` - Get all trips for logged-in user
-- `POST /api/trips` - Create a new trip
-  ```json
-  {
-    "destination": "Italy, Manarola",
-    "startDate": "2024-06-01",
-    "endDate": "2024-06-07",
-    "activities": []
-  }
-  ```
-- `GET /api/trips/[id]` - Get single trip
-- `PUT /api/trips/[id]` - Update trip
-- `DELETE /api/trips/[id]` - Delete trip
-
-## Troubleshooting
-
-### MongoDB Connection Issues
-- Make sure you replaced `<password>` with your actual password
-- Check that you added your IP to "Network Access" in MongoDB Atlas
-- Verify the database name is in the connection string
-
-### Google OAuth Issues
-- Make sure you added `http://localhost:3000` to Authorized JavaScript origins
-- Make sure you added `http://localhost:3000/api/auth/callback/google` to Authorized redirect URIs
-- Check that you're using the correct Client ID and Secret
-- Make sure you added yourself as a test user in the OAuth consent screen
-
-### Environment Variables Not Loading
-- Make sure the file is named exactly `.env.local` (not `.env.local.txt`)
-- Restart your dev server after creating the file
-- Check for typos in variable names
-
-## Next Steps
-
-You now have:
-- ✅ User authentication with Google
-- ✅ MongoDB database connected
-- ✅ User model for storing user data
-- ✅ Trip model for storing trip itineraries
-- ✅ Protected API routes that require login
-- ✅ Frontend showing login/logout with user profile
-
-You can now build features that:
-- Save trips to the database
-- Load user's saved trips
-- Create personalized experiences based on the logged-in user
+- The algorithm uses collaborative filtering, content-based filtering, and Pinecone for semantic search
+- User preferences are stored in MongoDB and synced with the Python algorithm
+- Itineraries are automatically saved to the database as you edit them
+- The swipe interface shows match scores based on the hybrid recommendation algorithm

@@ -22,8 +22,19 @@ export async function POST() {
             body: JSON.stringify({
                 replica_id: replicaId,
                 persona_id: personaId,
-                conversation_name: 'API Conversation',
-                conversational_context: 'You are a helpful AI assistant.',
+                conversation_name: 'Travel Planning Session',
+                conversational_context: `You are an expert travel agent helping users plan their perfect trip. Your goal is to gather key information to provide personalized recommendations.
+
+Ask the following questions in a friendly, conversational manner (one at a time):
+1. What is your age? (This helps us recommend age-appropriate activities)
+2. What's your budget range? (Options: low, medium, high)
+3. How much do you like to walk during trips? (Options: minimal, moderate, a lot)
+4. Do you prefer daytime activities or nightlife? (Options: day, night, both)
+5. Are you traveling solo or with others? (Options: solo, with others)
+
+After gathering all information, summarize what they told you and let them know they can now explore personalized recommendations by swiping through places and activities.
+
+Store their responses in a structured format.`,
             })
         });
 

@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Video, Mic, MicOff, PhoneOff, Loader2, AlertCircle } from 'lucide-react';
+import { Video, Mic, MicOff, PhoneOff, Loader2, AlertCircle, Heart } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface Log {
     time: string;
@@ -25,6 +26,7 @@ declare global {
 }
 
 export default function TavusDemo() {
+    const router = useRouter();
     const [conversationId, setConversationId] = useState<string>('');
     const [conversationUrl, setConversationUrl] = useState<string>('');
     const [isConnected, setIsConnected] = useState<boolean>(false);
@@ -33,6 +35,7 @@ export default function TavusDemo() {
     const [error, setError] = useState<string>('');
     const [logs, setLogs] = useState<Log[]>([]);
     const [dailyLoaded, setDailyLoaded] = useState<boolean>(false);
+    const [showSwipeButton, setShowSwipeButton] = useState<boolean>(false);
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const callObjectRef = useRef<DailyCallObject | null>(null);
@@ -175,19 +178,16 @@ export default function TavusDemo() {
         setIsLoading(true);
 
         try {
-            // Leave Daily call
             if (callObjectRef.current) {
                 await callObjectRef.current.leave();
                 await callObjectRef.current.destroy();
                 callObjectRef.current = null;
             }
 
-            // Clear video
             if (videoRef.current) {
                 videoRef.current.srcObject = null;
             }
 
-            // Delete conversation via API
             if (conversationId) {
                 await fetch(`/api/conversation?id=${conversationId}`, {
                     method: 'DELETE',
@@ -197,7 +197,8 @@ export default function TavusDemo() {
             setIsConnected(false);
             setConversationId('');
             setConversationUrl('');
-            addLog('✅ Conversation ended');
+            setShowSwipeButton(true);
+            addLog('✅ Conversation ended - Ready to explore recommendations!');
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'Unknown error';
             addLog(`❌ ${errorMessage}`);
@@ -319,6 +320,53 @@ export default function TavusDemo() {
                                     </div>
                                 </div>
                             )}
+                        </div>
+                    </div>
+                ) : showSwipeButton ? (
+                    <div style={{ maxWidth: '672px', margin: '0 auto' }}>
+                        <div style={{
+                            background: 'rgba(255, 255, 255, 0.1)',
+                            backdropFilter: 'blur(16px)',
+                            borderRadius: '1rem',
+                            padding: '2rem',
+                            border: '1px solid rgba(255, 255, 255, 0.2)',
+                            textAlign: 'center'
+                        }}>
+                            <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' }}>
+                                Great! Now Let's Find Your Perfect Places
+                            </h2>
+                            <p style={{ color: '#bfdbfe', marginBottom: '1.5rem' }}>
+                                Based on your preferences, we've prepared personalized recommendations. Swipe through them to find places you'll love!
+                            </p>
+
+                            <button
+                                onClick={() => router.push('/recommendations')}
+                                style={{
+                                    background: '#22c55e',
+                                    color: 'white',
+                                    fontWeight: '500',
+                                    padding: '1rem 2rem',
+                                    borderRadius: '0.5rem',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '0.75rem',
+                                    margin: '0 auto',
+                                    fontSize: '1.125rem',
+                                    transition: 'background 0.2s'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = '#16a34a';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = '#22c55e';
+                                }}
+                            >
+                                <Heart style={{ width: '1.5rem', height: '1.5rem' }} />
+                                Start Swiping
+                            </button>
                         </div>
                     </div>
                 ) : (

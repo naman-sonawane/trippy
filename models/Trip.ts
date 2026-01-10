@@ -14,6 +14,15 @@ export interface ITrip {
     description?: string;
     imageUrl?: string;
   }>;
+  itinerary?: Array<{
+    id: string;
+    name: string;
+    description: string;
+    color: string;
+    startTime: string;
+    endTime: string;
+    day: number;
+  }>;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -62,6 +71,38 @@ const TripSchema = new Schema<ITrip>(
         imageUrl: {
           type: String,
           required: false,
+        },
+      },
+    ],
+    itinerary: [
+      {
+        id: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        description: {
+          type: String,
+          required: false,
+        },
+        color: {
+          type: String,
+          required: true,
+        },
+        startTime: {
+          type: String,
+          required: true,
+        },
+        endTime: {
+          type: String,
+          required: true,
+        },
+        day: {
+          type: Number,
+          required: true,
         },
       },
     ],

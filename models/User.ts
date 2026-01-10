@@ -7,6 +7,16 @@ export interface IUser {
   image?: string;
   emailVerified?: Date;
   googleId?: string;
+  age?: number;
+  budget?: string;
+  walk?: string;
+  dayNight?: string;
+  solo?: boolean;
+  preferences?: {
+    likedItems?: string[];
+    dislikedItems?: string[];
+    travelHistory?: string[];
+  };
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -36,6 +46,40 @@ const UserSchema = new Schema<IUser>(
       required: false,
       unique: true,
       sparse: true,
+    },
+    age: {
+      type: Number,
+      required: false,
+    },
+    budget: {
+      type: String,
+      required: false,
+    },
+    walk: {
+      type: String,
+      required: false,
+    },
+    dayNight: {
+      type: String,
+      required: false,
+    },
+    solo: {
+      type: Boolean,
+      required: false,
+    },
+    preferences: {
+      likedItems: {
+        type: [String],
+        default: [],
+      },
+      dislikedItems: {
+        type: [String],
+        default: [],
+      },
+      travelHistory: {
+        type: [String],
+        default: [],
+      },
     },
   },
   {

@@ -81,6 +81,19 @@ const Dashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer"
+            onClick={() => router.push('/recommendations')}
+          >
+            <div className="text-4xl mb-4">💝</div>
+            <h3 className="text-xl font-semibold mb-2">Discover Places</h3>
+            <p className="text-gray-600">Swipe through personalized recommendations</p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer"
+            onClick={() => router.push('/new-trip')}
           >
             <div className="text-4xl mb-4">✈️</div>
             <h3 className="text-xl font-semibold mb-2">Create New Trip</h3>
@@ -92,10 +105,11 @@ const Dashboard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer"
+            onClick={() => router.push('/recommendations')}
           >
-            <div className="text-4xl mb-4">📍</div>
-            <h3 className="text-xl font-semibold mb-2">My Trips</h3>
-            <p className="text-gray-600">View all your saved itineraries</p>
+            <div className="text-4xl mb-4">💝</div>
+            <h3 className="text-xl font-semibold mb-2">Discover Places</h3>
+            <p className="text-gray-600">Swipe through personalized recommendations</p>
           </motion.div>
 
           <motion.div
@@ -104,9 +118,9 @@ const Dashboard = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow cursor-pointer"
           >
-            <div className="text-4xl mb-4">🎲</div>
-            <h3 className="text-xl font-semibold mb-2">I'm Feeling Lucky</h3>
-            <p className="text-gray-600">Get a random destination suggestion</p>
+            <div className="text-4xl mb-4">📍</div>
+            <h3 className="text-xl font-semibold mb-2">My Trips</h3>
+            <p className="text-gray-600">View all your saved itineraries</p>
           </motion.div>
         </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { ScheduleItem, TimeSelection } from "./types";
 import ScheduleGrid from "./components/ScheduleGrid";
 import AddItemModal from "./components/AddItemModal";
@@ -9,6 +9,7 @@ import AddItemModal from "./components/AddItemModal";
 export default function SchedulePage() {
   const searchParams = useSearchParams();
   const daysParam = searchParams.get("days");
+  const tripId = searchParams.get("tripId");
   const days = Math.max(1, Math.min(7, parseInt(daysParam || "1", 10) || 1));
 
   const [items, setItems] = useState<ScheduleItem[]>([]);
@@ -16,6 +17,45 @@ export default function SchedulePage() {
   const [timeSelection, setTimeSelection] = useState<TimeSelection | null>(
     null
   );
+  const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (tripId) loadItinerary();
+    else setIsLoading(false);
+  }, [tripId]);
+
+  const loadItinerary = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`/api/schedule?tripId=${tripId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setItems(data.itinerary || []);
+      }
+    } catch (error) {
+      console.error('Error loading itinerary:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const saveItinerary = async (updatedItems: ScheduleItem[]) => {
+    if (!tripId) return;
+    
+    try {
+      setIsSaving(true);
+      await fetch('/api/schedule', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tripId, itinerary: updatedItems }),
+      });
+    } catch (error) {
+      console.error('Error saving itinerary:', error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const handleAddItem = useCallback(
     (name: string, description: string, color: string, startTime: string, endTime: string, day: number) => {
@@ -28,61 +68,72 @@ export default function SchedulePage() {
         endTime,
         day,
       };
-      setItems((prev) => [...prev, newItem]);
+      const updatedItems = [...items, newItem];
+      setItems(updatedItems);
+      saveItinerary(updatedItems);
     },
-    []
+    [items, tripId]
   );
 
   const handleDeleteItem = useCallback((id: string) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
-  }, []);
+    const updatedItems = items.filter((item) => item.id !== id);
+    setItems(updatedItems);
+    saveItinerary(updatedItems);
+  }, [items, tripId]);
 
   const handleItemDrop = useCallback(
     (itemId: string, day: number, time: string) => {
-      setItems((prev) =>
-        prev.map((item) => {
-          if (item.id === itemId) {
-            const startMinutes = timeToMinutes(time);
-            const originalStart = timeToMinutes(item.startTime);
-            const originalEnd = timeToMinutes(item.endTime);
-            const duration = originalEnd - originalStart;
-            const newEndMinutes = startMinutes + duration;
-            return {
-              ...item,
-              day,
-              startTime: time,
-              endTime: minutesToTime(newEndMinutes),
-            };
-          }
-          return item;
-        })
-      );
+      const updatedItems = items.map((item) => {
+        if (item.id === itemId) {
+          const startMinutes = timeToMinutes(time);
+          const originalStart = timeToMinutes(item.startTime);
+          const originalEnd = timeToMinutes(item.endTime);
+          const duration = originalEnd - originalStart;
+          const newEndMinutes = startMinutes + duration;
+          return {
+            ...item,
+            day,
+            startTime: time,
+            endTime: minutesToTime(newEndMinutes),
+          };
+        }
+        return item;
+      });
+      setItems(updatedItems);
+      saveItinerary(updatedItems);
     },
-    []
+    [items, tripId]
   );
 
   const handleItemResize = useCallback(
     (itemId: string, newStartTime: string, newEndTime: string) => {
-      setItems((prev) =>
-        prev.map((item) => {
-          if (item.id === itemId) {
-            return {
-              ...item,
-              startTime: newStartTime,
-              endTime: newEndTime,
-            };
-          }
-          return item;
-        })
-      );
+      const updatedItems = items.map((item) => {
+        if (item.id === itemId) {
+          return {
+            ...item,
+            startTime: newStartTime,
+            endTime: newEndTime,
+          };
+        }
+        return item;
+      });
+      setItems(updatedItems);
+      saveItinerary(updatedItems);
     },
-    []
+    [items, tripId]
   );
 
   const handleRegenerate = useCallback(() => {
-    // No-op for now as specified
     console.log("Regenerate clicked", timeSelection);
   }, [timeSelection]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-zinc-50 dark:bg-black flex items-center justify-center">
+        <div className="text-gray-900 dark:text-zinc-50">Loading itinerary...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black p-4 sm:p-8">
@@ -90,10 +141,11 @@ export default function SchedulePage() {
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-semibold text-gray-900 dark:text-zinc-50 mb-2">
-              Schedule
+              Itinerary
             </h1>
             <p className="text-gray-600 dark:text-zinc-400">
               {days === 1 ? "Single Day View" : `${days} Day View`}
+              {isSaving && <span className="ml-2 text-sm">Saving...</span>}
             </p>
           </div>
           <div className="flex gap-3">
