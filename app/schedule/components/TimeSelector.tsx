@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { TimeSelection } from "../types";
 
 interface TimeSelectorProps {
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
   onSelectionChange: (selection: TimeSelection | null) => void;
   slotHeight: number;
   days: number;
@@ -25,6 +25,10 @@ export default function TimeSelector({
   slotHeight,
   days,
 }: TimeSelectorProps) {
+
+  const container = containerRef?.current;
+  if (!container) return null;
+
   const [isSelecting, setIsSelecting] = useState(false);
   const [startSlot, setStartSlot] = useState<{
     day: number;
