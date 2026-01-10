@@ -3,8 +3,19 @@
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const NavigationBar = () => {
+  const { data: session, status } = useSession();
+
+  const handleAuthClick = () => {
+    if (session) {
+      signOut();
+    } else {
+      signIn('google');
+    }
+  };
+
   return (
     <motion.nav 
       initial={{ y: -100, opacity: 0 }}
@@ -25,13 +36,31 @@ const NavigationBar = () => {
         <a href="#" className="hover:opacity-70 transition-opacity">Cruises</a>
       </div>
 
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="bg-white text-black px-8 py-3 rounded-full text-base font-medium hover:bg-opacity-90 transition-all"
-      >
-        Login
-      </motion.button>
+      <div className="flex items-center gap-4">
+        {session?.user && (
+          <div className="flex items-center gap-3">
+            {session.user.image && (
+              <Image 
+                src={session.user.image} 
+                alt={session.user.name || "User"} 
+                width={36} 
+                height={36} 
+                className="rounded-full"
+              />
+            )}
+            <span className="text-white text-sm hidden lg:block">{session.user.name}</span>
+          </div>
+        )}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleAuthClick}
+          disabled={status === 'loading'}
+          className="bg-white text-black px-8 py-3 rounded-full text-base font-medium hover:bg-opacity-90 transition-all disabled:opacity-50"
+        >
+          {status === 'loading' ? 'Loading...' : session ? 'Logout' : 'Login'}
+        </motion.button>
+      </div>
     </motion.nav>
   );
 };
