@@ -6,9 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-// Import your panorama component/page file (as requested)
-import PanaromaPage from "./panaroma/panaroma";
-
 const NavigationBar = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -183,9 +180,9 @@ export default function Home() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => router.push("/panaroma")}
-                  className="bg-white/10 text-white px-8 py-4 rounded-full text-base font-medium hover:bg-white/15 transition-all border border-white/20"
+                  className="bg-red-800 text-white px-8 py-4 ml-5 rounded-full text-base font-medium hover:bg-white/15 transition-all border border-white/20"
                 >
-                  Open Panaroma
+                  delete this demo later
                 </motion.button>
 
                 <p className="text-sm text-white/80 font-light">
