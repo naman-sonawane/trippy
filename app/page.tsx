@@ -1,27 +1,24 @@
 'use client';
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+
+// Import your panorama component/page file (as requested)
+import PanaromaPage from "./panaroma/panaroma";
 
 const NavigationBar = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const handleLoginClick = () => {
-    signIn('google');
-  };
-
   useEffect(() => {
-    if (session) {
-      router.push('/dashboard');
-    }
+    if (session) router.push("/dashboard");
   }, [session, router]);
 
   return (
-    <motion.nav 
+    <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -29,9 +26,14 @@ const NavigationBar = () => {
     >
       <div className="flex items-center gap-2">
         <Image src="/logo.png" alt="Trippy" width={40} height={40} className="w-10 h-10" />
-        <span className="text-white text-2xl font-normal" style={{ fontFamily: 'var(--font-dm-sans)' }}>trippy</span>
+        <span
+          className="text-white text-2xl font-normal"
+          style={{ fontFamily: "var(--font-dm-sans)" }}
+        >
+          trippy
+        </span>
       </div>
-      
+
       <div className="hidden md:flex items-center gap-8 text-white text-base">
         <a href="#" className="hover:opacity-70 transition-opacity">Hotels</a>
         <a href="#" className="hover:opacity-70 transition-opacity">Tours</a>
@@ -43,11 +45,11 @@ const NavigationBar = () => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={handleLoginClick}
-        disabled={status === 'loading'}
+        onClick={() => signIn("google")}
+        disabled={status === "loading"}
         className="bg-white text-black px-8 py-3 rounded-full text-base font-medium hover:bg-opacity-90 transition-all disabled:opacity-50"
       >
-        {status === 'loading' ? 'Loading...' : 'Login'}
+        {status === "loading" ? "Loading..." : "Login"}
       </motion.button>
     </motion.nav>
   );
@@ -66,13 +68,7 @@ const ImageCard = ({ src, alt, index }: { src: string; alt: string; index: numbe
       onHoverEnd={() => setIsHovered(false)}
       className="relative w-[360px] h-[260px]"
     >
-      <Image
-        src={src}
-        alt={alt}
-        width={360}
-        height={260}
-        className="rounded-lg w-full h-full"
-      />
+      <Image src={src} alt={alt} width={360} height={260} className="rounded-lg w-full h-full" />
       <AnimatePresence>
         {isHovered && (
           <motion.div
@@ -81,9 +77,7 @@ const ImageCard = ({ src, alt, index }: { src: string; alt: string; index: numbe
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.2 }}
             className="absolute bottom-4 left-4 bg-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium"
-            style={{ 
-              fontFamily: 'var(--font-dm-sans)'
-            }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {alt}
           </motion.div>
@@ -94,16 +88,18 @@ const ImageCard = ({ src, alt, index }: { src: string; alt: string; index: numbe
 };
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(/landingbg.jpg)',
-          filter: 'brightness(0.85)',
+          backgroundImage: "url(/landingbg.jpg)",
+          filter: "brightness(0.85)",
         }}
       />
-      
+
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-blue-900/20" />
 
       <NavigationBar />
@@ -111,56 +107,63 @@ export default function Home() {
       <div className="relative z-10 h-screen flex items-center">
         <div className="container mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="text-white space-y-6"
             >
               <div>
-                <motion.h2 
+                <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   className="text-xl mb-2"
-                  style={{ fontFamily: 'var(--font-fraunces)' }}
+                  style={{ fontFamily: "var(--font-fraunces)" }}
                 >
                   Italy,
                 </motion.h2>
-                <motion.h1 
+                <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="text-6xl mb-4"
-                  style={{ fontFamily: 'var(--font-fraunces)', fontWeight: 400 }}
+                  style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}
                 >
                   Manarola
                 </motion.h1>
               </div>
 
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="text-base leading-relaxed max-w-lg"
-                style={{ fontFamily: 'var(--font-dm-sans)' }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
-                One of the charming fishing villages of the vibrant Cinque Terre, Manarola is dotted with grapevines, lemon trees, and medieval fortifications, offering views that are nothing short of breathtaking.
+                One of the charming fishing villages of the vibrant Cinque Terre, Manarola is dotted with
+                grapevines, lemon trees, and medieval fortifications, offering views that are nothing short
+                of breathtaking.
               </motion.p>
 
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex items-center gap-3 text-base"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
                 </svg>
                 <span className="font-light">I&apos;m feeling lucky...</span>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.7 }}
@@ -169,11 +172,22 @@ export default function Home() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => signIn('google')}
+                  onClick={() => signIn("google")}
                   className="bg-white text-black px-8 py-4 rounded-full text-base font-medium hover:bg-opacity-90 transition-all shadow-lg"
                 >
                   Try Trippy
                 </motion.button>
+
+                {/* NEW: Go to /panaroma route */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => router.push("/panaroma")}
+                  className="bg-white/10 text-white px-8 py-4 rounded-full text-base font-medium hover:bg-white/15 transition-all border border-white/20"
+                >
+                  Open Panaroma
+                </motion.button>
+
                 <p className="text-sm text-white/80 font-light">
                   Plan your entire itinerary with just one click.
                 </p>
