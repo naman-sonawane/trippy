@@ -5,7 +5,7 @@ import time
 from collections import deque
 
 class VisualTracking:
-    def __init__(self, cam_index: int = 0, queue_len: int = 8):
+    def __init__(self, cam_index: int = 0, queue_len: int = 10):
         self.cap = cv2.VideoCapture(cam_index, cv2.CAP_DSHOW)
         if not self.cap.isOpened():
             raise RuntimeError("Issue initializing cap (camera not opened)")
@@ -25,7 +25,7 @@ class VisualTracking:
         self.q = deque(maxlen=queue_len)
 
         self._last_swipe_time = 0.0
-        self._swipe_cooldown_s = 0.8
+        self._swipe_cooldown_s = 1.5
         self._last_swipe_direction = None
         self._swipe_display_time = 0.0
         self._swipe_display_duration = 0.8
@@ -128,7 +128,7 @@ class VisualTracking:
         cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    tracker = VisualTracking(queue_len=12)
+    tracker = VisualTracking(queue_len=10)
 
     while True:
         frame, swipe = tracker.read_store_frame()
