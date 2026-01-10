@@ -1,20 +1,24 @@
 'use client';
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const NavigationBar = () => {
   const { data: session, status } = useSession();
+  const router = useRouter();
 
-  const handleAuthClick = () => {
-    if (session) {
-      signOut();
-    } else {
-      signIn('google');
-    }
+  const handleLoginClick = () => {
+    signIn('google');
   };
+
+  useEffect(() => {
+    if (session) {
+      router.push('/dashboard');
+    }
+  }, [session, router]);
 
   return (
     <motion.nav 
@@ -36,31 +40,15 @@ const NavigationBar = () => {
         <a href="#" className="hover:opacity-70 transition-opacity">Cruises</a>
       </div>
 
-      <div className="flex items-center gap-4">
-        {session?.user && (
-          <div className="flex items-center gap-3">
-            {session.user.image && (
-              <Image 
-                src={session.user.image} 
-                alt={session.user.name || "User"} 
-                width={36} 
-                height={36} 
-                className="rounded-full"
-              />
-            )}
-            <span className="text-white text-sm hidden lg:block">{session.user.name}</span>
-          </div>
-        )}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleAuthClick}
-          disabled={status === 'loading'}
-          className="bg-white text-black px-8 py-3 rounded-full text-base font-medium hover:bg-opacity-90 transition-all disabled:opacity-50"
-        >
-          {status === 'loading' ? 'Loading...' : session ? 'Logout' : 'Login'}
-        </motion.button>
-      </div>
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={handleLoginClick}
+        disabled={status === 'loading'}
+        className="bg-white text-black px-8 py-3 rounded-full text-base font-medium hover:bg-opacity-90 transition-all disabled:opacity-50"
+      >
+        {status === 'loading' ? 'Loading...' : 'Login'}
+      </motion.button>
     </motion.nav>
   );
 };
