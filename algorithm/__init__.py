@@ -1,0 +1,2 @@
+"""Trippy recommendation algorithm package."""
+
