@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export async function POST() {
+export async function POST(request: Request) {
     const apiKey = process.env.TAVUS_API_KEY;
     const replicaId = process.env.TAVUS_REPLICA_ID;
     const personaId = process.env.TAVUS_PERSONA_ID;
@@ -12,6 +12,10 @@ export async function POST() {
         );
     }
 
+    // Get trip details from request body
+    const body = await request.json().catch(() => ({}));
+    const conversationalContext = body.conversational_context || '';
+
     try {
         const response = await fetch('https://tavusapi.com/v2/conversations', {
             method: 'POST',
@@ -22,19 +26,8 @@ export async function POST() {
             body: JSON.stringify({
                 replica_id: replicaId,
                 persona_id: personaId,
-                conversation_name: 'Travel Planning Session',
-                conversational_context: `You are an expert travel agent helping users plan their perfect trip. Your goal is to gather key information to provide personalized recommendations.
-
-Ask the following questions in a friendly, conversational manner (one at a time):
-1. What is your age? (This helps us recommend age-appropriate activities)
-2. What's your budget range? (Options: low, medium, high)
-3. How much do you like to walk during trips? (Options: minimal, moderate, a lot)
-4. Do you prefer daytime activities or nightlife? (Options: day, night, both)
-5. Are you traveling solo or with others? (Options: solo, with others)
-
-After gathering all information, summarize what they told you and let them know they can now explore personalized recommendations by swiping through places and activities.
-
-Store their responses in a structured format.`,
+                conversation_name: 'API Conversation',
+                conversational_context: conversationalContext,
             })
         });
 

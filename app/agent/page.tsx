@@ -30,19 +30,34 @@ export default function TavusDemo() {
     const [conversationId, setConversationId] = useState<string>('');
     const [conversationUrl, setConversationUrl] = useState<string>('');
     const [isConnected, setIsConnected] = useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isMuted, setIsMuted] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [logs, setLogs] = useState<Log[]>([]);
     const [dailyLoaded, setDailyLoaded] = useState<boolean>(false);
     const [showSwipeButton, setShowSwipeButton] = useState<boolean>(false);
+    const [tripDetails, setTripDetails] = useState<{destination: string; startDate: string; endDate: string} | null>(null);
+    const [autoStarted, setAutoStarted] = useState<boolean>(false);
 
     const videoRef = useRef<HTMLVideoElement>(null);
+    const audioRef = useRef<HTMLAudioElement>(null);
     const callObjectRef = useRef<DailyCallObject | null>(null);
 
     const addLog = (message: string): void => {
         setLogs(prev => [...prev, { time: new Date().toLocaleTimeString(), message }]);
     };
+
+    // Load trip details from localStorage
+    useEffect(() => {
+        const destination = localStorage.getItem('currentDestination');
+        const startDate = localStorage.getItem('tripStartDate');
+        const endDate = localStorage.getItem('tripEndDate');
+
+        if (destination && startDate && endDate) {
+            setTripDetails({ destination, startDate, endDate });
+            addLog(`📍 Trip loaded: ${destination} (${startDate} to ${endDate})`);
+        }
+    }, []);
 
     // Load Daily.co SDK
     useEffect(() => {
@@ -62,6 +77,14 @@ export default function TavusDemo() {
         };
     }, []);
 
+    // Auto-start conversation when Daily is loaded
+    useEffect(() => {
+        if (dailyLoaded && !autoStarted && !isConnected) {
+            setAutoStarted(true);
+            startConversation();
+        }
+    }, [dailyLoaded, autoStarted, isConnected]);
+
     const startConversation = async (): Promise<void> => {
         if (!dailyLoaded) {
             setError('Daily.co SDK is still loading...');
@@ -74,9 +97,25 @@ export default function TavusDemo() {
         try {
             addLog('🔄 Creating conversation...');
 
-            // Call our API endpoint
+            // Build conversational context with trip details
+            let conversationalContext = 'You are a helpful AI travel assistant. ';
+            if (tripDetails) {
+                conversationalContext += `The user is planning a trip to ${tripDetails.destination} from ${tripDetails.startDate} to ${tripDetails.endDate}. `;
+                conversationalContext += `Ask them about their preferences for activities, dining, budget, and travel style to help recommend the best places and experiences in ${tripDetails.destination}.`;
+            } else {
+                conversationalContext += 'Help the user plan their travel itinerary by asking about their destination, dates, and preferences.';
+            }
+
+            // Call our API endpoint with trip context
             const response = await fetch('/api/conversation', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    conversational_context: conversationalContext,
+                    trip_details: tripDetails,
+                }),
             });
 
             if (!response.ok) {
@@ -105,10 +144,10 @@ export default function TavusDemo() {
         try {
             addLog('🔗 Joining Daily room...');
 
-            // Create Daily call object (audio only)
+            // Create Daily call object (audio only, video disabled)
             const callObject = window.DailyIframe.createCallObject({
-                videoSource: false,  // Disable camera
-                audioSource: true,   // Enable microphone only
+                videoSource: false,
+                audioSource: true,
             });
 
             callObjectRef.current = callObject;
@@ -118,33 +157,27 @@ export default function TavusDemo() {
                 addLog(`👤 Participant joined: ${e?.participant?.user_name || 'AI'}`);
             });
 
-            // Listen for track started (video and audio available)
+            // Listen for track started - separate video and audio handling
             callObject.on('track-started', (e) => {
-                if (!e?.participant || !videoRef.current) return;
+                if (!e?.participant) return;
 
-                if (e.track.kind === 'video') {
-                    addLog('🎥 Video track started');
-                    const currentStream = videoRef.current.srcObject as MediaStream;
-                    if (currentStream) {
-                        currentStream.addTrack(e.track);
-                    } else {
-                        const newStream = new MediaStream([e.track]);
-                        videoRef.current.srcObject = newStream;
-                    }
+                // Only handle remote participants (not local)
+                if (e.participant.local) {
+                    addLog('⏭️ Skipping local track (preventing echo)');
+                    return;
+                }
+
+                if (e.track.kind === 'video' && videoRef.current) {
+                    addLog('🎥 Remote video track started');
+                    videoRef.current.srcObject = new MediaStream([e.track]);
                     videoRef.current.play();
                     setIsLoading(false);
                 }
 
-                if (e.track.kind === 'audio') {
-                    addLog('🔊 Audio track started');
-                    const currentStream = videoRef.current.srcObject as MediaStream;
-                    if (currentStream) {
-                        currentStream.addTrack(e.track);
-                    } else {
-                        const newStream = new MediaStream([e.track]);
-                        videoRef.current.srcObject = newStream;
-                    }
-                    videoRef.current.play();
+                if (e.track.kind === 'audio' && audioRef.current) {
+                    addLog('🔊 Remote audio track started');
+                    audioRef.current.srcObject = new MediaStream([e.track]);
+                    audioRef.current.play();
                 }
             });
 
@@ -188,6 +221,10 @@ export default function TavusDemo() {
                 videoRef.current.srcObject = null;
             }
 
+            if (audioRef.current) {
+                audioRef.current.srcObject = null;
+            }
+
             if (conversationId) {
                 await fetch(`/api/conversation?id=${conversationId}`, {
                     method: 'DELETE',
@@ -229,100 +266,14 @@ export default function TavusDemo() {
                         Tavus AI Video
                     </h1>
                     <p style={{ color: '#bfdbfe', fontSize: '1rem' }}>Talk to an AI avatar</p>
+                    {tripDetails && (
+                        <p style={{ color: '#86efac', fontSize: '0.875rem', marginTop: '0.5rem' }}>
+                            Planning trip to {tripDetails.destination} • {tripDetails.startDate} to {tripDetails.endDate}
+                        </p>
+                    )}
                 </div>
 
-                {!isConnected ? (
-                    <div style={{ maxWidth: '672px', margin: '0 auto' }}>
-                        <div style={{
-                            background: 'rgba(255, 255, 255, 0.1)',
-                            backdropFilter: 'blur(16px)',
-                            borderRadius: '1rem',
-                            padding: '2rem',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            textAlign: 'center'
-                        }}>
-                            <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' }}>
-                                Ready to Start?
-                            </h2>
-                            <p style={{ color: '#bfdbfe', marginBottom: '1.5rem' }}>
-                                Click the button below to begin your conversation with the AI avatar.
-                            </p>
-
-                            <button
-                                onClick={startConversation}
-                                disabled={isLoading || !dailyLoaded}
-                                style={{
-                                    background: isLoading || !dailyLoaded ? '#4b5563' : '#22c55e',
-                                    color: 'white',
-                                    fontWeight: '500',
-                                    padding: '1rem 2rem',
-                                    borderRadius: '0.5rem',
-                                    border: 'none',
-                                    cursor: isLoading || !dailyLoaded ? 'not-allowed' : 'pointer',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    gap: '0.75rem',
-                                    margin: '0 auto',
-                                    fontSize: '1.125rem',
-                                    transition: 'background 0.2s'
-                                }}
-                                onMouseEnter={(e) => {
-                                    if (!isLoading && dailyLoaded) {
-                                        e.currentTarget.style.background = '#16a34a';
-                                    }
-                                }}
-                                onMouseLeave={(e) => {
-                                    if (!isLoading && dailyLoaded) {
-                                        e.currentTarget.style.background = '#22c55e';
-                                    }
-                                }}
-                            >
-                                {isLoading ? <Loader2 style={{ width: '1.5rem', height: '1.5rem', animation: 'spin 1s linear infinite' }} /> : <Video style={{ width: '1.5rem', height: '1.5rem' }} />}
-                                Start Conversation
-                            </button>
-
-                            {error && (
-                                <div style={{
-                                    marginTop: '1.5rem',
-                                    padding: '1rem',
-                                    background: 'rgba(239, 68, 68, 0.2)',
-                                    border: '1px solid #ef4444',
-                                    borderRadius: '0.5rem',
-                                    color: '#fecaca',
-                                    fontSize: '0.875rem',
-                                    display: 'flex',
-                                    gap: '0.5rem'
-                                }}>
-                                    <AlertCircle style={{ width: '1.25rem', height: '1.25rem', flexShrink: 0, marginTop: '0.125rem' }} />
-                                    <span>{error}</span>
-                                </div>
-                            )}
-
-                            {logs.length > 0 && (
-                                <div style={{
-                                    marginTop: '1.5rem',
-                                    background: 'rgba(0, 0, 0, 0.4)',
-                                    borderRadius: '0.75rem',
-                                    padding: '1rem',
-                                    maxHeight: '12rem',
-                                    overflowY: 'auto'
-                                }}>
-                                    <h3 style={{ fontSize: '0.875rem', fontWeight: 'bold', color: '#bfdbfe', marginBottom: '0.5rem' }}>
-                                        Activity
-                                    </h3>
-                                    <div style={{ fontFamily: 'monospace', fontSize: '0.75rem', textAlign: 'left' }}>
-                                        {logs.map((log, i) => (
-                                            <div key={i} style={{ color: '#d1d5db', marginBottom: '0.25rem' }}>
-                                                <span style={{ color: '#60a5fa' }}>[{log.time}]</span> {log.message}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                ) : showSwipeButton ? (
+                {showSwipeButton ? (
                     <div style={{ maxWidth: '672px', margin: '0 auto' }}>
                         <div style={{
                             background: 'rgba(255, 255, 255, 0.1)',
@@ -378,12 +329,21 @@ export default function TavusDemo() {
                             overflow: 'hidden',
                             aspectRatio: '16/9'
                         }}>
+                            {/* Video element for visual only - MUTED */}
                             <video
                                 ref={videoRef}
                                 autoPlay
                                 playsInline
-                                muted={false}
+                                muted={true}
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+
+                            {/* Hidden audio element for sound only - handles remote audio separately */}
+                            <audio
+                                ref={audioRef}
+                                autoPlay
+                                playsInline
+                                style={{ display: 'none' }}
                             />
 
                             {isLoading && (
@@ -405,6 +365,26 @@ export default function TavusDemo() {
                                         }} />
                                         <p style={{ color: 'white', fontWeight: '500' }}>Connecting to AI avatar...</p>
                                     </div>
+                                </div>
+                            )}
+
+                            {error && (
+                                <div style={{
+                                    position: 'absolute',
+                                    top: '1rem',
+                                    left: '1rem',
+                                    right: '1rem',
+                                    padding: '1rem',
+                                    background: 'rgba(239, 68, 68, 0.9)',
+                                    border: '1px solid #ef4444',
+                                    borderRadius: '0.5rem',
+                                    color: 'white',
+                                    fontSize: '0.875rem',
+                                    display: 'flex',
+                                    gap: '0.5rem'
+                                }}>
+                                    <AlertCircle style={{ width: '1.25rem', height: '1.25rem', flexShrink: 0, marginTop: '0.125rem' }} />
+                                    <span>{error}</span>
                                 </div>
                             )}
 
