@@ -169,6 +169,7 @@ export default function Home() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  onClick={() => signIn('google')}
                   className="bg-white text-black px-8 py-4 rounded-full text-base font-medium hover:bg-opacity-90 transition-all shadow-lg"
                 >
                   Try Trippy
