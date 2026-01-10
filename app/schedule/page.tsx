@@ -1,0 +1,147 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useState, useCallback } from "react";
+import { ScheduleItem, TimeSelection } from "./types";
+import ScheduleGrid from "./components/ScheduleGrid";
+import AddItemModal from "./components/AddItemModal";
+
+export default function SchedulePage() {
+  const searchParams = useSearchParams();
+  const daysParam = searchParams.get("days");
+  const days = Math.max(1, Math.min(7, parseInt(daysParam || "1", 10) || 1));
+
+  const [items, setItems] = useState<ScheduleItem[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [timeSelection, setTimeSelection] = useState<TimeSelection | null>(
+    null
+  );
+
+  const handleAddItem = useCallback(
+    (name: string, description: string, color: string, startTime: string, endTime: string, day: number) => {
+      const newItem: ScheduleItem = {
+        id: `item-${Date.now()}-${Math.random()}`,
+        name,
+        description,
+        color,
+        startTime,
+        endTime,
+        day,
+      };
+      setItems((prev) => [...prev, newItem]);
+    },
+    []
+  );
+
+  const handleDeleteItem = useCallback((id: string) => {
+    setItems((prev) => prev.filter((item) => item.id !== id));
+  }, []);
+
+  const handleItemDrop = useCallback(
+    (itemId: string, day: number, time: string) => {
+      setItems((prev) =>
+        prev.map((item) => {
+          if (item.id === itemId) {
+            const startMinutes = timeToMinutes(time);
+            const originalStart = timeToMinutes(item.startTime);
+            const originalEnd = timeToMinutes(item.endTime);
+            const duration = originalEnd - originalStart;
+            const newEndMinutes = startMinutes + duration;
+            return {
+              ...item,
+              day,
+              startTime: time,
+              endTime: minutesToTime(newEndMinutes),
+            };
+          }
+          return item;
+        })
+      );
+    },
+    []
+  );
+
+  const handleItemResize = useCallback(
+    (itemId: string, newStartTime: string, newEndTime: string) => {
+      setItems((prev) =>
+        prev.map((item) => {
+          if (item.id === itemId) {
+            return {
+              ...item,
+              startTime: newStartTime,
+              endTime: newEndTime,
+            };
+          }
+          return item;
+        })
+      );
+    },
+    []
+  );
+
+  const handleRegenerate = useCallback(() => {
+    // No-op for now as specified
+    console.log("Regenerate clicked", timeSelection);
+  }, [timeSelection]);
+
+  return (
+    <div className="min-h-screen bg-zinc-50 dark:bg-black p-4 sm:p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-semibold text-gray-900 dark:text-zinc-50 mb-2">
+              Schedule
+            </h1>
+            <p className="text-gray-600 dark:text-zinc-400">
+              {days === 1 ? "Single Day View" : `${days} Day View`}
+            </p>
+          </div>
+          <div className="flex gap-3">
+            {timeSelection && (
+              <button
+                onClick={handleRegenerate}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
+              >
+                Regenerate
+              </button>
+            )}
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="px-4 py-2 bg-gray-900 dark:bg-zinc-50 text-white dark:text-black rounded-md hover:bg-gray-800 dark:hover:bg-zinc-200 transition-colors font-medium"
+            >
+              Add Item
+            </button>
+          </div>
+        </div>
+
+        <ScheduleGrid
+          days={days}
+          items={items}
+          onItemDelete={handleDeleteItem}
+          onItemDrop={handleItemDrop}
+          onItemResize={handleItemResize}
+          onSelectionChange={setTimeSelection}
+        />
+
+        <AddItemModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onAdd={handleAddItem}
+          days={days}
+        />
+      </div>
+    </div>
+  );
+}
+
+function timeToMinutes(time: string): number {
+  const [hours, minutes] = time.split(":").map(Number);
+  return hours * 60 + minutes;
+}
+
+function minutesToTime(minutes: number): string {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return `${hours.toString().padStart(2, "0")}:${mins.toString().padStart(2, "0")}`;
+}
+

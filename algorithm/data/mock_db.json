@@ -1,0 +1,678 @@
+{
+  "users": [
+    {
+      "id": "user_paris_25",
+      "age": 25,
+      "preferences": [
+        "place_1",
+        "activity_1"
+      ],
+      "travel_history": [
+        "Paris",
+        "London"
+      ]
+    },
+    {
+      "id": "user_tokyo_30",
+      "age": 30,
+      "preferences": [
+        "place_3",
+        "activity_3",
+        "place_4"
+      ],
+      "travel_history": [
+        "Tokyo",
+        "Kyoto"
+      ]
+    },
+    {
+      "id": "user_newyork_45",
+      "age": 45,
+      "preferences": [
+        "place_5",
+        "activity_5",
+        "place_6"
+      ],
+      "travel_history": [
+        "New York",
+        "Boston"
+      ]
+    },
+    {
+      "id": "user_barcelona_28",
+      "age": 28,
+      "preferences": [
+        "place_7",
+        "activity_7"
+      ],
+      "travel_history": [
+        "Barcelona",
+        "Madrid"
+      ]
+    },
+    {
+      "id": "user_paris_65",
+      "age": 65,
+      "preferences": [
+        "place_2",
+        "activity_2"
+      ],
+      "travel_history": [
+        "Paris",
+        "Rome"
+      ]
+    },
+    {
+      "id": "user_Paris_19",
+      "age": 19,
+      "preferences": [],
+      "travel_history": [
+        "Paris"
+      ]
+    },
+    {
+      "id": "user_paris_17",
+      "age": 17,
+      "preferences": [],
+      "travel_history": [
+        "paris"
+      ]
+    },
+    {
+      "id": "user_paris_2",
+      "age": 2,
+      "preferences": [],
+      "travel_history": [
+        "paris"
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_1",
+      "name": "Eiffel Tower",
+      "location": "Paris",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "architecture",
+          "views"
+        ],
+        "price_range": "medium",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural"
+      },
+      "description": "Iconic iron lattice tower offering panoramic city views"
+    },
+    {
+      "id": "place_2",
+      "name": "Louvre Museum",
+      "location": "Paris",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "culture"
+        ],
+        "price_range": "medium",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural"
+      },
+      "description": "World's largest art museum housing the Mona Lisa"
+    },
+    {
+      "id": "place_3",
+      "name": "Shibuya Crossing",
+      "location": "Tokyo",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "urban",
+          "crowds"
+        ],
+        "price_range": "free",
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife"
+      },
+      "description": "World's busiest pedestrian crossing"
+    },
+    {
+      "id": "place_4",
+      "name": "Senso-ji Temple",
+      "location": "Tokyo",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "spiritual",
+          "traditional",
+          "culture"
+        ],
+        "price_range": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural"
+      },
+      "description": "Tokyo's oldest temple, a spiritual and cultural landmark"
+    },
+    {
+      "id": "place_5",
+      "name": "Central Park",
+      "location": "New York",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxation",
+          "outdoor"
+        ],
+        "price_range": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly"
+      },
+      "description": "Massive urban park with lakes, trails, and recreational activities"
+    },
+    {
+      "id": "place_6",
+      "name": "Metropolitan Museum of Art",
+      "location": "New York",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "culture"
+        ],
+        "price_range": "medium",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural"
+      },
+      "description": "One of the world's largest and finest art museums"
+    },
+    {
+      "id": "place_7",
+      "name": "Sagrada Familia",
+      "location": "Barcelona",
+      "category": "Church",
+      "features": {
+        "tags": [
+          "architecture",
+          "gothic",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural"
+      },
+      "description": "Gaudi's unfinished masterpiece, a stunning basilica"
+    },
+    {
+      "id": "place_8",
+      "name": "Park Guell",
+      "location": "Barcelona",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "architecture",
+          "mosaic",
+          "views"
+        ],
+        "price_range": "medium",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly"
+      },
+      "description": "Colorful park designed by Gaudi with unique architecture"
+    },
+    {
+      "id": "place_9",
+      "name": "Le Marais District",
+      "location": "Paris",
+      "category": "Neighborhood",
+      "features": {
+        "tags": [
+          "historic",
+          "shopping",
+          "nightlife"
+        ],
+        "price_range": "high",
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife"
+      },
+      "description": "Trendy historic district with bars, restaurants, and boutiques"
+    },
+    {
+      "id": "place_10",
+      "name": "Times Square",
+      "location": "New York",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "urban",
+          "entertainment"
+        ],
+        "price_range": "medium",
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife"
+      },
+      "description": "Famous commercial intersection and entertainment hub"
+    }
+  ],
+  "activities": [
+    {
+      "id": "activity_1",
+      "name": "Seine River Cruise",
+      "place_id": "place_1",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "relaxing",
+          "views"
+        ],
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly"
+      },
+      "description": "Relaxing boat tour along the Seine River"
+    },
+    {
+      "id": "activity_2",
+      "name": "Art Gallery Tour",
+      "place_id": "place_2",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "art",
+          "educational",
+          "culture"
+        ],
+        "energy_level": "low",
+        "age_suitability_profile": "cultural"
+      },
+      "description": "Guided tour of the Louvre's masterpieces"
+    },
+    {
+      "id": "activity_3",
+      "name": "Karaoke Night",
+      "place_id": "place_3",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "music",
+          "social",
+          "fun"
+        ],
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife"
+      },
+      "description": "Sing your heart out at a Tokyo karaoke bar"
+    },
+    {
+      "id": "activity_4",
+      "name": "Temple Meditation",
+      "place_id": "place_4",
+      "category": "Wellness",
+      "features": {
+        "tags": [
+          "spiritual",
+          "peaceful",
+          "mindfulness"
+        ],
+        "energy_level": "low",
+        "age_suitability_profile": "cultural"
+      },
+      "description": "Peaceful meditation session at the temple"
+    },
+    {
+      "id": "activity_5",
+      "name": "Central Park Bike Tour",
+      "place_id": "place_5",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "outdoor",
+          "exercise",
+          "scenic"
+        ],
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly"
+      },
+      "description": "Explore Central Park on a guided bike tour"
+    },
+    {
+      "id": "activity_6",
+      "name": "Art Workshop",
+      "place_id": "place_6",
+      "category": "Workshop",
+      "features": {
+        "tags": [
+          "art",
+          "educational",
+          "creative"
+        ],
+        "energy_level": "low",
+        "age_suitability_profile": "educational"
+      },
+      "description": "Learn art techniques inspired by museum collections"
+    },
+    {
+      "id": "activity_7",
+      "name": "Architecture Walking Tour",
+      "place_id": "place_7",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "architecture",
+          "educational",
+          "walking"
+        ],
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural"
+      },
+      "description": "Explore Gaudi's architectural masterpieces"
+    },
+    {
+      "id": "activity_8",
+      "name": "Family Picnic",
+      "place_id": "place_8",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "outdoor",
+          "relaxing",
+          "social"
+        ],
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly"
+      },
+      "description": "Enjoy a picnic with family in the park"
+    },
+    {
+      "id": "activity_9",
+      "name": "Nightlife Bar Crawl",
+      "place_id": "place_9",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "drinks",
+          "social",
+          "nightlife"
+        ],
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife"
+      },
+      "description": "Explore Parisian nightlife in Le Marais"
+    },
+    {
+      "id": "activity_10",
+      "name": "Broadway Show",
+      "place_id": "place_10",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "theater",
+          "culture",
+          "entertainment"
+        ],
+        "energy_level": "low",
+        "age_suitability_profile": "cultural"
+      },
+      "description": "Watch a world-class Broadway musical"
+    }
+  ],
+  "interactions": [
+    {
+      "user_id": "user_paris_25",
+      "item_id": "place_1",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2024-01-15T10:00:00"
+    },
+    {
+      "user_id": "user_paris_25",
+      "item_id": "activity_1",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2024-01-15T14:00:00"
+    },
+    {
+      "user_id": "user_paris_25",
+      "item_id": "place_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2024-01-15T20:00:00"
+    },
+    {
+      "user_id": "user_tokyo_30",
+      "item_id": "place_3",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2024-01-20T09:00:00"
+    },
+    {
+      "user_id": "user_tokyo_30",
+      "item_id": "activity_3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2024-01-20T22:00:00"
+    },
+    {
+      "user_id": "user_tokyo_30",
+      "item_id": "place_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2024-01-21T10:00:00"
+    },
+    {
+      "user_id": "user_newyork_45",
+      "item_id": "place_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2024-02-01T11:00:00"
+    },
+    {
+      "user_id": "user_newyork_45",
+      "item_id": "activity_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2024-02-01T14:00:00"
+    },
+    {
+      "user_id": "user_newyork_45",
+      "item_id": "place_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2024-02-02T10:00:00"
+    },
+    {
+      "user_id": "user_barcelona_28",
+      "item_id": "place_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2024-02-10T09:00:00"
+    },
+    {
+      "user_id": "user_barcelona_28",
+      "item_id": "activity_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2024-02-10T15:00:00"
+    },
+    {
+      "user_id": "user_paris_65",
+      "item_id": "place_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2024-02-15T10:00:00"
+    },
+    {
+      "user_id": "user_paris_65",
+      "item_id": "activity_2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2024-02-15T14:00:00"
+    },
+    {
+      "user_id": "user_paris_65",
+      "item_id": "place_9",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2024-02-15T20:00:00"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "activity_9",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-10T12:26:07.583002"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "place_9",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:26:12.351081"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "activity_1",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:26:14.733749"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "place_1",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:26:16.544408"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "place_2",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:26:17.868756"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "activity_2",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:26:19.248555"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "place_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-10T12:27:24.793235"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "activity_9",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-10T12:27:34.942901"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "place_2",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:27:36.834451"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "activity_2",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:27:38.167747"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "activity_1",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:27:39.017882"
+    },
+    {
+      "user_id": "user_Paris_19",
+      "item_id": "place_1",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:27:39.798945"
+    },
+    {
+      "user_id": "user_paris_17",
+      "item_id": "activity_1",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-10T12:30:26.836849"
+    },
+    {
+      "user_id": "user_paris_17",
+      "item_id": "place_1",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-10T12:30:29.484679"
+    },
+    {
+      "user_id": "user_paris_17",
+      "item_id": "place_9",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:30:35.801107"
+    },
+    {
+      "user_id": "user_paris_17",
+      "item_id": "place_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-10T12:30:44.036321"
+    },
+    {
+      "user_id": "user_paris_17",
+      "item_id": "activity_9",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:30:48.206044"
+    },
+    {
+      "user_id": "user_paris_2",
+      "item_id": "place_1",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-10T12:32:51.100069"
+    },
+    {
+      "user_id": "user_paris_2",
+      "item_id": "activity_1",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:32:55.802203"
+    },
+    {
+      "user_id": "user_paris_2",
+      "item_id": "activity_2",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:32:59.847586"
+    },
+    {
+      "user_id": "user_paris_2",
+      "item_id": "activity_9",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-10T12:33:02.166905"
+    },
+    {
+      "user_id": "user_paris_2",
+      "item_id": "place_2",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-10T12:33:08.316078"
+    }
+  ]
+}
