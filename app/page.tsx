@@ -14,7 +14,7 @@ const NavigationBar = () => {
     >
       <div className="flex items-center gap-2">
         <Image src="/logo.png" alt="Trippy" width={40} height={40} className="w-10 h-10" />
-        <span className="text-white text-2xl font-normal" style={{ fontFamily: 'var(--font-fraunces)' }}>trippy</span>
+        <span className="text-white text-2xl font-normal" style={{ fontFamily: 'var(--font-dm-sans)' }}>trippy</span>
       </div>
       
       <div className="hidden md:flex items-center gap-8 text-white text-base">
@@ -47,24 +47,26 @@ const ImageCard = ({ src, alt, index }: { src: string; alt: string; index: numbe
       whileHover={{ scale: 1.05 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="relative"
+      className="relative w-[360px] h-[260px]"
     >
       <Image
         src={src}
         alt={alt}
-        width={380}
-        height={280}
-        className="rounded-lg object-cover w-full h-full"
+        width={360}
+        height={260}
+        className="rounded-lg w-full h-full"
       />
       <AnimatePresence>
         {isHovered && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.2 }}
             className="absolute bottom-4 left-4 bg-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium"
-            style={{ fontFamily: 'var(--font-dm-sans)' }}
+            style={{ 
+              fontFamily: 'var(--font-dm-sans)'
+            }}
           >
             {alt}
           </motion.div>
@@ -76,7 +78,7 @@ const ImageCard = ({ src, alt, index }: { src: string; alt: string; index: numbe
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
+    <div className="relative h-screen w-full overflow-hidden">
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
@@ -89,14 +91,14 @@ export default function Home() {
 
       <NavigationBar />
 
-      <div className="relative z-10 min-h-screen flex items-center">
-        <div className="container mx-auto px-8 py-24">
+      <div className="relative z-10 h-screen flex items-center">
+        <div className="container mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="text-white space-y-8"
+              className="text-white space-y-6"
             >
               <div>
                 <motion.h2 
@@ -112,8 +114,8 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="text-7xl font-light mb-6"
-                  style={{ fontFamily: 'var(--font-fraunces)' }}
+                  className="text-6xl mb-4"
+                  style={{ fontFamily: 'var(--font-fraunces)', fontWeight: 400 }}
                 >
                   Manarola
                 </motion.h1>
@@ -123,7 +125,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-lg leading-relaxed max-w-lg"
+                className="text-base leading-relaxed max-w-lg"
                 style={{ fontFamily: 'var(--font-dm-sans)' }}
               >
                 One of the charming fishing villages of the vibrant Cinque Terre, Manarola is dotted with grapevines, lemon trees, and medieval fortifications, offering views that are nothing short of breathtaking.
@@ -160,14 +162,14 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            <div className="relative hidden lg:block w-[500px] h-[700px]">
-              <div className="absolute top-8 -right-20 w-[380px] h-[280px] z-30" style={{ transform: '' }}>
+            <div className="absolute right-0 hidden lg:block w-[500px] h-[600px]">
+              <div className="absolute top-12 -right-16 z-10">
                 <ImageCard src="/Stella Boat Tour.png" alt="Stella Boat Tour" index={0} />
               </div>
-              <div className="absolute top-50 -right-20 w-[380px] h-[280px] z-20" style={{ transform: '' }}>
+              <div className="absolute top-44 -right-12 z-20">
                 <ImageCard src="/Manarola Downtown.png" alt="Manarola Downtown" index={1} />
               </div>
-              <div className="absolute bottom-20 -right-20 w-[380px] h-[280px] z-10" style={{ transform: '' }}>
+              <div className="absolute top-76 -right-8 z-30">
                 <ImageCard src="/Bar Enrica.png" alt="Bar Enrica" index={2} />
               </div>
             </div>
