@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import Trip from '@/models/Trip';
+import User from '@/models/User';
 
 export const GET = async (req: Request) => {
   try {
@@ -14,10 +15,27 @@ export const GET = async (req: Request) => {
 
     await connectDB();
 
+    let userId = session.user.id;
+    if (!userId && session.user.email) {
+      let user = await User.findOne({ email: session.user.email });
+      if (!user) {
+        user = await User.create({
+          email: session.user.email,
+          name: session.user.name,
+          image: session.user.image,
+        });
+      }
+      userId = user._id.toString();
+    }
+
+    if (!userId) {
+      return NextResponse.json({ error: 'Unable to determine user ID' }, { status: 400 });
+    }
+
     const trips = await Trip.find({
       $or: [
-        { userId: session.user.id },
-        { participantIds: session.user.id }
+        { userId },
+        { participantIds: userId }
       ]
     }).sort({ createdAt: -1 });
 
@@ -45,6 +63,23 @@ export const POST = async (req: Request) => {
 
     await connectDB();
 
+    let userId = session.user.id;
+    if (!userId && session.user.email) {
+      let user = await User.findOne({ email: session.user.email });
+      if (!user) {
+        user = await User.create({
+          email: session.user.email,
+          name: session.user.name,
+          image: session.user.image,
+        });
+      }
+      userId = user._id.toString();
+    }
+
+    if (!userId) {
+      return NextResponse.json({ error: 'Unable to determine user ID' }, { status: 400 });
+    }
+
     const generateTripCode = (): string => {
       const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
       let code = '';
@@ -62,8 +97,8 @@ export const POST = async (req: Request) => {
     }
 
     const trip = await Trip.create({
-      userId: session.user.id,
-      participantIds: [session.user.id], // Owner is first participant
+      userId,
+      participantIds: [userId],
       destination,
       startDate: new Date(startDate),
       endDate: new Date(endDate),

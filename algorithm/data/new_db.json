@@ -14,6 +14,14 @@
       "travel_history": [
         "china"
       ]
+    },
+    {
+      "id": "6963a4ff90209ad2d09f9de0",
+      "age": 25,
+      "preferences": [],
+      "travel_history": [
+        "paris"
+      ]
     }
   ],
   "places": [
@@ -2987,6 +2995,206 @@
         "image_url": "https://source.unsplash.com/800x600/?jasper%20raft%20tours%20athabasca%20river"
       },
       "description": "Float down the Athabasca River on a gentle, guided raft tour perfect for spotting local wildlife."
+    },
+    {
+      "id": "place_paris_1",
+      "name": "Eiffel Tower",
+      "location": "Paris",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "views",
+          "architecture",
+          "romantic"
+        ],
+        "price_range": "medium",
+        "budget": "$30",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Ascend the Iron Lady for breathtaking panoramic views of the City of Light from its observation decks."
+    },
+    {
+      "id": "place_paris_2",
+      "name": "Louvre Museum",
+      "location": "Paris",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "mona lisa",
+          "culture"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "high",
+        "age_suitability_profile": "educational",
+        "image_url": ""
+      },
+      "description": "Explore the world's largest art museum, home to the Mona Lisa and thousands of historic masterpieces."
+    },
+    {
+      "id": "place_paris_3",
+      "name": "Seine River Cruise",
+      "location": "Paris",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "relaxing",
+          "water",
+          "sightseeing"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Drift past illuminated monuments like Notre Dame on a relaxing boat ride through the heart of Paris."
+    },
+    {
+      "id": "place_paris_4",
+      "name": "Luxembourg Gardens",
+      "location": "Paris",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxing",
+          "flowers",
+          "picnic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Stroll through manicured lawns, statues, and fountains in this beloved park near the Latin Quarter."
+    },
+    {
+      "id": "place_paris_5",
+      "name": "Moulin Rouge",
+      "location": "Paris",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "cabaret",
+          "dance",
+          "show",
+          "nightlife"
+        ],
+        "price_range": "medium",
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": ""
+      },
+      "description": "Experience the glitz, glamour, and the famous can-can dance at the world's most iconic cabaret."
+    },
+    {
+      "id": "place_paris_6",
+      "name": "Mus\u00e9e d'Orsay",
+      "location": "Paris",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "impressionism",
+          "van gogh",
+          "art",
+          "station"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Wander through a stunning Beaux-Arts railway station filled with the world's best Impressionist art."
+    },
+    {
+      "id": "place_paris_7",
+      "name": "Caf\u00e9 de Flore",
+      "location": "Paris",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "coffee",
+          "historic",
+          "chic",
+          "dining"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Sip hot chocolate at this historic Saint-Germain caf\u00e9 once frequented by famous writers and philosophers."
+    },
+    {
+      "id": "place_paris_8",
+      "name": "Arc de Triomphe",
+      "location": "Paris",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "napoleon",
+          "view",
+          "monument",
+          "history"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Climb to the rooftop of this massive triumphal arch for the best view of the Champs-\u00c9lys\u00e9es."
+    },
+    {
+      "id": "place_paris_9",
+      "name": "Sainte-Chapelle",
+      "location": "Paris",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "stained glass",
+          "gothic",
+          "architecture",
+          "beautiful"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Marvel at 1,113 scenes depicted in towering stained glass windows within this Gothic royal chapel."
+    },
+    {
+      "id": "place_paris_10",
+      "name": "Montmartre Walking Tour",
+      "location": "Paris",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "walking",
+          "village",
+          "artistic",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Explore the artistic hilltop village, cobblestone streets, and the white basilica of Sacr\u00e9-C\u0153ur."
     }
   ],
   "activities": [
@@ -5810,6 +6018,196 @@
         "image_url": "https://source.unsplash.com/800x600/?jasper%20raft%20tours%20athabasca%20river"
       },
       "description": "Float down the Athabasca River on a gentle, guided raft tour perfect for spotting local wildlife."
+    },
+    {
+      "id": "activity_paris_1",
+      "name": "Eiffel Tower",
+      "place_id": "place_paris_1",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "views",
+          "architecture",
+          "romantic"
+        ],
+        "budget": "$30",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Ascend the Iron Lady for breathtaking panoramic views of the City of Light from its observation decks."
+    },
+    {
+      "id": "activity_paris_2",
+      "name": "Louvre Museum",
+      "place_id": "place_paris_2",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "mona lisa",
+          "culture"
+        ],
+        "budget": "$25",
+        "energy_level": "high",
+        "age_suitability_profile": "educational",
+        "image_url": ""
+      },
+      "description": "Explore the world's largest art museum, home to the Mona Lisa and thousands of historic masterpieces."
+    },
+    {
+      "id": "activity_paris_3",
+      "name": "Seine River Cruise",
+      "place_id": "place_paris_3",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "relaxing",
+          "water",
+          "sightseeing"
+        ],
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Drift past illuminated monuments like Notre Dame on a relaxing boat ride through the heart of Paris."
+    },
+    {
+      "id": "activity_paris_4",
+      "name": "Luxembourg Gardens",
+      "place_id": "place_paris_4",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxing",
+          "flowers",
+          "picnic"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Stroll through manicured lawns, statues, and fountains in this beloved park near the Latin Quarter."
+    },
+    {
+      "id": "activity_paris_5",
+      "name": "Moulin Rouge",
+      "place_id": "place_paris_5",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "cabaret",
+          "dance",
+          "show",
+          "nightlife"
+        ],
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": ""
+      },
+      "description": "Experience the glitz, glamour, and the famous can-can dance at the world's most iconic cabaret."
+    },
+    {
+      "id": "activity_paris_6",
+      "name": "Mus\u00e9e d'Orsay",
+      "place_id": "place_paris_6",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "impressionism",
+          "van gogh",
+          "art",
+          "station"
+        ],
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Wander through a stunning Beaux-Arts railway station filled with the world's best Impressionist art."
+    },
+    {
+      "id": "activity_paris_7",
+      "name": "Caf\u00e9 de Flore",
+      "place_id": "place_paris_7",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "coffee",
+          "historic",
+          "chic",
+          "dining"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Sip hot chocolate at this historic Saint-Germain caf\u00e9 once frequented by famous writers and philosophers."
+    },
+    {
+      "id": "activity_paris_8",
+      "name": "Arc de Triomphe",
+      "place_id": "place_paris_8",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "napoleon",
+          "view",
+          "monument",
+          "history"
+        ],
+        "budget": "$15",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Climb to the rooftop of this massive triumphal arch for the best view of the Champs-\u00c9lys\u00e9es."
+    },
+    {
+      "id": "activity_paris_9",
+      "name": "Sainte-Chapelle",
+      "place_id": "place_paris_9",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "stained glass",
+          "gothic",
+          "architecture",
+          "beautiful"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Marvel at 1,113 scenes depicted in towering stained glass windows within this Gothic royal chapel."
+    },
+    {
+      "id": "activity_paris_10",
+      "name": "Montmartre Walking Tour",
+      "place_id": "place_paris_10",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "walking",
+          "village",
+          "artistic",
+          "scenic"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Explore the artistic hilltop village, cobblestone streets, and the white basilica of Sacr\u00e9-C\u0153ur."
     }
   ],
   "interactions": [
@@ -7065,6 +7463,293 @@
       "item_type": "activity",
       "rating": 1,
       "timestamp": "2026-01-11T08:12:09.234356"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_jasper_7",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:12:53.840114"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_jasper_10",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:12:55.500934"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_jasper_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:12:57.031730"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_jasper_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:12:58.282734"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_jasper_3",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:12:59.548881"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_jasper_9",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:13:00.755127"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_jasper_8",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:13:01.914483"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_jasper_1",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:13:03.033549"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_jasper_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:13:04.438656"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_jasper_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:13:05.339975"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_paris_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:27:56.648110"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_paris_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:27:57.347597"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_paris_8",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:27:58.558317"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_paris_1",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:27:59.979740"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_paris_6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:28:01.146193"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_paris_10",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:28:02.238255"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_paris_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:28:04.147002"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_paris_3",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:28:05.534557"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_paris_4",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:28:06.704256"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_paris_9",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:28:08.022552"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_barcelona_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:30:51.870575"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_barcelona_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:30:52.902946"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_barcelona_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:30:53.770885"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_barcelona_4",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:30:54.710157"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_barcelona_3",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:30:55.579822"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_barcelona_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:30:56.578918"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_barcelona_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:30:57.622818"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_barcelona_2",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:30:58.446794"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_barcelona_1",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:30:59.388129"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_barcelona_10",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:31:00.203596"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:34:13.625023"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:34:14.769370"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:34:15.654074"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_4",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:34:16.535952"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_9",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:34:17.550651"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_10",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:34:18.474404"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_5",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:34:19.584084"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_1",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:34:21.158388"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_1",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:34:21.486518"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:34:22.260317"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:34:23.205935"
     }
   ]
 }

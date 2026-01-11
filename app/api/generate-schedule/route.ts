@@ -302,7 +302,9 @@ Requirements:
 - "day" must be 0-6 (0 = first day)
 - "startTime" and "endTime" must be in "HH:MM" format (24-hour)
 - "color" must be one of: ${COLOR_OPTIONS.join(', ')}
-- Distribute activities across days logically
+- CRITICAL: Distribute activities across MULTIPLE days (not all on day 0)
+- Target ${Math.min(Math.ceil(items.length / 3), 7)} days based on ${items.length} activities
+- Spread activities evenly: approximately ${Math.ceil(items.length / Math.min(Math.ceil(items.length / 3), 7))} activities per day
 - Ensure endTime > startTime for each item
 - Include all provided activities
 - Add realistic travel time between activities
@@ -312,14 +314,17 @@ Return ONLY valid JSON array, no markdown, no explanations.`;
 }
 
 function createFallbackSchedule(items: any[]): ScheduleItem[] {
-  // Simple fallback: distribute items across days with default times
-  const itemsPerDay = Math.ceil(items.length / 3); // 3 days default
+  if (items.length === 0) return [];
+  
+  const targetDays = Math.min(Math.max(Math.ceil(items.length / 3), 1), 7);
+  const itemsPerDay = Math.ceil(items.length / targetDays);
   const schedule: ScheduleItem[] = [];
   
   items.forEach((item, index) => {
-    const day = Math.floor(index / itemsPerDay);
+    const day = Math.min(Math.floor(index / itemsPerDay), targetDays - 1);
+    const dayIndex = index % itemsPerDay;
     const colorIndex = index % COLOR_OPTIONS.length;
-    const startHour = 9 + (index % 3) * 3; // 9am, 12pm, 3pm rotation
+    const startHour = 9 + (dayIndex % 3) * 3; // 9am, 12pm, 3pm rotation
     
     schedule.push({
       id: `item-${item.id}-${index}`,
@@ -327,8 +332,8 @@ function createFallbackSchedule(items: any[]): ScheduleItem[] {
       description: item.description || `Visit ${item.name} in ${item.location || 'the destination'}`,
       color: COLOR_OPTIONS[colorIndex],
       startTime: `${String(startHour).padStart(2, '0')}:00`,
-      endTime: `${String(startHour + 2).padStart(2, '0')}:00`,
-      day: Math.min(day, 6),
+      endTime: `${String(Math.min(startHour + 2, 23)).padStart(2, '0')}:00`,
+      day,
     });
   });
   
@@ -405,6 +410,30 @@ function validateScheduleItems(items: any[], maxItems: number): ScheduleItem[] {
     });
   });
 
-  return validated;
+  return redistributeAcrossDays(validated);
+}
+
+function redistributeAcrossDays(items: ScheduleItem[]): ScheduleItem[] {
+  if (items.length === 0) return items;
+
+  const dayCounts = new Map<number, number>();
+  items.forEach(item => {
+    dayCounts.set(item.day, (dayCounts.get(item.day) || 0) + 1);
+  });
+
+  const uniqueDays = Array.from(dayCounts.keys());
+  const allOnOneDay = uniqueDays.length === 1 && items.length > 3;
+
+  if (allOnOneDay) {
+    const targetDays = Math.min(Math.ceil(items.length / 3), 7);
+    const itemsPerDay = Math.ceil(items.length / targetDays);
+    
+    return items.map((item, index) => ({
+      ...item,
+      day: Math.min(Math.floor(index / itemsPerDay), targetDays - 1),
+    }));
+  }
+
+  return items;
 }
 

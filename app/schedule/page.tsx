@@ -23,25 +23,62 @@ export default function SchedulePage() {
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [regenerateError, setRegenerateError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (tripId) loadItinerary();
-    else setIsLoading(false);
+  const generateInitialSchedule = useCallback(async () => {
+    if (!tripId) return;
+    
+    try {
+      const tripResponse = await fetch(`/api/trips/${tripId}`);
+      if (!tripResponse.ok) return;
+      
+      const tripData = await tripResponse.json();
+      const destination = tripData.trip?.destination;
+      if (!destination) return;
+
+      const response = await fetch("/api/generate-schedule", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          destination,
+          tripId,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setItems(data.schedule || []);
+      }
+    } catch (error) {
+      console.error('Error generating initial schedule:', error);
+    }
   }, [tripId]);
 
-  const loadItinerary = async () => {
+  const loadItinerary = useCallback(async () => {
+    if (!tripId) return;
+    
     try {
       setIsLoading(true);
       const response = await fetch(`/api/schedule?tripId=${tripId}`);
       if (response.ok) {
         const data = await response.json();
-        setItems(data.itinerary || []);
+        const itinerary = data.itinerary || [];
+        
+        if (itinerary.length === 0) {
+          await generateInitialSchedule();
+        } else {
+          setItems(itinerary);
+        }
       }
     } catch (error) {
       console.error('Error loading itinerary:', error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [tripId, generateInitialSchedule]);
+
+  useEffect(() => {
+    if (tripId) loadItinerary();
+    else setIsLoading(false);
+  }, [tripId, loadItinerary]);
 
   const saveItinerary = async (updatedItems: ScheduleItem[]) => {
     if (!tripId) return;
