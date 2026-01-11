@@ -1,15 +1,11 @@
-"""Web scraper for TripAdvisor activities with Gemini parsing."""
+"""Web scraper for activities using RapidAPI with Gemini parsing."""
 import re
 import time
 import random
 import os
 import json
-import base64
 from typing import List, Dict, Any, Optional, Tuple
-from urllib.parse import quote_plus, urljoin
 import requests
-from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
 from models import Place, Activity
 
 try:
@@ -19,52 +15,33 @@ except ImportError:
     GEMINI_AVAILABLE = False
 
 
-class TripAdvisorScraper:
-    """Scraper for TripAdvisor activities with image scraping."""
+class RapidAPIScraper:
+    """Scraper for activities using RapidAPI (Foursquare Places API)."""
     
-    def __init__(self):
-        """Initialize scraper with user agent."""
-        self.ua = UserAgent()
-        self.base_url = "https://www.tripadvisor.com"
-        self.session = requests.Session()
-        self.session.headers.update({
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Accept-Encoding': 'gzip, deflate',
-            'Connection': 'keep-alive',
-        })
+    def __init__(self, api_key: str = None):
+        """Initialize scraper with RapidAPI key."""
+        self.api_key = api_key or os.getenv("RAPIDAPI_KEY", "4e260aebc6mshdb19f055d84393fp172533jsn4d079431bff5")
+        self.base_url = "https://foursquare-com.p.rapidapi.com/v3/places/search"
+        self.headers = {
+            "X-RapidAPI-Key": self.api_key,
+            "X-RapidAPI-Host": "foursquare-com.p.rapidapi.com",
+            "Accept": "application/json"
+        }
         
         # Initialize Gemini
         if GEMINI_AVAILABLE:
-            api_key = os.getenv("GEMINI_API_KEY")
-            if api_key:
-                genai.configure(api_key=api_key)
+            gemini_key = os.getenv("GEMINI_API_KEY")
+            if gemini_key:
+                genai.configure(api_key=gemini_key)
                 self.model = genai.GenerativeModel('gemini-1.5-pro')
             else:
                 self.model = None
         else:
             self.model = None
     
-    def _get_headers(self) -> Dict[str, str]:
-        """Get randomized headers for request."""
-        return {
-            'User-Agent': self.ua.random,
-            'Referer': self.base_url,
-        }
-    
     def _normalize_location(self, location: str) -> str:
         """Normalize location name for consistent lookups."""
         return location.strip().title()
-    
-    def _download_image(self, image_url: str) -> Optional[bytes]:
-        """Download image from URL."""
-        try:
-            headers = self._get_headers()
-            response = self.session.get(image_url, headers=headers, timeout=10)
-            response.raise_for_status()
-            return response.content
-        except Exception:
-            return None
     
     def _parse_with_gemini(self, scraped_items: List[Dict[str, Any]], location: str) -> List[Dict[str, Any]]:
         """Parse scraped data using Gemini to extract structured information."""
@@ -148,6 +125,7 @@ Return JSON array format:
             formatted.append(f"Activity {i}:")
             formatted.append(f"  Name: {item.get('name', 'N/A')}")
             formatted.append(f"  Description: {item.get('description', 'N/A')}")
+            formatted.append(f"  Category: {item.get('category', 'N/A')}")
             formatted.append(f"  Image URL: {item.get('image_url', 'N/A')}")
             formatted.append("")
         return "\n".join(formatted)
@@ -158,14 +136,15 @@ Return JSON array format:
         for item in scraped_items:
             name = item.get("name", f"Activity in {location}")
             description = item.get("description", "")
+            category = item.get("category", "")
             
             structured_item = {
                 "name": name,
                 "description": description or f"Popular activity in {location}",
-                "category": self._infer_category(name, description),
-                "tags": self._infer_tags(name, description, ""),
-                "energy_level": self._infer_energy_level(name, description, ""),
-                "age_suitability_profile": self._infer_age_suitability(name, description, "", "medium"),
+                "category": self._infer_category(name, description) if not category else category,
+                "tags": self._infer_tags(name, description, category),
+                "energy_level": self._infer_energy_level(name, description, category),
+                "age_suitability_profile": self._infer_age_suitability(name, description, category, "medium"),
                 "image_url": item.get("image_url", ""),
                 "location": location
             }
@@ -262,78 +241,80 @@ Return JSON array format:
         
         return tags[:5]
     
+    def _geocode_location(self, location: str) -> Optional[Tuple[float, float]]:
+        """Geocode location to get coordinates using RapidAPI geocoding."""
+        try:
+            # Use a simple geocoding approach - you might want to use a geocoding API
+            # For now, return None and let the search API handle location by name
+            return None
+        except Exception:
+            return None
+    
     def scrape_activities(self, location: str, max_activities: int = 50) -> List[Dict[str, Any]]:
-        """Scrape activities from TripAdvisor for a given location."""
+        """Scrape activities using RapidAPI (Foursquare Places API)."""
         location = self._normalize_location(location)
         scraped_items = []
         
         try:
-            # Construct search URL
-            search_query = f"{location} things to do"
-            search_url = f"{self.base_url}/Search?q={quote_plus(search_query)}"
+            # Search for places using Foursquare Places API via RapidAPI
+            url = self.base_url
             
-            # Make request with headers
-            headers = self._get_headers()
-            response = self.session.get(search_url, headers=headers, timeout=10)
+            params = {
+                "query": location,
+                "limit": min(max_activities, 50),  # API typically limits to 50
+                "near": location,
+                "fields": "fsq_id,name,description,categories,location,photos,rating"
+            }
+            
+            response = requests.get(url, headers=self.headers, params=params, timeout=15)
             response.raise_for_status()
+            data = response.json()
             
-            soup = BeautifulSoup(response.content, 'html.parser')
+            # Parse Foursquare API response (adjust structure based on actual API response)
+            results = data.get("results", [])
+            if not results and isinstance(data, list):
+                results = data
             
-            # Find activity cards
-            activity_cards = soup.find_all('div', class_=re.compile(r'result|listing|attraction', re.I))
-            
-            # Alternative: Look for links to things-to-do pages
-            if not activity_cards:
-                things_to_do_link = soup.find('a', href=re.compile(r'Attractions', re.I))
-                if things_to_do_link:
-                    things_to_do_url = urljoin(self.base_url, things_to_do_link.get('href', ''))
-                    response = self.session.get(things_to_do_url, headers=headers, timeout=10)
-                    soup = BeautifulSoup(response.content, 'html.parser')
-                    activity_cards = soup.find_all('div', class_=re.compile(r'result|listing|attraction', re.I))
-            
-            # Parse activities
-            for i, card in enumerate(activity_cards[:max_activities]):
-                if len(scraped_items) >= max_activities:
-                    break
-                
+            for result in results[:max_activities]:
                 try:
-                    # Extract name
-                    name_elem = card.find(['h2', 'h3', 'a'], class_=re.compile(r'title|name|heading', re.I))
-                    if not name_elem:
-                        name_elem = card.find('a', href=re.compile(r'Attraction', re.I))
-                    
-                    if not name_elem:
-                        continue
-                    
-                    name = name_elem.get_text(strip=True)
+                    name = result.get("name", "")
                     if not name:
                         continue
                     
-                    # Extract description
-                    desc_elem = card.find(['p', 'span', 'div'], class_=re.compile(r'description|summary|text', re.I))
-                    description = desc_elem.get_text(strip=True) if desc_elem else ""
-                    if len(description) > 500:
-                        description = description[:500] + "..."
+                    # Get description
+                    description = result.get("description", "")
+                    if not description:
+                        # Try to get from categories
+                        categories = result.get("categories", [])
+                        if categories:
+                            description = categories[0].get("name", "")
                     
-                    # Extract image URL
+                    # Get category
+                    category_name = ""
+                    categories = result.get("categories", [])
+                    if categories:
+                        category_name = categories[0].get("name", "")
+                    
+                    # Get image URL
                     image_url = ""
-                    img_elem = card.find('img', src=re.compile(r'\.(jpg|jpeg|png|webp)', re.I))
-                    if img_elem:
-                        image_url = img_elem.get('src') or img_elem.get('data-src') or ""
-                        if image_url and not image_url.startswith('http'):
-                            image_url = urljoin(self.base_url, image_url)
+                    photos = result.get("photos", [])
+                    if photos and len(photos) > 0:
+                        photo = photos[0]
+                        prefix = photo.get("prefix", "")
+                        suffix = photo.get("suffix", "")
+                        if prefix and suffix:
+                            image_url = f"{prefix}original{suffix}"
                     
                     scraped_items.append({
                         "name": name,
                         "description": description,
+                        "category": category_name,
                         "image_url": image_url,
                         "location": location
                     })
                     
-                    # Rate limiting
-                    time.sleep(random.uniform(0.5, 1.5))
-                    
-                except Exception:
+                except Exception as e:
+                    print(f"Error parsing result: {e}")
                     continue
             
             # If we got some items, parse with Gemini
@@ -344,13 +325,23 @@ Return JSON array format:
             return []
             
         except Exception as e:
-            print(f"Error scraping activities: {e}")
+            print(f"Error scraping activities from RapidAPI: {e}")
+            # If Foursquare doesn't work, try alternative approach
+            return self._try_alternative_api(location, max_activities)
+    
+    def _try_alternative_api(self, location: str, max_activities: int) -> List[Dict[str, Any]]:
+        """Try alternative RapidAPI endpoint if primary fails."""
+        try:
+            # Try using Expedia Rapid Activities API or another service
+            # For now, return empty list - implement alternative if needed
+            return []
+        except Exception:
             return []
 
 
 def webscrape_location(database, location: str, max_activities: int = 50) -> Tuple[List[Place], List[Activity]]:
     """
-    Webscrape location: Check MongoDB -> Scrape -> Parse with Gemini -> Save to MongoDB.
+    Webscrape location: Check MongoDB -> Scrape via RapidAPI -> Parse with Gemini -> Save to MongoDB.
     
     Args:
         database: Database instance
@@ -370,7 +361,7 @@ def webscrape_location(database, location: str, max_activities: int = 50) -> Tup
         return places, activities
     
     # Step 2: Scrape if no data in MongoDB
-    scraper = TripAdvisorScraper()
+    scraper = RapidAPIScraper()
     scraped_data = scraper.scrape_activities(location, max_activities)
     
     if not scraped_data:
