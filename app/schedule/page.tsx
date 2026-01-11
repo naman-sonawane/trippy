@@ -232,32 +232,48 @@ export default function SchedulePage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-black flex items-center justify-center">
-        <div className="text-gray-900 dark:text-zinc-50">Loading itinerary...</div>
+      <div className="min-h-screen relative flex items-center justify-center"
+           style={{
+             backgroundImage: "url(/anotherbg.jpg)",
+             backgroundSize: "cover",
+             backgroundPosition: "center",
+             backgroundRepeat: "no-repeat",
+             backgroundAttachment: "fixed"
+           }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+        <div className="relative z-10 text-white">Loading itinerary...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black p-4 sm:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen relative p-4 sm:p-8"
+         style={{
+           backgroundImage: "url(/anotherbg.jpg)",
+           backgroundSize: "cover",
+           backgroundPosition: "center",
+           backgroundRepeat: "no-repeat",
+           backgroundAttachment: "fixed"
+         }}>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+      <div className="relative z-10 max-w-7xl mx-auto">
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <button
                 onClick={() => router.push('/dashboard')}
-                className="p-2 text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-50 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-md transition-colors"
+                className="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-md transition-colors"
                 title="Back to Dashboard"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
               </button>
-              <h1 className="text-3xl font-semibold text-gray-900 dark:text-zinc-50">
+              <h1 className="text-3xl font-semibold text-white">
                 Itinerary
               </h1>
             </div>
-            <p className="text-gray-600 dark:text-zinc-400">
+            <p className="text-white/80">
               {days === 1 ? "Single Day View" : `${days} Day View`}
               {isSaving && <span className="ml-2 text-sm">Saving...</span>}
             </p>

@@ -8985,6 +8985,167 @@
       "item_type": "place",
       "rating": 1,
       "timestamp": "2026-01-11T10:08:49.276593"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_10",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:09:29.051180"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_3",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:09:50.829215"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:09:57.915972"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_china_3",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:23:39.348685"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_china_1",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:23:58.518856"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_china_5",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:24:02.648730"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_china_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:25:05.054891"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_china_10",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:25:10.510627"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_china_6",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:25:13.174155"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_china_4",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:25:19.623190"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_china_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:25:25.588390"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_china_2",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:25:30.412943"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_china_9",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:25:38.957292"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_france_1",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:30:50.818513"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_france_10",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:30:52.422908"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_france_2",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:31:00.820399"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_france_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:31:14.501175"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_france_6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:32:04.638498"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_france_8",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:32:08.108875"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_france_3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:32:38.944631"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_france_4",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:33:29.667770"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_france_9",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:33:32.597559"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_france_5",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:33:49.778418"
     }
   ]
 }

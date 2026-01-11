@@ -1,5 +1,6 @@
 'use client'
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 type LatLng = { lat: number; lng: number };
 const DEFAULT_COORDS: LatLng = { lat: 40.758, lng: -73.9855 }; // Times Square
@@ -108,9 +109,11 @@ function shortestAngleDeltaDeg(fromDeg: number, toDeg: number) {
 }
 
 export default function GoogleStreetViewPage() {
+  const searchParams = useSearchParams();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const panoramaRef = useRef<GoogleStreetViewPanorama | null>(null);
 
+  const locationParam = searchParams.get("location");
   const [coords, setCoords] = useState<LatLng>(DEFAULT_COORDS);
   const [status, setStatus] = useState<string>("Loading…");
   const [isApiLoaded, setIsApiLoaded] = useState<boolean>(false);
@@ -122,10 +125,10 @@ export default function GoogleStreetViewPage() {
   const [isBackendRunning, setIsBackendRunning] = useState(false);
 
   // Location search state
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState(locationParam || "");
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState("");
-  const [currentLocation, setCurrentLocation] = useState("Times Square, NYC");
+  const [currentLocation, setCurrentLocation] = useState(locationParam || "Times Square, NYC");
 
   // Smoothing state
   const smoothRef = useRef<{
@@ -188,12 +191,25 @@ export default function GoogleStreetViewPage() {
     }
   }, [searchInput, searchPlace]);
 
+  useEffect(() => {
+    if (locationParam && locationParam !== searchInput) {
+      setSearchInput(locationParam);
+      setCurrentLocation(locationParam);
+      if (isApiLoaded) {
+        searchPlace(locationParam);
+      }
+    }
+  }, [locationParam, isApiLoaded, searchInput, searchPlace]);
+
   // Load Google Maps
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     if (window.google?.maps) {
       setIsApiLoaded(true);
+      if (locationParam) {
+        searchPlace(locationParam);
+      }
       return;
     }
 
@@ -209,7 +225,12 @@ export default function GoogleStreetViewPage() {
     script.async = true;
     script.defer = true;
 
-    const handleLoad = () => setIsApiLoaded(true);
+    const handleLoad = () => {
+      setIsApiLoaded(true);
+      if (locationParam) {
+        searchPlace(locationParam);
+      }
+    };
     const handleError = () => setStatus("Failed to load Google Maps API");
 
     script.addEventListener("load", handleLoad);
@@ -220,7 +241,7 @@ export default function GoogleStreetViewPage() {
       script.removeEventListener("load", handleLoad);
       script.removeEventListener("error", handleError);
     };
-  }, []);
+  }, [locationParam]);
 
   // Init Street View
   useEffect(() => {
@@ -406,8 +427,17 @@ export default function GoogleStreetViewPage() {
   }, [isBackendRunning]);
 
   return (
-    <div className="w-full h-screen bg-black text-white">
-      <div className="absolute top-6 left-6 z-10 bg-black/90 p-4 rounded-xl backdrop-blur-md w-[380px] shadow-2xl border border-white/10">
+    <div className="w-full h-screen relative"
+         style={{
+           backgroundImage: "url(/anotherbg.jpg)",
+           backgroundSize: "cover",
+           backgroundPosition: "center",
+           backgroundRepeat: "no-repeat",
+           backgroundAttachment: "fixed"
+         }}>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+      <div className="relative z-10 text-white">
+      <div className="absolute top-6 left-6 z-20 bg-white/10 backdrop-blur-md p-4 rounded-xl w-[380px] shadow-2xl border border-white/20">
         <div className="text-xl font-semibold">Hand-Controlled Street View</div>
         <div className="text-sm text-white/70 mt-1">{status}</div>
         <div className="text-xs text-white/50 mt-1">{currentLocation}</div>
@@ -476,37 +506,37 @@ export default function GoogleStreetViewPage() {
               onClick={() => navigateToLocation({ lat: 40.758, lng: -73.9855 }, "Times Square, NYC")}
               className="block w-full text-left px-3 py-2 text-xs bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
             >
-              🗽 Times Square, NYC
+              Times Square, NYC
             </button>
             <button
               onClick={() => navigateToLocation({ lat: 48.8584, lng: 2.2945 }, "Eiffel Tower, Paris")}
               className="block w-full text-left px-3 py-2 text-xs bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
             >
-              🗼 Eiffel Tower, Paris
+              Eiffel Tower, Paris
             </button>
             <button
               onClick={() => navigateToLocation({ lat: 51.5074, lng: -0.1278 }, "London, UK")}
               className="block w-full text-left px-3 py-2 text-xs bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
             >
-              🏰 London, UK
+              London, UK
             </button>
             <button
               onClick={() => navigateToLocation({ lat: 51.500729, lng: -0.124625 }, "Big Ben, London")}
               className="block w-full text-left px-3 py-2 text-xs bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
             >
-              🕰️ Big Ben, London
+              Big Ben, London
             </button>
           </div>
         </div>
 
         <div className="mt-4 p-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
           <div className="text-xs text-blue-300">
-            💡 <strong>Tip:</strong> Move your hand left/right to look around. Swipe quickly to snap turn.
+            <strong>Tip:</strong> Move your hand left/right to look around. Swipe quickly to snap turn.
           </div>
         </div>
       </div>
-
-      <div ref={containerRef} className="w-full h-full" />
+      </div>
+      <div ref={containerRef} className="w-full h-full absolute inset-0 z-0" />
     </div>
   );
 }

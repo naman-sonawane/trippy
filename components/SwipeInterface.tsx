@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useMotionValue, useTransform, PanInfo } from "framer-motion";
-import { PanoramicView } from "./PanoramicView";
 
 export interface RecommendationItem {
   id: string;
@@ -81,10 +80,13 @@ const SwipeCard = ({ item, onSwipe, isTop, onPanoramicClick }: SwipeCardProps) =
                   onPanoramicClick?.();
                 }}
                 className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white flex items-center justify-center shadow-lg transition-all hover:scale-110"
-                aria-label="View panoramic"
-                title="View panoramic"
+                aria-label="View on map"
+                title="View on map"
               >
-                🗺️
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
               </button>
             </div>
             <div className="absolute bottom-4 left-4 right-4">
@@ -97,9 +99,10 @@ const SwipeCard = ({ item, onSwipe, isTop, onPanoramicClick }: SwipeCardProps) =
         ) : (
           <div className="h-2/5 bg-gradient-to-br from-blue-500 to-purple-600 relative">
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-white text-6xl font-bold opacity-20">
-                {item.type === "place" ? "📍" : "🎯"}
-              </div>
+              <svg className="w-16 h-16 text-white opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
             </div>
             <div className="absolute top-4 right-4 z-20">
               <button
@@ -108,10 +111,13 @@ const SwipeCard = ({ item, onSwipe, isTop, onPanoramicClick }: SwipeCardProps) =
                   onPanoramicClick?.();
                 }}
                 className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white flex items-center justify-center shadow-lg transition-all hover:scale-110"
-                aria-label="View panoramic"
-                title="View panoramic"
+                aria-label="View on map"
+                title="View on map"
               >
-                🗺️
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
               </button>
             </div>
             <div className="absolute bottom-4 left-4 right-4">
@@ -125,9 +131,13 @@ const SwipeCard = ({ item, onSwipe, isTop, onPanoramicClick }: SwipeCardProps) =
 
         <div className="h-3/5 p-6 overflow-y-auto">
           {item.location && (
-            <div className="mb-3">
+            <div className="mb-3 flex items-center gap-2">
+              <svg className="w-4 h-4 text-gray-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
               <span className="text-sm font-semibold text-gray-700 dark:text-zinc-300">
-                📍 {item.location}
+                {item.location}
               </span>
             </div>
           )}
@@ -154,8 +164,11 @@ const SwipeCard = ({ item, onSwipe, isTop, onPanoramicClick }: SwipeCardProps) =
 
             {(item.features.budget || item.features.price_range) && (
               <div className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-gray-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
                 <span className="text-sm font-semibold text-gray-700 dark:text-zinc-300">
-                  💰 Budget:
+                  Budget:
                 </span>
                 <span className="text-sm text-gray-600 dark:text-zinc-400">
                   {item.features.budget || item.features.price_range}
@@ -165,8 +178,11 @@ const SwipeCard = ({ item, onSwipe, isTop, onPanoramicClick }: SwipeCardProps) =
 
             {item.features.energy_level && (
               <div className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-gray-600 dark:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
                 <span className="text-sm font-semibold text-gray-700 dark:text-zinc-300">
-                  ⚡ Energy:
+                  Energy:
                 </span>
                 <span className="text-sm text-gray-600 dark:text-zinc-400">
                   {item.features.energy_level}
@@ -183,11 +199,11 @@ const SwipeCard = ({ item, onSwipe, isTop, onPanoramicClick }: SwipeCardProps) =
                   <div className="w-24 h-2 bg-gray-200 dark:bg-zinc-800 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-gradient-to-r from-blue-500 to-purple-600"
-                      style={{ width: `${Math.min(100, item.score * 10)}%` }}
+                      style={{ width: `${Math.min(100, 100 - item.score * 10)}%` }}
                     />
                   </div>
                   <span className="text-xs font-semibold text-gray-700 dark:text-zinc-300">
-                    {(item.score * 10).toFixed(0)}%
+                    {(100 - item.score * 10).toFixed(0)}%
                   </span>
                 </div>
               </div>
@@ -220,7 +236,7 @@ export const SwipeInterface = ({
   const [scheduleError, setScheduleError] = useState<string | null>(null);
   const [panoramicLocation, setPanoramicLocation] = useState<string | null>(null);
   const [isPanoramicOpen, setIsPanoramicOpen] = useState(false);
-  const [isFingerTrackingActive, setIsFingerTrackingActive] = useState(false);
+  const [isFingerTrackingActive, setIsFingerTrackingActive] = useState(true);
   const [lastSwipeDetected, setLastSwipeDetected] = useState<0 | 1 | 2>(0);
   const handleSwipeRef = useRef<((direction: "like" | "dislike") => Promise<void>) | undefined>(undefined);
   
@@ -229,6 +245,21 @@ export const SwipeInterface = ({
   useEffect(() => {
     loadRecommendations();
   }, [destination, tripId]);
+
+  useEffect(() => {
+    const checkBackendAndEnable = async () => {
+      try {
+        const response = await fetch(`${ALGORITHM_API_URL}/api/status`);
+        const data = await response.json();
+        if (data.running) {
+          setIsFingerTrackingActive(true);
+        }
+      } catch (error) {
+        console.error("Cannot connect to algorithm API:", error);
+      }
+    };
+    checkBackendAndEnable();
+  }, []);
 
   useEffect(() => {
     if (!isFingerTrackingActive) return;
@@ -301,16 +332,16 @@ export const SwipeInterface = ({
 
   const generateFallbackRecommendations = (dest: string): RecommendationItem[] => {
     const categories = [
-      { category: "Restaurant", emoji: "🍽️", tags: ["dining", "local cuisine"] },
-      { category: "Museum", emoji: "🏛️", tags: ["culture", "history", "art"] },
-      { category: "Park", emoji: "🌳", tags: ["nature", "outdoors", "relaxing"] },
-      { category: "Landmark", emoji: "🗼", tags: ["iconic", "sightseeing", "photo spot"] },
-      { category: "Market", emoji: "🛍️", tags: ["shopping", "local", "souvenirs"] },
-      { category: "Cafe", emoji: "☕", tags: ["coffee", "relaxing", "cozy"] },
-      { category: "Beach", emoji: "🏖️", tags: ["water", "sun", "relaxing"] },
-      { category: "Theater", emoji: "🎭", tags: ["entertainment", "culture", "evening"] },
-      { category: "Bar", emoji: "🍸", tags: ["nightlife", "drinks", "social"] },
-      { category: "Gallery", emoji: "🎨", tags: ["art", "culture", "indoor"] },
+      { category: "Restaurant", tags: ["dining", "local cuisine"] },
+      { category: "Museum", tags: ["culture", "history", "art"] },
+      { category: "Park", tags: ["nature", "outdoors", "relaxing"] },
+      { category: "Landmark", tags: ["iconic", "sightseeing", "photo spot"] },
+      { category: "Market", tags: ["shopping", "local", "souvenirs"] },
+      { category: "Cafe", tags: ["coffee", "relaxing", "cozy"] },
+      { category: "Beach", tags: ["water", "sun", "relaxing"] },
+      { category: "Theater", tags: ["entertainment", "culture", "evening"] },
+      { category: "Bar", tags: ["nightlife", "drinks", "social"] },
+      { category: "Gallery", tags: ["art", "culture", "indoor"] },
     ];
 
     const priceRanges = ["$", "$$", "$$$", "$$$$"];
@@ -318,7 +349,7 @@ export const SwipeInterface = ({
 
     return categories.map((cat, idx) => ({
       id: `fallback-${dest}-${idx}`,
-      name: `${cat.emoji} ${cat.category} in ${dest}`,
+      name: `${cat.category} in ${dest}`,
       category: cat.category,
       description: `Experience the best ${cat.category.toLowerCase()} that ${dest} has to offer. This is a popular local spot recommended by our travel experts.`,
       features: {
@@ -481,7 +512,9 @@ export const SwipeInterface = ({
   if (isGeneratingSchedule) {
     return (
       <div className="flex flex-col items-center justify-center h-[600px] gap-4">
-        <div className="text-6xl mb-4">✨</div>
+        <svg className="w-16 h-16 text-blue-500 mb-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
         <div className="text-gray-900 dark:text-zinc-50 text-2xl font-bold">
           Generating Your Schedule
         </div>
@@ -514,7 +547,10 @@ export const SwipeInterface = ({
   if (cards.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[600px] gap-4">
-        <div className="text-2xl">🏝️</div>
+        <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
         <div className="text-gray-900 dark:text-zinc-50 text-lg font-semibold">
           No recommendations found
         </div>
@@ -528,7 +564,9 @@ export const SwipeInterface = ({
   if (currentIndex >= cards.length) {
     return (
       <div className="flex flex-col items-center justify-center h-[600px] gap-4">
-        <div className="text-6xl mb-4">✨</div>
+        <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
         <div className="text-gray-900 dark:text-zinc-50 text-2xl font-bold">
           All Done!
         </div>
@@ -537,11 +575,17 @@ export const SwipeInterface = ({
             You've seen all recommendations for {destination}
           </p>
           <div className="mt-4 flex gap-6 justify-center text-sm">
-            <span className="text-green-600 dark:text-green-400">
-              ❤️ Liked: {likedCount}
+            <span className="text-green-600 dark:text-green-400 flex items-center gap-1">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              Liked: {likedCount}
             </span>
-            <span className="text-red-600 dark:text-red-400">
-              ✕ Passed: {dislikedCount}
+            <span className="text-red-600 dark:text-red-400 flex items-center gap-1">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              Passed: {dislikedCount}
             </span>
           </div>
         </div>
@@ -568,20 +612,33 @@ export const SwipeInterface = ({
   return (
     <div className="flex flex-col items-center gap-6">
       <div className="flex gap-6 text-sm text-gray-600 dark:text-zinc-400 items-center">
-        <span>❤️ {likedCount}</span>
-        <span>✕ {dislikedCount}</span>
+        <span className="flex items-center gap-1">
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          {likedCount}
+        </span>
+        <span className="flex items-center gap-1">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          {dislikedCount}
+        </span>
         <span>
           {currentIndex + 1} / {cards.length}
         </span>
         <button
           onClick={toggleFingerTracking}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
             isFingerTrackingActive
               ? "bg-green-500 hover:bg-green-600 text-white"
               : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-zinc-50"
           }`}
         >
-          {isFingerTrackingActive ? "🖐️ Finger Tracking ON" : "🖐️ Enable Finger Tracking"}
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+          </svg>
+          {isFingerTrackingActive ? "Finger Tracking ON" : "Enable Finger Tracking"}
         </button>
         {isFingerTrackingActive && lastSwipeDetected !== 0 && (
           <span className="text-xs text-blue-500">
@@ -599,34 +656,29 @@ export const SwipeInterface = ({
             isTop={idx === 0}
             onPanoramicClick={() => {
               const location = card.location || card.name;
-              setPanoramicLocation(location);
-              setIsPanoramicOpen(true);
+              router.push(`/panaroma?location=${encodeURIComponent(location)}`);
             }}
           />
         ))}
       </div>
 
-      <PanoramicView
-        locationName={panoramicLocation || ""}
-        isOpen={isPanoramicOpen}
-        onClose={() => {
-          setIsPanoramicOpen(false);
-          setPanoramicLocation(null);
-        }}
-      />
 
       <div className="flex gap-6">
         <button
           onClick={() => handleSwipe("dislike")}
-          className="w-16 h-16 rounded-full bg-red-500 hover:bg-red-600 text-white text-2xl flex items-center justify-center shadow-lg transition-transform hover:scale-110"
+          className="w-16 h-16 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center shadow-lg transition-transform hover:scale-110"
         >
-          ✕
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
         <button
           onClick={() => handleSwipe("like")}
-          className="w-16 h-16 rounded-full bg-green-500 hover:bg-green-600 text-white text-2xl flex items-center justify-center shadow-lg transition-transform hover:scale-110"
+          className="w-16 h-16 rounded-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center shadow-lg transition-transform hover:scale-110"
         >
-          ❤️
+          <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
         </button>
       </div>
 

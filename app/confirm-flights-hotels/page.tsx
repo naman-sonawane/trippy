@@ -310,53 +310,53 @@ export default function ConfirmFlightsHotelsPage() {
         const image = imgTemplate ? imgTemplate.replace('{width}', '400').replace('{height}', '300') : '';
 
         return (
-            <div key={index} className="p-4 rounded-lg border hover:shadow-lg transition-shadow bg-white flex gap-4">
-                <div className="w-32 h-24 shrink-0 rounded overflow-hidden bg-gray-200 flex items-center justify-center">
+            <div key={index} className="p-4 rounded-lg border border-white/20 hover:shadow-lg transition-shadow bg-white/10 backdrop-blur-sm flex gap-4">
+                <div className="w-32 h-24 shrink-0 rounded overflow-hidden bg-black/20 flex items-center justify-center">
                     {image ? (
                         <img src={image} alt={title} className="object-cover w-full h-full" />
                     ) : (
-                        <div className="text-xs text-gray-500">No image</div>
+                        <div className="text-xs text-white/50">No image</div>
                     )}
                 </div>
                 <div className="flex-1">
                     <div className="flex justify-between items-start gap-4">
                         <div>
-                            <h3 className="font-semibold text-gray-800">{title}</h3>
-                            <p className="text-sm text-gray-500 mt-1">{h.descriptiveText ?? h.secondaryInfo ?? ''}</p>
+                            <h3 className="font-semibold text-white">{title}</h3>
+                            <p className="text-sm text-white/70 mt-1">{h.descriptiveText ?? h.secondaryInfo ?? ''}</p>
                         </div>
                         <div className="text-right">
                             {pricePerNight ? (
                                 <div>
-                                    <div className="font-bold text-lg">{currencySymbols[currency]}{priceValue.toLocaleString()}</div>
-                                    <div className="text-xs text-gray-500">per night</div>
+                                    <div className="font-bold text-lg text-white">{currencySymbols[currency]}{priceValue.toLocaleString()}</div>
+                                    <div className="text-xs text-white/60">per night</div>
                                     {currency !== 'USD' && priceValueUSD > 0 && (
-                                        <div className="text-xs text-gray-400">${priceValueUSD} USD</div>
+                                        <div className="text-xs text-white/50">${priceValueUSD} USD</div>
                                     )}
                                     {numberOfNights > 0 && totalPrice > 0 && (
-                                        <div className="text-sm font-semibold text-blue-600 mt-1">
+                                        <div className="text-sm font-semibold text-blue-400 mt-1">
                                             {currencySymbols[currency]}{totalPrice.toLocaleString()} total ({numberOfNights} {numberOfNights === 1 ? 'night' : 'nights'})
                                         </div>
                                     )}
                                 </div>
                             ) : (
-                                <div className="text-sm text-gray-500">No price</div>
+                                <div className="text-sm text-white/60">No price</div>
                             )}
                         </div>
                     </div>
 
-                    <div className="mt-3 flex items-center gap-4 text-sm text-gray-600">
+                    <div className="mt-3 flex items-center gap-4 text-sm text-white/80">
                         {rating ? (
                             <div className="flex items-center gap-2">
                                 <Star size={14} className="fill-yellow-400 text-yellow-400" />
                                 <span className="font-medium">{rating}</span>
-                                <span className="text-xs text-gray-500">{reviews}</span>
+                                <span className="text-xs text-white/60">{reviews}</span>
                             </div>
                         ) : (
-                            <div className="text-xs text-gray-500">No rating</div>
+                            <div className="text-xs text-white/60">No rating</div>
                         )}
 
                         {h.rewardsBadge?.text?.string && (
-                            <div className="text-xs text-green-700 bg-green-100 px-2 py-1 rounded">{h.rewardsBadge.text.string}</div>
+                            <div className="text-xs text-green-300 bg-green-500/20 px-2 py-1 rounded border border-green-500/30">{h.rewardsBadge.text.string}</div>
                         )}
                     </div>
                 </div>
@@ -365,41 +365,59 @@ export default function ConfirmFlightsHotelsPage() {
     };
 
     if (isLoadingTrip) {
-        return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
-                <Loader2 className="animate-spin text-blue-600" size={48} />
+    return (
+        <div className="min-h-screen relative flex items-center justify-center"
+             style={{
+               backgroundImage: "url(/anotherbg.jpg)",
+               backgroundSize: "cover",
+               backgroundPosition: "center",
+               backgroundRepeat: "no-repeat",
+               backgroundAttachment: "fixed"
+             }}>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+            <div className="relative z-10">
+                <Loader2 className="animate-spin text-white" size={48} />
             </div>
-        );
+        </div>
+    );
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-6">
-            <div className="max-w-5xl mx-auto">
+        <div className="min-h-screen relative p-6"
+             style={{
+               backgroundImage: "url(/anotherbg.jpg)",
+               backgroundSize: "cover",
+               backgroundPosition: "center",
+               backgroundRepeat: "no-repeat",
+               backgroundAttachment: "fixed"
+             }}>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+            <div className="relative z-10 max-w-5xl mx-auto">
                 <div className="mb-6">
                     <button
                         onClick={() => router.back()}
-                        className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors mb-4"
+                        className="flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-4"
                     >
                         <ArrowLeft className="w-5 h-5" />
                         <span>Back to Schedule</span>
                     </button>
-                    <h1 className="text-4xl font-bold text-gray-800 mb-2 flex items-center gap-3">
-                        <Search className="text-blue-600" />
+                    <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                        <Search className="text-blue-400" />
                         Confirm Flights & Hotels
                     </h1>
                     {tripDestination && (
-                        <p className="text-gray-600">
+                        <p className="text-white/80">
                             For your trip to <span className="font-semibold">{tripDestination}</span>
                         </p>
                     )}
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-2xl p-8 mb-6">
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 mb-6 border border-white/20">
                     <div className="space-y-6">
-                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl">
+                        <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
                             <div className="flex items-center justify-between mb-4">
-                                <h3 className="font-semibold text-gray-700 flex items-center gap-2">
-                                    <Plane size={20} className="text-blue-600" />
+                                <h3 className="font-semibold text-white flex items-center gap-2">
+                                    <Plane size={20} className="text-blue-400" />
                                     Flight Details
                                 </h3>
                                 <button
@@ -421,13 +439,13 @@ export default function ConfirmFlightsHotelsPage() {
                                 </button>
                             </div>
                             {userCity && (
-                                <p className="text-xs text-gray-600 mb-3">
+                                <p className="text-xs text-white/70 mb-3">
                                     Detected departure city: <span className="font-medium">{userCity}</span>
                                 </p>
                             )}
                             <div className="grid grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         <MapPin className="inline mr-1" size={16} />
                                         From (Airport Code)
                                     </label>
@@ -437,11 +455,11 @@ export default function ConfirmFlightsHotelsPage() {
                                         onChange={(e) => setTripData({ ...tripData, departId: e.target.value.toUpperCase() })}
                                         placeholder="e.g., JFK"
                                         maxLength={3}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent uppercase"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-white placeholder-white/40 uppercase"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         <MapPin className="inline mr-1" size={16} />
                                         To (Airport Code)
                                     </label>
@@ -451,18 +469,18 @@ export default function ConfirmFlightsHotelsPage() {
                                         onChange={(e) => handleArrivalChange(e.target.value)}
                                         placeholder="e.g., LAX"
                                         maxLength={3}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent uppercase"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-white placeholder-white/40 uppercase"
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-white mb-2">
                                     Cabin Class
                                 </label>
                                 <select
                                     value={tripData.cabinClass}
                                     onChange={(e) => setTripData({ ...tripData, cabinClass: e.target.value })}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-white"
                                 >
                                     <option value="ECONOMY">Economy</option>
                                     <option value="PREMIUM_ECONOMY">Premium Economy</option>
@@ -472,14 +490,14 @@ export default function ConfirmFlightsHotelsPage() {
                             </div>
                         </div>
 
-                        <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl">
-                            <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                                <Calendar size={20} className="text-purple-600" />
+                        <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                            <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
+                                <Calendar size={20} className="text-purple-400" />
                                 Travel Dates
                             </h3>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         Departure Date
                                     </label>
                                     <input
@@ -487,11 +505,11 @@ export default function ConfirmFlightsHotelsPage() {
                                         value={tripData.departDate}
                                         onChange={(e) => setTripData({ ...tripData, departDate: e.target.value })}
                                         min={new Date().toISOString().split('T')[0]}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded-lg focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 text-white"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         Return Date
                                     </label>
                                     <input
@@ -499,20 +517,20 @@ export default function ConfirmFlightsHotelsPage() {
                                         value={tripData.returnDate}
                                         onChange={(e) => setTripData({ ...tripData, returnDate: e.target.value })}
                                         min={tripData.departDate || new Date().toISOString().split('T')[0]}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded-lg focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 text-white"
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-gradient-to-r from-green-50 to-teal-50 p-6 rounded-xl">
-                            <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                                <Hotel size={20} className="text-green-600" />
+                        <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                            <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
+                                <Hotel size={20} className="text-green-400" />
                                 Hotel Preferences
                             </h3>
                             <div className="grid grid-cols-2 gap-4 mb-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         Destination Geo ID
                                     </label>
                                     <input
@@ -520,20 +538,20 @@ export default function ConfirmFlightsHotelsPage() {
                                         value={tripData.geoId}
                                         onChange={(e) => setTripData({ ...tripData, geoId: e.target.value })}
                                         placeholder="e.g., 32655 for Los Angeles"
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded-lg focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 text-white placeholder-white/40"
                                     />
-                                    <p className="text-xs text-gray-500 mt-1">
+                                    <p className="text-xs text-white/60 mt-1">
                                         Auto-updates for common airports
                                     </p>
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         Sort By
                                     </label>
                                     <select
                                         value={tripData.sort}
                                         onChange={(e) => setTripData({ ...tripData, sort: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded-lg focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 text-white"
                                     >
                                         <option value="BEST_VALUE">Best Value</option>
                                         <option value="POPULARITY">Traveler Ranking</option>
@@ -544,7 +562,7 @@ export default function ConfirmFlightsHotelsPage() {
                             </div>
                             <div className="grid grid-cols-3 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         <Users className="inline mr-1" size={16} />
                                         Rooms
                                     </label>
@@ -554,11 +572,11 @@ export default function ConfirmFlightsHotelsPage() {
                                         max="10"
                                         value={tripData.rooms}
                                         onChange={(e) => setTripData({ ...tripData, rooms: parseInt(e.target.value) || 1 })}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded-lg focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 text-white"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         <Users className="inline mr-1" size={16} />
                                         Adults
                                     </label>
@@ -568,17 +586,17 @@ export default function ConfirmFlightsHotelsPage() {
                                         max="20"
                                         value={tripData.adults}
                                         onChange={(e) => setTripData({ ...tripData, adults: parseInt(e.target.value) || 1 })}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded-lg focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 text-white"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    <label className="block text-sm font-medium text-white mb-2">
                                         Currency
                                     </label>
                                     <select
                                         value={tripData.currency}
                                         onChange={(e) => setTripData({ ...tripData, currency: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        className="w-full px-4 py-3 bg-black/40 border border-white/20 rounded-lg focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 text-white"
                                     >
                                         <option value="USD">USD</option>
                                         <option value="EUR">EUR</option>
@@ -611,7 +629,7 @@ export default function ConfirmFlightsHotelsPage() {
                 </div>
 
                 {error && (
-                    <div className="bg-red-50 border-l-4 border-red-500 text-red-700 px-6 py-4 rounded-lg mb-6 flex items-start gap-3">
+                    <div className="bg-red-500/20 backdrop-blur-sm border-l-4 border-red-500 text-red-200 px-6 py-4 rounded-lg mb-6 flex items-start gap-3 border border-red-500/30">
                         <AlertCircle className="shrink-0 mt-0.5" size={20} />
                         <div>
                             <strong className="font-semibold">Error:</strong> {error}
@@ -621,9 +639,9 @@ export default function ConfirmFlightsHotelsPage() {
 
                 {results && (
                     <div className="space-y-6">
-                        <div className="bg-white rounded-2xl shadow-xl p-8">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-3">
-                                <Plane className="text-blue-600" />
+                        <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl p-8 border border-white/20">
+                            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                <Plane className="text-blue-400" />
                                 Outbound Flight Prices ({tripData.departId} → {tripData.arrivalId})
                             </h2>
                             <div className="space-y-3">
@@ -636,15 +654,15 @@ export default function ConfirmFlightsHotelsPage() {
                                             key={index}
                                             className={`p-4 rounded-lg border-2 ${
                                                 isSelectedDate
-                                                    ? 'bg-indigo-100 border-indigo-600 ring-2 ring-indigo-400'
+                                                    ? 'bg-indigo-500/30 border-indigo-400 ring-2 ring-indigo-400/50'
                                                     : flight.isCheapest
-                                                        ? 'bg-green-50 border-green-500'
-                                                        : 'bg-blue-50 border-blue-200'
-                                            }`}
+                                                        ? 'bg-green-500/20 border-green-400'
+                                                        : 'bg-blue-500/20 border-blue-400/50'
+                                            } backdrop-blur-sm`}
                                         >
                                             <div className="flex justify-between items-center">
                                                 <div>
-                                                    <p className="font-semibold text-gray-800">
+                                                    <p className="font-semibold text-white">
                                                         {new Date(flight.departureDate).toLocaleDateString('en-US', {
                                                             weekday: 'short',
                                                             month: 'short',
@@ -654,23 +672,23 @@ export default function ConfirmFlightsHotelsPage() {
                                                     </p>
                                                     <div className="flex gap-2 mt-1">
                                                         {isSelectedDate && (
-                                                            <span className="text-xs font-medium text-indigo-700 bg-indigo-200 px-2 py-1 rounded">
+                                                            <span className="text-xs font-medium text-indigo-200 bg-indigo-500/30 px-2 py-1 rounded border border-indigo-400/50">
                                                                 Your Selected Date
                                                             </span>
                                                         )}
                                                         {flight.isCheapest && (
-                                                            <span className="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded">
+                                                            <span className="text-xs font-medium text-green-200 bg-green-500/30 px-2 py-1 rounded border border-green-400/50">
                                                                 Best Price
                                                             </span>
                                                         )}
                                                     </div>
                                                 </div>
                                                 <div className="text-right">
-                                                    <p className="text-2xl font-bold text-gray-800">
+                                                    <p className="text-2xl font-bold text-white">
                                                         {currencySymbols[tripData.currency]}{convertedPrice.toLocaleString()}
                                                     </p>
                                                     {tripData.currency !== 'USD' && (
-                                                        <p className="text-xs text-gray-500">
+                                                        <p className="text-xs text-white/60">
                                                             ${flight.priceRounded.units} USD
                                                         </p>
                                                     )}
@@ -682,9 +700,9 @@ export default function ConfirmFlightsHotelsPage() {
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-2xl shadow-xl p-8">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-3">
-                                <Plane className="text-purple-600 transform rotate-180" />
+                        <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl p-8 border border-white/20">
+                            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                <Plane className="text-purple-400 transform rotate-180" />
                                 Return Flight Prices ({tripData.arrivalId} → {tripData.departId})
                             </h2>
                             <div className="space-y-3">
@@ -697,15 +715,15 @@ export default function ConfirmFlightsHotelsPage() {
                                             key={index}
                                             className={`p-4 rounded-lg border-2 ${
                                                 isSelectedDate
-                                                    ? 'bg-indigo-100 border-indigo-600 ring-2 ring-indigo-400'
+                                                    ? 'bg-indigo-500/30 border-indigo-400 ring-2 ring-indigo-400/50'
                                                     : flight.isCheapest
-                                                        ? 'bg-green-50 border-green-500'
-                                                        : 'bg-purple-50 border-purple-200'
-                                            }`}
+                                                        ? 'bg-green-500/20 border-green-400'
+                                                        : 'bg-purple-500/20 border-purple-400/50'
+                                            } backdrop-blur-sm`}
                                         >
                                             <div className="flex justify-between items-center">
                                                 <div>
-                                                    <p className="font-semibold text-gray-800">
+                                                    <p className="font-semibold text-white">
                                                         {new Date(flight.departureDate).toLocaleDateString('en-US', {
                                                             weekday: 'short',
                                                             month: 'short',
@@ -715,23 +733,23 @@ export default function ConfirmFlightsHotelsPage() {
                                                     </p>
                                                     <div className="flex gap-2 mt-1">
                                                         {isSelectedDate && (
-                                                            <span className="text-xs font-medium text-indigo-700 bg-indigo-200 px-2 py-1 rounded">
+                                                            <span className="text-xs font-medium text-indigo-200 bg-indigo-500/30 px-2 py-1 rounded border border-indigo-400/50">
                                                                 Your Selected Date
                                                             </span>
                                                         )}
                                                         {flight.isCheapest && (
-                                                            <span className="text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded">
+                                                            <span className="text-xs font-medium text-green-200 bg-green-500/30 px-2 py-1 rounded border border-green-400/50">
                                                                 Best Price
                                                             </span>
                                                         )}
                                                     </div>
                                                 </div>
                                                 <div className="text-right">
-                                                    <p className="text-2xl font-bold text-gray-800">
+                                                    <p className="text-2xl font-bold text-white">
                                                         {currencySymbols[tripData.currency]}{convertedPrice.toLocaleString()}
                                                     </p>
                                                     {tripData.currency !== 'USD' && (
-                                                        <p className="text-xs text-gray-500">
+                                                        <p className="text-xs text-white/60">
                                                             ${flight.priceRounded.units} USD
                                                         </p>
                                                     )}
@@ -780,9 +798,9 @@ export default function ConfirmFlightsHotelsPage() {
                             </div>
                         )}
 
-                        <div className="bg-white rounded-2xl shadow-xl p-8">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-3">
-                                <Hotel className="text-green-600" />
+                        <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl p-8 border border-white/20">
+                            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                <Hotel className="text-green-400" />
                                 Top Hotels (First 5 Results) - {results.numberOfNights} {results.numberOfNights === 1 ? 'Night' : 'Nights'}
                             </h2>
 
@@ -791,7 +809,7 @@ export default function ConfirmFlightsHotelsPage() {
                                     const hotels = extractHotels(results.hotels).slice(0, 5);
                                     if (!hotels.length) {
                                         return (
-                                            <div className="text-sm text-gray-600 p-4 bg-gray-50 rounded-lg">
+                                            <div className="text-sm text-white/70 p-4 bg-black/20 rounded-lg border border-white/10">
                                                 No hotels found for those dates / geo ID.
                                             </div>
                                         );

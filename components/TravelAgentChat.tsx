@@ -501,29 +501,6 @@ function TravelAgentComponent({ tripDetails, onConversationEnd }: TravelAgentCom
             console.log('✅ Transcript formatted successfully');
             console.log('📄 Transcript preview (first 500 chars):', formattedTranscript.substring(0, 500));
 
-            // Automatically download the transcript
-            if (audioChunksRef.current.length > 0) {
-                const blob = new Blob([formattedTranscript], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const fileName = `travel-conversation-${new Date().getTime()}.txt`;
-
-                console.log('📦 Auto-downloading transcript:', {
-                    size: blob.size,
-                    fileName: fileName
-                });
-
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = fileName;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-
-                console.log('✅ Transcript downloaded automatically');
-                addLog('📥 Transcript downloaded');
-            }
-
             // Cleanup
             if (callObjectRef.current) {
                 await callObjectRef.current.leave();
