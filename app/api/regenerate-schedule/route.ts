@@ -4,10 +4,10 @@ import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import Trip from '@/models/Trip';
 import User from '@/models/User';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const PYTHON_API_URL = process.env.PYTHON_API_URL || 'http://localhost:8000';
-const GOOGLE_AI_API_KEY = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+const HACK_CLUB_API_KEY = 'sk-hc-v1-0980dcafe29d477fa757a2c1c7f0e2200ccad811c41549f592e8219f20bc7c32';
+const HACK_CLUB_API_URL = 'https://ai.hackclub.com/proxy/v1/chat/completions';
 
 // Color options matching the schedule UI
 const COLOR_OPTIONS = [
@@ -45,12 +45,6 @@ export const POST = async (req: Request) => {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    if (!GOOGLE_AI_API_KEY) {
-      return NextResponse.json(
-        { error: 'Google AI API key not configured' },
-        { status: 500 }
-      );
-    }
 
     const body = await req.json();
     const { tripId, timeSelection } = body;
@@ -126,10 +120,6 @@ export const POST = async (req: Request) => {
       );
     }
 
-    // Initialize Gemini
-    const genAI = new GoogleGenerativeAI(GOOGLE_AI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-
     // Create prompt for regeneration
     const prompt = createRegeneratePrompt(
       activitiesInTimeSlot,
@@ -142,10 +132,27 @@ export const POST = async (req: Request) => {
       userAge
     );
 
-    // Call Gemini API
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    // Call Gemini API via Hack Club proxy
+    const response = await fetch(HACK_CLUB_API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${HACK_CLUB_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'google/gemini-3-pro-preview',
+        messages: [
+          { role: 'user', content: prompt }
+        ],
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to call Gemini API');
+    }
+
+    const data = await response.json();
+    const text = data.choices?.[0]?.message?.content || '';
 
     // Parse JSON from Gemini response
     let newActivities: ScheduleItem[];
