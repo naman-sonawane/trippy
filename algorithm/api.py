@@ -3,21 +3,12 @@ Merged FastAPI server:
 1) Recommendation engine API + image scraping endpoint
 2) Hand-tracking camera API (MediaPipe + OpenCV) for swipe + view-adjust endpoints
 
-- Single FastAPI app + single uvicorn process.
-- Keeps logic for BOTH.
-- Keeps ALL endpoints:
-  /api/recommendations
-  /api/swipe
-  /api/confidence-check
-  /api/high-confidence-items
-  /api/multi-user-recommendations
-  /api/multi-user-confidence-check
-  /api/scrape-image
-  /api/health
-  /api/finger-track
-  /api/view-adjust
-  /api/status
-  /
+Speed changes applied (keeps your logic):
+- MediaPipe inference is throttled to a fixed FPS (default 15) instead of every camera loop tick
+- Frames are downscaled before MediaPipe (default target width 640)
+- MediaPipe model_complexity lowered to 0 (faster)
+- Lock scope is kept small (only around shared-state writes/reads)
+- Camera loop no longer sleeps a fixed 33ms (uses tiny sleep to avoid pegging CPU)
 """
 
 from __future__ import annotations
@@ -49,10 +40,6 @@ from webscraper import webscrape_location, ActivityGenerator
 
 app = FastAPI(title="Trippy Merged API", version="1.0.0")
 
-# Merge CORS intents:
-# - recommendation server used "*"
-# - camera server used localhost origins
-# If you want to tighten later, replace ["*"] with your exact Next.js domains.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -120,20 +107,36 @@ class HandTracker:
         "pinky": 20,
     }
 
-    def __init__(self, cam_index: int = 0, queue_len: int = 10):
+    def __init__(
+        self,
+        cam_index: int = 0,
+        queue_len: int = 10,
+        infer_fps: float = 15.0,
+        target_width: int = 640,
+    ):
         # Camera setup
         self.cap = cv2.VideoCapture(cam_index)
         if not self.cap.isOpened():
             raise RuntimeError("Failed to open camera")
 
-        # MediaPipe setup
+        # -------------------------
+        # Speed knobs
+        # -------------------------
+        self._infer_fps = float(max(1.0, infer_fps))
+        self._infer_period = 1.0 / self._infer_fps
+        self._last_infer_t = 0.0
+
+        self._target_width = int(max(160, target_width))
+        self._downscale_interpolation = cv2.INTER_AREA
+
+        # MediaPipe setup (speed: complexity=0)
         self.mp_hands = mp.solutions.hands
         self.hands = self.mp_hands.Hands(
             static_image_mode=False,
             max_num_hands=1,
-            model_complexity=1,
-            min_detection_confidence=0.75,
-            min_tracking_confidence=0.75,
+            model_complexity=0,               # speed change
+            min_detection_confidence=0.60,    # speed change (less strict)
+            min_tracking_confidence=0.60,     # speed change (less strict)
         )
 
         # Swipe detection state
@@ -149,6 +152,13 @@ class HandTracker:
         # Current swipe state
         self.current_swipe = 0
         self.current_direction = "none"
+        
+        self._event_id = 0
+        self._pending_swipe: int = 0          # 0|1|2
+        self._pending_direction: str = "none"
+        self._pending_event_id: int = 0
+        self._pending_set_time: float = 0.0
+        self._pending_ttl_s: float = 1.25     # how long we keep an un-acked swipe available
 
         # Thread control
         self.running = False
@@ -163,7 +173,7 @@ class HandTracker:
     def _compute_hand_center_wrist(self, hand_lms, w, h):
         """For swipe detection - uses wrist"""
         wrist = self._lm_xy(hand_lms, 0, w, h)
-        return wrist / np.array([w, h])
+        return wrist / np.array([w, h], dtype=np.float32)
 
     def _compute_hand_center_fingertips(self, hand_lms, w, h):
         """For position tracking - uses fingertips average"""
@@ -173,7 +183,20 @@ class HandTracker:
             fingertip_positions.append(tip_pos)
 
         avg_position = np.mean(fingertip_positions, axis=0)
-        return avg_position / np.array([w, h])
+        return avg_position / np.array([w, h], dtype=np.float32)
+
+    def _downscale_for_inference(self, frame_bgr: np.ndarray):
+        """Downscale frame before MediaPipe for speed. Returns (small_frame, scale)."""
+        h, w = frame_bgr.shape[:2]
+        if w <= self._target_width:
+            return frame_bgr, 1.0
+        scale = self._target_width / float(w)
+        new_w = self._target_width
+        new_h = int(round(h * scale))
+        small = cv2.resize(
+            frame_bgr, (new_w, new_h), interpolation=self._downscale_interpolation
+        )
+        return small, scale
 
     def detect_swipe(
         self,
@@ -182,21 +205,21 @@ class HandTracker:
         min_total_dx_norm: float = 0.12,
         max_total_dy_norm: float = 0.12,
     ):
-        if len(self.swipe_queue) < min_frames:
-            return 0
+        # Snapshot quickly (lock only for copying)
+        with self.lock:
+            if len(self.swipe_queue) < min_frames:
+                return 0
+            samples = list(self.swipe_queue)[-min_frames:]
 
-        samples = list(self.swipe_queue)[-min_frames:]
-        xs, ys = [], []
+        xs = np.empty((min_frames,), dtype=np.float32)
+        ys = np.empty((min_frames,), dtype=np.float32)
 
-        for s in samples:
+        for i, s in enumerate(samples):
             center = s.get("center")
             if center is None:
                 return 0
-            xs.append(center[0])
-            ys.append(center[1])
-
-        xs = np.array(xs, dtype=np.float32)
-        ys = np.array(ys, dtype=np.float32)
+            xs[i] = center[0]
+            ys[i] = center[1]
 
         total_dx = float(xs[-1] - xs[0])
         total_dy = float(ys[-1] - ys[0])
@@ -204,7 +227,7 @@ class HandTracker:
         if abs(total_dx) < min_total_dx_norm or abs(total_dy) > max_total_dy_norm:
             return 0
 
-        step_dx = np.diff(xs)
+        step_dx = xs[1:] - xs[:-1]
         direction = 1.0 if total_dx > 0 else -1.0
         if float(np.mean((step_dx * direction) > 0)) < required_fraction:
             return 0
@@ -212,65 +235,121 @@ class HandTracker:
         return 1 if total_dx > 0 else 2  # 1=right, 2=left
 
     def process_frame(self):
-        """Process one frame from the camera"""
+        """Process one frame from the camera (fast path)."""
         ok, frame = self.cap.read()
         if not ok or frame is None or frame.size == 0:
             return
 
         frame = cv2.flip(frame, 1)
-        h, w = frame.shape[:2]
 
-        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        # Speed change: run MediaPipe only at fixed infer FPS
+        now = time.time()
+        if (now - self._last_infer_t) < self._infer_period:
+            return
+        self._last_infer_t = now
+
+        # Speed change: downscale before inference
+        small_bgr, _scale = self._downscale_for_inference(frame)
+        sh, sw = small_bgr.shape[:2]
+
+        rgb = cv2.cvtColor(small_bgr, cv2.COLOR_BGR2RGB)
         rgb.flags.writeable = False
         result = self.hands.process(rgb)
         rgb.flags.writeable = True
 
         swipe = 0
 
-        with self.lock:
-            if result.multi_hand_landmarks:
-                hand_lms = result.multi_hand_landmarks[0]
+        if result.multi_hand_landmarks:
+            hand_lms = result.multi_hand_landmarks[0]
 
-                # Update position (fingertips avg)
-                center_norm = self._compute_hand_center_fingertips(hand_lms, w, h)
-                x_frac = float(center_norm[0])
-                y_frac = float(center_norm[1])
+            # Position (fingertips avg) on SMALL frame, normalized => equivalent
+            center_norm = self._compute_hand_center_fingertips(hand_lms, sw, sh)
+            x_frac = float(center_norm[0])
+            y_frac = float(center_norm[1])
 
-                x_frac = min(1.0, max(0.0, x_frac))
-                y_frac = min(1.0, max(0.0, y_frac))
+            x_frac = min(1.0, max(0.0, x_frac))
+            y_frac = min(1.0, max(0.0, y_frac))
 
+            # Swipe detection (wrist) on SMALL frame, normalized => equivalent
+            wrist_norm = self._compute_hand_center_wrist(hand_lms, sw, sh)
+
+            # Lock only around shared-state writes
+            with self.lock:
                 self.last_known_x = x_frac
                 self.last_known_y = y_frac
+                self.swipe_queue.append({"center": wrist_norm})
 
-                # Update swipe detection (wrist)
-                wrist_norm = self._compute_hand_center_wrist(hand_lms, w, h)
-                self.swipe_queue.append({"center": wrist_norm, "w": w, "h": h})
+            swipe = self.detect_swipe()
 
-                swipe = self.detect_swipe()
-                now = time.time()
-                if swipe != 0 and (now - self._last_swipe_time) >= self._swipe_cooldown_s:
-                    self._last_swipe_time = now
+            # Cooldown + debouncing (tiny lock)
+            now2 = time.time()
+            with self.lock:
+                if swipe != 0 and (now2 - self._last_swipe_time) >= self._swipe_cooldown_s:
+                    self._last_swipe_time = now2
                 else:
                     swipe = 0
-            else:
+
+                if swipe != 0 and any(s != 0 for s in self.last_n_frames):
+                    swipe = 0
+                self.last_n_frames.append(swipe)
+
+                self.current_swipe = swipe
+                self.current_direction = "right" if swipe == 1 else "left" if swipe == 2 else "none"
+
+                # --- NEW: latch swipe as an event (so polling can't miss it) ---
+                if swipe != 0:
+                    # Don't allow a second swipe to overwrite an un-acked one
+                    if self._pending_swipe == 0:
+                        self._event_id += 1
+                        self._pending_swipe = int(swipe)
+                        self._pending_direction = self.current_direction
+                        self._pending_event_id = int(self._event_id)
+                        self._pending_set_time = time.time()
+        else:
+            # No hand detected
+            with self.lock:
                 self.swipe_queue.clear()
+                self.current_swipe = 0
+                self.current_direction = "none"
 
-            if swipe != 0 and any(s != 0 for s in self.last_n_frames):
-                swipe = 0
-            self.last_n_frames.append(swipe)
+    def get_swipe_event(self):
+        """Return a latched swipe event until consumed or TTL expires."""
+        with self.lock:
+            if self._pending_swipe != 0:
+                # TTL expiry safety (prevents a stuck swipe if client disappears)
+                if (time.time() - self._pending_set_time) > self._pending_ttl_s:
+                    self._pending_swipe = 0
+                    self._pending_direction = "none"
+                    self._pending_event_id = 0
 
-            self.current_swipe = swipe
-            self.current_direction = "right" if swipe == 1 else "left" if swipe == 2 else "none"
+            return (
+                int(self._pending_swipe),
+                str(self._pending_direction),
+                int(self._pending_event_id),
+            )
+
+    def consume_swipe_event(self, event_id: int) -> bool:
+        """Consume only if the event_id matches the currently pending one."""
+        with self.lock:
+            if self._pending_swipe == 0:
+                return True
+            if int(event_id) != int(self._pending_event_id):
+                return False
+            self._pending_swipe = 0
+            self._pending_direction = "none"
+            self._pending_event_id = 0
+            return True
 
     def camera_loop(self):
         print("Camera loop started")
         while self.running:
             try:
                 self.process_frame()
-                time.sleep(0.033)
+                # Speed change: tiny sleep only (keeps latency low, avoids 100% CPU spin)
+                time.sleep(0.002)
             except Exception as e:
                 print(f"Error in camera loop: {e}")
-                time.sleep(0.1)
+                time.sleep(0.05)
         print("Camera loop stopped")
 
     def start(self):
@@ -309,7 +388,8 @@ async def startup_event():
     """Initialize tracker and start camera on startup"""
     global tracker
     try:
-        tracker = HandTracker(cam_index=0, queue_len=10)
+        # You can tune infer_fps/target_width here without touching logic
+        tracker = HandTracker(cam_index=0, queue_len=10, infer_fps=15.0, target_width=640)
         tracker.start()
         print("✓ Hand tracking initialized with camera")
     except Exception as e:
@@ -583,7 +663,6 @@ async def get_multi_user_recommendations(request: MultiUserRecommendationRequest
             if pref.age:
                 participant_ages.append(pref.age)
 
-        # kept as-is from your code (variable name suggests average but it isn't used)
         _avg_age = participant_ages[0] if participant_ages else requesting_user.age
 
         recommendations = engine.get_recommendations(
@@ -700,15 +779,11 @@ async def scrape_image(request: Dict[str, Any]):
 
         generator = ActivityGenerator()
 
-        # try pexels first if api key is set (most reliable)
         image_url = generator._get_pexels_image(query)
-
         if not image_url:
             image_url = generator._get_google_image(query)
-
         if not image_url:
             image_url = generator._get_duckduckgo_image(query)
-
         if not image_url:
             image_url = generator._get_unsplash_image(query)
 
@@ -722,18 +797,33 @@ async def scrape_image(request: Dict[str, Any]):
 # Hand-tracking endpoints
 # -----------------------------------------------------------------------------
 
+from fastapi import Query
+
 @app.get("/api/finger-track")
-async def finger_track():
-    """Get current swipe state. Returns: {"swipe": 0|1|2, "direction": str}"""
+async def finger_track(
+    consume: int = Query(0, ge=0, le=1),
+    event_id: int = Query(0, ge=0),
+):
+    """
+    Latched swipe event:
+    - Normal poll: GET /api/finger-track -> returns pending swipe until consumed
+    - Ack:         GET /api/finger-track?consume=1&event_id=123 -> clears if matches
+    Returns: {"swipe": 0|1|2, "direction": str, "event_id": int}
+    """
     global tracker
     if not tracker:
         raise HTTPException(status_code=500, detail="Tracker not initialized")
+
     try:
-        swipe, direction = tracker.get_swipe()
-        return JSONResponse({"swipe": swipe, "direction": direction})
+        if consume == 1:
+            ok = tracker.consume_swipe_event(event_id)
+            return JSONResponse({"ok": ok})
+
+        swipe, direction, eid = tracker.get_swipe_event()
+        return JSONResponse({"swipe": swipe, "direction": direction, "event_id": eid})
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error getting swipe: {str(e)}")
-
 
 @app.get("/api/view-adjust")
 async def view_adjust_get():

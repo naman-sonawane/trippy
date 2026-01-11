@@ -9146,6 +9146,146 @@
       "item_type": "activity",
       "rating": -1,
       "timestamp": "2026-01-11T10:33:49.778418"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-new york-0",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:46:16.480461"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-new york-1",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:46:23.234550"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-new york-2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:46:26.809098"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-new york-3",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:46:29.628930"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-new york-4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:46:32.761501"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-new york-5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:46:36.968026"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-new york-6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:46:39.548044"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-new york-7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:46:41.879617"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-new york-8",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:46:45.148707"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-new york-9",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:46:57.824787"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-delhi-0",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:57:05.492290"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-delhi-1",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:57:05.977569"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-delhi-2",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:57:06.500262"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-delhi-3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:57:07.897288"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-delhi-4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:57:08.394300"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-delhi-5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:57:08.884923"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-delhi-6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:57:09.369563"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-delhi-7",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:57:09.827005"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-delhi-8",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:57:10.315546"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "fallback-delhi-9",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:57:17.279791"
     }
   ]
 }
