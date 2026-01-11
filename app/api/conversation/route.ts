@@ -34,7 +34,9 @@ export async function POST(request: Request) {
     enhancedContext += '4. Who they are traveling with (solo, family, friends, or partner)\n\n';
     enhancedContext += 'This is a NEW conversation with a NEW user. Start fresh and introduce yourself. After collecting ALL this information, say goodbye and tell them their preferences have been saved.';
 
-    const webhookUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/tavus/webhook`;
+    const baseUrl = process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const webhookUrl = `${baseUrl}/api/tavus/webhook`;
+    const transcriptWebhookUrl = `${baseUrl}/api/tavus/transcript`;
     const conversationName = `Trip_${userEmail}_${Date.now()}`;
 
     console.log('Creating Tavus conversation with context:', enhancedContext);
@@ -52,6 +54,12 @@ export async function POST(request: Request) {
                 conversation_name: conversationName,
                 conversational_context: enhancedContext,
                 callback_url: webhookUrl,
+                properties: {
+                    max_call_duration: 900,
+                    enable_recording: true,
+                    enable_transcription: true,
+                    language: "english"
+                }
             })
         });
 

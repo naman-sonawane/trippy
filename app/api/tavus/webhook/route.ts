@@ -1,6 +1,4 @@
-import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import User from '@/models/User';
 
@@ -67,9 +65,9 @@ const checkIfConversationComplete = (transcript: TranscriptMessage[]): boolean =
   return lastMessages.some(msg => farewellKeywords.some(keyword => msg.includes(keyword)));
 };
 
-export const POST = async (req: Request) => {
+export async function POST(request: NextRequest) {
   try {
-    const payload: WebhookPayload = await req.json();
+    const payload: WebhookPayload = await request.json();
 
     console.log('Tavus Webhook Event:', payload.event_type);
     console.log('Conversation ID:', payload.conversation_id);

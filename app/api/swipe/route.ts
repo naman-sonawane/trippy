@@ -45,7 +45,31 @@ export const POST = async (req: Request) => {
       throw new Error('Failed to record swipe action');
     }
 
-    return NextResponse.json({ success: true }, { status: 200 });
+    // Check confidence after recording swipe
+    const confidenceResponse = await fetch(`${PYTHON_API_URL}/api/confidence-check`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: session.user.id,
+        destination,
+      }),
+    });
+
+    if (confidenceResponse.ok) {
+      const confidenceData = await confidenceResponse.json();
+      return NextResponse.json({
+        success: true,
+        scheduleReady: confidenceData.meets_threshold || false,
+        progress: {
+          likes: confidenceData.likes,
+          total: confidenceData.total,
+          ratio: confidenceData.confidence_ratio,
+        },
+      }, { status: 200 });
+    }
+
+    // If confidence check fails, still return success but scheduleReady: false
+    return NextResponse.json({ success: true, scheduleReady: false }, { status: 200 });
   } catch (error) {
     console.error('Error handling swipe:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

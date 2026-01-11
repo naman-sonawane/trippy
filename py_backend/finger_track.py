@@ -4,8 +4,8 @@ import numpy as np
 import time
 from collections import deque
 
-class VisualTracking:
-    def __init__(self, cam_index: int = 0, queue_len: int = 8):
+class FingerTracking:
+    def __init__(self, cam_index: int = 0, queue_len: int = 10):
         self.cap = cv2.VideoCapture(cam_index, cv2.CAP_DSHOW)
         if not self.cap.isOpened():
             raise RuntimeError("Issue initializing cap (camera not opened)")
@@ -25,7 +25,7 @@ class VisualTracking:
         self.q = deque(maxlen=queue_len)
 
         self._last_swipe_time = 0.0
-        self._swipe_cooldown_s = 0.8
+        self._swipe_cooldown_s = 1.5
         self._last_swipe_direction = None
         self._swipe_display_time = 0.0
         self._swipe_display_duration = 0.8
@@ -38,9 +38,9 @@ class VisualTracking:
 
     def _compute_hand_center(self, hand_lms, w, h):
         wrist = self._lm_xy(hand_lms, 0, w, h)
-        return wrist / np.array([w, h])  # Normalize
+        return wrist / np.array([w, h])
 
-    def detect_swipe(self, min_frames: int = 8, required_fraction: float = 0.40, # Fraction moving in same direction
+    def detect_swipe(self, min_frames: int = 8, required_fraction: float = 0.40,
                      min_total_dx_norm: float = 0.12, max_total_dy_norm: float = 0.12):
         if len(self.q) < min_frames:
             return 0
@@ -61,11 +61,9 @@ class VisualTracking:
         total_dx = float(xs[-1] - xs[0])
         total_dy = float(ys[-1] - ys[0])
 
-        # Check if motion is horizontal enough
         if abs(total_dx) < min_total_dx_norm or abs(total_dy) > max_total_dy_norm:
             return 0
 
-        # Direction consistency
         step_dx = np.diff(xs)
         direction = 1.0 if total_dx > 0 else -1.0
         if float(np.mean((step_dx * direction) > 0)) < required_fraction:
@@ -91,7 +89,6 @@ class VisualTracking:
         if result.multi_hand_landmarks:
             hand_lms = result.multi_hand_landmarks[0]
 
-            # Draw on BGR frame for display
             self.mp_draw.draw_landmarks(
                 frame, hand_lms,
                 self.mp_hands.HAND_CONNECTIONS,
@@ -99,7 +96,6 @@ class VisualTracking:
                 self.mp_styles.get_default_hand_connections_style(),
             )
 
-            # Compute hand center
             center_norm = self._compute_hand_center(hand_lms, w, h)
             self.q.append({"center": center_norm, "w": w, "h": h})
 
@@ -112,7 +108,6 @@ class VisualTracking:
         else:
             self.q.clear()
 
-        # Only return a single l/r signal for easy frontend
         if swipe != 0 and any(s != 0 for s in self.last_n_frames):
             swipe = 0
         self.last_n_frames.append(swipe)
@@ -128,7 +123,7 @@ class VisualTracking:
         cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    tracker = VisualTracking(queue_len=12)
+    tracker = FingerTracking(queue_len=10)
 
     while True:
         frame, swipe = tracker.read_store_frame()

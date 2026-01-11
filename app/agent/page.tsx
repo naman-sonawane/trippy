@@ -44,10 +44,19 @@ export default function TavusDemo() {
         dayNight?: string;
         solo?: string;
     } | null>(null);
+    const [transcript, setTranscript] = useState<Array<{
+        id: string;
+        text: string;
+        isUser: boolean;
+        timestamp: Date;
+    }>>([]);
+    const [isTranscriptVisible, setIsTranscriptVisible] = useState(false);
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const audioRef = useRef<HTMLAudioElement>(null);
     const callObjectRef = useRef<DailyCallObject | null>(null);
+    const transcriptPollingRef = useRef<NodeJS.Timeout | null>(null);
+    const speechRecognitionRef = useRef<any>(null);
 
     const addLog = (message: string): void => {
         setLogs(prev => [...prev, { time: new Date().toLocaleTimeString(), message }]);
@@ -90,6 +99,131 @@ export default function TavusDemo() {
             startConversation();
         }
     }, [dailyLoaded, autoStarted, isConnected]);
+
+    // Speech recognition effect - capture audio from user's microphone
+    useEffect(() => {
+        console.log('Speech recognition effect triggered. isConnected:', isConnected);
+        addLog(`Speech recognition check - Connected: ${isConnected}`);
+        
+        if (isConnected && typeof window !== 'undefined') {
+            const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+            
+            console.log('SpeechRecognition available:', !!SpeechRecognition);
+            
+            if (SpeechRecognition) {
+                if (speechRecognitionRef.current) {
+                    try {
+                        speechRecognitionRef.current.stop();
+                    } catch (error) {
+                        console.log('Error stopping existing recognition:', error);
+                    }
+                    speechRecognitionRef.current = null;
+                }
+                
+                const recognition = new SpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                recognition.lang = 'en-US';
+                recognition.maxAlternatives = 1;
+                
+                let isRecognitionActive = false;
+                
+                recognition.onstart = () => {
+                    console.log('🎤 Speech recognition started');
+                    addLog('🎤 Started listening to conversation');
+                    isRecognitionActive = true;
+                };
+                
+                recognition.onresult = (event: any) => {
+                    const current = event.resultIndex;
+                    const transcriptText = event.results[current][0].transcript;
+                    const isFinal = event.results[current].isFinal;
+                    
+                    console.log('🎤 Result:', isFinal ? 'FINAL' : 'interim', transcriptText);
+                    
+                    if (isFinal && transcriptText.trim()) {
+                        console.log('🎤 Speech detected:', transcriptText);
+                        addLog(`🎤 Captured: ${transcriptText.substring(0, 50)}...`);
+                        
+                        setTranscript(prev => {
+                            const isUser = prev.length % 2 === 0;
+                            
+                            const newEntry = {
+                                id: `${isUser ? 'user' : 'ai'}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+                                text: transcriptText.trim(),
+                                isUser: isUser,
+                                timestamp: new Date()
+                            };
+                            
+                            console.log('Adding transcript entry:', newEntry);
+                            return [...prev, newEntry];
+                        });
+                    }
+                };
+                
+                recognition.onerror = (event: any) => {
+                    console.log('🎤 Speech recognition error:', event.error);
+                    addLog(`❌ Speech recognition error: ${event.error}`);
+                    isRecognitionActive = false;
+                    
+                    if (event.error === 'no-speech' || event.error === 'audio-capture' || event.error === 'aborted') {
+                        setTimeout(() => {
+                            if (isConnected && !isRecognitionActive) {
+                                try {
+                                    recognition.start();
+                                    console.log('🔄 Restarting speech recognition');
+                                } catch (error) {
+                                    console.log('Failed to restart recognition:', error);
+                                }
+                            }
+                        }, 1000);
+                    }
+                };
+                
+                recognition.onend = () => {
+                    console.log('🎤 Speech recognition ended');
+                    isRecognitionActive = false;
+                    
+                    if (isConnected) {
+                        setTimeout(() => {
+                            try {
+                                recognition.start();
+                                console.log('🔄 Auto-restarting speech recognition');
+                            } catch (error) {
+                                console.log('Failed to restart recognition:', error);
+                            }
+                        }, 500);
+                    }
+                };
+                
+                speechRecognitionRef.current = recognition;
+                
+                try {
+                    console.log('🎤 Attempting to start speech recognition...');
+                    recognition.start();
+                    addLog('🎤 Speech recognition initialized - listening for audio...');
+                } catch (error) {
+                    console.error('Failed to start speech recognition:', error);
+                    addLog('❌ Speech recognition failed to start');
+                }
+            } else {
+                addLog('❌ Speech recognition not supported in this browser');
+                console.log('❌ Speech Recognition API not available');
+            }
+        }
+
+        return () => {
+            if (speechRecognitionRef.current) {
+                try {
+                    speechRecognitionRef.current.stop();
+                    console.log('🛑 Stopped speech recognition');
+                } catch (error) {
+                    console.log('Error stopping recognition:', error);
+                }
+                speechRecognitionRef.current = null;
+            }
+        };
+    }, [isConnected]);
 
     const startConversation = async (): Promise<void> => {
         if (!dailyLoaded) {
@@ -472,6 +606,147 @@ export default function TavusDemo() {
                                     <PhoneOff style={{ width: '1.5rem', height: '1.5rem', color: 'white' }} />
                                 </button>
                             </div>
+
+                            {/* Transcript Toggle Button */}
+                            <button
+                                onClick={() => setIsTranscriptVisible(!isTranscriptVisible)}
+                                style={{
+                                    position: 'absolute',
+                                    top: '1rem',
+                                    right: '1rem',
+                                    background: 'rgba(255, 255, 255, 0.2)',
+                                    backdropFilter: 'blur(12px)',
+                                    padding: '0.75rem 1rem',
+                                    borderRadius: '0.5rem',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    color: 'white',
+                                    fontSize: '0.875rem',
+                                    fontWeight: '500',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem'
+                                }}
+                            >
+                                📝 {isTranscriptVisible ? 'Hide' : 'Show'} Transcript
+                                {transcript.length > 0 && (
+                                    <span style={{
+                                        background: '#3b82f6',
+                                        color: 'white',
+                                        padding: '0.125rem 0.5rem',
+                                        borderRadius: '9999px',
+                                        fontSize: '0.75rem'
+                                    }}>
+                                        {transcript.length}
+                                    </span>
+                                )}
+                            </button>
+
+                            {/* Transcript Panel */}
+                            {isTranscriptVisible && (
+                                <div style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: 0,
+                                    width: '400px',
+                                    height: '100%',
+                                    background: 'rgba(0, 0, 0, 0.95)',
+                                    backdropFilter: 'blur(12px)',
+                                    color: 'white',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    zIndex: 10
+                                }}>
+                                    <div style={{
+                                        padding: '1rem',
+                                        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between'
+                                    }}>
+                                        <h3 style={{ fontSize: '1.125rem', fontWeight: '600', margin: 0 }}>Live Transcript</h3>
+                                        <button
+                                            onClick={() => setIsTranscriptVisible(false)}
+                                            style={{
+                                                background: 'transparent',
+                                                border: 'none',
+                                                color: '#9ca3af',
+                                                cursor: 'pointer',
+                                                fontSize: '1.5rem',
+                                                fontWeight: 'bold',
+                                                padding: 0
+                                            }}
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                    <div style={{
+                                        flex: 1,
+                                        overflowY: 'auto',
+                                        padding: '1rem',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '0.75rem'
+                                    }}>
+                                        {transcript.length === 0 ? (
+                                            <div style={{
+                                                textAlign: 'center',
+                                                color: '#9ca3af',
+                                                padding: '2rem',
+                                                animation: 'pulse 2s infinite'
+                                            }}>
+                                                <div>Waiting for conversation...</div>
+                                                <div style={{ fontSize: '0.75rem', marginTop: '0.5rem', opacity: 0.75 }}>
+                                                    Transcript will appear here
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            transcript.map((entry) => (
+                                                <div
+                                                    key={entry.id}
+                                                    style={{
+                                                        padding: '1rem',
+                                                        borderRadius: '0.75rem',
+                                                        background: entry.isUser ? '#2563eb' : '#374151',
+                                                        marginLeft: entry.isUser ? '1rem' : 0,
+                                                        marginRight: entry.isUser ? 0 : '1rem',
+                                                        borderLeft: entry.isUser ? '4px solid #60a5fa' : '4px solid #6b7280'
+                                                    }}
+                                                >
+                                                    <div style={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'space-between',
+                                                        marginBottom: '0.5rem'
+                                                    }}>
+                                                        <div style={{
+                                                            fontSize: '0.875rem',
+                                                            fontWeight: 'bold',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            gap: '0.5rem'
+                                                        }}>
+                                                            <span style={{
+                                                                width: '0.5rem',
+                                                                height: '0.5rem',
+                                                                borderRadius: '9999px',
+                                                                background: entry.isUser ? '#93c5fd' : '#9ca3af'
+                                                            }} />
+                                                            <span>{entry.isUser ? 'You' : 'AI Assistant'}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div style={{ fontSize: '0.875rem', lineHeight: '1.5', marginBottom: '0.5rem' }}>
+                                                        {entry.text}
+                                                    </div>
+                                                    <div style={{ fontSize: '0.75rem', opacity: 0.75, textAlign: 'right' }}>
+                                                        {new Date(entry.timestamp).toLocaleTimeString()}
+                                                    </div>
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         <div style={{
