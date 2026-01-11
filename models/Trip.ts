@@ -3,6 +3,7 @@ import mongoose, { Schema, Model } from 'mongoose';
 export interface ITrip {
   _id?: string;
   userId: string;
+  participantIds?: string[];
   destination: string;
   startDate: Date;
   endDate: Date;
@@ -23,6 +24,7 @@ export interface ITrip {
     endTime: string;
     day: number;
   }>;
+  status?: 'collecting_preferences' | 'ready' | 'active';
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -32,6 +34,11 @@ const TripSchema = new Schema<ITrip>(
     userId: {
       type: String,
       required: true,
+      index: true,
+    },
+    participantIds: {
+      type: [String],
+      default: [],
       index: true,
     },
     destination: {
@@ -106,6 +113,11 @@ const TripSchema = new Schema<ITrip>(
         },
       },
     ],
+    status: {
+      type: String,
+      enum: ['collecting_preferences', 'ready', 'active'],
+      default: 'collecting_preferences',
+    },
   },
   {
     timestamps: true,

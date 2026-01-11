@@ -5,4 +5,11 @@ sentence-transformers>=2.2.0
 fastapi>=0.109.0
 uvicorn>=0.27.0
 pydantic>=2.5.0
+pymongo>=4.6.0
+beautifulsoup4>=4.12.0
+requests>=2.31.0
+fake-useragent>=1.4.0
+lxml>=4.9.0
+google-generativeai>=0.3.0
+Pillow>=10.0.0
 

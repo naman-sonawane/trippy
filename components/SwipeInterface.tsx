@@ -147,11 +147,13 @@ const SwipeCard = ({ item, onSwipe, isTop }: SwipeCardProps) => {
 
 interface SwipeInterfaceProps {
   destination: string;
+  tripId?: string;
   onComplete?: () => void;
 }
 
 export const SwipeInterface = ({
   destination,
+  tripId,
   onComplete,
 }: SwipeInterfaceProps) => {
   const router = useRouter();
@@ -165,7 +167,7 @@ export const SwipeInterface = ({
 
   useEffect(() => {
     loadRecommendations();
-  }, [destination]);
+  }, [destination, tripId]);
 
   const loadRecommendations = async () => {
     try {
@@ -173,7 +175,7 @@ export const SwipeInterface = ({
       const response = await fetch("/api/recommendations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ destination, topN: 20 }),
+        body: JSON.stringify({ destination, topN: 20, tripId }),
       });
 
       if (response.ok) {
@@ -200,6 +202,7 @@ export const SwipeInterface = ({
           itemId: currentCard.id,
           action: direction,
           destination,
+          tripId,
         }),
       });
 

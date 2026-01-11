@@ -1,15 +1,22 @@
-"""Database interface for JSON-based mock database."""
+"""Database interface for MongoDB only."""
 import json
 import os
 from typing import List, Optional, Dict, Any
 from models import User, Place, Activity, Interaction
 
+try:
+    from pymongo import MongoClient
+    from pymongo.errors import ConnectionFailure, ConfigurationError
+    MONGODB_AVAILABLE = True
+except ImportError:
+    MONGODB_AVAILABLE = False
+
 
 class Database:
-    """JSON-based database interface."""
+    """Database interface supporting MongoDB only."""
     
     def __init__(self, db_path: str = None):
-        """Initialize database with path to JSON file."""
+        """Initialize database with path to JSON file and MongoDB connection."""
         if db_path is None:
             # Default to data/mock_db.json relative to this file
             script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -17,6 +24,42 @@ class Database:
         self.db_path = db_path
         self._ensure_data_dir()
         self._load_db()
+        
+        # Initialize MongoDB connection
+        self.mongo_client = None
+        self.mongo_db = None
+        self._init_mongodb()
+    
+    def _init_mongodb(self):
+        """Initialize MongoDB connection if available."""
+        if not MONGODB_AVAILABLE:
+            return
+        
+        mongodb_uri = os.getenv("MONGODB_URI")
+        if not mongodb_uri:
+            return
+        
+        try:
+            self.mongo_client = MongoClient(mongodb_uri, serverSelectionTimeoutMS=5000)
+            # Test connection
+            self.mongo_client.admin.command('ping')
+            # Extract database name from URI or use default
+            # MongoDB URI format: mongodb://[user:pass@]host[:port]/[database][?options]
+            try:
+                from urllib.parse import urlparse
+                parsed = urlparse(mongodb_uri)
+                db_name = parsed.path[1:] if parsed.path else 'trippy'  # Remove leading '/'
+                if not db_name or '?' in db_name:
+                    db_name = db_name.split('?')[0] if db_name else 'trippy'
+                if not db_name:
+                    db_name = 'trippy'
+            except Exception:
+                db_name = 'trippy'
+            self.mongo_db = self.mongo_client[db_name]
+        except (ConnectionFailure, ConfigurationError, Exception):
+            # MongoDB not available, continue with JSON only
+            self.mongo_client = None
+            self.mongo_db = None
     
     def _ensure_data_dir(self):
         """Ensure data directory exists."""
@@ -51,22 +94,112 @@ class Database:
                 return User(**user_data)
         return None
     
+    def _get_places_from_mongodb(self, destination: str) -> List[Place]:
+        """Get places from MongoDB by destination."""
+        if not self.mongo_db:
+            return []
+        
+        try:
+            places_collection = self.mongo_db.places
+            cursor = places_collection.find({"location": {"$regex": f"^{destination}$", "$options": "i"}})
+            places = []
+            for doc in cursor:
+                # Convert MongoDB document to Place model
+                doc_dict = {k: v for k, v in doc.items() if k != "_id"}
+                places.append(Place(**doc_dict))
+            return places
+        except Exception:
+            return []
+    
+    def _get_activities_from_mongodb(self, destination: str) -> List[Activity]:
+        """Get activities from MongoDB by destination."""
+        if not self.mongo_db:
+            return []
+        
+        try:
+            # First get place IDs for this destination
+            places = self._get_places_from_mongodb(destination)
+            place_ids = {place.id for place in places}
+            
+            if not place_ids:
+                return []
+            
+            activities_collection = self.mongo_db.activities
+            cursor = activities_collection.find({"place_id": {"$in": list(place_ids)}})
+            activities = []
+            for doc in cursor:
+                # Convert MongoDB document to Activity model
+                doc_dict = {k: v for k, v in doc.items() if k != "_id"}
+                activities.append(Activity(**doc_dict))
+            return activities
+        except Exception:
+            return []
+    
+    def _save_places_to_mongodb(self, places: List[Place]):
+        """Save places to MongoDB."""
+        if not self.mongo_db:
+            return
+        
+        try:
+            places_collection = self.mongo_db.places
+            for place in places:
+                place_dict = {
+                    "id": place.id,
+                    "name": place.name,
+                    "location": place.location,
+                    "category": place.category,
+                    "features": place.features,
+                    "description": place.description
+                }
+                # Upsert: update if exists, insert if not
+                places_collection.update_one(
+                    {"id": place.id},
+                    {"$set": place_dict},
+                    upsert=True
+                )
+        except Exception:
+            pass  # Fail silently
+    
+    def _save_activities_to_mongodb(self, activities: List[Activity]):
+        """Save activities to MongoDB."""
+        if not self.mongo_db:
+            return
+        
+        try:
+            activities_collection = self.mongo_db.activities
+            for activity in activities:
+                activity_dict = {
+                    "id": activity.id,
+                    "name": activity.name,
+                    "place_id": activity.place_id,
+                    "category": activity.category,
+                    "features": activity.features,
+                    "description": activity.description
+                }
+                # Upsert: update if exists, insert if not
+                activities_collection.update_one(
+                    {"id": activity.id},
+                    {"$set": activity_dict},
+                    upsert=True
+                )
+        except Exception:
+            pass  # Fail silently
+    
     def get_places_by_destination(self, destination: str) -> List[Place]:
-        """Get all places in a destination."""
-        return [
-            Place(**place_data)
-            for place_data in self.db["places"]
-            if place_data["location"].lower() == destination.lower()
-        ]
+        """Get all places in a destination from MongoDB only."""
+        return self._get_places_from_mongodb(destination)
     
     def get_activities_by_destination(self, destination: str) -> List[Activity]:
-        """Get all activities in places within a destination."""
-        place_ids = {place.id for place in self.get_places_by_destination(destination)}
-        return [
-            Activity(**activity_data)
-            for activity_data in self.db["activities"]
-            if activity_data["place_id"] in place_ids
-        ]
+        """Get all activities in places within a destination from MongoDB only."""
+        return self._get_activities_from_mongodb(destination)
+    
+    def save_places(self, places: List[Place]):
+        """Save places to MongoDB only."""
+        self._save_places_to_mongodb(places)
+    
+    def save_activities(self, activities: List[Activity]):
+        """Save activities to MongoDB only."""
+        self._save_activities_to_mongodb(activities)
     
     def get_user_interactions(self, user_id: str) -> List[Interaction]:
         """Get all interactions for a user."""
