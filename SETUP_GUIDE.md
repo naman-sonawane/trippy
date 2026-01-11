@@ -5,7 +5,6 @@ Your app now has:
 1. **User database** with fields: Username, Age, Budget, Walk, DayNight, Solo
 2. **Itinerary saving** (renamed from schedule)
 3. **Algorithm integration** with Tinder-style swipe interface
-4. **Tavus AI agent** that asks travel preference questions
 
 ## Database Structure
 
@@ -39,21 +38,14 @@ See algorithm/data/mock_db.json for Places, Activities, and Interactions
 
 ## Workflow
 
-1. **User visits /agent** → Tavus AI asks questions:
-   - Age
-   - Budget (low/medium/high)
-   - Walk preference (minimal/moderate/a lot)
-   - Day/Night preference
-   - Solo or group travel
+1. **User creates trip** → Enter destination, start date, end date
 
-2. **After conversation** → Button to go to /recommendations
-
-3. **User swipes** on recommendations (Tinder-style)
+2. **User swipes** on recommendations (Tinder-style)
    - Algorithm provides personalized recommendations
    - Likes/dislikes are saved to database
    - Algorithm learns from preferences
 
-4. **Itinerary creation** → User can build itinerary at /schedule?tripId=XXX&days=3
+3. **Itinerary creation** → User can build itinerary at /schedule?tripId=XXX&days=3
 
 ## Setup Instructions
 
@@ -74,9 +66,6 @@ Add to your .env.local:
 ```
 MONGODB_URI=your_mongodb_uri
 PYTHON_API_URL=http://localhost:8000
-TAVUS_API_KEY=your_tavus_key
-TAVUS_REPLICA_ID=your_replica_id
-TAVUS_PERSONA_ID=your_persona_id
 ```
 
 ### 4. Start Next.js App (Port 3000)
@@ -99,11 +88,10 @@ npm run dev
 
 ## Testing the Flow
 
-1. Visit http://localhost:3000/agent
-2. Talk to Tavus AI and answer the questions
-3. Click "Start Swiping" button
-4. Swipe through recommendations
-5. Create an itinerary at /schedule
+1. Visit http://localhost:3000/new-trip
+2. Enter trip details (destination, dates)
+3. Swipe through recommendations at /recommendations
+4. Create an itinerary at /schedule
 
 ## Notes
 

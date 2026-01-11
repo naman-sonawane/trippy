@@ -1,109 +1,123 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export const POST = async () => {
-  const apiKey = process.env.TAVUS_API_KEY;
-
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: 'Missing TAVUS_API_KEY' },
-      { status: 500 }
-    );
-  }
-
+export async function POST(request: NextRequest) {
   try {
+    const body = await request.json();
+    const { personaId } = body;
+
+    if (!personaId) {
+      return NextResponse.json(
+        { error: 'persona_id is required' },
+        { status: 400 }
+      );
+    }
+
+    const apiKey = process.env.TAVUS_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: 'tavus api key not configured' },
+        { status: 500 }
+      );
+    }
+
+    const objectives = {
+      data: [
+        {
+          objective_name: 'gather_age',
+          objective_prompt: 'ask the traveler their age in a friendly way. this helps us recommend age-appropriate activities.',
+          confirmation_mode: 'auto',
+          output_variables: ['age'],
+          modality: 'verbal',
+          next_required_objectives: ['gather_budget']
+        },
+        {
+          objective_name: 'gather_budget',
+          objective_prompt: 'ask about their budget for the trip in dollars. be tactful and explain it helps us find the right options.',
+          confirmation_mode: 'auto',
+          output_variables: ['budget'],
+          modality: 'verbal',
+          next_required_objectives: ['gather_walking_preference']
+        },
+        {
+          objective_name: 'gather_walking_preference',
+          objective_prompt: 'ask how much they want to walk on a scale of 1-10, where 1 is minimal walking and 10 is lots of walking/hiking.',
+          confirmation_mode: 'auto',
+          output_variables: ['walking_preference'],
+          modality: 'verbal',
+          next_required_objectives: ['gather_time_preference']
+        },
+        {
+          objective_name: 'gather_time_preference',
+          objective_prompt: 'ask if they prefer daytime activities, nighttime activities, or both.',
+          confirmation_mode: 'auto',
+          output_variables: ['time_preference'],
+          modality: 'verbal',
+          next_required_objectives: ['gather_travel_companions']
+        },
+        {
+          objective_name: 'gather_travel_companions',
+          objective_prompt: 'ask who they are traveling with (solo, partner, family, friends, etc).',
+          confirmation_mode: 'auto',
+          output_variables: ['traveling_with'],
+          modality: 'verbal',
+          next_required_objectives: ['summarize_preferences']
+        },
+        {
+          objective_name: 'summarize_preferences',
+          objective_prompt: 'summarize all the information you gathered: age, budget, walking preference, time preference, and travel companions. show enthusiasm and tell them you are ready to find perfect places for their trip.',
+          confirmation_mode: 'auto',
+          output_variables: [],
+          modality: 'verbal',
+          next_required_objectives: []
+        }
+      ]
+    };
+
+    console.log('creating objectives for persona:', personaId);
+
     const response = await fetch('https://tavusapi.com/v2/objectives', {
       method: 'POST',
       headers: {
-        'x-api-key': apiKey,
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        data: [
-          {
-            objective_name: 'collect_budget',
-            objective_prompt: 'Ask the user about their travel budget. Ask if they prefer budget-friendly, mid-range, or luxury options. Store their answer as one of: "budget", "mid-range", or "luxury".',
-            confirmation_mode: 'auto',
-            output_variables: ['budget'],
-            modality: 'verbal',
-            next_required_objectives: ['collect_walking_preference'],
-          },
-          {
-            objective_name: 'collect_walking_preference',
-            objective_prompt: 'Ask the user about their comfort with walking long distances. Ask if they are comfortable with lots of walking or prefer shorter distances. Store their answer as one of: "comfortable" or "prefer-short".',
-            confirmation_mode: 'auto',
-            output_variables: ['walking_preference'],
-            modality: 'verbal',
-            next_required_objectives: ['collect_time_preference'],
-          },
-          {
-            objective_name: 'collect_time_preference',
-            objective_prompt: 'Ask the user if they are more of a day person or night person. Ask if they prefer daytime activities or nighttime activities. Store their answer as one of: "day" or "night".',
-            confirmation_mode: 'auto',
-            output_variables: ['time_preference'],
-            modality: 'verbal',
-            next_required_objectives: ['collect_travel_companions'],
-          },
-          {
-            objective_name: 'collect_travel_companions',
-            objective_prompt: 'Ask the user who they are traveling with. Ask if they are traveling solo, with family, with friends, or with a partner. Store their answer as one of: "solo", "family", "friends", or "partner".',
-            confirmation_mode: 'auto',
-            output_variables: ['travel_companions'],
-            modality: 'verbal',
-          },
-        ],
-      }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      return NextResponse.json(
-        { error: 'Failed to create objectives', details: errorData },
-        { status: response.status }
-      );
-    }
-
-    const data = await response.json();
-    return NextResponse.json(data);
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Internal server error', details: error },
-      { status: 500 }
-    );
-  }
-};
-
-export const GET = async () => {
-  const apiKey = process.env.TAVUS_API_KEY;
-
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: 'Missing TAVUS_API_KEY' },
-      { status: 500 }
-    );
-  }
-
-  try {
-    const response = await fetch('https://tavusapi.com/v2/objectives', {
-      method: 'GET',
-      headers: {
         'x-api-key': apiKey,
       },
+      body: JSON.stringify(objectives),
     });
 
+    console.log('tavus objectives response status:', response.status);
+
     if (!response.ok) {
-      const errorData = await response.json();
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch {
+        errorData = await response.text();
+      }
+      console.log('tavus objectives api error:', errorData);
+      
       return NextResponse.json(
-        { error: 'Failed to get objectives', details: errorData },
+        { 
+          error: 'failed to create objectives', 
+          details: errorData,
+          status: response.status
+        },
         { status: response.status }
       );
     }
 
     const data = await response.json();
-    return NextResponse.json(data);
+    console.log('tavus objectives created successfully:', data);
+
+    return NextResponse.json({
+      success: true,
+      objectives: data
+    });
+
   } catch (error) {
+    console.error('objectives api route error:', error);
     return NextResponse.json(
-      { error: 'Internal server error', details: error },
+      { error: 'internal server error', details: error instanceof Error ? error.message : 'unknown error' },
       { status: 500 }
     );
   }
-};
+}

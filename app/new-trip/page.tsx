@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { motion } from "framer-motion";
+import TravelAgentChat from "@/components/TravelAgentChat";
 
 export default function NewTripPage() {
     const router = useRouter();
@@ -12,6 +13,7 @@ export default function NewTripPage() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [isCreating, setIsCreating] = useState(false);
+    const [showTravelAgent, setShowTravelAgent] = useState(false);
 
     const handleCreateTrip = async () => {
         if (!destination || !startDate || !endDate) return;
@@ -32,14 +34,12 @@ export default function NewTripPage() {
             if (response.ok) {
                 const { trip } = await response.json();
 
-                // Save trip details to localStorage for the Tavus bot
                 localStorage.setItem("currentTripId", trip._id);
                 localStorage.setItem("currentDestination", destination);
                 localStorage.setItem("tripStartDate", startDate);
                 localStorage.setItem("tripEndDate", endDate);
 
-                // Navigate to the AI agent (Tavus page)
-                router.push("/agent");
+                setShowTravelAgent(true);
             }
         } catch (error) {
             console.error("Error creating trip:", error);
@@ -48,9 +48,27 @@ export default function NewTripPage() {
         }
     };
 
+    if (showTravelAgent) {
+        return (
+            <TravelAgentChat
+                destination={destination}
+                startDate={startDate}
+                endDate={endDate}
+                onEnd={() => setShowTravelAgent(false)}
+            />
+        );
+    }
+
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-zinc-950 dark:to-zinc-900 p-4 sm:p-8">
-            <div className="max-w-2xl mx-auto">
+        <div className="min-h-screen p-4 sm:p-8"
+             style={{
+               backgroundImage: "url(/dashbg.jpg)",
+               backgroundSize: "cover",
+               backgroundPosition: "center"
+             }}>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+            
+            <div className="max-w-2xl mx-auto relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -58,14 +76,15 @@ export default function NewTripPage() {
                 >
                     <button
                         onClick={() => router.back()}
-                        className="text-gray-700 dark:text-zinc-300 hover:text-gray-900 dark:hover:text-zinc-100 mb-4"
+                        className="text-white hover:text-white/80 mb-4 transition-colors"
+                        style={{ fontFamily: 'var(--font-dm-sans)' }}
                     >
                         ← Back
                     </button>
-                    <h1 className="text-4xl font-bold text-gray-900 dark:text-zinc-50 mb-2">
+                    <h1 className="text-4xl font-bold text-white mb-2" style={{ fontFamily: 'var(--font-fraunces)' }}>
                         Create New Trip
                     </h1>
-                    <p className="text-gray-600 dark:text-zinc-400">
+                    <p className="text-white/80" style={{ fontFamily: 'var(--font-dm-sans)' }}>
                         Tell us where you're going and we'll help you plan the perfect itinerary
                     </p>
                 </motion.div>
@@ -74,13 +93,14 @@ export default function NewTripPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-8"
+                    className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl p-8 border border-white/20"
                 >
                     <div className="space-y-6">
                         <div>
                             <label
                                 htmlFor="destination"
-                                className="block text-sm font-semibold text-gray-700 dark:text-zinc-300 mb-2"
+                                className="block text-sm font-semibold text-white mb-2"
+                                style={{ fontFamily: 'var(--font-dm-sans)' }}
                             >
                                 Destination *
                             </label>
@@ -90,9 +110,10 @@ export default function NewTripPage() {
                                 value={destination}
                                 onChange={(e) => setDestination(e.target.value)}
                                 placeholder="e.g., Paris, Tokyo, New York, Barcelona"
-                                className="w-full px-4 py-3 border border-gray-300 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-zinc-800 text-gray-900 dark:text-zinc-50"
+                                className="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/50 focus:border-transparent bg-white/10 backdrop-blur-sm text-white placeholder-white/50"
+                                style={{ fontFamily: 'var(--font-dm-sans)' }}
                             />
-                            <p className="mt-2 text-xs text-gray-500 dark:text-zinc-500">
+                            <p className="mt-2 text-xs text-white/60" style={{ fontFamily: 'var(--font-dm-sans)' }}>
                                 Available destinations: Paris, Tokyo, New York, Barcelona
                             </p>
                         </div>
@@ -101,7 +122,8 @@ export default function NewTripPage() {
                             <div>
                                 <label
                                     htmlFor="startDate"
-                                    className="block text-sm font-semibold text-gray-700 dark:text-zinc-300 mb-2"
+                                    className="block text-sm font-semibold text-white mb-2"
+                                    style={{ fontFamily: 'var(--font-dm-sans)' }}
                                 >
                                     Start Date *
                                 </label>
@@ -110,14 +132,16 @@ export default function NewTripPage() {
                                     type="date"
                                     value={startDate}
                                     onChange={(e) => setStartDate(e.target.value)}
-                                    className="w-full px-4 py-3 border border-gray-300 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-zinc-800 text-gray-900 dark:text-zinc-50"
+                                    className="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/50 focus:border-transparent bg-white/10 backdrop-blur-sm text-white"
+                                    style={{ fontFamily: 'var(--font-dm-sans)' }}
                                 />
                             </div>
 
                             <div>
                                 <label
                                     htmlFor="endDate"
-                                    className="block text-sm font-semibold text-gray-700 dark:text-zinc-300 mb-2"
+                                    className="block text-sm font-semibold text-white mb-2"
+                                    style={{ fontFamily: 'var(--font-dm-sans)' }}
                                 >
                                     End Date *
                                 </label>
@@ -127,7 +151,8 @@ export default function NewTripPage() {
                                     value={endDate}
                                     onChange={(e) => setEndDate(e.target.value)}
                                     min={startDate}
-                                    className="w-full px-4 py-3 border border-gray-300 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-zinc-800 text-gray-900 dark:text-zinc-50"
+                                    className="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/50 focus:border-transparent bg-white/10 backdrop-blur-sm text-white"
+                                    style={{ fontFamily: 'var(--font-dm-sans)' }}
                                 />
                             </div>
                         </div>
@@ -136,22 +161,23 @@ export default function NewTripPage() {
                             <button
                                 onClick={handleCreateTrip}
                                 disabled={!destination || !startDate || !endDate || isCreating}
-                                className="w-full px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed transition-all text-lg"
+                                className="w-full px-6 py-4 bg-white text-black rounded-full font-semibold hover:bg-opacity-90 disabled:bg-white/30 disabled:cursor-not-allowed transition-all text-lg"
+                                style={{ fontFamily: 'var(--font-dm-sans)' }}
                             >
-                                {isCreating ? "Creating..." : "Continue to AI Travel Agent →"}
+                                {isCreating ? "Creating..." : "Talk to Travel Agent →"}
                             </button>
                         </div>
                     </div>
 
-                    <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
-                        <h3 className="font-semibold text-gray-900 dark:text-zinc-50 mb-2 flex items-center gap-2">
+                    <div className="mt-8 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                        <h3 className="font-semibold text-white mb-2 flex items-center gap-2" style={{ fontFamily: 'var(--font-fraunces)' }}>
                             <span className="text-xl">🗺️</span>
                             What happens next?
                         </h3>
-                        <ol className="space-y-2 text-sm text-gray-700 dark:text-zinc-300 ml-6 list-decimal">
-                            <li>You'll chat with our AI travel agent who will ask about your preferences</li>
-                            <li>Swipe through personalized place recommendations</li>
-                            <li>Build your custom itinerary</li>
+                        <ol className="space-y-2 text-sm text-white/80 ml-6 list-decimal" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+                            <li>Chat with our AI travel agent to personalize your trip</li>
+                            <li>Swipe through curated place recommendations</li>
+                            <li>Build your perfect itinerary</li>
                         </ol>
                     </div>
                 </motion.div>

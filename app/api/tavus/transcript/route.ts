@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('Tavus transcript webhook received');
+    console.log('tavus transcript webhook received');
     
     const body = await request.json();
-    console.log('Transcript webhook data:', JSON.stringify(body, null, 2));
+    console.log('transcript webhook data:', JSON.stringify(body, null, 2));
     
     const { 
       conversation_id, 
@@ -14,8 +14,8 @@ export async function POST(request: NextRequest) {
     } = body;
     
     if (!conversation_id) {
-      console.log('No conversation_id in webhook data');
-      return NextResponse.json({ error: 'Missing conversation_id' }, { status: 400 });
+      console.log('no conversation_id in webhook data');
+      return NextResponse.json({ error: 'missing conversation_id' }, { status: 400 });
     }
     
     const processedEntries = transcript_entries.map((entry: any) => ({
@@ -25,19 +25,18 @@ export async function POST(request: NextRequest) {
       timestamp: entry.timestamp ? new Date(entry.timestamp) : new Date()
     }));
     
-    console.log('Processed transcript entries:', processedEntries.length);
-    console.log('Transcript data processed successfully');
+    console.log('processed transcript entries:', processedEntries.length);
     
     return NextResponse.json({ 
       success: true, 
-      message: 'Transcript data received',
+      message: 'transcript data received',
       entries_processed: processedEntries.length
     });
     
   } catch (error) {
-    console.error('Transcript webhook error:', error);
+    console.error('transcript webhook error:', error);
     return NextResponse.json(
-      { error: 'Failed to process transcript data' },
+      { error: 'failed to process transcript data' },
       { status: 500 }
     );
   }
@@ -50,19 +49,21 @@ export async function GET(request: NextRequest) {
     
     if (!conversationId) {
       return NextResponse.json({ 
-        message: 'Tavus transcript webhook endpoint is active',
+        message: 'tavus transcript endpoint is active',
         timestamp: new Date().toISOString()
       });
     }
     
-    console.log(`Polling transcript for conversation: ${conversationId}`);
+    console.log(`polling transcript for conversation: ${conversationId}`);
     
     try {
       const apiKey = process.env.TAVUS_API_KEY;
       
-      if (!apiKey) throw new Error('No Tavus API key found');
+      if (!apiKey) {
+        throw new Error('no tavus api key found');
+      }
 
-      const tavusResponse = await fetch(`https://tavusapi.com/v2/conversations/${conversationId}?verbose=true`, {
+      const tavusResponse = await fetch(`https://tavusapi.com/v2/conversations/${conversationId}`, {
         method: 'GET',
         headers: {
           'x-api-key': apiKey,
@@ -71,44 +72,33 @@ export async function GET(request: NextRequest) {
 
       if (tavusResponse.ok) {
         const conversationData = await tavusResponse.json();
-        console.log('Tavus conversation data:', conversationData);
+        console.log('📦 tavus conversation data:', JSON.stringify(conversationData, null, 2));
         
-        let transcriptEntries: any[] = [];
-        
-        // check multiple possible locations for transcript
-        if (conversationData.transcript_entries) {
-          transcriptEntries = conversationData.transcript_entries;
-        } else if (conversationData.transcript) {
-          transcriptEntries = Array.isArray(conversationData.transcript) ? conversationData.transcript : [];
-        } else if (conversationData.events) {
-          const transcriptEvent = conversationData.events.find((e: any) => e.event_type === 'application.transcription_ready');
-          if (transcriptEvent?.properties?.transcript) {
-            transcriptEntries = Array.isArray(transcriptEvent.properties.transcript) ? transcriptEvent.properties.transcript : [];
-          }
-        } else if (conversationData.properties?.transcript) {
-          transcriptEntries = Array.isArray(conversationData.properties.transcript) ? conversationData.properties.transcript : [];
-        }
-        
-        if (transcriptEntries.length > 0) {
-          console.log('Found transcript entries:', transcriptEntries.length);
+        if (conversationData.transcript_entries || conversationData.transcript) {
+          const transcriptEntries = conversationData.transcript_entries || conversationData.transcript || [];
+          
+          console.log(`📝 found ${transcriptEntries.length} transcript entries from tavus`);
+          
           return NextResponse.json({
             conversation_id: conversationId,
             transcript_entries: transcriptEntries.map((entry: any) => ({
               id: entry.id || `tavus_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-              text: entry.text || entry.content || entry.transcript || '',
-              isUser: entry.is_user || entry.speaker === 'user' || entry.role === 'user' || false,
+              text: entry.text || entry.transcript || '',
+              isUser: entry.is_user || entry.speaker === 'user' || false,
               timestamp: entry.timestamp ? new Date(entry.timestamp) : new Date()
             })),
             timestamp: new Date().toISOString()
           });
         } else {
-          console.log('No transcript entries found in response');
+          console.log('⚠️ no transcript_entries or transcript field in response');
         }
       } else {
-        console.log('Tavus API response not ok:', tavusResponse.status);
+        console.log('❌ tavus api response not ok:', tavusResponse.status);
+        const errorText = await tavusResponse.text();
+        console.log('error details:', errorText);
       }
     } catch (error) {
-      console.error('Error fetching from Tavus API:', error);
+      console.error('error fetching from tavus api:', error);
     }
     
     return NextResponse.json({
@@ -118,9 +108,9 @@ export async function GET(request: NextRequest) {
     });
     
   } catch (error) {
-    console.error('Transcript polling error:', error);
+    console.error('transcript polling error:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch transcript data' },
+      { error: 'failed to fetch transcript data' },
       { status: 500 }
     );
   }
