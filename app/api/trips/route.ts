@@ -14,7 +14,12 @@ export const GET = async (req: Request) => {
 
     await connectDB();
 
-    const trips = await Trip.find({ userId: session.user.id }).sort({ createdAt: -1 });
+    const trips = await Trip.find({
+      $or: [
+        { userId: session.user.id },
+        { participantIds: session.user.id }
+      ]
+    }).sort({ createdAt: -1 });
 
     return NextResponse.json({ trips }, { status: 200 });
   } catch (error) {
@@ -42,10 +47,12 @@ export const POST = async (req: Request) => {
 
     const trip = await Trip.create({
       userId: session.user.id,
+      participantIds: [session.user.id], // Owner is first participant
       destination,
       startDate: new Date(startDate),
       endDate: new Date(endDate),
       activities: activities || [],
+      status: 'collecting_preferences',
     });
 
     return NextResponse.json({ trip }, { status: 201 });

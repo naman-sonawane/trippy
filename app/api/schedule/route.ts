@@ -21,10 +21,16 @@ export const GET = async (req: Request) => {
 
     await connectDB();
 
-    const trip = await Trip.findOne({ _id: tripId, userId: session.user.id });
+    const trip = await Trip.findOne({
+      _id: tripId,
+      $or: [
+        { userId: session.user.id },
+        { participantIds: session.user.id }
+      ]
+    });
 
     if (!trip) {
-      return NextResponse.json({ error: 'Trip not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Trip not found or access denied' }, { status: 404 });
     }
 
     return NextResponse.json({ itinerary: trip.itinerary || [] }, { status: 200 });
@@ -52,13 +58,19 @@ export const POST = async (req: Request) => {
     await connectDB();
 
     const trip = await Trip.findOneAndUpdate(
-      { _id: tripId, userId: session.user.id },
+      {
+        _id: tripId,
+        $or: [
+          { userId: session.user.id },
+          { participantIds: session.user.id }
+        ]
+      },
       { itinerary },
       { new: true }
     );
 
     if (!trip) {
-      return NextResponse.json({ error: 'Trip not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Trip not found or access denied' }, { status: 404 });
     }
 
     return NextResponse.json({ itinerary: trip.itinerary }, { status: 200 });

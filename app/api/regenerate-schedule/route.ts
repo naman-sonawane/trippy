@@ -67,10 +67,16 @@ export const POST = async (req: Request) => {
 
     await connectDB();
 
-    // Get trip to verify ownership and get destination
-    const trip = await Trip.findOne({ _id: tripId, userId: session.user.id });
+    // Get trip - check if user is participant
+    const trip = await Trip.findOne({
+      _id: tripId,
+      $or: [
+        { userId: session.user.id },
+        { participantIds: session.user.id }
+      ]
+    });
     if (!trip) {
-      return NextResponse.json({ error: 'Trip not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Trip not found or access denied' }, { status: 404 });
     }
 
     const destination = trip.destination;
@@ -183,7 +189,13 @@ export const POST = async (req: Request) => {
 
     // Save updated itinerary to trip
     const updatedTrip = await Trip.findOneAndUpdate(
-      { _id: tripId, userId: session.user.id },
+      {
+        _id: tripId,
+        $or: [
+          { userId: session.user.id },
+          { participantIds: session.user.id }
+        ]
+      },
       { itinerary: updatedItinerary },
       { new: true }
     );

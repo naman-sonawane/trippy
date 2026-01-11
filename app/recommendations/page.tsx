@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { SwipeInterface } from "@/components/SwipeInterface";
 import { motion } from "framer-motion";
 
 export default function RecommendationsPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const tripId = searchParams.get("tripId");
   const [destination, setDestination] = useState("");
   const [showSwipe, setShowSwipe] = useState(false);
 
@@ -16,7 +18,20 @@ export default function RecommendationsPage() {
       setDestination(savedDestination);
       setShowSwipe(true);
     }
-  }, []);
+    
+    // If tripId provided, fetch trip destination
+    if (tripId) {
+      fetch(`/api/trips/${tripId}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.trip) {
+            setDestination(data.trip.destination);
+            setShowSwipe(true);
+          }
+        })
+        .catch(err => console.error('Error fetching trip:', err));
+    }
+  }, [tripId]);
 
   const handleStart = () => {
     if (destination.trim()) {
@@ -110,7 +125,14 @@ export default function RecommendationsPage() {
             animate={{ opacity: 1 }}
             className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-8"
           >
-            <SwipeInterface destination={destination} onComplete={handleComplete} />
+            {tripId && (
+              <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                <p className="text-sm text-blue-700 dark:text-blue-300">
+                  Planning together! Recommendations are tailored to all trip participants.
+                </p>
+              </div>
+            )}
+            <SwipeInterface destination={destination} tripId={tripId || undefined} onComplete={handleComplete} />
           </motion.div>
         )}
       </div>

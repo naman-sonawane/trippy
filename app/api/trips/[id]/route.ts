@@ -14,10 +14,16 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
 
     await connectDB();
 
-    const trip = await Trip.findOne({ _id: params.id, userId: session.user.id });
+    const trip = await Trip.findOne({
+      _id: params.id,
+      $or: [
+        { userId: session.user.id },
+        { participantIds: session.user.id }
+      ]
+    });
 
     if (!trip) {
-      return NextResponse.json({ error: 'Trip not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Trip not found or access denied' }, { status: 404 });
     }
 
     return NextResponse.json({ trip }, { status: 200 });
