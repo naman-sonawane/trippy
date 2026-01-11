@@ -31,6 +31,7 @@ const Dashboard = () => {
   const [joinCode, setJoinCode] = useState('');
   const [isJoining, setIsJoining] = useState(false);
   const [joinError, setJoinError] = useState<string | null>(null);
+  const [copiedTripCode, setCopiedTripCode] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -360,13 +361,20 @@ const Dashboard = () => {
                               onClick={(e) => {
                                 e.stopPropagation();
                                 navigator.clipboard.writeText(trip.tripCode!);
+                                setCopiedTripCode(trip.tripCode!);
+                                setTimeout(() => setCopiedTripCode(null), 2000);
                               }}
-                              className="text-white/60 hover:text-white transition-colors"
+                              className="text-white/60 hover:text-white transition-colors relative"
                               title="Copy trip code"
                             >
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                               </svg>
+                              {copiedTripCode === trip.tripCode && (
+                                <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                                  copied!
+                                </span>
+                              )}
                             </button>
                           </div>
                         )}

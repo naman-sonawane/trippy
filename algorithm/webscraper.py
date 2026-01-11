@@ -6,6 +6,7 @@ import time
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 import requests
+from bs4 import BeautifulSoup
 from models import Place, Activity
 
 
@@ -32,12 +33,146 @@ class ActivityGenerator:
         """Normalize location name for consistent lookups."""
         return location.strip().title()
     
-    def _get_unsplash_image(self, query: str) -> str:
-        """Get image URL from Unsplash."""
+    def _get_google_image(self, query: str) -> str:
+        """Get first image URL from Google Images search."""
         try:
-            # Use Unsplash Source API for random images
-            encoded_query = query.replace(" ", "%20")
-            return f"https://source.unsplash.com/800x600/?{encoded_query}"
+            import re
+            import urllib.parse
+            
+            search_url = f"https://www.google.com/search?q={urllib.parse.quote(query)}&tbm=isch"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Accept-Encoding': 'gzip, deflate',
+                'Connection': 'keep-alive',
+            }
+            response = requests.get(search_url, headers=headers, timeout=15)
+            response.raise_for_status()
+            
+            html_content = response.text
+            
+            # method 1: extract from AF_initDataCallback (google's data structure)
+            pattern = r'AF_initDataCallback\([^)]*key:\'ds:1\'[^)]*data:([^,}]+)'
+            matches = re.findall(pattern, html_content)
+            
+            if matches:
+                try:
+                    import json
+                    # try to parse json data
+                    for match in matches:
+                        try:
+                            # clean up the match
+                            data_str = match.strip()
+                            if data_str.startswith('['):
+                                data = json.loads(data_str)
+                                # navigate through google's nested structure
+                                if isinstance(data, list) and len(data) > 0:
+                                    images = data[0] if isinstance(data[0], list) else data
+                                    for item in images:
+                                        if isinstance(item, list) and len(item) > 1:
+                                            img_url = item[1] if isinstance(item[1], str) else (item[1][0] if isinstance(item[1], list) and len(item[1]) > 0 else None)
+                                            if img_url and img_url.startswith('http') and not any(d in img_url for d in ['google.com', 'gstatic.com']):
+                                                return img_url
+                        except:
+                            continue
+                except:
+                    pass
+            
+            # method 2: extract from oimg tag data
+            oimg_pattern = r'"ou":"([^"]+)"'
+            oimg_matches = re.findall(oimg_pattern, html_content)
+            for url in oimg_matches:
+                if url.startswith('http') and not any(d in url for d in ['google.com', 'gstatic.com', 'googleusercontent.com']):
+                    if any(ext in url.lower() for ext in ['.jpg', '.jpeg', '.png', '.webp']) or 'image' in url.lower():
+                        return url
+            
+            # method 3: extract from imgurl pattern
+            imgurl_pattern = r'"imgurl":"([^"]+)"'
+            imgurl_matches = re.findall(imgurl_pattern, html_content)
+            for url in imgurl_matches:
+                if url.startswith('http') and not any(d in url for d in ['google.com', 'gstatic.com', 'googleusercontent.com']):
+                    return url
+            
+            # method 4: use beautifulsoup as fallback
+            soup = BeautifulSoup(html_content, 'html.parser')
+            img_tags = soup.find_all('img')
+            for img in img_tags:
+                src = img.get('src') or img.get('data-src') or img.get('data-lazy-src')
+                if src and src.startswith('http') and not any(d in src for d in ['google.com', 'gstatic.com']):
+                    if any(ext in src.lower() for ext in ['.jpg', '.jpeg', '.png', '.webp']):
+                        return src
+            
+            return ""
+        except Exception as e:
+            print(f"Error scraping Google image for {query}: {e}")
+            return ""
+    
+    def _get_duckduckgo_image(self, query: str) -> str:
+        """Get image URL from DuckDuckGo image search (reliable, no API key needed)."""
+        try:
+            import urllib.parse
+            search_url = f"https://duckduckgo.com/?q={urllib.parse.quote(query)}&iax=images&ia=images"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            }
+            response = requests.get(search_url, headers=headers, timeout=10)
+            response.raise_for_status()
+            
+            soup = BeautifulSoup(response.text, 'html.parser')
+            img_tags = soup.find_all('img', {'data-src': True})
+            
+            for img in img_tags[:5]:  # check first 5 images
+                src = img.get('data-src') or img.get('src')
+                if src and src.startswith('http') and not any(d in src for d in ['duckduckgo.com']):
+                    if any(ext in src.lower() for ext in ['.jpg', '.jpeg', '.png', '.webp', '.gif']):
+                        return src
+            
+            # also try finding images in script tags
+            scripts = soup.find_all('script')
+            import re
+            for script in scripts:
+                if script.string:
+                    # look for image urls
+                    urls = re.findall(r'https?://[^\s"\'<>]+\.(?:jpg|jpeg|png|webp)', script.string, re.IGNORECASE)
+                    for url in urls:
+                        if not any(d in url for d in ['duckduckgo.com', 'google.com']):
+                            return url
+            
+            return ""
+        except Exception as e:
+            print(f"Error scraping DuckDuckGo image for {query}: {e}")
+            return ""
+    
+    def _get_pexels_image(self, query: str) -> str:
+        """Get image URL from Pexels API using official API."""
+        try:
+            api_key = os.getenv("PEXELS_API_KEY", "")
+            if not api_key:
+                return ""
+            
+            import urllib.parse
+            encoded_query = urllib.parse.quote(query)
+            search_url = f"https://api.pexels.com/v1/search?query={encoded_query}&per_page=1"
+            headers = {"Authorization": api_key}
+            response = requests.get(search_url, headers=headers, timeout=10)
+            
+            if response.ok:
+                data = response.json()
+                if data.get('photos') and len(data['photos']) > 0:
+                    photo = data['photos'][0]
+                    # use large size for good quality
+                    return photo.get('src', {}).get('large', photo.get('src', {}).get('original', ''))
+            return ""
+        except Exception as e:
+            print(f"Error fetching Pexels image for {query}: {e}")
+            return ""
+    
+    def _get_unsplash_image(self, query: str) -> str:
+        """Get image URL from Unsplash API (fallback)."""
+        try:
+            # return empty instead of broken unsplash source url
+            return ""
         except Exception:
             return ""
     
@@ -126,6 +261,14 @@ Return ONLY valid JSON array, no markdown formatting:
             structured_items = []
             for item in parsed_data:
                 search_term = item.get("search_term", f"{item.get('name', '')} {location}").strip()
+                # try pexels first if api key is set (most reliable)
+                image_url = self._get_pexels_image(search_term)
+                if not image_url:
+                    image_url = self._get_google_image(search_term)
+                if not image_url:
+                    image_url = self._get_duckduckgo_image(search_term)
+                if not image_url:
+                    image_url = self._get_unsplash_image(search_term)
                 structured_item = {
                     "name": item.get("name", ""),
                     "description": item.get("description", ""),
@@ -134,7 +277,7 @@ Return ONLY valid JSON array, no markdown formatting:
                     "energy_level": item.get("energy_level", "medium"),
                     "age_suitability_profile": item.get("age_suitability_profile", "cultural"),
                     "budget": item.get("budget", "$25"),
-                    "image_url": self._get_unsplash_image(search_term),
+                    "image_url": image_url,
                     "location": location
                 }
                 structured_items.append(structured_item)

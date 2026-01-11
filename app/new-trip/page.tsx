@@ -15,6 +15,7 @@ export default function NewTripPage() {
     const [isCreating, setIsCreating] = useState(false);
     const [showTravelAgent, setShowTravelAgent] = useState(false);
     const [createdTrip, setCreatedTrip] = useState<{ _id: string; tripCode?: string } | null>(null);
+    const [showCopied, setShowCopied] = useState(false);
 
     const handleCreateTrip = async () => {
         if (!destination || !startDate || !endDate) return;
@@ -88,14 +89,21 @@ export default function NewTripPage() {
                                         <button
                                             onClick={() => {
                                                 navigator.clipboard.writeText(createdTrip.tripCode!);
+                                                setShowCopied(true);
+                                                setTimeout(() => setShowCopied(false), 2000);
                                             }}
-                                            className="px-4 py-4 bg-white text-black rounded-lg hover:bg-opacity-90 transition-colors font-semibold"
+                                            className="px-4 py-4 bg-white text-black rounded-lg hover:bg-opacity-90 transition-colors font-semibold relative"
                                             style={{ fontFamily: 'var(--font-dm-sans)' }}
                                             title="Copy trip code"
                                         >
                                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                                             </svg>
+                                            {showCopied && (
+                                                <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs px-3 py-1 rounded whitespace-nowrap">
+                                                    copied!
+                                                </span>
+                                            )}
                                         </button>
                                     </div>
                                     <p className="text-center text-white/60 text-sm mt-4" style={{ fontFamily: 'var(--font-dm-sans)' }}>

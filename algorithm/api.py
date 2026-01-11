@@ -9,6 +9,7 @@ from database import Database
 from recommendation_engine import RecommendationEngine
 from models import User, Interaction
 from webscraper import webscrape_location
+from webscraper import ActivityGenerator
 
 app = FastAPI()
 
@@ -445,6 +446,32 @@ async def check_multi_user_confidence(request: MultiUserConfidenceCheckRequest):
             "participants": participant_results
         }
     
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/scrape-image")
+async def scrape_image(request: Dict):
+    """Scrape Google Images for a search query."""
+    try:
+        query = request.get("query", "")
+        if not query:
+            raise HTTPException(status_code=400, detail="Query parameter required")
+        
+        generator = ActivityGenerator()
+        # try pexels first if api key is set (most reliable)
+        image_url = generator._get_pexels_image(query)
+        
+        if not image_url:
+            image_url = generator._get_google_image(query)
+        
+        if not image_url:
+            image_url = generator._get_duckduckgo_image(query)
+        
+        if not image_url:
+            image_url = generator._get_unsplash_image(query)
+        
+        return {"image_url": image_url}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

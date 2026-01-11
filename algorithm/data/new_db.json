@@ -1396,6 +1396,1597 @@
         "image_url": "https://source.unsplash.com/800x600/?montreal%20biodome%20interior"
       },
       "description": "Walk through replicas of four distinct ecosystems, from tropical rainforests to polar ice caps."
+    },
+    {
+      "id": "place_poland_1",
+      "name": "Wieliczka Salt Mine",
+      "location": "Poland",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "history",
+          "underground",
+          "unesco",
+          "unique"
+        ],
+        "price_range": "medium",
+        "budget": "$30",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?wieliczka%20salt%20mine%20interior"
+      },
+      "description": "Explore underground chambers, chapels carved entirely from salt, and saline lakes in this UNESCO site."
+    },
+    {
+      "id": "place_poland_2",
+      "name": "Auschwitz-Birkenau Memorial",
+      "location": "Poland",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "wwii",
+          "solemn",
+          "educational"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?auschwitz%20birkenau%20memorial"
+      },
+      "description": "Pay respects at the former Nazi concentration camp, a solemn and essential reminder of WWII history."
+    },
+    {
+      "id": "place_poland_3",
+      "name": "Wawel Royal Castle",
+      "location": "Poland",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "architecture",
+          "history",
+          "royalty",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?wawel%20royal%20castle%20krakow"
+      },
+      "description": "Discover the historic seat of Polish kings featuring stunning architecture, cathedral, and royal treasures."
+    },
+    {
+      "id": "place_poland_4",
+      "name": "\u0141azienki Kr\u00f3lewskie Park",
+      "location": "Poland",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "palace",
+          "relaxing",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?lazienki%20park%20warsaw%20palace"
+      },
+      "description": "Stroll through Warsaw\u2019s largest park featuring the Palace on the Isle, botanical gardens, and roaming peacocks."
+    },
+    {
+      "id": "place_poland_5",
+      "name": "Pierogarnia Zapiecek",
+      "location": "Poland",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "traditional",
+          "dumplings",
+          "cozy"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?pierogarnia%20zapiecek%20warsaw"
+      },
+      "description": "Savor traditional Polish dumplings served by waitresses in folk costumes in a cozy, rustic setting."
+    },
+    {
+      "id": "place_poland_6",
+      "name": "Malbork Castle",
+      "location": "Poland",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "medieval",
+          "castle",
+          "gothic",
+          "unesco"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?malbork%20castle%20poland"
+      },
+      "description": "Tour the largest brick castle in the world, a Gothic masterpiece built by the Teutonic Knights."
+    },
+    {
+      "id": "place_poland_7",
+      "name": "Morskie Oko",
+      "location": "Poland",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "hiking",
+          "mountains",
+          "nature",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "$5",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?morskie%20oko%20tatra%20mountains"
+      },
+      "description": "Hike to this breathtaking emerald-green lake nestled deep within the Tatra Mountains National Park."
+    },
+    {
+      "id": "place_poland_8",
+      "name": "Copernicus Science Centre",
+      "location": "Poland",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "science",
+          "interactive",
+          "modern",
+          "fun"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?copernicus%20science%20centre%20warsaw"
+      },
+      "description": "Engage with hundreds of hands-on exhibits exploring physics, biology, and robotics in a modern facility."
+    },
+    {
+      "id": "place_poland_9",
+      "name": "Pijalnia W\u00f3dki i Piwa",
+      "location": "Poland",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "nightlife",
+          "retro",
+          "drinks",
+          "social"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?pijalnia%20wodki%20i%20piwa%20interior"
+      },
+      "description": "Experience a retro communist-era style bar serving cheap shots and traditional Polish bar snacks."
+    },
+    {
+      "id": "place_poland_10",
+      "name": "Krak\u00f3w Main Market Square",
+      "location": "Poland",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "architecture",
+          "shopping",
+          "historic",
+          "urban"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?krakow%20main%20market%20square"
+      },
+      "description": "Wander Europe's largest medieval square, home to the historic Cloth Hall and St. Mary's Basilica."
+    },
+    {
+      "id": "place_tokyo_1",
+      "name": "Historic Tokyo Walking Tour",
+      "location": "Tokyo",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "walking",
+          "history",
+          "cultural"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?historic%20Tokyo"
+      },
+      "description": "Popular tour attraction in Tokyo"
+    },
+    {
+      "id": "place_tokyo_2",
+      "name": "Tokyo City Museum",
+      "location": "Tokyo",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "indoor",
+          "art",
+          "history"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?museum%20Tokyo"
+      },
+      "description": "Popular museum attraction in Tokyo"
+    },
+    {
+      "id": "place_tokyo_3",
+      "name": "Central Tokyo Park",
+      "location": "Tokyo",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "outdoor",
+          "relaxing",
+          "nature"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?park%20Tokyo"
+      },
+      "description": "Popular park attraction in Tokyo"
+    },
+    {
+      "id": "place_tokyo_4",
+      "name": "Tokyo Main Cathedral",
+      "location": "Tokyo",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "architecture",
+          "spiritual",
+          "historic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?cathedral%20Tokyo"
+      },
+      "description": "Popular temple attraction in Tokyo"
+    },
+    {
+      "id": "place_tokyo_5",
+      "name": "Local Tokyo Market",
+      "location": "Tokyo",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "shopping",
+          "food",
+          "local"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?market%20Tokyo"
+      },
+      "description": "Popular attraction attraction in Tokyo"
+    },
+    {
+      "id": "place_tokyo_6",
+      "name": "Traditional Tokyo Restaurant",
+      "location": "Tokyo",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dining",
+          "authentic",
+          "food"
+        ],
+        "price_range": "medium",
+        "budget": "$40",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?restaurant%20Tokyo"
+      },
+      "description": "Popular restaurant attraction in Tokyo"
+    },
+    {
+      "id": "place_tokyo_7",
+      "name": "Tokyo Art Gallery",
+      "location": "Tokyo",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "indoor",
+          "cultural"
+        ],
+        "price_range": "medium",
+        "budget": "$12",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?art%20gallery%20Tokyo"
+      },
+      "description": "Popular museum attraction in Tokyo"
+    },
+    {
+      "id": "place_tokyo_8",
+      "name": "Tokyo Riverfront Cruise",
+      "location": "Tokyo",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "relaxing",
+          "water"
+        ],
+        "price_range": "medium",
+        "budget": "$35",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?river%20cruise%20Tokyo"
+      },
+      "description": "Popular tour attraction in Tokyo"
+    },
+    {
+      "id": "place_tokyo_9",
+      "name": "Tokyo Night Entertainment",
+      "location": "Tokyo",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "nightlife",
+          "music",
+          "social"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?nightlife%20Tokyo"
+      },
+      "description": "Popular entertainment attraction in Tokyo"
+    },
+    {
+      "id": "place_tokyo_10",
+      "name": "Tokyo Viewpoint Tower",
+      "location": "Tokyo",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "scenic",
+          "views",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "$18",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?viewpoint%20Tokyo"
+      },
+      "description": "Popular landmark attraction in Tokyo"
+    },
+    {
+      "id": "place_mumbai_1",
+      "name": "Gateway of India",
+      "location": "Mumbai",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "history",
+          "architecture",
+          "sea-view"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?gateway%20of%20india%20mumbai"
+      },
+      "description": "Mumbai's most iconic monument overlooking the Arabian Sea, built to commemorate a royal visit in 1911."
+    },
+    {
+      "id": "place_mumbai_2",
+      "name": "Elephanta Caves",
+      "location": "Mumbai",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "history",
+          "caves",
+          "ferry",
+          "unesco"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?elephanta%20caves%20mumbai"
+      },
+      "description": "Explore ancient rock-cut caves and sculptures dedicated to Lord Shiva on an island a ferry ride away."
+    },
+    {
+      "id": "place_mumbai_3",
+      "name": "Marine Drive",
+      "location": "Mumbai",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "sunset",
+          "scenic",
+          "walking",
+          "skyline"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?marine%20drive%20mumbai%20queen's%20necklace"
+      },
+      "description": "A C-shaped seaside promenade known as the Queen's Necklace, perfect for sunset walks and skyline views."
+    },
+    {
+      "id": "place_mumbai_4",
+      "name": "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya",
+      "location": "Mumbai",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "architecture",
+          "exhibits"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?csmvs%20museum%20mumbai"
+      },
+      "description": "A magnificent Indo-Saracenic museum housing thousands of rare artifacts, sculptures, and miniature paintings."
+    },
+    {
+      "id": "place_mumbai_5",
+      "name": "Bollywood Film City Tour",
+      "location": "Mumbai",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "movies",
+          "cinema",
+          "tour",
+          "glitz"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?bollywood%20film%20city%20mumbai%20tour"
+      },
+      "description": "Go behind the scenes of the world's largest film industry with a guided tour of live movie sets."
+    },
+    {
+      "id": "place_mumbai_6",
+      "name": "Leopold Cafe",
+      "location": "Mumbai",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "history",
+          "lively",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?leopold%20cafe%20mumbai"
+      },
+      "description": "A legendary eatery founded in 1871, famous for its history, lively atmosphere, and literary fame."
+    },
+    {
+      "id": "place_mumbai_7",
+      "name": "Sree Siddhivinayak Ganapati Temple",
+      "location": "Mumbai",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "spiritual",
+          "worship",
+          "famous",
+          "hindu"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?siddhivinayak%20temple%20mumbai"
+      },
+      "description": "One of India's richest and most famous temples, dedicated to Lord Ganesha, attracting thousands daily."
+    },
+    {
+      "id": "place_mumbai_8",
+      "name": "Sanjay Gandhi National Park",
+      "location": "Mumbai",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "wildlife",
+          "hiking",
+          "caves"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?sanjay%20gandhi%20national%20park%20mumbai"
+      },
+      "description": "A massive protected forest within city limits featuring the ancient Kanheri Caves and lion safaris."
+    },
+    {
+      "id": "place_mumbai_9",
+      "name": "Colaba Causeway",
+      "location": "Mumbai",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "shopping",
+          "market",
+          "street-food",
+          "busy"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?colaba%20causeway%20shopping"
+      },
+      "description": "A bustling street market offering everything from antique trinkets and jewelry to trendy clothes."
+    },
+    {
+      "id": "place_mumbai_10",
+      "name": "Haji Ali Dargah",
+      "location": "Mumbai",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "spiritual",
+          "ocean",
+          "architecture",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?haji%20ali%20dargah%20mumbai"
+      },
+      "description": "A stunning white mosque and tomb located on an islet, accessible via a causeway only during low tide."
+    },
+    {
+      "id": "place_india_1",
+      "name": "Taj Mahal",
+      "location": "India",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "architecture",
+          "history",
+          "unesco"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?taj%20mahal%20agra%20india"
+      },
+      "description": "Marvel at this ivory-white marble mausoleum in Agra, a UNESCO World Heritage site and symbol of eternal love."
+    },
+    {
+      "id": "place_india_2",
+      "name": "Ranthambore National Park Safari",
+      "location": "India",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "wildlife",
+          "nature",
+          "adventure",
+          "safari"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?ranthambore%20tiger%20safari"
+      },
+      "description": "Explore the wilderness in an open jeep to spot Bengal tigers and diverse wildlife in their natural habitat."
+    },
+    {
+      "id": "place_india_3",
+      "name": "Kerala Backwaters Houseboat",
+      "location": "India",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "relaxing",
+          "scenic",
+          "nature",
+          "water"
+        ],
+        "price_range": "medium",
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?kerala%20backwaters%20houseboat%20alleppey"
+      },
+      "description": "Cruise through serene palm-fringed canals in Alleppey on a traditional thatch-roofed boat known as a Kettuvallam."
+    },
+    {
+      "id": "place_india_4",
+      "name": "Amber Fort",
+      "location": "India",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "fort",
+          "history",
+          "architecture",
+          "views"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "high",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?amber%20fort%20jaipur%20exterior"
+      },
+      "description": "Explore this majestic hilltop fort in Jaipur blending Hindu and Mughal architecture with stunning city views."
+    },
+    {
+      "id": "place_india_5",
+      "name": "Bukhara",
+      "location": "India",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "cuisine",
+          "luxury",
+          "dining",
+          "authentic"
+        ],
+        "price_range": "medium",
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?bukhara%20restaurant%20new%20delhi"
+      },
+      "description": "Savor world-famous Dal Bukhara and tandoori cuisine at this iconic restaurant favored by global dignitaries."
+    },
+    {
+      "id": "place_india_6",
+      "name": "Ganges River Boat Ride and Aarti",
+      "location": "India",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "spiritual",
+          "ritual",
+          "river",
+          "culture"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?varanasi%20ganga%20aarti%20boat"
+      },
+      "description": "Witness spiritual rituals and the famous Ganga Aarti ceremony at sunset from a boat on the holy river in Varanasi."
+    },
+    {
+      "id": "place_india_7",
+      "name": "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya",
+      "location": "India",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "museum",
+          "indoor"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?prince%20of%20wales%20museum%20mumbai"
+      },
+      "description": "Admire extensive collections of art, archaeology, and natural history in a stunning Indo-Saracenic building."
+    },
+    {
+      "id": "place_india_8",
+      "name": "Parmarth Niketan Ashram Yoga",
+      "location": "India",
+      "category": "Wellness",
+      "features": {
+        "tags": [
+          "yoga",
+          "meditation",
+          "peaceful",
+          "spiritual"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?rishikesh%20yoga%20by%20ganges"
+      },
+      "description": "Rejuvenate your mind and body with meditation and yoga sessions in Rishikesh, the Yoga Capital of the World."
+    },
+    {
+      "id": "place_india_9",
+      "name": "Bollywood Studio Tour",
+      "location": "India",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "cinema",
+          "film",
+          "fun",
+          "tour"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?bollywood%20studio%20tour%20mumbai"
+      },
+      "description": "Go behind the scenes of the world's largest film industry in Mumbai, visit sets, and watch live filming."
+    },
+    {
+      "id": "place_india_10",
+      "name": "Meenakshi Amman Temple",
+      "location": "India",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "religious",
+          "architecture",
+          "colorful",
+          "ancient"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?meenakshi%20temple%20madurai"
+      },
+      "description": "Walk through the colorful, towering gopurams and intricate carvings of this historic temple city in Madurai."
+    },
+    {
+      "id": "place_vancouver_1",
+      "name": "Stanley Park",
+      "location": "Vancouver",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "scenic",
+          "iconic",
+          "outdoors"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?stanley%20park%20vancouver"
+      },
+      "description": "Explore this massive urban oasis featuring totem poles, beaches, and ancient cedars surrounded by water."
+    },
+    {
+      "id": "place_vancouver_2",
+      "name": "Capilano Suspension Bridge Park",
+      "location": "Vancouver",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "nature",
+          "thrill",
+          "scenic",
+          "forest"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?capilano%20suspension%20bridge"
+      },
+      "description": "Walk across the swaying bridge suspended 230 feet above the river and explore the treetop adventures."
+    },
+    {
+      "id": "place_vancouver_3",
+      "name": "Granville Island Public Market",
+      "location": "Vancouver",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "food",
+          "shopping",
+          "waterfront",
+          "bustling"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?granville%20island%20public%20market"
+      },
+      "description": "Wander through a bustling market filled with fresh produce, artisan crafts, and delicious local food stalls."
+    },
+    {
+      "id": "place_vancouver_4",
+      "name": "Museum of Anthropology at UBC",
+      "location": "Vancouver",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "art",
+          "indigenous",
+          "culture"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?museum%20of%20anthropology%20vancouver"
+      },
+      "description": "Discover world-renowned displays of Northwest Coast First Nations art in a stunning architectural setting."
+    },
+    {
+      "id": "place_vancouver_5",
+      "name": "Grouse Mountain",
+      "location": "Vancouver",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "mountain",
+          "views",
+          "skiing",
+          "hiking"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?grouse%20mountain%20vancouver"
+      },
+      "description": "Take the Skyride gondola up for breathtaking city views, lumberjack shows, and grizzly bear habitats."
+    },
+    {
+      "id": "place_vancouver_6",
+      "name": "Gastown Steam Clock",
+      "location": "Vancouver",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "historic",
+          "iconic",
+          "charming",
+          "urban"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?gastown%20steam%20clock"
+      },
+      "description": "Watch steam pour from this Victorian-style clock every 15 minutes in the heart of the historic district."
+    },
+    {
+      "id": "place_vancouver_7",
+      "name": "FlyOver Canada",
+      "location": "Vancouver",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "4D ride",
+          "immersive",
+          "scenic",
+          "fun"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?flyover%20canada%20vancouver"
+      },
+      "description": "Experience a flight simulation ride that takes you on an aerial journey across Canada's spectacular landscapes."
+    },
+    {
+      "id": "place_vancouver_8",
+      "name": "Science World",
+      "location": "Vancouver",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "science",
+          "interactive",
+          "iconic",
+          "learning"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?science%20world%20vancouver"
+      },
+      "description": "Ignite your curiosity at this iconic geodesic dome filled with interactive exhibits and scientific displays."
+    },
+    {
+      "id": "place_vancouver_9",
+      "name": "Miku Vancouver",
+      "location": "Vancouver",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "sushi",
+          "fine dining",
+          "waterfront",
+          "seafood"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?miku%20restaurant%20vancouver"
+      },
+      "description": "Indulge in famous Aburi-style flame-seared sushi while enjoying panoramic views of the Vancouver harbour."
+    },
+    {
+      "id": "place_vancouver_10",
+      "name": "Vancouver Seawall",
+      "location": "Vancouver",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "cycling",
+          "scenic",
+          "fitness",
+          "ocean"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?vancouver%20seawall%20biking"
+      },
+      "description": "Cycle or jog along the world's longest uninterrupted waterfront path offering stunning ocean and city views."
+    },
+    {
+      "id": "place_delhi_1",
+      "name": "Red Fort",
+      "location": "Delhi",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "history",
+          "architecture",
+          "unesco",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?red%20fort%20delhi"
+      },
+      "description": "Explore the majestic red sandstone fortress of the Mughal emperors, a massive UNESCO World Heritage site."
+    },
+    {
+      "id": "place_delhi_2",
+      "name": "Chandni Chowk Rickshaw Tour",
+      "location": "Delhi",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "culture",
+          "street food",
+          "adventure",
+          "market"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?chandni%20chowk%20rickshaw%20ride"
+      },
+      "description": "Navigate the chaotic, vibrant narrow lanes of Old Delhi's oldest market on a traditional cycle rickshaw."
+    },
+    {
+      "id": "place_delhi_3",
+      "name": "Qutub Minar",
+      "location": "Delhi",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "ancient",
+          "photography",
+          "history",
+          "ruins"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?qutub%20minar%20delhi"
+      },
+      "description": "Marvel at the world's tallest brick minaret, a victory tower surrounded by ancient ruins and intricate carvings."
+    },
+    {
+      "id": "place_delhi_4",
+      "name": "Lodhi Gardens",
+      "location": "Delhi",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "picnic",
+          "peaceful",
+          "history"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?lodhi%20gardens%20new%20delhi"
+      },
+      "description": "Stroll through lush greenery dotted with 15th-century tombs, a favorite spot for morning walks and picnics."
+    },
+    {
+      "id": "place_delhi_5",
+      "name": "Akshardham Temple",
+      "location": "Delhi",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "spiritual",
+          "grand",
+          "light show",
+          "architecture"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?akshardham%20temple%20delhi"
+      },
+      "description": "Experience spiritual grandeur, boat rides, and a stunning water show at this massive modern temple complex."
+    },
+    {
+      "id": "place_delhi_6",
+      "name": "Hauz Khas Village",
+      "location": "Delhi",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "nightlife",
+          "trendy",
+          "dining",
+          "history"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?hauz%20khas%20village%20social"
+      },
+      "description": "Enjoy trendy boutiques, rooftop cafes, and vibrant bars set amidst medieval ruins and a deer park."
+    },
+    {
+      "id": "place_delhi_7",
+      "name": "Lotus Temple",
+      "location": "Delhi",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "peace",
+          "unique",
+          "meditation",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?lotus%20temple%20delhi"
+      },
+      "description": "Meditate in the serene, flower-shaped Bah\u00e1'\u00ed House of Worship known for its striking white marble petals."
+    },
+    {
+      "id": "place_delhi_8",
+      "name": "Dilli Haat INA",
+      "location": "Delhi",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "shopping",
+          "crafts",
+          "food",
+          "colorful"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?dilli%20haat%20ina%20market"
+      },
+      "description": "Shop for regional handicrafts and taste authentic cuisines from every Indian state in this open-air bazaar."
+    },
+    {
+      "id": "place_delhi_9",
+      "name": "National Museum",
+      "location": "Delhi",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "educational",
+          "art",
+          "artifacts",
+          "history"
+        ],
+        "price_range": "medium",
+        "budget": "$5",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?national%20museum%20new%20delhi"
+      },
+      "description": "Journey through 5,000 years of Indian history with rare artifacts ranging from the Harappan era to Mughal art."
+    },
+    {
+      "id": "place_delhi_10",
+      "name": "Bukhara",
+      "location": "Delhi",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "fine dining",
+          "luxury",
+          "cuisine",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?bukhara%20restaurant%20delhi"
+      },
+      "description": "Indulge in world-famous Dal Bukhara and kebabs at this legendary, rustic-chic restaurant in the ITC Maurya."
+    },
+    {
+      "id": "place_banff_1",
+      "name": "Lake Louise",
+      "location": "Banff",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "iconic",
+          "scenic",
+          "hiking",
+          "nature",
+          "photography"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?lake%20louise%20banff"
+      },
+      "description": "Marvel at the turquoise waters and soaring mountain peaks of this world-famous alpine lake."
+    },
+    {
+      "id": "place_banff_2",
+      "name": "Banff Gondola",
+      "location": "Banff",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "views",
+          "mountains",
+          "scenic",
+          "accessible"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?banff%20gondola%20sulphur%20mountain"
+      },
+      "description": "Soar to the top of Sulphur Mountain for breathtaking panoramic views of six mountain ranges."
+    },
+    {
+      "id": "place_banff_3",
+      "name": "Johnston Canyon",
+      "location": "Banff",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "hiking",
+          "waterfall",
+          "nature",
+          "canyon"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?johnston%20canyon%20hike"
+      },
+      "description": "Walk along steel catwalks attached to limestone walls to witness thundering waterfalls."
+    },
+    {
+      "id": "place_banff_4",
+      "name": "Banff Upper Hot Springs",
+      "location": "Banff",
+      "category": "Wellness",
+      "features": {
+        "tags": [
+          "relaxation",
+          "thermal",
+          "scenic",
+          "history"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?banff%20upper%20hot%20springs"
+      },
+      "description": "Soak in the steaming mineral waters while gazing at the stunning Rundle Mountain."
+    },
+    {
+      "id": "place_banff_5",
+      "name": "Moraine Lake",
+      "location": "Banff",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "iconic",
+          "scenic",
+          "photography",
+          "nature"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?moraine%20lake%20banff"
+      },
+      "description": "Experience the Valley of the Ten Peaks reflected in the intense shade of turquoise water."
+    },
+    {
+      "id": "place_banff_6",
+      "name": "The Grizzly House",
+      "location": "Banff",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dining",
+          "fondue",
+          "historic",
+          "unique"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?grizzly%20house%20banff%20restaurant"
+      },
+      "description": "Enjoy a unique fondue dining experience in a rustic, historic setting with exotic meats."
+    },
+    {
+      "id": "place_banff_7",
+      "name": "Whyte Museum of the Canadian Rockies",
+      "location": "Banff",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "art",
+          "culture",
+          "indoors"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?whyte%20museum%20banff"
+      },
+      "description": "Explore the art, culture, and history of the Rocky Mountains through captivating exhibits."
+    },
+    {
+      "id": "place_banff_8",
+      "name": "Cave and Basin National Historic Site",
+      "location": "Banff",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "history",
+          "nature",
+          "educational",
+          "cave"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?cave%20and%20basin%20banff"
+      },
+      "description": "Visit the birthplace of Canada's national parks and see the thermal springs inside a cave."
+    },
+    {
+      "id": "place_banff_9",
+      "name": "Lake Minnewanka Cruise",
+      "location": "Banff",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "boat",
+          "scenic",
+          "wildlife",
+          "guided"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?lake%20minnewanka%20cruise"
+      },
+      "description": "Take a guided boat tour across Banff\u2019s largest lake to learn about local legends and wildlife."
+    },
+    {
+      "id": "place_banff_10",
+      "name": "Fairmont Banff Springs",
+      "location": "Banff",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "architecture",
+          "luxury",
+          "historic",
+          "hotel"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?fairmont%20banff%20springs%20castle"
+      },
+      "description": "Visit the \"Castle in the Rockies\" to admire its architecture or enjoy a luxurious afternoon tea."
+    },
+    {
+      "id": "place_jasper_1",
+      "name": "Maligne Lake Cruise",
+      "location": "Jasper",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "iconic",
+          "scenic",
+          "boat",
+          "photography"
+        ],
+        "price_range": "medium",
+        "budget": "$75",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?maligne%20lake%20spirit%20island%20jasper"
+      },
+      "description": "Cruise across azure waters to Spirit Island, one of the most photographed spots in the Canadian Rockies."
+    },
+    {
+      "id": "place_jasper_2",
+      "name": "Jasper SkyTram",
+      "location": "Jasper",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "views",
+          "mountains",
+          "aerial",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?jasper%20skytram%20view"
+      },
+      "description": "Ride Canada's highest and longest guided aerial tramway for breathtaking panoramic mountain views."
+    },
+    {
+      "id": "place_jasper_3",
+      "name": "Maligne Canyon",
+      "location": "Jasper",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "hiking",
+          "nature",
+          "geology",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?maligne%20canyon%20jasper"
+      },
+      "description": "Explore the deepest canyon in the park with limestone walls, rushing water, and scenic bridges."
+    },
+    {
+      "id": "place_jasper_4",
+      "name": "Athabasca Falls",
+      "location": "Jasper",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "waterfall",
+          "powerful",
+          "scenic",
+          "nature"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?athabasca%20falls%20jasper"
+      },
+      "description": "Witness the raw power of this Class 5 waterfall as it thunders through a narrow gorge."
+    },
+    {
+      "id": "place_jasper_5",
+      "name": "Miette Hot Springs",
+      "location": "Jasper",
+      "category": "Wellness",
+      "features": {
+        "tags": [
+          "relaxation",
+          "thermal",
+          "scenic",
+          "outdoor"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?miette%20hot%20springs%20jasper"
+      },
+      "description": "Soak in the hottest mineral springs in the Canadian Rockies while surrounded by mountain peaks."
+    },
+    {
+      "id": "place_jasper_6",
+      "name": "Jasper Planetarium",
+      "location": "Jasper",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "astronomy",
+          "stargazing",
+          "dark sky",
+          "night"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?jasper%20planetarium%20telescope"
+      },
+      "description": "Experience the world's second-largest Dark Sky Preserve with guided telescope tours and dome shows."
+    },
+    {
+      "id": "place_jasper_7",
+      "name": "Jasper Yellowhead Museum & Archives",
+      "location": "Jasper",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "culture",
+          "exhibits",
+          "local"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?jasper%20yellowhead%20museum"
+      },
+      "description": "Discover the rich history of the area, from fur trade exploration to railway construction."
+    },
+    {
+      "id": "place_jasper_8",
+      "name": "The Emerald Lounge",
+      "location": "Jasper",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dining",
+          "luxury",
+          "scenic",
+          "cocktails"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?fairmont%20jasper%20park%20lodge%20emerald%20lounge"
+      },
+      "description": "Enjoy upscale dining and cocktails with a stunning view of Lac Beauvert at the Fairmont."
+    },
+    {
+      "id": "place_jasper_9",
+      "name": "Mount Edith Cavell",
+      "location": "Jasper",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "glacier",
+          "hiking",
+          "mountains",
+          "alpine"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?mount%20edith%20cavell%20angel%20glacier"
+      },
+      "description": "Hike the Path of the Glacier trail to see Angel Glacier hanging dramatically over a pond."
+    },
+    {
+      "id": "place_jasper_10",
+      "name": "Jasper Raft Tours",
+      "location": "Jasper",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "rafting",
+          "river",
+          "wildlife",
+          "adventure"
+        ],
+        "price_range": "medium",
+        "budget": "$75",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?jasper%20raft%20tours%20athabasca%20river"
+      },
+      "description": "Float down the Athabasca River on a gentle, guided raft tour perfect for spotting local wildlife."
     }
   ],
   "activities": [
@@ -2708,6 +4299,1517 @@
         "image_url": "https://source.unsplash.com/800x600/?montreal%20biodome%20interior"
       },
       "description": "Walk through replicas of four distinct ecosystems, from tropical rainforests to polar ice caps."
+    },
+    {
+      "id": "activity_poland_1",
+      "name": "Wieliczka Salt Mine",
+      "place_id": "place_poland_1",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "history",
+          "underground",
+          "unesco",
+          "unique"
+        ],
+        "budget": "$30",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?wieliczka%20salt%20mine%20interior"
+      },
+      "description": "Explore underground chambers, chapels carved entirely from salt, and saline lakes in this UNESCO site."
+    },
+    {
+      "id": "activity_poland_2",
+      "name": "Auschwitz-Birkenau Memorial",
+      "place_id": "place_poland_2",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "wwii",
+          "solemn",
+          "educational"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?auschwitz%20birkenau%20memorial"
+      },
+      "description": "Pay respects at the former Nazi concentration camp, a solemn and essential reminder of WWII history."
+    },
+    {
+      "id": "activity_poland_3",
+      "name": "Wawel Royal Castle",
+      "place_id": "place_poland_3",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "architecture",
+          "history",
+          "royalty",
+          "iconic"
+        ],
+        "budget": "$15",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?wawel%20royal%20castle%20krakow"
+      },
+      "description": "Discover the historic seat of Polish kings featuring stunning architecture, cathedral, and royal treasures."
+    },
+    {
+      "id": "activity_poland_4",
+      "name": "\u0141azienki Kr\u00f3lewskie Park",
+      "place_id": "place_poland_4",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "palace",
+          "relaxing",
+          "scenic"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?lazienki%20park%20warsaw%20palace"
+      },
+      "description": "Stroll through Warsaw\u2019s largest park featuring the Palace on the Isle, botanical gardens, and roaming peacocks."
+    },
+    {
+      "id": "activity_poland_5",
+      "name": "Pierogarnia Zapiecek",
+      "place_id": "place_poland_5",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "traditional",
+          "dumplings",
+          "cozy"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?pierogarnia%20zapiecek%20warsaw"
+      },
+      "description": "Savor traditional Polish dumplings served by waitresses in folk costumes in a cozy, rustic setting."
+    },
+    {
+      "id": "activity_poland_6",
+      "name": "Malbork Castle",
+      "place_id": "place_poland_6",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "medieval",
+          "castle",
+          "gothic",
+          "unesco"
+        ],
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?malbork%20castle%20poland"
+      },
+      "description": "Tour the largest brick castle in the world, a Gothic masterpiece built by the Teutonic Knights."
+    },
+    {
+      "id": "activity_poland_7",
+      "name": "Morskie Oko",
+      "place_id": "place_poland_7",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "hiking",
+          "mountains",
+          "nature",
+          "scenic"
+        ],
+        "budget": "$5",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?morskie%20oko%20tatra%20mountains"
+      },
+      "description": "Hike to this breathtaking emerald-green lake nestled deep within the Tatra Mountains National Park."
+    },
+    {
+      "id": "activity_poland_8",
+      "name": "Copernicus Science Centre",
+      "place_id": "place_poland_8",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "science",
+          "interactive",
+          "modern",
+          "fun"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?copernicus%20science%20centre%20warsaw"
+      },
+      "description": "Engage with hundreds of hands-on exhibits exploring physics, biology, and robotics in a modern facility."
+    },
+    {
+      "id": "activity_poland_9",
+      "name": "Pijalnia W\u00f3dki i Piwa",
+      "place_id": "place_poland_9",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "nightlife",
+          "retro",
+          "drinks",
+          "social"
+        ],
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?pijalnia%20wodki%20i%20piwa%20interior"
+      },
+      "description": "Experience a retro communist-era style bar serving cheap shots and traditional Polish bar snacks."
+    },
+    {
+      "id": "activity_poland_10",
+      "name": "Krak\u00f3w Main Market Square",
+      "place_id": "place_poland_10",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "architecture",
+          "shopping",
+          "historic",
+          "urban"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?krakow%20main%20market%20square"
+      },
+      "description": "Wander Europe's largest medieval square, home to the historic Cloth Hall and St. Mary's Basilica."
+    },
+    {
+      "id": "activity_tokyo_1",
+      "name": "Historic Tokyo Walking Tour",
+      "place_id": "place_tokyo_1",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "walking",
+          "history",
+          "cultural"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?historic%20Tokyo"
+      },
+      "description": "Popular tour attraction in Tokyo"
+    },
+    {
+      "id": "activity_tokyo_2",
+      "name": "Tokyo City Museum",
+      "place_id": "place_tokyo_2",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "indoor",
+          "art",
+          "history"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?museum%20Tokyo"
+      },
+      "description": "Popular museum attraction in Tokyo"
+    },
+    {
+      "id": "activity_tokyo_3",
+      "name": "Central Tokyo Park",
+      "place_id": "place_tokyo_3",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "outdoor",
+          "relaxing",
+          "nature"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?park%20Tokyo"
+      },
+      "description": "Popular park attraction in Tokyo"
+    },
+    {
+      "id": "activity_tokyo_4",
+      "name": "Tokyo Main Cathedral",
+      "place_id": "place_tokyo_4",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "architecture",
+          "spiritual",
+          "historic"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?cathedral%20Tokyo"
+      },
+      "description": "Popular temple attraction in Tokyo"
+    },
+    {
+      "id": "activity_tokyo_5",
+      "name": "Local Tokyo Market",
+      "place_id": "place_tokyo_5",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "shopping",
+          "food",
+          "local"
+        ],
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?market%20Tokyo"
+      },
+      "description": "Popular attraction attraction in Tokyo"
+    },
+    {
+      "id": "activity_tokyo_6",
+      "name": "Traditional Tokyo Restaurant",
+      "place_id": "place_tokyo_6",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dining",
+          "authentic",
+          "food"
+        ],
+        "budget": "$40",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?restaurant%20Tokyo"
+      },
+      "description": "Popular restaurant attraction in Tokyo"
+    },
+    {
+      "id": "activity_tokyo_7",
+      "name": "Tokyo Art Gallery",
+      "place_id": "place_tokyo_7",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "indoor",
+          "cultural"
+        ],
+        "budget": "$12",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?art%20gallery%20Tokyo"
+      },
+      "description": "Popular museum attraction in Tokyo"
+    },
+    {
+      "id": "activity_tokyo_8",
+      "name": "Tokyo Riverfront Cruise",
+      "place_id": "place_tokyo_8",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "relaxing",
+          "water"
+        ],
+        "budget": "$35",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?river%20cruise%20Tokyo"
+      },
+      "description": "Popular tour attraction in Tokyo"
+    },
+    {
+      "id": "activity_tokyo_9",
+      "name": "Tokyo Night Entertainment",
+      "place_id": "place_tokyo_9",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "nightlife",
+          "music",
+          "social"
+        ],
+        "budget": "$50",
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?nightlife%20Tokyo"
+      },
+      "description": "Popular entertainment attraction in Tokyo"
+    },
+    {
+      "id": "activity_tokyo_10",
+      "name": "Tokyo Viewpoint Tower",
+      "place_id": "place_tokyo_10",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "scenic",
+          "views",
+          "iconic"
+        ],
+        "budget": "$18",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?viewpoint%20Tokyo"
+      },
+      "description": "Popular landmark attraction in Tokyo"
+    },
+    {
+      "id": "activity_mumbai_1",
+      "name": "Gateway of India",
+      "place_id": "place_mumbai_1",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "history",
+          "architecture",
+          "sea-view"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?gateway%20of%20india%20mumbai"
+      },
+      "description": "Mumbai's most iconic monument overlooking the Arabian Sea, built to commemorate a royal visit in 1911."
+    },
+    {
+      "id": "activity_mumbai_2",
+      "name": "Elephanta Caves",
+      "place_id": "place_mumbai_2",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "history",
+          "caves",
+          "ferry",
+          "unesco"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?elephanta%20caves%20mumbai"
+      },
+      "description": "Explore ancient rock-cut caves and sculptures dedicated to Lord Shiva on an island a ferry ride away."
+    },
+    {
+      "id": "activity_mumbai_3",
+      "name": "Marine Drive",
+      "place_id": "place_mumbai_3",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "sunset",
+          "scenic",
+          "walking",
+          "skyline"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?marine%20drive%20mumbai%20queen's%20necklace"
+      },
+      "description": "A C-shaped seaside promenade known as the Queen's Necklace, perfect for sunset walks and skyline views."
+    },
+    {
+      "id": "activity_mumbai_4",
+      "name": "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya",
+      "place_id": "place_mumbai_4",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "architecture",
+          "exhibits"
+        ],
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?csmvs%20museum%20mumbai"
+      },
+      "description": "A magnificent Indo-Saracenic museum housing thousands of rare artifacts, sculptures, and miniature paintings."
+    },
+    {
+      "id": "activity_mumbai_5",
+      "name": "Bollywood Film City Tour",
+      "place_id": "place_mumbai_5",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "movies",
+          "cinema",
+          "tour",
+          "glitz"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?bollywood%20film%20city%20mumbai%20tour"
+      },
+      "description": "Go behind the scenes of the world's largest film industry with a guided tour of live movie sets."
+    },
+    {
+      "id": "activity_mumbai_6",
+      "name": "Leopold Cafe",
+      "place_id": "place_mumbai_6",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "history",
+          "lively",
+          "iconic"
+        ],
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?leopold%20cafe%20mumbai"
+      },
+      "description": "A legendary eatery founded in 1871, famous for its history, lively atmosphere, and literary fame."
+    },
+    {
+      "id": "activity_mumbai_7",
+      "name": "Sree Siddhivinayak Ganapati Temple",
+      "place_id": "place_mumbai_7",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "spiritual",
+          "worship",
+          "famous",
+          "hindu"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?siddhivinayak%20temple%20mumbai"
+      },
+      "description": "One of India's richest and most famous temples, dedicated to Lord Ganesha, attracting thousands daily."
+    },
+    {
+      "id": "activity_mumbai_8",
+      "name": "Sanjay Gandhi National Park",
+      "place_id": "place_mumbai_8",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "wildlife",
+          "hiking",
+          "caves"
+        ],
+        "budget": "$10",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?sanjay%20gandhi%20national%20park%20mumbai"
+      },
+      "description": "A massive protected forest within city limits featuring the ancient Kanheri Caves and lion safaris."
+    },
+    {
+      "id": "activity_mumbai_9",
+      "name": "Colaba Causeway",
+      "place_id": "place_mumbai_9",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "shopping",
+          "market",
+          "street-food",
+          "busy"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?colaba%20causeway%20shopping"
+      },
+      "description": "A bustling street market offering everything from antique trinkets and jewelry to trendy clothes."
+    },
+    {
+      "id": "activity_mumbai_10",
+      "name": "Haji Ali Dargah",
+      "place_id": "place_mumbai_10",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "spiritual",
+          "ocean",
+          "architecture",
+          "iconic"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?haji%20ali%20dargah%20mumbai"
+      },
+      "description": "A stunning white mosque and tomb located on an islet, accessible via a causeway only during low tide."
+    },
+    {
+      "id": "activity_india_1",
+      "name": "Taj Mahal",
+      "place_id": "place_india_1",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "architecture",
+          "history",
+          "unesco"
+        ],
+        "budget": "$15",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?taj%20mahal%20agra%20india"
+      },
+      "description": "Marvel at this ivory-white marble mausoleum in Agra, a UNESCO World Heritage site and symbol of eternal love."
+    },
+    {
+      "id": "activity_india_2",
+      "name": "Ranthambore National Park Safari",
+      "place_id": "place_india_2",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "wildlife",
+          "nature",
+          "adventure",
+          "safari"
+        ],
+        "budget": "$50",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?ranthambore%20tiger%20safari"
+      },
+      "description": "Explore the wilderness in an open jeep to spot Bengal tigers and diverse wildlife in their natural habitat."
+    },
+    {
+      "id": "activity_india_3",
+      "name": "Kerala Backwaters Houseboat",
+      "place_id": "place_india_3",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "relaxing",
+          "scenic",
+          "nature",
+          "water"
+        ],
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?kerala%20backwaters%20houseboat%20alleppey"
+      },
+      "description": "Cruise through serene palm-fringed canals in Alleppey on a traditional thatch-roofed boat known as a Kettuvallam."
+    },
+    {
+      "id": "activity_india_4",
+      "name": "Amber Fort",
+      "place_id": "place_india_4",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "fort",
+          "history",
+          "architecture",
+          "views"
+        ],
+        "budget": "$10",
+        "energy_level": "high",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?amber%20fort%20jaipur%20exterior"
+      },
+      "description": "Explore this majestic hilltop fort in Jaipur blending Hindu and Mughal architecture with stunning city views."
+    },
+    {
+      "id": "activity_india_5",
+      "name": "Bukhara",
+      "place_id": "place_india_5",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "cuisine",
+          "luxury",
+          "dining",
+          "authentic"
+        ],
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?bukhara%20restaurant%20new%20delhi"
+      },
+      "description": "Savor world-famous Dal Bukhara and tandoori cuisine at this iconic restaurant favored by global dignitaries."
+    },
+    {
+      "id": "activity_india_6",
+      "name": "Ganges River Boat Ride and Aarti",
+      "place_id": "place_india_6",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "spiritual",
+          "ritual",
+          "river",
+          "culture"
+        ],
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?varanasi%20ganga%20aarti%20boat"
+      },
+      "description": "Witness spiritual rituals and the famous Ganga Aarti ceremony at sunset from a boat on the holy river in Varanasi."
+    },
+    {
+      "id": "activity_india_7",
+      "name": "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya",
+      "place_id": "place_india_7",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "museum",
+          "indoor"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?prince%20of%20wales%20museum%20mumbai"
+      },
+      "description": "Admire extensive collections of art, archaeology, and natural history in a stunning Indo-Saracenic building."
+    },
+    {
+      "id": "activity_india_8",
+      "name": "Parmarth Niketan Ashram Yoga",
+      "place_id": "place_india_8",
+      "category": "Wellness",
+      "features": {
+        "tags": [
+          "yoga",
+          "meditation",
+          "peaceful",
+          "spiritual"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?rishikesh%20yoga%20by%20ganges"
+      },
+      "description": "Rejuvenate your mind and body with meditation and yoga sessions in Rishikesh, the Yoga Capital of the World."
+    },
+    {
+      "id": "activity_india_9",
+      "name": "Bollywood Studio Tour",
+      "place_id": "place_india_9",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "cinema",
+          "film",
+          "fun",
+          "tour"
+        ],
+        "budget": "$50",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?bollywood%20studio%20tour%20mumbai"
+      },
+      "description": "Go behind the scenes of the world's largest film industry in Mumbai, visit sets, and watch live filming."
+    },
+    {
+      "id": "activity_india_10",
+      "name": "Meenakshi Amman Temple",
+      "place_id": "place_india_10",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "religious",
+          "architecture",
+          "colorful",
+          "ancient"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?meenakshi%20temple%20madurai"
+      },
+      "description": "Walk through the colorful, towering gopurams and intricate carvings of this historic temple city in Madurai."
+    },
+    {
+      "id": "activity_vancouver_1",
+      "name": "Stanley Park",
+      "place_id": "place_vancouver_1",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "scenic",
+          "iconic",
+          "outdoors"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?stanley%20park%20vancouver"
+      },
+      "description": "Explore this massive urban oasis featuring totem poles, beaches, and ancient cedars surrounded by water."
+    },
+    {
+      "id": "activity_vancouver_2",
+      "name": "Capilano Suspension Bridge Park",
+      "place_id": "place_vancouver_2",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "nature",
+          "thrill",
+          "scenic",
+          "forest"
+        ],
+        "budget": "$50",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?capilano%20suspension%20bridge"
+      },
+      "description": "Walk across the swaying bridge suspended 230 feet above the river and explore the treetop adventures."
+    },
+    {
+      "id": "activity_vancouver_3",
+      "name": "Granville Island Public Market",
+      "place_id": "place_vancouver_3",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "food",
+          "shopping",
+          "waterfront",
+          "bustling"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?granville%20island%20public%20market"
+      },
+      "description": "Wander through a bustling market filled with fresh produce, artisan crafts, and delicious local food stalls."
+    },
+    {
+      "id": "activity_vancouver_4",
+      "name": "Museum of Anthropology at UBC",
+      "place_id": "place_vancouver_4",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "art",
+          "indigenous",
+          "culture"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?museum%20of%20anthropology%20vancouver"
+      },
+      "description": "Discover world-renowned displays of Northwest Coast First Nations art in a stunning architectural setting."
+    },
+    {
+      "id": "activity_vancouver_5",
+      "name": "Grouse Mountain",
+      "place_id": "place_vancouver_5",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "mountain",
+          "views",
+          "skiing",
+          "hiking"
+        ],
+        "budget": "$50",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?grouse%20mountain%20vancouver"
+      },
+      "description": "Take the Skyride gondola up for breathtaking city views, lumberjack shows, and grizzly bear habitats."
+    },
+    {
+      "id": "activity_vancouver_6",
+      "name": "Gastown Steam Clock",
+      "place_id": "place_vancouver_6",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "historic",
+          "iconic",
+          "charming",
+          "urban"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?gastown%20steam%20clock"
+      },
+      "description": "Watch steam pour from this Victorian-style clock every 15 minutes in the heart of the historic district."
+    },
+    {
+      "id": "activity_vancouver_7",
+      "name": "FlyOver Canada",
+      "place_id": "place_vancouver_7",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "4D ride",
+          "immersive",
+          "scenic",
+          "fun"
+        ],
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?flyover%20canada%20vancouver"
+      },
+      "description": "Experience a flight simulation ride that takes you on an aerial journey across Canada's spectacular landscapes."
+    },
+    {
+      "id": "activity_vancouver_8",
+      "name": "Science World",
+      "place_id": "place_vancouver_8",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "science",
+          "interactive",
+          "iconic",
+          "learning"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?science%20world%20vancouver"
+      },
+      "description": "Ignite your curiosity at this iconic geodesic dome filled with interactive exhibits and scientific displays."
+    },
+    {
+      "id": "activity_vancouver_9",
+      "name": "Miku Vancouver",
+      "place_id": "place_vancouver_9",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "sushi",
+          "fine dining",
+          "waterfront",
+          "seafood"
+        ],
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?miku%20restaurant%20vancouver"
+      },
+      "description": "Indulge in famous Aburi-style flame-seared sushi while enjoying panoramic views of the Vancouver harbour."
+    },
+    {
+      "id": "activity_vancouver_10",
+      "name": "Vancouver Seawall",
+      "place_id": "place_vancouver_10",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "cycling",
+          "scenic",
+          "fitness",
+          "ocean"
+        ],
+        "budget": "free",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?vancouver%20seawall%20biking"
+      },
+      "description": "Cycle or jog along the world's longest uninterrupted waterfront path offering stunning ocean and city views."
+    },
+    {
+      "id": "activity_delhi_1",
+      "name": "Red Fort",
+      "place_id": "place_delhi_1",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "history",
+          "architecture",
+          "unesco",
+          "iconic"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?red%20fort%20delhi"
+      },
+      "description": "Explore the majestic red sandstone fortress of the Mughal emperors, a massive UNESCO World Heritage site."
+    },
+    {
+      "id": "activity_delhi_2",
+      "name": "Chandni Chowk Rickshaw Tour",
+      "place_id": "place_delhi_2",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "culture",
+          "street food",
+          "adventure",
+          "market"
+        ],
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?chandni%20chowk%20rickshaw%20ride"
+      },
+      "description": "Navigate the chaotic, vibrant narrow lanes of Old Delhi's oldest market on a traditional cycle rickshaw."
+    },
+    {
+      "id": "activity_delhi_3",
+      "name": "Qutub Minar",
+      "place_id": "place_delhi_3",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "ancient",
+          "photography",
+          "history",
+          "ruins"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?qutub%20minar%20delhi"
+      },
+      "description": "Marvel at the world's tallest brick minaret, a victory tower surrounded by ancient ruins and intricate carvings."
+    },
+    {
+      "id": "activity_delhi_4",
+      "name": "Lodhi Gardens",
+      "place_id": "place_delhi_4",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "picnic",
+          "peaceful",
+          "history"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?lodhi%20gardens%20new%20delhi"
+      },
+      "description": "Stroll through lush greenery dotted with 15th-century tombs, a favorite spot for morning walks and picnics."
+    },
+    {
+      "id": "activity_delhi_5",
+      "name": "Akshardham Temple",
+      "place_id": "place_delhi_5",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "spiritual",
+          "grand",
+          "light show",
+          "architecture"
+        ],
+        "budget": "free",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?akshardham%20temple%20delhi"
+      },
+      "description": "Experience spiritual grandeur, boat rides, and a stunning water show at this massive modern temple complex."
+    },
+    {
+      "id": "activity_delhi_6",
+      "name": "Hauz Khas Village",
+      "place_id": "place_delhi_6",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "nightlife",
+          "trendy",
+          "dining",
+          "history"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?hauz%20khas%20village%20social"
+      },
+      "description": "Enjoy trendy boutiques, rooftop cafes, and vibrant bars set amidst medieval ruins and a deer park."
+    },
+    {
+      "id": "activity_delhi_7",
+      "name": "Lotus Temple",
+      "place_id": "place_delhi_7",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "peace",
+          "unique",
+          "meditation",
+          "scenic"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?lotus%20temple%20delhi"
+      },
+      "description": "Meditate in the serene, flower-shaped Bah\u00e1'\u00ed House of Worship known for its striking white marble petals."
+    },
+    {
+      "id": "activity_delhi_8",
+      "name": "Dilli Haat INA",
+      "place_id": "place_delhi_8",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "shopping",
+          "crafts",
+          "food",
+          "colorful"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?dilli%20haat%20ina%20market"
+      },
+      "description": "Shop for regional handicrafts and taste authentic cuisines from every Indian state in this open-air bazaar."
+    },
+    {
+      "id": "activity_delhi_9",
+      "name": "National Museum",
+      "place_id": "place_delhi_9",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "educational",
+          "art",
+          "artifacts",
+          "history"
+        ],
+        "budget": "$5",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?national%20museum%20new%20delhi"
+      },
+      "description": "Journey through 5,000 years of Indian history with rare artifacts ranging from the Harappan era to Mughal art."
+    },
+    {
+      "id": "activity_delhi_10",
+      "name": "Bukhara",
+      "place_id": "place_delhi_10",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "fine dining",
+          "luxury",
+          "cuisine",
+          "iconic"
+        ],
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?bukhara%20restaurant%20delhi"
+      },
+      "description": "Indulge in world-famous Dal Bukhara and kebabs at this legendary, rustic-chic restaurant in the ITC Maurya."
+    },
+    {
+      "id": "activity_banff_1",
+      "name": "Lake Louise",
+      "place_id": "place_banff_1",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "iconic",
+          "scenic",
+          "hiking",
+          "nature",
+          "photography"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?lake%20louise%20banff"
+      },
+      "description": "Marvel at the turquoise waters and soaring mountain peaks of this world-famous alpine lake."
+    },
+    {
+      "id": "activity_banff_2",
+      "name": "Banff Gondola",
+      "place_id": "place_banff_2",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "views",
+          "mountains",
+          "scenic",
+          "accessible"
+        ],
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?banff%20gondola%20sulphur%20mountain"
+      },
+      "description": "Soar to the top of Sulphur Mountain for breathtaking panoramic views of six mountain ranges."
+    },
+    {
+      "id": "activity_banff_3",
+      "name": "Johnston Canyon",
+      "place_id": "place_banff_3",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "hiking",
+          "waterfall",
+          "nature",
+          "canyon"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?johnston%20canyon%20hike"
+      },
+      "description": "Walk along steel catwalks attached to limestone walls to witness thundering waterfalls."
+    },
+    {
+      "id": "activity_banff_4",
+      "name": "Banff Upper Hot Springs",
+      "place_id": "place_banff_4",
+      "category": "Wellness",
+      "features": {
+        "tags": [
+          "relaxation",
+          "thermal",
+          "scenic",
+          "history"
+        ],
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?banff%20upper%20hot%20springs"
+      },
+      "description": "Soak in the steaming mineral waters while gazing at the stunning Rundle Mountain."
+    },
+    {
+      "id": "activity_banff_5",
+      "name": "Moraine Lake",
+      "place_id": "place_banff_5",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "iconic",
+          "scenic",
+          "photography",
+          "nature"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?moraine%20lake%20banff"
+      },
+      "description": "Experience the Valley of the Ten Peaks reflected in the intense shade of turquoise water."
+    },
+    {
+      "id": "activity_banff_6",
+      "name": "The Grizzly House",
+      "place_id": "place_banff_6",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dining",
+          "fondue",
+          "historic",
+          "unique"
+        ],
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?grizzly%20house%20banff%20restaurant"
+      },
+      "description": "Enjoy a unique fondue dining experience in a rustic, historic setting with exotic meats."
+    },
+    {
+      "id": "activity_banff_7",
+      "name": "Whyte Museum of the Canadian Rockies",
+      "place_id": "place_banff_7",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "art",
+          "culture",
+          "indoors"
+        ],
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?whyte%20museum%20banff"
+      },
+      "description": "Explore the art, culture, and history of the Rocky Mountains through captivating exhibits."
+    },
+    {
+      "id": "activity_banff_8",
+      "name": "Cave and Basin National Historic Site",
+      "place_id": "place_banff_8",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "history",
+          "nature",
+          "educational",
+          "cave"
+        ],
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?cave%20and%20basin%20banff"
+      },
+      "description": "Visit the birthplace of Canada's national parks and see the thermal springs inside a cave."
+    },
+    {
+      "id": "activity_banff_9",
+      "name": "Lake Minnewanka Cruise",
+      "place_id": "place_banff_9",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "boat",
+          "scenic",
+          "wildlife",
+          "guided"
+        ],
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?lake%20minnewanka%20cruise"
+      },
+      "description": "Take a guided boat tour across Banff\u2019s largest lake to learn about local legends and wildlife."
+    },
+    {
+      "id": "activity_banff_10",
+      "name": "Fairmont Banff Springs",
+      "place_id": "place_banff_10",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "architecture",
+          "luxury",
+          "historic",
+          "hotel"
+        ],
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?fairmont%20banff%20springs%20castle"
+      },
+      "description": "Visit the \"Castle in the Rockies\" to admire its architecture or enjoy a luxurious afternoon tea."
+    },
+    {
+      "id": "activity_jasper_1",
+      "name": "Maligne Lake Cruise",
+      "place_id": "place_jasper_1",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "iconic",
+          "scenic",
+          "boat",
+          "photography"
+        ],
+        "budget": "$75",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?maligne%20lake%20spirit%20island%20jasper"
+      },
+      "description": "Cruise across azure waters to Spirit Island, one of the most photographed spots in the Canadian Rockies."
+    },
+    {
+      "id": "activity_jasper_2",
+      "name": "Jasper SkyTram",
+      "place_id": "place_jasper_2",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "views",
+          "mountains",
+          "aerial",
+          "scenic"
+        ],
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?jasper%20skytram%20view"
+      },
+      "description": "Ride Canada's highest and longest guided aerial tramway for breathtaking panoramic mountain views."
+    },
+    {
+      "id": "activity_jasper_3",
+      "name": "Maligne Canyon",
+      "place_id": "place_jasper_3",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "hiking",
+          "nature",
+          "geology",
+          "scenic"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?maligne%20canyon%20jasper"
+      },
+      "description": "Explore the deepest canyon in the park with limestone walls, rushing water, and scenic bridges."
+    },
+    {
+      "id": "activity_jasper_4",
+      "name": "Athabasca Falls",
+      "place_id": "place_jasper_4",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "waterfall",
+          "powerful",
+          "scenic",
+          "nature"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?athabasca%20falls%20jasper"
+      },
+      "description": "Witness the raw power of this Class 5 waterfall as it thunders through a narrow gorge."
+    },
+    {
+      "id": "activity_jasper_5",
+      "name": "Miette Hot Springs",
+      "place_id": "place_jasper_5",
+      "category": "Wellness",
+      "features": {
+        "tags": [
+          "relaxation",
+          "thermal",
+          "scenic",
+          "outdoor"
+        ],
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?miette%20hot%20springs%20jasper"
+      },
+      "description": "Soak in the hottest mineral springs in the Canadian Rockies while surrounded by mountain peaks."
+    },
+    {
+      "id": "activity_jasper_6",
+      "name": "Jasper Planetarium",
+      "place_id": "place_jasper_6",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "astronomy",
+          "stargazing",
+          "dark sky",
+          "night"
+        ],
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?jasper%20planetarium%20telescope"
+      },
+      "description": "Experience the world's second-largest Dark Sky Preserve with guided telescope tours and dome shows."
+    },
+    {
+      "id": "activity_jasper_7",
+      "name": "Jasper Yellowhead Museum & Archives",
+      "place_id": "place_jasper_7",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "culture",
+          "exhibits",
+          "local"
+        ],
+        "budget": "$10",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?jasper%20yellowhead%20museum"
+      },
+      "description": "Discover the rich history of the area, from fur trade exploration to railway construction."
+    },
+    {
+      "id": "activity_jasper_8",
+      "name": "The Emerald Lounge",
+      "place_id": "place_jasper_8",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dining",
+          "luxury",
+          "scenic",
+          "cocktails"
+        ],
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?fairmont%20jasper%20park%20lodge%20emerald%20lounge"
+      },
+      "description": "Enjoy upscale dining and cocktails with a stunning view of Lac Beauvert at the Fairmont."
+    },
+    {
+      "id": "activity_jasper_9",
+      "name": "Mount Edith Cavell",
+      "place_id": "place_jasper_9",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "glacier",
+          "hiking",
+          "mountains",
+          "alpine"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?mount%20edith%20cavell%20angel%20glacier"
+      },
+      "description": "Hike the Path of the Glacier trail to see Angel Glacier hanging dramatically over a pond."
+    },
+    {
+      "id": "activity_jasper_10",
+      "name": "Jasper Raft Tours",
+      "place_id": "place_jasper_10",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "rafting",
+          "river",
+          "wildlife",
+          "adventure"
+        ],
+        "budget": "$75",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?jasper%20raft%20tours%20athabasca%20river"
+      },
+      "description": "Float down the Athabasca River on a gentle, guided raft tour perfect for spotting local wildlife."
     }
   ],
   "interactions": [
@@ -3620,6 +6722,349 @@
       "item_type": "activity",
       "rating": 1,
       "timestamp": "2026-01-11T06:15:21.281837"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_poland_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:14.182733"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:16.175185"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_poland_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:16.805937"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_9",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:17.309708"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:17.702453"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:17.931653"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_poland_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:18.148552"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_poland_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:18.482267"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_poland_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:18.628582"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:19.018315"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:19.065269"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:19.160116"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:19.359715"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:19.463144"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_poland_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:19.634283"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_poland_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:19.762144"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_poland_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:19.816586"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_poland_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:19.994910"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:20.098202"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:20.199561"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:20.574708"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:20.659984"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_poland_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:30:24.934060"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_mumbai_8",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T07:54:21.861395"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_mumbai_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:54:22.489041"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_mumbai_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T07:54:23.539215"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_mumbai_5",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T07:54:25.444400"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_delhi_8",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:06:46.531446"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_delhi_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:06:52.921965"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_delhi_2",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:06:56.219980"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_delhi_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:06:58.226413"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_delhi_10",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:07:00.305377"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_delhi_10",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:07:02.748134"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_delhi_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:07:04.128320"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_delhi_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:07:24.756673"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_delhi_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:08:19.561784"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_delhi_4",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:08:23.570715"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_delhi_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:08:25.506047"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_delhi_9",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:08:27.643643"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_delhi_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:08:30.687914"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_delhi_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:08:33.526962"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_delhi_7",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:08:35.182179"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_banff_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:09:57.080502"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_banff_4",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:09:59.909694"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_banff_2",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:10:02.433908"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_banff_2",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:10:17.761665"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_jasper_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:12:04.339850"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_jasper_10",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:12:06.653323"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_jasper_2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:12:09.234356"
     }
   ]
 }

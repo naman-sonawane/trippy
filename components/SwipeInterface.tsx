@@ -33,7 +33,7 @@ const SwipeCard = ({ item, onSwipe, isTop }: SwipeCardProps) => {
   const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0]);
 
   const handleDragEnd = (_: any, info: PanInfo) => {
-    if (Math.abs(info.offset.x) > 100) {
+    if (Math.abs(info.offset.x) > 100 && isTop) {
       onSwipe(info.offset.x > 0 ? "like" : "dislike");
     }
   };
@@ -47,11 +47,12 @@ const SwipeCard = ({ item, onSwipe, isTop }: SwipeCardProps) => {
         opacity,
         cursor: isTop ? "grab" : "default",
         pointerEvents: isTop ? "auto" : "none",
+        zIndex: isTop ? 10 : 9,
       }}
       drag={isTop ? "x" : false}
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={handleDragEnd}
-      whileDrag={{ cursor: "grabbing" }}
+      whileDrag={{ cursor: "grabbing", zIndex: 20 }}
       initial={{ scale: isTop ? 1 : 0.95, y: isTop ? 0 : 10 }}
       animate={{ scale: isTop ? 1 : 0.95, y: isTop ? 0 : 10 }}
       transition={{ duration: 0.2 }}
@@ -238,7 +239,22 @@ export const SwipeInterface = ({
 
       if (response.ok) {
         const data = await response.json();
-        setCards(data.recommendations || []);
+        const recommendations = data.recommendations || [];
+        // deduplicate by id and name
+        const seenIds = new Set<string>();
+        const seenNames = new Set<string>();
+        const uniqueCards = recommendations.filter((card: RecommendationItem) => {
+          const id = card.id || '';
+          const name = (card.name || '').toLowerCase().trim();
+          
+          if (seenIds.has(id) || (name && seenNames.has(name))) {
+            return false;
+          }
+          seenIds.add(id);
+          if (name) seenNames.add(name);
+          return true;
+        });
+        setCards(uniqueCards);
         setCurrentIndex(0);
       } else {
         console.warn("api failed, using fallback recommendations");
@@ -456,7 +472,7 @@ export const SwipeInterface = ({
       <div className="relative w-full max-w-md h-[600px]">
         {cards.slice(currentIndex, currentIndex + 2).map((card, idx) => (
           <SwipeCard
-            key={card.id}
+            key={`${card.id}-${currentIndex + idx}`}
             item={card}
             onSwipe={handleSwipe}
             isTop={idx === 0}
