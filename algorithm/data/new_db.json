@@ -3195,6 +3195,206 @@
         "image_url": ""
       },
       "description": "Explore the artistic hilltop village, cobblestone streets, and the white basilica of Sacr\u00e9-C\u0153ur."
+    },
+    {
+      "id": "place_amsterdam_1",
+      "name": "Rijksmuseum",
+      "location": "Amsterdam",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "iconic",
+          "indoors"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Explore Dutch history and art, featuring masterpieces by Rembrandt and Vermeer."
+    },
+    {
+      "id": "place_amsterdam_2",
+      "name": "Canal Boat Cruise",
+      "location": "Amsterdam",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "water",
+          "romantic",
+          "architecture"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Glide through the historic UNESCO canal ring to see the city architecture from the water."
+    },
+    {
+      "id": "place_amsterdam_3",
+      "name": "Anne Frank House",
+      "location": "Amsterdam",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "emotional",
+          "wwii",
+          "biography"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": ""
+      },
+      "description": "Visit the emotional hiding place where Anne Frank wrote her famous diary during WWII."
+    },
+    {
+      "id": "place_amsterdam_4",
+      "name": "Vondelpark",
+      "location": "Amsterdam",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxing",
+          "scenic",
+          "outdoors"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Relax in Amsterdam's most famous park, perfect for picnics, cycling, and people-watching."
+    },
+    {
+      "id": "place_amsterdam_5",
+      "name": "Heineken Experience",
+      "location": "Amsterdam",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "beer",
+          "brewery",
+          "interactive",
+          "fun"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "nightlife",
+        "image_url": ""
+      },
+      "description": "Tour the historic brewery to learn about the brewing process and enjoy a tasting session."
+    },
+    {
+      "id": "place_amsterdam_6",
+      "name": "Van Gogh Museum",
+      "location": "Amsterdam",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "painting",
+          "famous",
+          "impressionism"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Admire the world's largest collection of artworks by Vincent van Gogh."
+    },
+    {
+      "id": "place_amsterdam_7",
+      "name": "Foodhallen",
+      "location": "Amsterdam",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "dining",
+          "indoor",
+          "variety"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": ""
+      },
+      "description": "Taste global street food and drinks in a trendy, refurbished historic tram depot."
+    },
+    {
+      "id": "place_amsterdam_8",
+      "name": "A'DAM Lookout",
+      "location": "Amsterdam",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "view",
+          "thrill",
+          "skyline",
+          "modern"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Enjoy panoramic views of the city and swing over the edge on Europe's highest swing."
+    },
+    {
+      "id": "place_amsterdam_9",
+      "name": "Royal Palace Amsterdam",
+      "location": "Amsterdam",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "royalty",
+          "architecture",
+          "history",
+          "luxury"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Step inside the opulent reception palace of King Willem-Alexander located in Dam Square."
+    },
+    {
+      "id": "place_amsterdam_10",
+      "name": "Jordaan District Walk",
+      "location": "Amsterdam",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "shopping",
+          "walking",
+          "picturesque",
+          "local"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Wander through narrow streets filled with indie boutiques, cozy cafes, and hidden courtyards."
     }
   ],
   "activities": [
@@ -6208,6 +6408,196 @@
         "image_url": ""
       },
       "description": "Explore the artistic hilltop village, cobblestone streets, and the white basilica of Sacr\u00e9-C\u0153ur."
+    },
+    {
+      "id": "activity_amsterdam_1",
+      "name": "Rijksmuseum",
+      "place_id": "place_amsterdam_1",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "iconic",
+          "indoors"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Explore Dutch history and art, featuring masterpieces by Rembrandt and Vermeer."
+    },
+    {
+      "id": "activity_amsterdam_2",
+      "name": "Canal Boat Cruise",
+      "place_id": "place_amsterdam_2",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "water",
+          "romantic",
+          "architecture"
+        ],
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Glide through the historic UNESCO canal ring to see the city architecture from the water."
+    },
+    {
+      "id": "activity_amsterdam_3",
+      "name": "Anne Frank House",
+      "place_id": "place_amsterdam_3",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "emotional",
+          "wwii",
+          "biography"
+        ],
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": ""
+      },
+      "description": "Visit the emotional hiding place where Anne Frank wrote her famous diary during WWII."
+    },
+    {
+      "id": "activity_amsterdam_4",
+      "name": "Vondelpark",
+      "place_id": "place_amsterdam_4",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxing",
+          "scenic",
+          "outdoors"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Relax in Amsterdam's most famous park, perfect for picnics, cycling, and people-watching."
+    },
+    {
+      "id": "activity_amsterdam_5",
+      "name": "Heineken Experience",
+      "place_id": "place_amsterdam_5",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "beer",
+          "brewery",
+          "interactive",
+          "fun"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "nightlife",
+        "image_url": ""
+      },
+      "description": "Tour the historic brewery to learn about the brewing process and enjoy a tasting session."
+    },
+    {
+      "id": "activity_amsterdam_6",
+      "name": "Van Gogh Museum",
+      "place_id": "place_amsterdam_6",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "painting",
+          "famous",
+          "impressionism"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Admire the world's largest collection of artworks by Vincent van Gogh."
+    },
+    {
+      "id": "activity_amsterdam_7",
+      "name": "Foodhallen",
+      "place_id": "place_amsterdam_7",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "dining",
+          "indoor",
+          "variety"
+        ],
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": ""
+      },
+      "description": "Taste global street food and drinks in a trendy, refurbished historic tram depot."
+    },
+    {
+      "id": "activity_amsterdam_8",
+      "name": "A'DAM Lookout",
+      "place_id": "place_amsterdam_8",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "view",
+          "thrill",
+          "skyline",
+          "modern"
+        ],
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Enjoy panoramic views of the city and swing over the edge on Europe's highest swing."
+    },
+    {
+      "id": "activity_amsterdam_9",
+      "name": "Royal Palace Amsterdam",
+      "place_id": "place_amsterdam_9",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "royalty",
+          "architecture",
+          "history",
+          "luxury"
+        ],
+        "budget": "$15",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Step inside the opulent reception palace of King Willem-Alexander located in Dam Square."
+    },
+    {
+      "id": "activity_amsterdam_10",
+      "name": "Jordaan District Walk",
+      "place_id": "place_amsterdam_10",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "shopping",
+          "walking",
+          "picturesque",
+          "local"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Wander through narrow streets filled with indie boutiques, cozy cafes, and hidden courtyards."
     }
   ],
   "interactions": [
@@ -7750,6 +8140,216 @@
       "item_type": "place",
       "rating": 1,
       "timestamp": "2026-01-11T08:34:23.205935"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_amsterdam_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:44:25.138905"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_amsterdam_9",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:44:26.101579"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_amsterdam_1",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:44:27.201263"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_amsterdam_5",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:44:28.306180"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_amsterdam_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:44:29.335998"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_amsterdam_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:44:30.340931"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_amsterdam_6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:44:31.359609"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_amsterdam_10",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:44:32.418371"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_amsterdam_3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:44:33.768372"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_amsterdam_2",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:44:34.915771"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_mumbai_8",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:49:03.920066"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_mumbai_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:49:05.138761"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_mumbai_1",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:49:06.187406"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_mumbai_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:49:07.236967"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_mumbai_9",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:49:08.542617"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_mumbai_2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:49:10.187020"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_mumbai_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:49:11.266712"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_mumbai_10",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:49:12.435806"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_mumbai_3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:49:13.747491"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_mumbai_6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:49:15.052037"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_banff_4",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:57:06.908545"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_banff_10",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:57:08.141882"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_banff_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:57:09.735334"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_banff_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:57:11.607851"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_banff_3",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:57:13.391439"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_banff_6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:57:14.312651"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_banff_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:57:15.341390"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_banff_7",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:57:16.287138"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_banff_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T08:57:17.709948"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_banff_1",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T08:57:22.544967"
     }
   ]
 }

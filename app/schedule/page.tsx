@@ -5,6 +5,7 @@ import { useState, useCallback, useEffect } from "react";
 import { ScheduleItem, TimeSelection } from "./types";
 import ScheduleGrid from "./components/ScheduleGrid";
 import AddItemModal from "./components/AddItemModal";
+import ConfirmScheduleModal from "./components/ConfirmScheduleModal";
 
 export default function SchedulePage() {
   const router = useRouter();
@@ -22,6 +23,8 @@ export default function SchedulePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isRegenerating, setIsRegenerating] = useState(false);
   const [regenerateError, setRegenerateError] = useState<string | null>(null);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [destination, setDestination] = useState<string>("");
 
   const generateInitialSchedule = useCallback(async () => {
     if (!tripId) return;
@@ -57,6 +60,14 @@ export default function SchedulePage() {
     
     try {
       setIsLoading(true);
+      const tripResponse = await fetch(`/api/trips/${tripId}`);
+      if (tripResponse.ok) {
+        const tripData = await tripResponse.json();
+        if (tripData.trip?.destination) {
+          setDestination(tripData.trip.destination);
+        }
+      }
+
       const response = await fetch(`/api/schedule?tripId=${tripId}`);
       if (response.ok) {
         const data = await response.json();
@@ -285,6 +296,12 @@ export default function SchedulePage() {
             >
               Add Item
             </button>
+            <button
+              onClick={() => setIsConfirmModalOpen(true)}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
+            >
+              Confirm Schedule
+            </button>
           </div>
         </div>
 
@@ -302,6 +319,19 @@ export default function SchedulePage() {
           onClose={() => setIsModalOpen(false)}
           onAdd={handleAddItem}
           days={days}
+        />
+
+        <ConfirmScheduleModal
+          isOpen={isConfirmModalOpen}
+          onClose={() => setIsConfirmModalOpen(false)}
+          onConfirm={() => {
+            setIsConfirmModalOpen(false);
+            if (tripId) {
+              router.push(`/confirm-flights-hotels?tripId=${tripId}`);
+            }
+          }}
+          items={items}
+          destination={destination}
         />
       </div>
     </div>
