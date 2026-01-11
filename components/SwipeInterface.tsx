@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useMotionValue, useTransform, PanInfo } from "framer-motion";
+import { PanoramicView } from "./PanoramicView";
 
 export interface RecommendationItem {
   id: string;
@@ -25,9 +26,10 @@ interface SwipeCardProps {
   item: RecommendationItem;
   onSwipe: (direction: "like" | "dislike") => void;
   isTop: boolean;
+  onPanoramicClick?: () => void;
 }
 
-const SwipeCard = ({ item, onSwipe, isTop }: SwipeCardProps) => {
+const SwipeCard = ({ item, onSwipe, isTop, onPanoramicClick }: SwipeCardProps) => {
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-25, 25]);
   const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0]);
@@ -72,6 +74,19 @@ const SwipeCard = ({ item, onSwipe, isTop }: SwipeCardProps) => {
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute top-4 right-4 z-20">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onPanoramicClick?.();
+                }}
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white flex items-center justify-center shadow-lg transition-all hover:scale-110"
+                aria-label="View panoramic"
+                title="View panoramic"
+              >
+                🗺️
+              </button>
+            </div>
             <div className="absolute bottom-4 left-4 right-4">
               <h2 className="text-2xl font-bold text-white drop-shadow-lg">
                 {item.name}
@@ -85,6 +100,19 @@ const SwipeCard = ({ item, onSwipe, isTop }: SwipeCardProps) => {
               <div className="text-white text-6xl font-bold opacity-20">
                 {item.type === "place" ? "📍" : "🎯"}
               </div>
+            </div>
+            <div className="absolute top-4 right-4 z-20">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onPanoramicClick?.();
+                }}
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white flex items-center justify-center shadow-lg transition-all hover:scale-110"
+                aria-label="View panoramic"
+                title="View panoramic"
+              >
+                🗺️
+              </button>
             </div>
             <div className="absolute bottom-4 left-4 right-4">
               <h2 className="text-2xl font-bold text-white drop-shadow-lg">
@@ -190,10 +218,86 @@ export const SwipeInterface = ({
   const [dislikedCount, setDislikedCount] = useState(0);
   const [isGeneratingSchedule, setIsGeneratingSchedule] = useState(false);
   const [scheduleError, setScheduleError] = useState<string | null>(null);
+  const [panoramicLocation, setPanoramicLocation] = useState<string | null>(null);
+  const [isPanoramicOpen, setIsPanoramicOpen] = useState(false);
+  const [isFingerTrackingActive, setIsFingerTrackingActive] = useState(false);
+  const [lastSwipeDetected, setLastSwipeDetected] = useState<0 | 1 | 2>(0);
+  const handleSwipeRef = useRef<((direction: "like" | "dislike") => Promise<void>) | undefined>(undefined);
+  
+  const ALGORITHM_API_URL = "http://localhost:8000";
 
   useEffect(() => {
     loadRecommendations();
   }, [destination, tripId]);
+
+  useEffect(() => {
+    if (!isFingerTrackingActive) return;
+
+    let alive = true;
+    let inFlight = false;
+    let lastSwipeValue = 0;
+
+    const POLL_INTERVAL_MS = 100;
+
+    async function checkSwipe() {
+      if (!alive || inFlight || currentIndex >= cards.length) return;
+
+      inFlight = true;
+      try {
+        const response = await fetch(`${ALGORITHM_API_URL}/api/finger-track`);
+        if (!alive) return;
+
+        if (response.ok) {
+          const data = await response.json();
+          const swipe = data.swipe as 0 | 1 | 2;
+          
+          setLastSwipeDetected(swipe);
+
+          if (swipe !== 0 && swipe !== lastSwipeValue) {
+            lastSwipeValue = swipe;
+            if (swipe === 1 && handleSwipeRef.current) {
+              handleSwipeRef.current("like");
+            } else if (swipe === 2 && handleSwipeRef.current) {
+              handleSwipeRef.current("dislike");
+            }
+          } else if (swipe === 0) {
+            lastSwipeValue = 0;
+          }
+        } else {
+          console.error("Algorithm API error:", response.status, response.statusText);
+        }
+      } catch (error) {
+        console.error("Error checking swipe from algorithm API:", error);
+      } finally {
+        inFlight = false;
+      }
+    }
+
+    const interval = setInterval(() => void checkSwipe(), POLL_INTERVAL_MS);
+
+    return () => {
+      alive = false;
+      clearInterval(interval);
+    };
+  }, [isFingerTrackingActive, currentIndex, cards.length]);
+
+  const toggleFingerTracking = async () => {
+    if (!isFingerTrackingActive) {
+      try {
+        const response = await fetch(`${ALGORITHM_API_URL}/api/status`);
+        const data = await response.json();
+        if (data.running) {
+          setIsFingerTrackingActive(true);
+        } else {
+          alert("Algorithm API camera not running. Please start the Python backend first (algorithm/api.py).");
+        }
+      } catch (error) {
+        alert(`Cannot connect to algorithm API at ${ALGORITHM_API_URL}. Make sure the Python server is running on port 8000.`);
+      }
+    } else {
+      setIsFingerTrackingActive(false);
+    }
+  };
 
   const generateFallbackRecommendations = (dest: string): RecommendationItem[] => {
     const categories = [
@@ -272,7 +376,49 @@ export const SwipeInterface = ({
     }
   };
 
-  const handleSwipe = async (direction: "like" | "dislike") => {
+  const generateSchedule = useCallback(async () => {
+    const tripId = localStorage.getItem("currentTripId");
+    if (!tripId) {
+      setScheduleError("Trip ID not found. Please create a trip first.");
+      return;
+    }
+
+    setIsGeneratingSchedule(true);
+    setScheduleError(null);
+
+    try {
+      const response = await fetch("/api/generate-schedule", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          destination,
+          tripId,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to generate schedule");
+      }
+
+      const data = await response.json();
+      const days = data.days || 3;
+
+      // Navigate to schedule page
+      router.push(`/schedule?tripId=${tripId}&days=${days}`);
+    } catch (error) {
+      console.error("Error generating schedule:", error);
+      setScheduleError(
+        error instanceof Error
+          ? error.message
+          : "Failed to generate schedule. Please try again."
+      );
+      setIsGeneratingSchedule(false);
+      // Still allow manual completion if schedule generation fails
+    }
+  }, [destination, router]);
+
+  const handleSwipe = useCallback(async (direction: "like" | "dislike") => {
     const currentCard = cards[currentIndex];
     if (!currentCard) return;
 
@@ -318,49 +464,9 @@ export const SwipeInterface = ({
     } catch (error) {
       console.error("Error recording swipe:", error);
     }
-  };
-
-  const generateSchedule = async () => {
-    const tripId = localStorage.getItem("currentTripId");
-    if (!tripId) {
-      setScheduleError("Trip ID not found. Please create a trip first.");
-      return;
-    }
-
-    setIsGeneratingSchedule(true);
-    setScheduleError(null);
-
-    try {
-      const response = await fetch("/api/generate-schedule", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          destination,
-          tripId,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to generate schedule");
-      }
-
-      const data = await response.json();
-      const days = data.days || 3;
-
-      // Navigate to schedule page
-      router.push(`/schedule?tripId=${tripId}&days=${days}`);
-    } catch (error) {
-      console.error("Error generating schedule:", error);
-      setScheduleError(
-        error instanceof Error
-          ? error.message
-          : "Failed to generate schedule. Please try again."
-      );
-      setIsGeneratingSchedule(false);
-      // Still allow manual completion if schedule generation fails
-    }
-  };
+  }, [cards, currentIndex, destination, tripId, onComplete, generateSchedule]);
+  
+  handleSwipeRef.current = handleSwipe;
 
   if (isLoading) {
     return (
@@ -461,12 +567,27 @@ export const SwipeInterface = ({
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <div className="flex gap-6 text-sm text-gray-600 dark:text-zinc-400">
+      <div className="flex gap-6 text-sm text-gray-600 dark:text-zinc-400 items-center">
         <span>❤️ {likedCount}</span>
         <span>✕ {dislikedCount}</span>
         <span>
           {currentIndex + 1} / {cards.length}
         </span>
+        <button
+          onClick={toggleFingerTracking}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            isFingerTrackingActive
+              ? "bg-green-500 hover:bg-green-600 text-white"
+              : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-zinc-50"
+          }`}
+        >
+          {isFingerTrackingActive ? "🖐️ Finger Tracking ON" : "🖐️ Enable Finger Tracking"}
+        </button>
+        {isFingerTrackingActive && lastSwipeDetected !== 0 && (
+          <span className="text-xs text-blue-500">
+            {lastSwipeDetected === 1 ? "→ Swiped Right" : "← Swiped Left"}
+          </span>
+        )}
       </div>
 
       <div className="relative w-full max-w-md h-[600px]">
@@ -476,9 +597,23 @@ export const SwipeInterface = ({
             item={card}
             onSwipe={handleSwipe}
             isTop={idx === 0}
+            onPanoramicClick={() => {
+              const location = card.location || card.name;
+              setPanoramicLocation(location);
+              setIsPanoramicOpen(true);
+            }}
           />
         ))}
       </div>
+
+      <PanoramicView
+        locationName={panoramicLocation || ""}
+        isOpen={isPanoramicOpen}
+        onClose={() => {
+          setIsPanoramicOpen(false);
+          setPanoramicLocation(null);
+        }}
+      />
 
       <div className="flex gap-6">
         <button

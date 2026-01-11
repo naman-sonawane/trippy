@@ -3395,6 +3395,206 @@
         "image_url": ""
       },
       "description": "Wander through narrow streets filled with indie boutiques, cozy cafes, and hidden courtyards."
+    },
+    {
+      "id": "place_venice_1",
+      "name": "St. Mark's Basilica",
+      "location": "Venice",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "architecture",
+          "history",
+          "religious",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "$5",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Admire the stunning golden mosaics and Italo-Byzantine architecture of Venice's most famous cathedral."
+    },
+    {
+      "id": "place_venice_2",
+      "name": "Grand Canal Gondola Ride",
+      "location": "Venice",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "romantic",
+          "scenic",
+          "iconic",
+          "water"
+        ],
+        "price_range": "medium",
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Experience the romance of Venice from the water on a traditional hand-rowed boat navigating the canals."
+    },
+    {
+      "id": "place_venice_3",
+      "name": "Doge's Palace",
+      "location": "Venice",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "art",
+          "gothic",
+          "palace"
+        ],
+        "price_range": "medium",
+        "budget": "$30",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": ""
+      },
+      "description": "Explore the historic seat of Venetian power, featuring the famous Bridge of Sighs and lavish council rooms."
+    },
+    {
+      "id": "place_venice_4",
+      "name": "Rialto Bridge",
+      "location": "Venice",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "scenic",
+          "architecture",
+          "photography",
+          "busy"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Cross the oldest and most iconic bridge spanning the Grand Canal, offering spectacular views of the water."
+    },
+    {
+      "id": "place_venice_5",
+      "name": "Peggy Guggenheim Collection",
+      "location": "Venice",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "modern art",
+          "picasso",
+          "sculpture",
+          "canal view"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "View European and American 20th-century masterpieces located in an unfinished palace on the Grand Canal."
+    },
+    {
+      "id": "place_venice_6",
+      "name": "Caff\u00e8 Florian",
+      "location": "Venice",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "historic",
+          "luxury",
+          "coffee",
+          "elegant"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Sip coffee in the opulent rooms of the oldest continuous coffee house in Italy, located in St. Mark's Square."
+    },
+    {
+      "id": "place_venice_7",
+      "name": "Teatro La Fenice",
+      "location": "Venice",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "opera",
+          "music",
+          "gold",
+          "theater"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Tour the stunning interiors of one of the most famous and historically significant opera houses in the world."
+    },
+    {
+      "id": "place_venice_8",
+      "name": "Murano Glass Blowing Demo",
+      "location": "Venice",
+      "category": "Workshop",
+      "features": {
+        "tags": [
+          "craft",
+          "artisan",
+          "demonstration",
+          "island"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": ""
+      },
+      "description": "Watch master artisans shape molten glass into intricate art on the island of Murano, just a short boat ride away."
+    },
+    {
+      "id": "place_venice_9",
+      "name": "Giardini della Biennale",
+      "location": "Venice",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxing",
+          "gardens",
+          "walking"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Escape the crowds in these historic public gardens that host the famous Venice Art Biennale pavilions."
+    },
+    {
+      "id": "place_venice_10",
+      "name": "Libreria Acqua Alta",
+      "location": "Venice",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "quirky",
+          "books",
+          "hidden gem",
+          "unique"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Browse books stacked in bathtubs and gondolas in this whimsical, flood-prone bookstore."
     }
   ],
   "activities": [
@@ -6598,6 +6798,196 @@
         "image_url": ""
       },
       "description": "Wander through narrow streets filled with indie boutiques, cozy cafes, and hidden courtyards."
+    },
+    {
+      "id": "activity_venice_1",
+      "name": "St. Mark's Basilica",
+      "place_id": "place_venice_1",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "architecture",
+          "history",
+          "religious",
+          "iconic"
+        ],
+        "budget": "$5",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Admire the stunning golden mosaics and Italo-Byzantine architecture of Venice's most famous cathedral."
+    },
+    {
+      "id": "activity_venice_2",
+      "name": "Grand Canal Gondola Ride",
+      "place_id": "place_venice_2",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "romantic",
+          "scenic",
+          "iconic",
+          "water"
+        ],
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Experience the romance of Venice from the water on a traditional hand-rowed boat navigating the canals."
+    },
+    {
+      "id": "activity_venice_3",
+      "name": "Doge's Palace",
+      "place_id": "place_venice_3",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "art",
+          "gothic",
+          "palace"
+        ],
+        "budget": "$30",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": ""
+      },
+      "description": "Explore the historic seat of Venetian power, featuring the famous Bridge of Sighs and lavish council rooms."
+    },
+    {
+      "id": "activity_venice_4",
+      "name": "Rialto Bridge",
+      "place_id": "place_venice_4",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "scenic",
+          "architecture",
+          "photography",
+          "busy"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Cross the oldest and most iconic bridge spanning the Grand Canal, offering spectacular views of the water."
+    },
+    {
+      "id": "activity_venice_5",
+      "name": "Peggy Guggenheim Collection",
+      "place_id": "place_venice_5",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "modern art",
+          "picasso",
+          "sculpture",
+          "canal view"
+        ],
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "View European and American 20th-century masterpieces located in an unfinished palace on the Grand Canal."
+    },
+    {
+      "id": "activity_venice_6",
+      "name": "Caff\u00e8 Florian",
+      "place_id": "place_venice_6",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "historic",
+          "luxury",
+          "coffee",
+          "elegant"
+        ],
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Sip coffee in the opulent rooms of the oldest continuous coffee house in Italy, located in St. Mark's Square."
+    },
+    {
+      "id": "activity_venice_7",
+      "name": "Teatro La Fenice",
+      "place_id": "place_venice_7",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "opera",
+          "music",
+          "gold",
+          "theater"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Tour the stunning interiors of one of the most famous and historically significant opera houses in the world."
+    },
+    {
+      "id": "activity_venice_8",
+      "name": "Murano Glass Blowing Demo",
+      "place_id": "place_venice_8",
+      "category": "Workshop",
+      "features": {
+        "tags": [
+          "craft",
+          "artisan",
+          "demonstration",
+          "island"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": ""
+      },
+      "description": "Watch master artisans shape molten glass into intricate art on the island of Murano, just a short boat ride away."
+    },
+    {
+      "id": "activity_venice_9",
+      "name": "Giardini della Biennale",
+      "place_id": "place_venice_9",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxing",
+          "gardens",
+          "walking"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": ""
+      },
+      "description": "Escape the crowds in these historic public gardens that host the famous Venice Art Biennale pavilions."
+    },
+    {
+      "id": "activity_venice_10",
+      "name": "Libreria Acqua Alta",
+      "place_id": "place_venice_10",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "quirky",
+          "books",
+          "hidden gem",
+          "unique"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": ""
+      },
+      "description": "Browse books stacked in bathtubs and gondolas in this whimsical, flood-prone bookstore."
     }
   ],
   "interactions": [
@@ -8350,6 +8740,251 @@
       "item_type": "activity",
       "rating": -1,
       "timestamp": "2026-01-11T08:57:22.544967"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_india_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T09:58:09.658464"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_india_2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T09:58:11.045962"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_india_4",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T09:58:50.191961"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_india_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T09:58:55.004317"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_india_6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T09:58:57.198481"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_india_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T09:59:03.286081"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_india_3",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T09:59:11.675772"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_india_5",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T09:59:17.438864"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_india_10",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:00:45.212260"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_india_1",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:00:47.816346"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_venice_5",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:03:01.755302"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_venice_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:03:03.589738"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_venice_10",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:03:06.333281"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_venice_9",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:03:13.932483"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_venice_1",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:03:30.057028"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_venice_4",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:03:32.584199"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_venice_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:03:35.722578"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_venice_3",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:03:37.369673"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_venice_2",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:03:38.913647"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_venice_6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:03:40.448856"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_2",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:05:23.429753"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_6",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:05:34.117109"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_8",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:05:55.676617"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:05:58.286767"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_1",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:06:01.253299"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_9",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:06:04.280024"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_10",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:06:59.301323"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_3",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:07:02.407083"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_5",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:07:10.898036"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_7",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:07:42.428338"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_1",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:07:46.841719"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_1",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:08:36.020000"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_new_york_6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:08:40.852771"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:08:42.777335"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_new_york_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:08:49.276593"
     }
   ]
 }
