@@ -147,7 +147,14 @@ export default function NewTripPage() {
                 destination={destination}
                 startDate={startDate}
                 endDate={endDate}
-                onEnd={() => setShowTravelAgent(false)}
+                onEnd={() => {
+                    const tripId = localStorage.getItem("currentTripId");
+                    if (tripId) {
+                        router.push(`/recommendations?tripId=${tripId}`);
+                    } else {
+                        router.push("/recommendations");
+                    }
+                }}
             />
         );
     }

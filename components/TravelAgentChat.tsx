@@ -48,7 +48,7 @@ interface TravelAgentComponentProps {
     onConversationEnd?: (transcript?: string, preferences?: TravelPreferences) => void;
 }
 
-export default function TravelAgentComponent({ tripDetails, onConversationEnd }: TravelAgentComponentProps) {
+function TravelAgentComponent({ tripDetails, onConversationEnd }: TravelAgentComponentProps) {
     const [conversationId, setConversationId] = useState<string>('');
     const [conversationUrl, setConversationUrl] = useState<string>('');
     const [isConnected, setIsConnected] = useState<boolean>(false);
@@ -926,5 +926,24 @@ function PreferenceItem({ label, value }: { label: string; value: string }) {
                 {value}
             </div>
         </div>
+    );
+}
+
+export default function TravelAgentChat({ destination, startDate, endDate, onEnd }: TravelAgentChatProps) {
+    const handleConversationEnd = (transcript?: string, preferences?: TravelPreferences) => {
+        if (onEnd) {
+            onEnd();
+        }
+    };
+
+    return (
+        <TravelAgentComponent
+            tripDetails={{
+                destination,
+                startDate,
+                endDate
+            }}
+            onConversationEnd={handleConversationEnd}
+        />
     );
 }

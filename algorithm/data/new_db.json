@@ -3606,6 +3606,20 @@
       "item_type": "place",
       "rating": 1,
       "timestamp": "2026-01-11T01:20:20.355995"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-new york-0",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:38:18.238127"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-0",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T06:15:21.281837"
     }
   ]
 }

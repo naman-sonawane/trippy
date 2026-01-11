@@ -98,7 +98,9 @@ const Dashboard = () => {
            style={{
              backgroundImage: "url(/dashbg.jpg)",
              backgroundSize: "cover",
-             backgroundPosition: "center"
+             backgroundPosition: "center",
+             backgroundRepeat: "no-repeat",
+             backgroundAttachment: "fixed"
            }}>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
         <div className="text-xl text-white relative z-10" style={{ fontFamily: 'var(--font-dm-sans)' }}>Loading...</div>
@@ -115,7 +117,9 @@ const Dashboard = () => {
          style={{
            backgroundImage: "url(/dashbg.jpg)",
            backgroundSize: "cover",
-           backgroundPosition: "center"
+           backgroundPosition: "center",
+           backgroundRepeat: "no-repeat",
+           backgroundAttachment: "fixed"
          }}>
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
       
