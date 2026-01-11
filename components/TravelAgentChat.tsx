@@ -32,6 +32,13 @@ interface TravelPreferences {
     soloGroup: string;
 }
 
+interface TravelAgentChatProps {
+    destination: string;
+    startDate: string;
+    endDate: string;
+    onEnd?: () => void;
+}
+
 interface TravelAgentComponentProps {
     tripDetails: {
         destination: string;
@@ -411,6 +418,43 @@ export default function TravelAgentComponent({ tripDetails, onConversationEnd }:
         }
     };
 
+    const savePreferencesToDatabase = async (preferences: TravelPreferences): Promise<void> => {
+        try {
+            console.log('💾 Saving preferences to database...');
+            addLog('💾 Saving to database...');
+
+            const response = await fetch('/api/user/save-ai-preferences', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    age: preferences.age,
+                    budget: preferences.budget,
+                    walk: preferences.walk,
+                    dayNight: preferences.dayNight,
+                    soloGroup: preferences.soloGroup,
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('❌ Failed to save:', errorData);
+                addLog('⚠️ Could not save to profile');
+                return;
+            }
+
+            const data = await response.json();
+            console.log('✅ Preferences saved to database:', data);
+            console.log('📊 Saved fields:', data.savedFields);
+            addLog('✅ Saved to your profile');
+
+        } catch (err) {
+            console.error('❌ Error saving to database:', err);
+            addLog('⚠️ Could not save to profile');
+        }
+    };
+
 // Also update the endConversation function to add a delay:
 
     const endConversation = async (): Promise<void> => {
@@ -439,6 +483,10 @@ export default function TravelAgentComponent({ tripDetails, onConversationEnd }:
 
             // Analyze preferences from transcription
             const analyzedPreferences = await analyzePreferences(transcription);
+
+            if (analyzedPreferences) {
+                await savePreferencesToDatabase(analyzedPreferences);
+            }
 
             // Format transcript
             const header = `Travel Planning Conversation Transcript\n`;
