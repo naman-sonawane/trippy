@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export async function POST(request: Request) {
     const apiKey = process.env.TAVUS_API_KEY;
@@ -12,9 +14,30 @@ export async function POST(request: Request) {
         );
     }
 
-    // Get trip details from request body
-    const body = await request.json().catch(() => ({}));
+    const session = await getServerSession(authOptions);
+    const userEmail = session?.user?.email || 'anonymous';
+
+    let body;
+    try {
+        body = await request.json();
+    } catch (e) {
+        body = {};
+    }
+    
     const conversationalContext = body.conversational_context || '';
+    const tripDetails = body.trip_details;
+
+    let enhancedContext = conversationalContext + '\n\nIMPORTANT: Please collect the following information from the user in order:\n';
+    enhancedContext += '1. Their travel budget preference (budget-friendly, mid-range, or luxury)\n';
+    enhancedContext += '2. Their comfort with long walking distances (comfortable with lots of walking or prefer shorter distances)\n';
+    enhancedContext += '3. Whether they prefer daytime or nighttime activities\n';
+    enhancedContext += '4. Who they are traveling with (solo, family, friends, or partner)\n\n';
+    enhancedContext += 'This is a NEW conversation with a NEW user. Start fresh and introduce yourself. After collecting ALL this information, say goodbye and tell them their preferences have been saved.';
+
+    const webhookUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/tavus/webhook`;
+    const conversationName = `Trip_${userEmail}_${Date.now()}`;
+
+    console.log('Creating Tavus conversation with context:', enhancedContext);
 
     try {
         const response = await fetch('https://tavusapi.com/v2/conversations', {
@@ -26,13 +49,15 @@ export async function POST(request: Request) {
             body: JSON.stringify({
                 replica_id: replicaId,
                 persona_id: personaId,
-                conversation_name: 'API Conversation',
-                conversational_context: conversationalContext,
+                conversation_name: conversationName,
+                conversational_context: enhancedContext,
+                callback_url: webhookUrl,
             })
         });
 
         if (!response.ok) {
             const errorData = await response.json();
+            console.error('Tavus API error:', errorData);
             return NextResponse.json(
                 { error: 'Failed to create conversation', details: errorData },
                 { status: response.status }
@@ -40,14 +65,17 @@ export async function POST(request: Request) {
         }
 
         const data = await response.json();
+        console.log('Tavus conversation created:', data.conversation_id);
+        
         return NextResponse.json({
             conversation_id: data.conversation_id,
             conversation_url: data.conversation_url,
             status: data.status,
         });
     } catch (error) {
+        console.error('Error creating conversation:', error);
         return NextResponse.json(
-            { error: 'Internal server error', details: error },
+            { error: 'Internal server error', details: String(error) },
             { status: 500 }
         );
     }

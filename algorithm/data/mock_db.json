@@ -85,6 +85,14 @@
       "travel_history": [
         "paris"
       ]
+    },
+    {
+      "id": "6962bd45f4cc10683cd0a346",
+      "age": 25,
+      "preferences": [],
+      "travel_history": [
+        "barcelona"
+      ]
     }
   ],
   "places": [
@@ -673,6 +681,34 @@
       "item_type": "place",
       "rating": -1,
       "timestamp": "2026-01-10T12:33:08.316078"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_8",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-10T19:34:33.170727"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-10T19:34:33.178289"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_7",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-10T19:34:35.062102"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_8",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-10T19:34:35.928506"
     }
   ]
 }

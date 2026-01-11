@@ -38,6 +38,12 @@ export default function TavusDemo() {
     const [showSwipeButton, setShowSwipeButton] = useState<boolean>(false);
     const [tripDetails, setTripDetails] = useState<{destination: string; startDate: string; endDate: string} | null>(null);
     const [autoStarted, setAutoStarted] = useState<boolean>(false);
+    const [collectedPreferences, setCollectedPreferences] = useState<{
+        budget?: string;
+        walk?: string;
+        dayNight?: string;
+        solo?: string;
+    } | null>(null);
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -231,6 +237,29 @@ export default function TavusDemo() {
                 });
             }
 
+            // Wait for webhook to process (5 seconds)
+            addLog('⏳ Processing conversation data via webhook...');
+            await new Promise(resolve => setTimeout(resolve, 5000));
+
+            // Fetch from database (webhook should have saved it)
+            addLog('🔄 Fetching your preferences...');
+            const prefsResponse = await fetch('/api/user/collected-preferences');
+            if (prefsResponse.ok) {
+                const prefs = await prefsResponse.json();
+                if (prefs && (prefs.budget || prefs.walk || prefs.dayNight || prefs.solo)) {
+                    setCollectedPreferences(prefs);
+                    addLog('✅ Preferences loaded!');
+                } else {
+                    addLog('⚠️ No preferences found - webhook may still be processing');
+                    setCollectedPreferences({ 
+                        budget: null, 
+                        walk: null, 
+                        dayNight: null, 
+                        solo: null 
+                    });
+                }
+            }
+
             setIsConnected(false);
             setConversationId('');
             setConversationUrl('');
@@ -286,8 +315,9 @@ export default function TavusDemo() {
                             <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'white', marginBottom: '1rem' }}>
                                 Great! Now Let's Find Your Perfect Places
                             </h2>
+                            
                             <p style={{ color: '#bfdbfe', marginBottom: '1.5rem' }}>
-                                Based on your preferences, we've prepared personalized recommendations. Swipe through them to find places you'll love!
+                                Your preferences will help us recommend the best places for you!
                             </p>
 
                             <button
