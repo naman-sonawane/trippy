@@ -19,6 +19,8 @@ export default function SchedulePage() {
   );
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRegenerating, setIsRegenerating] = useState(false);
+  const [regenerateError, setRegenerateError] = useState<string | null>(null);
 
   useEffect(() => {
     if (tripId) loadItinerary();
@@ -123,9 +125,61 @@ export default function SchedulePage() {
     [items, tripId]
   );
 
-  const handleRegenerate = useCallback(() => {
-    console.log("Regenerate clicked", timeSelection);
-  }, [timeSelection]);
+  const handleRegenerate = useCallback(async () => {
+    if (!timeSelection || !tripId) {
+      return;
+    }
+
+    setIsRegenerating(true);
+    setRegenerateError(null);
+
+    try {
+      // Get trip to get destination
+      const tripResponse = await fetch(`/api/trips/${tripId}`);
+      if (!tripResponse.ok) {
+        throw new Error('Failed to fetch trip');
+      }
+
+      const tripData = await tripResponse.json();
+      const destination = tripData.trip?.destination;
+
+      if (!destination) {
+        throw new Error('Trip destination not found');
+      }
+
+      // Call regenerate endpoint
+      const response = await fetch('/api/regenerate-schedule', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tripId,
+          timeSelection,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to regenerate schedule');
+      }
+
+      const data = await response.json();
+      
+      // Update items with new itinerary
+      setItems(data.itinerary || []);
+      
+      // Clear time selection
+      setTimeSelection(null);
+    } catch (error) {
+      console.error('Error regenerating schedule:', error);
+      setRegenerateError(
+        error instanceof Error
+          ? error.message
+          : 'Failed to regenerate schedule. Please try again.'
+      );
+    } finally {
+      setIsRegenerating(false);
+    }
+  }, [timeSelection, tripId]);
 
   if (isLoading) {
     return (
@@ -150,12 +204,20 @@ export default function SchedulePage() {
           </div>
           <div className="flex gap-3">
             {timeSelection && (
-              <button
-                onClick={handleRegenerate}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
-              >
-                Regenerate
-              </button>
+              <div className="flex flex-col gap-1">
+                <button
+                  onClick={handleRegenerate}
+                  disabled={isRegenerating}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed transition-colors font-medium"
+                >
+                  {isRegenerating ? 'Regenerating...' : 'Regenerate'}
+                </button>
+                {regenerateError && (
+                  <p className="text-xs text-red-600 dark:text-red-400 max-w-xs">
+                    {regenerateError}
+                  </p>
+                )}
+              </div>
             )}
             <button
               onClick={() => setIsModalOpen(true)}
