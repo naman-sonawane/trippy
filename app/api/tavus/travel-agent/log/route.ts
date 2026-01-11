@@ -98,12 +98,12 @@ export async function POST(request: NextRequest) {
 
     console.log('saving travel agent conversation log');
     console.log('destination:', destination);
-    console.log('transcript entries:', transcript?.length || 0);
+    console.log('transcribe entries:', transcript?.length || 0);
     console.log('conversation length:', conversationLength);
 
     if (!transcript || transcript.length === 0) {
       return NextResponse.json(
-        { error: 'no transcript provided' },
+        { error: 'no transcribe provided' },
         { status: 400 }
       );
     }

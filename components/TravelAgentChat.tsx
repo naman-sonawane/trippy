@@ -1,520 +1,882 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useRef, useEffect } from 'react';
+import { Video, Mic, MicOff, PhoneOff, Loader2, AlertCircle } from 'lucide-react';
 
-interface TravelAgentChatProps {
-  destination: string;
-  startDate: string;
-  endDate: string;
-  onEnd?: () => void;
+interface Log {
+    time: string;
+    message: string;
 }
 
-interface TranscriptEntry {
-  id: string;
-  text: string;
-  isUser: boolean;
-  timestamp: Date;
+interface DailyCallObject {
+    join: (options?: any) => Promise<void>;
+    leave: () => Promise<void>;
+    setLocalAudio: (enabled: boolean) => void;
+    on: (event: string, handler: (e?: any) => void) => void;
+    destroy: () => Promise<void>;
 }
 
-export default function TravelAgentChat({ destination, startDate, endDate, onEnd }: TravelAgentChatProps) {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [conversationData, setConversationData] = useState<any>(null);
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [callDuration, setCallDuration] = useState(0);
-  const [isCallActive, setIsCallActive] = useState(false);
-  const [isConnecting, setIsConnecting] = useState(false);
-  const [isUserJoined, setIsUserJoined] = useState(false);
-  const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
-  const [isTranscriptVisible, setIsTranscriptVisible] = useState(true);
-  const [isListening, setIsListening] = useState(false);
-  const [isEndingCall, setIsEndingCall] = useState(false);
-  const [showListeningIndicator, setShowListeningIndicator] = useState(false);
-  
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const transcriptPollingRef = useRef<NodeJS.Timeout | null>(null);
-  const lastPollTimeRef = useRef<number>(0);
-
-  useEffect(() => {
-    if (isCallActive && isUserJoined) {
-      timerRef.current = setInterval(() => {
-        setCallDuration(prev => prev + 1);
-      }, 1000);
-    } else {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
+declare global {
+    interface Window {
+        DailyIframe: {
+            createCallObject: (options?: any) => DailyCallObject;
+        };
     }
+}
 
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+interface TravelPreferences {
+    age: string;
+    budget: string;
+    walk: string;
+    dayNight: string;
+    soloGroup: string;
+}
+
+interface TravelAgentComponentProps {
+    tripDetails: {
+        destination: string;
+        startDate: string;
+        endDate: string;
+    } | null;
+    onConversationEnd?: (transcript?: string, preferences?: TravelPreferences) => void;
+}
+
+export default function TravelAgentComponent({ tripDetails, onConversationEnd }: TravelAgentComponentProps) {
+    const [conversationId, setConversationId] = useState<string>('');
+    const [conversationUrl, setConversationUrl] = useState<string>('');
+    const [isConnected, setIsConnected] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isMuted, setIsMuted] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
+    const [logs, setLogs] = useState<Log[]>([]);
+    const [dailyLoaded, setDailyLoaded] = useState<boolean>(false);
+    const [autoStarted, setAutoStarted] = useState<boolean>(false);
+    const [isRecording, setIsRecording] = useState<boolean>(false);
+    const [isTranscribing, setIsTranscribing] = useState<boolean>(false);
+    const [preferences, setPreferences] = useState<TravelPreferences | null>(null);
+    const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
+
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const audioRef = useRef<HTMLAudioElement>(null);
+    const callObjectRef = useRef<DailyCallObject | null>(null);
+    const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+    const audioChunksRef = useRef<Blob[]>([]);
+    const localStreamRef = useRef<MediaStream | null>(null);
+    const remoteStreamRef = useRef<MediaStream | null>(null);
+    const audioContextRef = useRef<AudioContext | null>(null);
+
+    const addLog = (message: string): void => {
+        setLogs(prev => [...prev, { time: new Date().toLocaleTimeString(), message }]);
     };
-  }, [isCallActive, isUserJoined]);
 
-  useEffect(() => {
-    if (isCallActive && conversationData?.conversation_id && isUserJoined) {
-      console.log('starting tavus transcript polling');
-      
-      transcriptPollingRef.current = setInterval(async () => {
-        try {
-          const response = await fetch(`/api/tavus/transcript?conversation_id=${conversationData.conversation_id}`);
-          if (response.ok) {
-            const data = await response.json();
-            if (data.transcript_entries && data.transcript_entries.length > 0) {
-              console.log('📝 RECEIVED TRANSCRIPT ENTRIES:', data.transcript_entries.length);
-              
-              setTranscript(prev => {
-                const existingIds = new Set(prev.map(item => item.id));
-                const newEntries = data.transcript_entries.filter((entry: any) => !existingIds.has(entry.id));
-                
-                if (newEntries.length > 0) {
-                  console.log('✨ NEW TRANSCRIPT ENTRIES:', newEntries.length);
-                  newEntries.forEach((entry: any) => {
-                    const speaker = entry.isUser ? '👤 USER' : '🤖 AGENT';
-                    console.log(`${speaker}: "${entry.text}"`);
-                  });
-                  console.log('📊 TOTAL TRANSCRIPT LENGTH:', prev.length + newEntries.length);
-                  return [...prev, ...newEntries];
-                }
-                return prev;
-              });
-              
-              lastPollTimeRef.current = Date.now();
-            } else {
-              console.log('⏳ no transcript entries yet...');
+    // Load Daily.co SDK
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/@daily-co/daily-js';
+        script.async = true;
+        script.onload = () => {
+            setDailyLoaded(true);
+            addLog('✅ Daily.co SDK loaded');
+        };
+        document.body.appendChild(script);
+
+        return () => {
+            if (callObjectRef.current) {
+                callObjectRef.current.destroy();
             }
-          } else {
-            console.log('❌ transcript polling failed:', response.status);
-          }
-        } catch (error) {
-          console.error('💥 error polling transcript:', error);
+            if (audioContextRef.current) {
+                audioContextRef.current.close();
+            }
+        };
+    }, []);
+
+    // Auto-start conversation when Daily is loaded
+    useEffect(() => {
+        if (dailyLoaded && !autoStarted && !isConnected) {
+            setAutoStarted(true);
+            startConversation();
         }
-      }, 2000);
-    } else {
-      if (transcriptPollingRef.current) {
-        clearInterval(transcriptPollingRef.current);
-        transcriptPollingRef.current = null;
-      }
-    }
+    }, [dailyLoaded, autoStarted, isConnected]);
 
-    return () => {
-      if (transcriptPollingRef.current) {
-        clearInterval(transcriptPollingRef.current);
-      }
-    };
-  }, [isCallActive, conversationData?.conversation_id, isUserJoined]);
-
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-    
-    if (isListening) {
-      setShowListeningIndicator(true);
-    } else {
-      timeoutId = setTimeout(() => {
-        setShowListeningIndicator(false);
-      }, 500);
-    }
-    
-    return () => {
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, [isListening]);
-
-  const startTranscriptionAfterDelay = () => {
-    console.log('iframe loaded - will start polling in 4 seconds');
-    setTimeout(() => {
-      console.log('starting tavus transcript polling');
-      setIsUserJoined(true);
-      setIsListening(true);
-    }, 4000);
-  };
-
-  const startConversation = async () => {
-    setIsLoading(true);
-    setError(null);
-    setIsConnecting(true);
-
-    try {
-      console.log('starting travel agent conversation');
-      
-      const response = await fetch('/api/tavus/travel-agent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'create',
-          destination,
-          startDate,
-          endDate,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to create conversation');
-      }
-
-      const data = await response.json();
-      console.log('travel agent conversation created:', data);
-      setConversationData(data);
-      setIsCallActive(true);
-      setSessionId(`travel-agent-${Date.now()}`);
-      
-    } catch (error) {
-      console.error('error starting travel agent session:', error);
-      setError(error instanceof Error ? error.message : 'unknown error occurred');
-    } finally {
-      setIsLoading(false);
-      setIsConnecting(false);
-    }
-  };
-
-  const endCall = async () => {
-    setIsEndingCall(true);
-    setIsCallActive(false);
-    
-    console.log('🛑 ENDING CALL');
-    console.log('⏱️ call duration:', callDuration, 'seconds');
-    console.log('📝 transcript entries:', transcript.length);
-    console.log('='.repeat(80));
-    console.log('📋 FULL CONVERSATION TRANSCRIPT:');
-    console.log('='.repeat(80));
-    transcript.forEach((entry, index) => {
-      const speaker = entry.isUser ? '👤 USER' : '🤖 AGENT';
-      console.log(`[${index + 1}] ${speaker}: "${entry.text}"`);
-    });
-    console.log('='.repeat(80));
-    
-    let extractedPreferences = null;
-    if (transcript.length > 0) {
-      try {
-        const response = await fetch('/api/tavus/travel-agent/log', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            destination,
-            startDate,
-            endDate,
-            transcript: transcript,
-            conversationLength: callDuration,
-            sessionId: sessionId,
-          }),
-        });
-        
-        if (response.ok) {
-          const result = await response.json();
-          extractedPreferences = result.preferences;
-          console.log('✅ EXTRACTED PREFERENCES:', extractedPreferences);
+    const startConversation = async (): Promise<void> => {
+        if (!dailyLoaded) {
+            setError('Daily.co SDK is still loading...');
+            return;
         }
-      } catch (error) {
-        console.error('❌ error saving transcript:', error);
-      }
-    }
-    
-    setConversationData(null);
-    setCallDuration(0);
-    setSessionId(null);
-    setTranscript([]);
-    setIsTranscriptVisible(false);
-    setIsUserJoined(false);
-    
-    if (extractedPreferences) {
-      localStorage.setItem('travelPreferences', JSON.stringify(extractedPreferences));
-    }
-    
-    router.push('/preferences-summary');
-    
-    setTimeout(() => {
-      onEnd?.();
-    }, 100);
-  };
 
-  const formatDuration = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
+        setIsLoading(true);
+        setError('');
 
-  if (conversationData) {
+        try {
+            addLog('🔄 Creating conversation...');
+
+            // Build conversational context with trip details
+            let conversationalContext = 'You are a helpful AI travel assistant. ';
+            if (tripDetails) {
+                conversationalContext += `The user is planning a trip to ${tripDetails.destination} from ${tripDetails.startDate} to ${tripDetails.endDate}. `;
+                conversationalContext += `Ask them about their preferences for activities, dining, budget, and travel style to help recommend the best places and experiences in ${tripDetails.destination}.`;
+            } else {
+                conversationalContext += 'Help the user plan their travel itinerary by asking about their destination, dates, and preferences.';
+            }
+
+            // Call the updated API endpoint
+            const response = await fetch('/api/tavus/travel-agent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    conversational_context: conversationalContext,
+                    trip_details: tripDetails,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to create conversation');
+            }
+
+            const data = await response.json();
+            setConversationId(data.conversation_id);
+            setConversationUrl(data.conversation_url);
+            addLog('✅ Conversation created');
+
+            // Join with custom Daily UI
+            await joinCall(data.conversation_url);
+
+            setIsConnected(true);
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+            setError(errorMessage);
+            addLog(`❌ ${errorMessage}`);
+            console.error('❌ Error starting conversation:', err);
+            setIsLoading(false);
+        }
+    };
+
+    const startRecording = (localStream: MediaStream, remoteStream: MediaStream): void => {
+        try {
+            console.log('🎙️ Starting mixed audio recording...');
+
+            // Create AudioContext for mixing streams
+            const audioContext = new AudioContext();
+            audioContextRef.current = audioContext;
+
+            // Create sources from both streams
+            const localSource = audioContext.createMediaStreamSource(localStream);
+            const remoteSource = audioContext.createMediaStreamSource(remoteStream);
+
+            // Create destination for mixed audio
+            const destination = audioContext.createMediaStreamDestination();
+
+            // Connect both sources to the destination
+            localSource.connect(destination);
+            remoteSource.connect(destination);
+
+            console.log('🔊 Audio streams mixed successfully');
+
+            // Record the mixed stream
+            const mediaRecorder = new MediaRecorder(destination.stream, {
+                mimeType: 'audio/webm'
+            });
+
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    audioChunksRef.current.push(event.data);
+                    console.log('📦 Audio chunk collected:', event.data.size, 'bytes');
+                }
+            };
+
+            mediaRecorder.onstop = () => {
+                console.log('🛑 Recording stopped. Total chunks:', audioChunksRef.current.length);
+                // Clean up audio context
+                if (audioContextRef.current) {
+                    audioContextRef.current.close();
+                    audioContextRef.current = null;
+                }
+            };
+
+            mediaRecorder.start();
+            mediaRecorderRef.current = mediaRecorder;
+            setIsRecording(true);
+            addLog('🎙️ Recording conversation (both sides)');
+            console.log('✅ Recording started successfully');
+
+        } catch (err) {
+            console.error('❌ Error starting recording:', err);
+            addLog('❌ Failed to start recording');
+        }
+    };
+
+    const joinCall = async (url: string): Promise<void> => {
+        try {
+            addLog('🔗 Joining Daily room...');
+
+            // Create Daily call object
+            const callObject = window.DailyIframe.createCallObject({
+                videoSource: false,
+                audioSource: true,
+            });
+
+            callObjectRef.current = callObject;
+
+            // Listen for participants joining
+            callObject.on('participant-joined', (e) => {
+                addLog(`👤 Participant joined: ${e?.participant?.user_name || 'AI'}`);
+            });
+
+            // Listen for track started
+            callObject.on('track-started', (e) => {
+                if (!e?.participant) return;
+
+                // Handle local tracks
+                if (e.participant.local && e.track.kind === 'audio') {
+                    addLog('⭐️ Local audio track detected');
+                    const localAudioStream = new MediaStream([e.track]);
+                    localStreamRef.current = localAudioStream;
+
+                    // Start recording if we have both streams
+                    if (remoteStreamRef.current) {
+                        startRecording(localAudioStream, remoteStreamRef.current);
+                    }
+                    return;
+                }
+
+                // Handle remote video
+                if (e.track.kind === 'video' && videoRef.current) {
+                    addLog('🎥 Remote video track started');
+                    videoRef.current.srcObject = new MediaStream([e.track]);
+                    videoRef.current.play();
+                    setIsLoading(false);
+                }
+
+                // Handle remote audio
+                if (e.track.kind === 'audio' && audioRef.current) {
+                    addLog('🔊 Remote audio track started');
+                    const remoteAudioStream = new MediaStream([e.track]);
+                    audioRef.current.srcObject = remoteAudioStream;
+                    audioRef.current.play();
+                    remoteStreamRef.current = remoteAudioStream;
+
+                    // Start recording if we have both streams
+                    if (localStreamRef.current) {
+                        startRecording(localStreamRef.current, remoteAudioStream);
+                    }
+                }
+            });
+
+            // Listen for errors
+            callObject.on('error', (e) => {
+                addLog(`⚠️ Error: ${e?.errorMsg}`);
+                console.error('❌ Daily error:', e);
+            });
+
+            // Join the call
+            await callObject.join({ url });
+            addLog('✅ Joined call successfully');
+
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+            setError(`Failed to join call: ${errorMessage}`);
+            addLog(`❌ ${errorMessage}`);
+            console.error('❌ Join call error:', err);
+            setIsLoading(false);
+        }
+    };
+
+    const toggleMute = (): void => {
+        if (callObjectRef.current) {
+            const newMuteState = !isMuted;
+            callObjectRef.current.setLocalAudio(!newMuteState);
+            setIsMuted(newMuteState);
+            addLog(newMuteState ? '🔇 Muted' : '🔊 Unmuted');
+        }
+    };
+
+    const transcribeRecording = async (): Promise<string> => {
+        try {
+            console.log('🔄 Processing recorded audio...');
+            console.log('🔊 Total audio chunks:', audioChunksRef.current.length);
+
+            if (audioChunksRef.current.length === 0) {
+                console.warn('⚠️ No audio chunks to transcribe');
+                return 'No conversation audio recorded.';
+            }
+
+            // Combine all chunks into one blob
+            const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+            console.log('📦 Combined audio blob size:', audioBlob.size, 'bytes');
+
+            addLog('🎯 Transcribing conversation...');
+            setIsTranscribing(true);
+
+            // Convert to base64
+            const base64Audio = await new Promise<string>((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const result = reader.result as string;
+                    resolve(result.split(',')[1]);
+                };
+                reader.readAsDataURL(audioBlob);
+            });
+
+            console.log('📤 Sending to Gemini for transcription...');
+            console.log('📏 Base64 audio length:', base64Audio.length);
+
+            // Send to Gemini for transcription
+            const response = await fetch('/api/tavus/transcribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    audioData: base64Audio,
+                    speaker: 'conversation'
+                })
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('❌ Transcription API error:', errorText);
+                throw new Error(`Transcription failed: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('✅ Transcription received from Gemini');
+            console.log('📏 Transcription length:', data.transcription?.length || 0);
+
+            addLog('✅ Transcription complete');
+
+            return data.transcription || 'No transcription available.';
+
+        } catch (err) {
+            console.error('❌ Error transcribing:', err);
+            addLog('❌ Transcription failed');
+            return 'Transcription failed. Please try again.';
+        } finally {
+            setIsTranscribing(false);
+        }
+    };
+
+    // Replace the analyzePreferences function in TravelAgentChat.tsx with this:
+
+    const analyzePreferences = async (transcription: string): Promise<TravelPreferences | null> => {
+        try {
+            console.log('🔍 Analyzing travel preferences...');
+            addLog('🔍 Analyzing preferences...');
+            setIsAnalyzing(true);
+
+            const response = await fetch('/api/tavus/analyze-preferences', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    transcription: transcription
+                })
+            });
+
+            // API now always returns 200, even with fallback preferences
+            const data = await response.json();
+
+            console.log('✅ Preferences received:', data.preferences);
+
+            if (data.warning) {
+                console.warn('⚠️', data.warning);
+                addLog('⚠️ Using default preferences (API limit reached)');
+            } else {
+                addLog('✅ Preferences extracted');
+            }
+
+            setPreferences(data.preferences);
+            return data.preferences;
+
+        } catch (err) {
+            console.error('❌ Error analyzing preferences:', err);
+            addLog('❌ Analysis failed - using defaults');
+
+            // Return default preferences instead of null
+            const defaultPreferences: TravelPreferences = {
+                age: "Not mentioned",
+                budget: "Not mentioned",
+                walk: "Not mentioned",
+                dayNight: "Not mentioned",
+                soloGroup: "Not mentioned"
+            };
+
+            setPreferences(defaultPreferences);
+            return defaultPreferences;
+        } finally {
+            setIsAnalyzing(false);
+        }
+    };
+
+// Also update the endConversation function to add a delay:
+
+    const endConversation = async (): Promise<void> => {
+        setIsLoading(true);
+
+        try {
+            // Stop recording
+            if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+                mediaRecorderRef.current.stop();
+                setIsRecording(false);
+                console.log('🛑 Stopped audio recording');
+                addLog('🛑 Recording stopped');
+            }
+
+            // Wait a moment for final chunks
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            // Transcribe the entire conversation
+            console.log('📝 Starting transcription process...');
+            const transcription = await transcribeRecording();
+
+            // ADD DELAY HERE to avoid rate limiting
+            console.log('⏳ Waiting 2 seconds before analyzing preferences...');
+            addLog('⏳ Preparing to analyze...');
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Analyze preferences from transcription
+            const analyzedPreferences = await analyzePreferences(transcription);
+
+            // Format transcript
+            const header = `Travel Planning Conversation Transcript\n`;
+            const tripInfo = tripDetails
+                ? `Trip: ${tripDetails.destination}\nDates: ${tripDetails.startDate} to ${tripDetails.endDate}\n`
+                : '';
+            const dateInfo = `Generated: ${new Date().toLocaleString()}\n`;
+            const separator = '='.repeat(60) + '\n\n';
+
+            const formattedTranscript = header + tripInfo + dateInfo + separator + transcription;
+
+            console.log('✅ Transcript formatted successfully');
+            console.log('📄 Transcript preview (first 500 chars):', formattedTranscript.substring(0, 500));
+
+            // Automatically download the transcript
+            if (audioChunksRef.current.length > 0) {
+                const blob = new Blob([formattedTranscript], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const fileName = `travel-conversation-${new Date().getTime()}.txt`;
+
+                console.log('📦 Auto-downloading transcript:', {
+                    size: blob.size,
+                    fileName: fileName
+                });
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                console.log('✅ Transcript downloaded automatically');
+                addLog('📥 Transcript downloaded');
+            }
+
+            // Cleanup
+            if (callObjectRef.current) {
+                await callObjectRef.current.leave();
+                await callObjectRef.current.destroy();
+                callObjectRef.current = null;
+            }
+
+            if (videoRef.current) {
+                videoRef.current.srcObject = null;
+            }
+
+            if (audioRef.current) {
+                audioRef.current.srcObject = null;
+            }
+
+            if (conversationId) {
+                await fetch(`/api/tavus/travel-agent?id=${conversationId}`, {
+                    method: 'DELETE',
+                });
+            }
+
+            setIsConnected(false);
+            setConversationId('');
+            setConversationUrl('');
+            addLog('✅ Conversation ended');
+
+            // Call the callback if provided
+            if (onConversationEnd) {
+                console.log('📞 Calling onConversationEnd callback with transcript and preferences');
+                onConversationEnd(formattedTranscript, analyzedPreferences || undefined);
+            } else {
+                console.log('ℹ️ No onConversationEnd callback provided');
+            }
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+            console.error('❌ Error ending conversation:', err);
+            addLog(`❌ ${errorMessage}`);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const downloadTranscript = async (): Promise<void> => {
+        console.log('⬇️ Generating and downloading transcript...');
+        setIsTranscribing(true);
+
+        try {
+            const transcription = await transcribeRecording();
+
+            const header = `Travel Planning Conversation Transcript\n`;
+            const tripInfo = tripDetails
+                ? `Trip: ${tripDetails.destination}\nDates: ${tripDetails.startDate} to ${tripDetails.endDate}\n`
+                : '';
+            const dateInfo = `Generated: ${new Date().toLocaleString()}\n`;
+            const separator = '='.repeat(60) + '\n\n';
+
+            const transcriptText = header + tripInfo + dateInfo + separator + transcription;
+
+            const blob = new Blob([transcriptText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const fileName = `travel-conversation-${new Date().getTime()}.txt`;
+
+            console.log('📦 Creating download:', {
+                size: blob.size,
+                fileName: fileName
+            });
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            console.log('✅ Download successful');
+            console.log('💾 Saved to Downloads folder as:', fileName);
+            addLog('📥 Transcript downloaded');
+        } catch (err) {
+            console.error('❌ Download failed:', err);
+            addLog('❌ Download failed');
+        } finally {
+            setIsTranscribing(false);
+        }
+    };
+
     return (
-      <div className="fixed inset-0 z-50 overflow-hidden" 
-           style={{
-             backgroundImage: "url(/landingbg.jpg)",
-             backgroundSize: "cover",
-             backgroundPosition: "center"
-           }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
-        
-        <style jsx>{`
-          iframe {
-            width: 100vw !important;
-            height: 100vh !important;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            z-index: 1 !important;
-            border: none !important;
-          }
-        `}</style>
-        <div className={`w-screen h-screen relative transition-all duration-300 ${isTranscriptVisible ? 'mr-80' : ''}`}>
-          <iframe
-            ref={iframeRef}
-            src={conversationData.conversation_url}
-            className={`w-screen h-screen border-0 absolute inset-0 transition-all duration-300`}
-            allow="camera; microphone; fullscreen; speaker; display-capture"
-            title="Video call with travel agent"
-            style={{ 
-              width: isTranscriptVisible ? 'calc(100vw - 20rem)' : '100vw',
-              height: '100vh',
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              zIndex: 15
-            }}
-            onLoad={() => {
-              console.log('iframe loaded - ready for conversation');
-              startTranscriptionAfterDelay();
-            }}
-          />
-          
-          <div className={`absolute bottom-20 left-4 bg-white/10 backdrop-blur-md text-white text-sm px-4 py-3 rounded-xl z-30 transition-all duration-300 border border-white/20 ${isTranscriptVisible ? 'right-80' : 'right-4'}`}>
-            <div className="flex items-center justify-between">
-              <div className="text-center">
-                <div className="font-bold text-lg" style={{ fontFamily: "var(--font-fraunces)" }}>Travel Agent</div>
-                <div className="text-sm opacity-75" style={{ fontFamily: "var(--font-dm-sans)" }}>Planning your trip to {destination}</div>
-                <div className="text-xs opacity-60 mt-1" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                  conv id: {conversationData?.conversation_id?.slice(0, 8)}... | entries: {transcript.length}
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-4">
-                {isConnecting && (
-                  <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-3 py-1 rounded-lg">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span className="text-xs text-white font-medium" style={{ fontFamily: "var(--font-dm-sans)" }}>connecting...</span>
-                  </div>
-                )}
-                
-                {showListeningIndicator && (
-                  <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-3 py-1 rounded-lg">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs text-white font-medium" style={{ fontFamily: "var(--font-dm-sans)" }}>polling transcript...</span>
-                  </div>
-                )}
-                
-                <div className="bg-white/10 backdrop-blur-sm px-3 py-1 rounded-lg">
-                  <div className="text-sm font-bold text-white" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                    {formatDuration(callDuration)}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div style={{ width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{
+                    position: 'relative',
+                    background: '#000',
+                    borderRadius: '1rem',
+                    overflow: 'hidden',
+                    aspectRatio: '16/9'
+                }}>
+                    <video
+                        ref={videoRef}
+                        autoPlay
+                        playsInline
+                        muted={true}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
 
-          {isTranscriptVisible && (
-            <div className="absolute top-0 right-0 w-80 h-full bg-black/90 backdrop-blur-xl text-white z-30 overflow-hidden shadow-2xl border-l border-white/20">
-              <div className="p-4 border-b border-white/20 flex items-center justify-between">
-                <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-fraunces)" }}>live transcript</h3>
-                <button
-                  onClick={() => setIsTranscriptVisible(false)}
-                  className="text-gray-400 hover:text-white text-xl font-bold"
-                >
-                  ✕
-                </button>
-              </div>
-              <div className="flex-1 overflow-y-auto p-4 space-y-3 h-[calc(100vh-80px)]">
-                {transcript.length === 0 ? (
-                  <div className="text-center text-gray-400 py-8" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                    <div className="animate-pulse mb-4">
-                      {!isUserJoined ? 'starting transcript polling in 4 seconds...' : 'waiting for conversation...'}
-                    </div>
-                    <div className="text-xs space-y-2">
-                      <div>polling: {isListening ? '🔄 active' : '❌ not active'}</div>
-                      <div>conversation id: {conversationData?.conversation_id ? '✅' : '❌'}</div>
-                      <div className="text-green-400 mt-4">✨ both user and agent speech will be captured</div>
-                    </div>
-                  </div>
-                ) : (
-                  transcript.map((entry) => (
-                    <div
-                      key={entry.id}
-                      className={`p-4 rounded-xl shadow-lg ${
-                        entry.isUser
-                          ? 'bg-white/10 ml-4 border-l-4 border-white/40'
-                          : 'bg-white/5 mr-4 border-l-4 border-white/20'
-                      }`}
-                      style={{ fontFamily: "var(--font-dm-sans)" }}
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="text-sm font-bold flex items-center space-x-2">
-                          <span className={`w-2 h-2 rounded-full ${entry.isUser ? 'bg-white/60' : 'bg-white/40'}`}></span>
-                          <span>{entry.isUser ? 'you' : 'agent'}</span>
+                    <audio
+                        ref={audioRef}
+                        autoPlay
+                        playsInline
+                        style={{ display: 'none' }}
+                    />
+
+                    {isLoading && (
+                        <div style={{
+                            position: 'absolute',
+                            inset: 0,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: 'rgba(0, 0, 0, 0.7)'
+                        }}>
+                            <div style={{ textAlign: 'center' }}>
+                                <Loader2 style={{
+                                    width: '3rem',
+                                    height: '3rem',
+                                    color: '#fff',
+                                    margin: '0 auto 0.75rem',
+                                    animation: 'spin 1s linear infinite'
+                                }} />
+                                <p style={{ color: '#fff', fontWeight: 500 }}>
+                                    {isAnalyzing ? 'Analyzing preferences...' : isTranscribing ? 'Transcribing conversation...' : 'Connecting to AI avatar...'}
+                                </p>
+                            </div>
                         </div>
-                      </div>
-                      <div className="text-sm leading-relaxed mb-2">{entry.text}</div>
-                      <div className="text-xs opacity-75 text-right">
-                        {new Date(entry.timestamp).toLocaleTimeString()}
-                      </div>
+                    )}
+
+                    {error && (
+                        <div style={{
+                            position: 'absolute',
+                            top: '1rem',
+                            left: '1rem',
+                            right: '1rem',
+                            padding: '1rem',
+                            background: 'rgba(239, 68, 68, 0.9)',
+                            border: '1px solid #ef4444',
+                            borderRadius: '0.5rem',
+                            color: '#fff',
+                            fontSize: '0.875rem',
+                            display: 'flex',
+                            gap: '0.5rem'
+                        }}>
+                            <AlertCircle style={{ width: '1.25rem', height: '1.25rem', flexShrink: 0, marginTop: '0.125rem' }} />
+                            <span>{error}</span>
+                        </div>
+                    )}
+
+                    {isRecording && (
+                        <div style={{
+                            position: 'absolute',
+                            top: '1rem',
+                            right: '1rem',
+                            padding: '0.5rem 1rem',
+                            background: 'rgba(239, 68, 68, 0.9)',
+                            borderRadius: '0.5rem',
+                            color: '#fff',
+                            fontSize: '0.75rem',
+                            fontWeight: 600,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
+                        }}>
+                            <div style={{
+                                width: '8px',
+                                height: '8px',
+                                background: '#fff',
+                                borderRadius: '50%',
+                                animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                            }} />
+                            Recording
+                        </div>
+                    )}
+
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '1rem',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        display: 'flex',
+                        gap: '0.75rem'
+                    }}>
+                        <button
+                            onClick={toggleMute}
+                            style={{
+                                background: isMuted ? '#ef4444' : 'rgba(255, 255, 255, 0.2)',
+                                backdropFilter: 'blur(12px)',
+                                WebkitBackdropFilter: 'blur(12px)',
+                                padding: '1rem',
+                                borderRadius: '9999px',
+                                border: 'none',
+                                cursor: 'pointer',
+                                transition: 'background 0.2s'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.background = isMuted ? '#dc2626' : 'rgba(255, 255, 255, 0.3)';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.background = isMuted ? '#ef4444' : 'rgba(255, 255, 255, 0.2)';
+                            }}
+                        >
+                            {isMuted ? (
+                                <MicOff style={{ width: '1.5rem', height: '1.5rem', color: '#fff' }} />
+                            ) : (
+                                <Mic style={{ width: '1.5rem', height: '1.5rem', color: '#fff' }} />
+                            )}
+                        </button>
+
+                        {isConnected && audioChunksRef.current.length > 0 && (
+                            <button
+                                onClick={downloadTranscript}
+                                disabled={isTranscribing}
+                                style={{
+                                    background: isTranscribing ? '#6b7280' : 'rgba(34, 197, 94, 0.9)',
+                                    backdropFilter: 'blur(12px)',
+                                    WebkitBackdropFilter: 'blur(12px)',
+                                    padding: '1rem',
+                                    borderRadius: '9999px',
+                                    border: 'none',
+                                    cursor: isTranscribing ? 'not-allowed' : 'pointer',
+                                    transition: 'background 0.2s',
+                                    opacity: isTranscribing ? 0.6 : 1
+                                }}
+                                onMouseEnter={(e) => {
+                                    if (!isTranscribing) {
+                                        e.currentTarget.style.background = 'rgba(22, 163, 74, 0.9)';
+                                    }
+                                }}
+                                onMouseLeave={(e) => {
+                                    if (!isTranscribing) {
+                                        e.currentTarget.style.background = 'rgba(34, 197, 94, 0.9)';
+                                    }
+                                }}
+                                title="Download Transcript"
+                            >
+                                <svg
+                                    style={{ width: '1.5rem', height: '1.5rem', color: '#fff' }}
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                                    />
+                                </svg>
+                            </button>
+                        )}
+
+                        <button
+                            onClick={endConversation}
+                            disabled={isLoading && !isTranscribing}
+                            style={{
+                                background: (isLoading && !isTranscribing) ? '#6b7280' : '#ef4444',
+                                padding: '1rem',
+                                borderRadius: '9999px',
+                                border: 'none',
+                                cursor: (isLoading && !isTranscribing) ? 'not-allowed' : 'pointer',
+                                transition: 'background 0.2s',
+                                opacity: (isLoading && !isTranscribing) ? 0.6 : 1
+                            }}
+                            onMouseEnter={(e) => {
+                                if (!isLoading || isTranscribing) {
+                                    e.currentTarget.style.background = '#dc2626';
+                                }
+                            }}
+                            onMouseLeave={(e) => {
+                                if (!isLoading || isTranscribing) {
+                                    e.currentTarget.style.background = '#ef4444';
+                                }
+                            }}
+                        >
+                            <PhoneOff style={{ width: '1.5rem', height: '1.5rem', color: '#fff' }} />
+                        </button>
                     </div>
-                  ))
-                )}
-              </div>
-            </div>
-          )}
-
-          {isEndingCall && (
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm z-40 flex items-center justify-center">
-              <div className="bg-white rounded-xl p-8 text-center shadow-2xl">
-                <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2" style={{ fontFamily: "var(--font-fraunces)" }}>ending call</h3>
-                <p className="text-gray-600" style={{ fontFamily: "var(--font-dm-sans)" }}>analyzing your preferences...</p>
-              </div>
-            </div>
-          )}
-
-          <div className={`absolute bottom-0 left-0 right-0 z-30 ${isTranscriptVisible ? 'right-80' : ''}`}>
-            <div className="flex items-center justify-between p-4 pb-0 pr-2">
-              <div className="w-1/3"></div>
-              
-              <div className="flex justify-center w-1/3">
-                {!isUserJoined ? (
-                  <div className="px-12 py-4 rounded-full font-bold text-lg transition-all duration-200 flex items-center space-x-4 shadow-xl bg-white/10 backdrop-blur-md text-white border border-white/20"
-                    style={{ minWidth: '250px', fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    <span className="text-xl">⏳</span>
-                    <span>starting in 4 seconds...</span>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => setIsTranscriptVisible(!isTranscriptVisible)}
-                    className={`px-12 py-4 rounded-full font-bold text-lg transition-all duration-200 flex items-center space-x-4 shadow-xl ${
-                      isTranscriptVisible 
-                        ? 'bg-white text-black hover:bg-opacity-90' 
-                        : 'bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20'
-                    }`}
-                    style={{ minWidth: '250px', fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    <span className="text-xl">📝</span>
-                    <span>live transcript</span>
-                    {transcript.length > 0 && (
-                      <span className="mb-0 bg-red-500 text-white text-sm px-3 rounded-full font-bold">
-                        {transcript.length}
-                      </span>
-                    )}
-                  </button>
-                )}
-              </div>
-
-              <div className="flex justify-end w-1/3">
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => {
-                      console.log('⏭️ SKIPPING AGENT - NO TRANSCRIPT');
-                      setIsCallActive(false);
-                      setConversationData(null);
-                      router.push('/recommendations');
-                    }}
-                    className="px-8 py-4 rounded-full font-bold text-lg bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 transition-all shadow-xl"
-                    style={{ fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    skip agent →
-                  </button>
-                  <button
-                    onClick={endCall}
-                    disabled={isEndingCall}
-                    className={`px-16 py-4 rounded-full font-bold text-xl transition-all duration-200 shadow-xl relative z-30 ${
-                      isEndingCall 
-                        ? 'bg-gray-500 cursor-not-allowed opacity-75' 
-                        : 'bg-white text-black hover:bg-opacity-90 transform hover:scale-105'
-                    }`}
-                    style={{ fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    {isEndingCall ? (
-                      <div className="flex items-center justify-center space-x-3">
-                        <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                        <span>ending call...</span>
-                      </div>
-                    ) : (
-                      'end call'
-                    )}
-                  </button>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
-  return (
-    <div className="w-full h-full flex items-center justify-center rounded-2xl" 
-         style={{
-           backgroundImage: "url(/landingbg.jpg)",
-           backgroundSize: "cover",
-           backgroundPosition: "center"
-         }}>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 rounded-2xl" />
-      <div className="text-center text-white relative z-10">
-        {isLoading ? (
-          <>
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-            <p className="text-lg font-medium" style={{ fontFamily: "var(--font-fraunces)" }}>connecting to travel agent...</p>
-            <p className="text-sm opacity-75" style={{ fontFamily: "var(--font-dm-sans)" }}>preparing your consultation</p>
-          </>
-        ) : error ? (
-          <>
-            <div className="w-12 h-12 bg-red-500 bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-              </svg>
+                <div style={{
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    borderRadius: '0.75rem',
+                    padding: '1rem',
+                    border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                        <h3 style={{
+                            fontSize: '0.875rem',
+                            fontWeight: 700,
+                            color: '#fff',
+                            margin: 0
+                        }}>
+                            Activity Log
+                        </h3>
+                        {audioChunksRef.current.length > 0 && (
+                            <span style={{
+                                fontSize: '0.75rem',
+                                color: '#86efac',
+                                fontWeight: 500
+                            }}>
+                                {audioChunksRef.current.length} audio chunks recorded
+                            </span>
+                        )}
+                    </div>
+                    <div style={{
+                        background: 'rgba(0, 0, 0, 0.4)',
+                        borderRadius: '0.5rem',
+                        padding: '0.75rem',
+                        maxHeight: '8rem',
+                        overflowY: 'auto',
+                        fontFamily: 'monospace',
+                        fontSize: '0.75rem'
+                    }}>
+                        {logs.slice(-5).map((log, i) => (
+                            <div key={i} style={{ color: '#d1d5db' }}>
+                                <span style={{ color: '#60a5fa' }}>[{log.time}]</span> {log.message}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {preferences && (
+                    <div style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
+                        borderRadius: '0.75rem',
+                        padding: '1.5rem',
+                        border: '1px solid rgba(255, 255, 255, 0.2)'
+                    }}>
+                        <h3 style={{
+                            fontSize: '1rem',
+                            fontWeight: 700,
+                            color: '#fff',
+                            marginBottom: '1rem'
+                        }}>
+                            Travel Preferences
+                        </h3>
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                            gap: '1rem'
+                        }}>
+                            <PreferenceItem label="Age" value={preferences.age} />
+                            <PreferenceItem label="Budget" value={preferences.budget} />
+                            <PreferenceItem label="Walking" value={preferences.walk} />
+                            <PreferenceItem label="Day/Night" value={preferences.dayNight} />
+                            <PreferenceItem label="Travel Style" value={preferences.soloGroup} />
+                        </div>
+                    </div>
+                )}
             </div>
-            <p className="text-lg font-medium mb-2" style={{ fontFamily: "var(--font-fraunces)" }}>error loading video call</p>
-            <p className="text-sm opacity-75 mb-4" style={{ fontFamily: "var(--font-dm-sans)" }}>{error}</p>
-            <button
-              onClick={startConversation}
-              className="bg-white text-black px-6 py-3 rounded-full text-sm font-medium hover:bg-opacity-90 transition-colors"
-              style={{ fontFamily: "var(--font-dm-sans)" }}
-            >
-              retry
-            </button>
-          </>
-        ) : (
-          <>
-            <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-4 border border-white/20">
-              <span className="text-3xl">🧳</span>
+
+            <style>{`
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                @keyframes pulse {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0.5; }
+                }
+            `}</style>
+        </div>
+    );
+}
+
+function PreferenceItem({ label, value }: { label: string; value: string }) {
+    return (
+        <div style={{
+            background: 'rgba(255, 255, 255, 0.05)',
+            padding: '0.75rem',
+            borderRadius: '0.5rem',
+            border: '1px solid rgba(255, 255, 255, 0.1)'
+        }}>
+            <div style={{
+                fontSize: '0.75rem',
+                color: '#9ca3af',
+                marginBottom: '0.25rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                fontWeight: 600
+            }}>
+                {label}
             </div>
-            <p className="text-lg font-medium" style={{ fontFamily: "var(--font-fraunces)" }}>ready to plan your trip</p>
-            <p className="text-sm opacity-75 mb-4" style={{ fontFamily: "var(--font-dm-sans)" }}>our travel agent will help personalize your experience</p>
-            <div className="flex gap-2 justify-center">
-              <button
-                onClick={startConversation}
-                className="mt-4 bg-white text-black px-8 py-3 rounded-full text-base font-medium hover:bg-opacity-90 transition-colors"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
-              >
-                start consultation
-              </button>
-              <button
-                onClick={() => {
-                  console.log('⏭️ SKIPPING AGENT CONSULTATION');
-                  router.push('/recommendations');
-                }}
-                className="mt-4 bg-white/10 backdrop-blur-md text-white px-8 py-3 rounded-full text-base font-medium border border-white/20 hover:bg-white/20 transition-colors"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
-              >
-                skip for now
-              </button>
+            <div style={{
+                fontSize: '1rem',
+                color: '#fff',
+                fontWeight: 600
+            }}>
+                {value}
             </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
