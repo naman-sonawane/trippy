@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useMotionValue, useTransform, PanInfo } from "framer-motion";
 
 export interface RecommendationItem {
@@ -153,11 +154,14 @@ export const SwipeInterface = ({
   destination,
   onComplete,
 }: SwipeInterfaceProps) => {
+  const router = useRouter();
   const [cards, setCards] = useState<RecommendationItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [likedCount, setLikedCount] = useState(0);
   const [dislikedCount, setDislikedCount] = useState(0);
+  const [isGeneratingSchedule, setIsGeneratingSchedule] = useState(false);
+  const [scheduleError, setScheduleError] = useState<string | null>(null);
 
   useEffect(() => {
     loadRecommendations();
@@ -189,7 +193,7 @@ export const SwipeInterface = ({
     if (!currentCard) return;
 
     try {
-      await fetch("/api/swipe", {
+      const response = await fetch("/api/swipe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -199,19 +203,77 @@ export const SwipeInterface = ({
         }),
       });
 
+      if (!response.ok) {
+        throw new Error("Failed to record swipe");
+      }
+
+      const data = await response.json();
+
       if (direction === "like") {
         setLikedCount((prev) => prev + 1);
       } else {
         setDislikedCount((prev) => prev + 1);
       }
 
-      setCurrentIndex((prev) => prev + 1);
+      // Check if schedule is ready before incrementing
+      if (data.scheduleReady) {
+        setCurrentIndex((prev) => prev + 1);
+        await generateSchedule();
+        return;
+      }
 
-      if (currentIndex === cards.length - 1) {
+      // Check if we've reached the end before incrementing
+      const nextIndex = currentIndex + 1;
+      if (nextIndex >= cards.length) {
+        setCurrentIndex(nextIndex);
         if (onComplete) onComplete();
+      } else {
+        setCurrentIndex(nextIndex);
       }
     } catch (error) {
       console.error("Error recording swipe:", error);
+    }
+  };
+
+  const generateSchedule = async () => {
+    const tripId = localStorage.getItem("currentTripId");
+    if (!tripId) {
+      setScheduleError("Trip ID not found. Please create a trip first.");
+      return;
+    }
+
+    setIsGeneratingSchedule(true);
+    setScheduleError(null);
+
+    try {
+      const response = await fetch("/api/generate-schedule", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          destination,
+          tripId,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to generate schedule");
+      }
+
+      const data = await response.json();
+      const days = data.days || 3;
+
+      // Navigate to schedule page
+      router.push(`/schedule?tripId=${tripId}&days=${days}`);
+    } catch (error) {
+      console.error("Error generating schedule:", error);
+      setScheduleError(
+        error instanceof Error
+          ? error.message
+          : "Failed to generate schedule. Please try again."
+      );
+      setIsGeneratingSchedule(false);
+      // Still allow manual completion if schedule generation fails
     }
   };
 
@@ -221,6 +283,39 @@ export const SwipeInterface = ({
         <div className="text-gray-900 dark:text-zinc-50">
           Loading recommendations...
         </div>
+      </div>
+    );
+  }
+
+  if (isGeneratingSchedule) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[600px] gap-4">
+        <div className="text-6xl mb-4">✨</div>
+        <div className="text-gray-900 dark:text-zinc-50 text-2xl font-bold">
+          Generating Your Schedule
+        </div>
+        <div className="text-gray-600 dark:text-zinc-400">
+          <p className="text-center">
+            We're creating a personalized itinerary for {destination}
+          </p>
+          <p className="text-center text-sm mt-2">
+            This may take a moment...
+          </p>
+        </div>
+        {scheduleError && (
+          <div className="mt-4 p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg max-w-md">
+            <p className="text-sm">{scheduleError}</p>
+            <button
+              onClick={() => {
+                setIsGeneratingSchedule(false);
+                setScheduleError(null);
+              }}
+              className="mt-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm"
+            >
+              Continue Swiping
+            </button>
+          </div>
+        )}
       </div>
     );
   }
