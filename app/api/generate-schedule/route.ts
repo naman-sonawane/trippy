@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import Trip from '@/models/Trip';
 import User from '@/models/User';
+import mongoose from 'mongoose';
 
 const PYTHON_API_URL = process.env.PYTHON_API_URL || 'http://localhost:8000';
 const HACK_CLUB_API_KEY = 'sk-hc-v1-0980dcafe29d477fa757a2c1c7f0e2200ccad811c41549f592e8219f20bc7c32';
@@ -52,15 +53,30 @@ export const POST = async (req: Request) => {
 
     await connectDB();
 
+    // Convert tripId to ObjectId if it's a string
+    let tripObjectId;
+    try {
+      tripObjectId = mongoose.Types.ObjectId.isValid(tripId) 
+        ? new mongoose.Types.ObjectId(tripId)
+        : tripId;
+    } catch (error) {
+      console.error('Invalid tripId format:', tripId, error);
+      return NextResponse.json({ error: 'Invalid trip ID format' }, { status: 400 });
+    }
+
     // Get trip - check if user is participant
     const trip = await Trip.findOne({
-      _id: tripId,
+      _id: tripObjectId,
       $or: [
         { userId: session.user.id },
         { participantIds: session.user.id }
       ]
     });
     if (!trip) {
+      console.error('Trip not found or access denied:', {
+        tripId: tripObjectId,
+        userId: session.user.id
+      });
       return NextResponse.json({ error: 'Trip not found or access denied' }, { status: 404 });
     }
 
@@ -166,21 +182,54 @@ export const POST = async (req: Request) => {
     // Validate and clean schedule items
     scheduleData = validateScheduleItems(scheduleData, items.length);
 
+    console.log('Saving schedule:', {
+      tripId: tripObjectId,
+      scheduleItemsCount: scheduleData.length,
+      firstItem: scheduleData[0]
+    });
+
     // Save schedule to trip and update status
-    const updatedTrip = await Trip.findOneAndUpdate(
+    const updateResult = await Trip.findOneAndUpdate(
       {
-        _id: tripId,
+        _id: tripObjectId,
         $or: [
           { userId: session.user.id },
           { participantIds: session.user.id }
         ]
       },
-      { itinerary: scheduleData, status: 'active' },
+      { $set: { itinerary: scheduleData, status: 'active' } },
       { new: true }
     );
 
-    if (!updatedTrip) {
+    if (!updateResult) {
+      console.error('Failed to save schedule - trip not found or access denied:', {
+        tripId: tripObjectId,
+        userId: session.user.id
+      });
       return NextResponse.json({ error: 'Failed to save schedule' }, { status: 500 });
+    }
+
+    // Verify the save by re-querying the database
+    const verifiedTrip = await Trip.findById(tripObjectId);
+    
+    if (!verifiedTrip) {
+      console.error('CRITICAL: Trip not found after save operation:', tripObjectId);
+      return NextResponse.json({ error: 'Failed to verify schedule save' }, { status: 500 });
+    }
+
+    console.log('Schedule saved successfully:', {
+      tripId: verifiedTrip._id,
+      itineraryCount: verifiedTrip.itinerary?.length || 0,
+      status: verifiedTrip.status,
+      firstItineraryItem: verifiedTrip.itinerary?.[0] || null,
+      verified: verifiedTrip.itinerary?.length === scheduleData.length
+    });
+
+    if (verifiedTrip.itinerary?.length !== scheduleData.length) {
+      console.error('WARNING: Itinerary count mismatch:', {
+        expected: scheduleData.length,
+        actual: verifiedTrip.itinerary?.length || 0
+      });
     }
 
     // Calculate trip duration (max day + 1)
@@ -191,7 +240,7 @@ export const POST = async (req: Request) => {
       {
         schedule: scheduleData,
         days,
-        tripId: updatedTrip._id.toString(),
+        tripId: verifiedTrip._id.toString(),
       },
       { status: 200 }
     );

@@ -7,6 +7,7 @@ export interface ITrip {
   destination: string;
   startDate: Date;
   endDate: Date;
+  tripCode?: string;
   activities: Array<{
     name: string;
     location: string;
@@ -52,6 +53,12 @@ const TripSchema = new Schema<ITrip>(
     endDate: {
       type: Date,
       required: true,
+    },
+    tripCode: {
+      type: String,
+      unique: true,
+      sparse: true,
+      index: true,
     },
     activities: [
       {

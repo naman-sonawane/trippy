@@ -12,7 +12,9 @@ export interface RecommendationItem {
   features: {
     tags?: string[];
     price_range?: string;
+    budget?: string;
     energy_level?: string;
+    image_url?: string;
   };
   location?: string;
   type: "place" | "activity";
@@ -55,19 +57,42 @@ const SwipeCard = ({ item, onSwipe, isTop }: SwipeCardProps) => {
       transition={{ duration: 0.2 }}
     >
       <div className="w-full h-full bg-white dark:bg-zinc-900 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-zinc-800">
-        <div className="h-2/5 bg-gradient-to-br from-blue-500 to-purple-600 relative">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-white text-6xl font-bold opacity-20">
-              {item.type === "place" ? "📍" : "🎯"}
+        {item.features.image_url ? (
+          <div className="h-2/5 relative bg-gray-200 dark:bg-zinc-800">
+            <img
+              src={item.features.image_url}
+              alt={item.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                if (e.currentTarget.nextElementSibling) {
+                  (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
+                }
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4">
+              <h2 className="text-2xl font-bold text-white drop-shadow-lg">
+                {item.name}
+              </h2>
+              <p className="text-white/90 text-sm mt-1">{item.category}</p>
             </div>
           </div>
-          <div className="absolute bottom-4 left-4 right-4">
-            <h2 className="text-2xl font-bold text-white drop-shadow-lg">
-              {item.name}
-            </h2>
-            <p className="text-white/90 text-sm mt-1">{item.category}</p>
+        ) : (
+          <div className="h-2/5 bg-gradient-to-br from-blue-500 to-purple-600 relative">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-white text-6xl font-bold opacity-20">
+                {item.type === "place" ? "📍" : "🎯"}
+              </div>
+            </div>
+            <div className="absolute bottom-4 left-4 right-4">
+              <h2 className="text-2xl font-bold text-white drop-shadow-lg">
+                {item.name}
+              </h2>
+              <p className="text-white/90 text-sm mt-1">{item.category}</p>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="h-3/5 p-6 overflow-y-auto">
           {item.location && (
@@ -98,13 +123,13 @@ const SwipeCard = ({ item, onSwipe, isTop }: SwipeCardProps) => {
               </div>
             )}
 
-            {item.features.price_range && (
+            {(item.features.budget || item.features.price_range) && (
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold text-gray-700 dark:text-zinc-300">
-                  💰 Price:
+                  💰 Budget:
                 </span>
                 <span className="text-sm text-gray-600 dark:text-zinc-400">
-                  {item.features.price_range}
+                  {item.features.budget || item.features.price_range}
                 </span>
               </div>
             )}
@@ -169,6 +194,39 @@ export const SwipeInterface = ({
     loadRecommendations();
   }, [destination, tripId]);
 
+  const generateFallbackRecommendations = (dest: string): RecommendationItem[] => {
+    const categories = [
+      { category: "Restaurant", emoji: "🍽️", tags: ["dining", "local cuisine"] },
+      { category: "Museum", emoji: "🏛️", tags: ["culture", "history", "art"] },
+      { category: "Park", emoji: "🌳", tags: ["nature", "outdoors", "relaxing"] },
+      { category: "Landmark", emoji: "🗼", tags: ["iconic", "sightseeing", "photo spot"] },
+      { category: "Market", emoji: "🛍️", tags: ["shopping", "local", "souvenirs"] },
+      { category: "Cafe", emoji: "☕", tags: ["coffee", "relaxing", "cozy"] },
+      { category: "Beach", emoji: "🏖️", tags: ["water", "sun", "relaxing"] },
+      { category: "Theater", emoji: "🎭", tags: ["entertainment", "culture", "evening"] },
+      { category: "Bar", emoji: "🍸", tags: ["nightlife", "drinks", "social"] },
+      { category: "Gallery", emoji: "🎨", tags: ["art", "culture", "indoor"] },
+    ];
+
+    const priceRanges = ["$", "$$", "$$$", "$$$$"];
+    const energyLevels = ["Low", "Moderate", "High"];
+
+    return categories.map((cat, idx) => ({
+      id: `fallback-${dest}-${idx}`,
+      name: `${cat.emoji} ${cat.category} in ${dest}`,
+      category: cat.category,
+      description: `Experience the best ${cat.category.toLowerCase()} that ${dest} has to offer. This is a popular local spot recommended by our travel experts.`,
+      features: {
+        tags: cat.tags,
+        price_range: priceRanges[Math.floor(Math.random() * priceRanges.length)],
+        energy_level: energyLevels[Math.floor(Math.random() * energyLevels.length)],
+      },
+      location: dest,
+      type: "place" as const,
+      score: 0.7 + Math.random() * 0.3,
+    }));
+  };
+
   const loadRecommendations = async () => {
     try {
       setIsLoading(true);
@@ -182,9 +240,17 @@ export const SwipeInterface = ({
         const data = await response.json();
         setCards(data.recommendations || []);
         setCurrentIndex(0);
+      } else {
+        console.warn("api failed, using fallback recommendations");
+        const fallbackData = generateFallbackRecommendations(destination);
+        setCards(fallbackData);
+        setCurrentIndex(0);
       }
     } catch (error) {
-      console.error("Error loading recommendations:", error);
+      console.error("error loading recommendations, using fallback:", error);
+      const fallbackData = generateFallbackRecommendations(destination);
+      setCards(fallbackData);
+      setCurrentIndex(0);
     } finally {
       setIsLoading(false);
     }

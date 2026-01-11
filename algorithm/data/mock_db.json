@@ -265,6 +265,206 @@
         "age_suitability_profile": "nightlife"
       },
       "description": "Famous commercial intersection and entertainment hub"
+    },
+    {
+      "id": "place_china_1",
+      "name": "Great Wall of China (Mutianyu)",
+      "location": "China",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "history",
+          "hiking",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "high",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?mutianyu%20great%20wall%20beijing"
+      },
+      "description": "Hike the restored watchtowers of this ancient wonder, offering breathtaking mountain views and fewer crowds than other sections."
+    },
+    {
+      "id": "place_china_2",
+      "name": "The Palace Museum (Forbidden City)",
+      "location": "China",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "imperial",
+          "architecture",
+          "history",
+          "unesco"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?forbidden%20city%20beijing"
+      },
+      "description": "Explore the colossal imperial palace complex that served as the home of emperors and their households for almost 500 years."
+    },
+    {
+      "id": "place_china_3",
+      "name": "Chengdu Research Base of Giant Panda Breeding",
+      "location": "China",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "animals",
+          "nature",
+          "cute",
+          "conservation"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?chengdu%20panda%20base"
+      },
+      "description": "Watch adorable giant pandas and red pandas play in their natural habitat at this world-famous conservation center."
+    },
+    {
+      "id": "place_china_4",
+      "name": "The Bund",
+      "location": "China",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "skyline",
+          "architecture",
+          "waterfront",
+          "night view"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?the%20bund%20shanghai%20skyline"
+      },
+      "description": "Stroll along the waterfront promenade to see historic colonial architecture contrasting with the futuristic Pudong skyline."
+    },
+    {
+      "id": "place_china_5",
+      "name": "Emperor Qinshihuang's Mausoleum Site Museum",
+      "location": "China",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "archaeology",
+          "history",
+          "ancient",
+          "unesco"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?terracotta%20warriors%20xian"
+      },
+      "description": "Marvel at the thousands of life-sized clay soldiers, horses, and chariots buried to protect the first emperor of China."
+    },
+    {
+      "id": "place_china_6",
+      "name": "Quanjude Roast Duck Restaurant",
+      "location": "China",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "culinary",
+          "dining",
+          "traditional"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?quanjude%20peking%20duck%20beijing"
+      },
+      "description": "Savor the crispy skin and tender meat of authentic Peking Duck at China's most famous heritage restaurant chain."
+    },
+    {
+      "id": "place_china_7",
+      "name": "Zhangjiajie National Forest Park",
+      "location": "China",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "mountains",
+          "hiking",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "$35",
+        "energy_level": "high",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?zhangjiajie%20avatar%20mountains"
+      },
+      "description": "Wander among the towering sandstone pillars that inspired the floating mountains in the movie Avatar."
+    },
+    {
+      "id": "place_china_8",
+      "name": "Li River Cruise",
+      "location": "China",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "river",
+          "relaxing",
+          "photography"
+        ],
+        "price_range": "medium",
+        "budget": "$60",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?li%20river%20cruise%20guilin"
+      },
+      "description": "Drift past dramatic limestone karst mountains and sleepy villages on a scenic boat ride from Guilin to Yangshuo."
+    },
+    {
+      "id": "place_china_9",
+      "name": "Temple of Heaven",
+      "location": "China",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "religious",
+          "architecture",
+          "park",
+          "spiritual"
+        ],
+        "price_range": "medium",
+        "budget": "$5",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?temple%20of%20heaven%20beijing"
+      },
+      "description": "Visit this architectural masterpiece where emperors prayed for good harvests, surrounded by a lively park full of locals practicing tai chi."
+    },
+    {
+      "id": "place_china_10",
+      "name": "Impression Sanjie Liu",
+      "location": "China",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "show",
+          "performance",
+          "lights",
+          "outdoor"
+        ],
+        "price_range": "medium",
+        "budget": "$40",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?impression%20sanjie%20liu%20yangshuo"
+      },
+      "description": "Watch a spectacular night show set directly on the Li River, featuring hundreds of performers and dramatic light effects."
     }
   ],
   "activities": [
@@ -427,6 +627,196 @@
         "age_suitability_profile": "cultural"
       },
       "description": "Watch a world-class Broadway musical"
+    },
+    {
+      "id": "activity_china_1",
+      "name": "Great Wall of China (Mutianyu)",
+      "place_id": "place_china_1",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "history",
+          "hiking",
+          "scenic"
+        ],
+        "budget": "$25",
+        "energy_level": "high",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?mutianyu%20great%20wall%20beijing"
+      },
+      "description": "Hike the restored watchtowers of this ancient wonder, offering breathtaking mountain views and fewer crowds than other sections."
+    },
+    {
+      "id": "activity_china_2",
+      "name": "The Palace Museum (Forbidden City)",
+      "place_id": "place_china_2",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "imperial",
+          "architecture",
+          "history",
+          "unesco"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?forbidden%20city%20beijing"
+      },
+      "description": "Explore the colossal imperial palace complex that served as the home of emperors and their households for almost 500 years."
+    },
+    {
+      "id": "activity_china_3",
+      "name": "Chengdu Research Base of Giant Panda Breeding",
+      "place_id": "place_china_3",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "animals",
+          "nature",
+          "cute",
+          "conservation"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?chengdu%20panda%20base"
+      },
+      "description": "Watch adorable giant pandas and red pandas play in their natural habitat at this world-famous conservation center."
+    },
+    {
+      "id": "activity_china_4",
+      "name": "The Bund",
+      "place_id": "place_china_4",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "skyline",
+          "architecture",
+          "waterfront",
+          "night view"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?the%20bund%20shanghai%20skyline"
+      },
+      "description": "Stroll along the waterfront promenade to see historic colonial architecture contrasting with the futuristic Pudong skyline."
+    },
+    {
+      "id": "activity_china_5",
+      "name": "Emperor Qinshihuang's Mausoleum Site Museum",
+      "place_id": "place_china_5",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "archaeology",
+          "history",
+          "ancient",
+          "unesco"
+        ],
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?terracotta%20warriors%20xian"
+      },
+      "description": "Marvel at the thousands of life-sized clay soldiers, horses, and chariots buried to protect the first emperor of China."
+    },
+    {
+      "id": "activity_china_6",
+      "name": "Quanjude Roast Duck Restaurant",
+      "place_id": "place_china_6",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "culinary",
+          "dining",
+          "traditional"
+        ],
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?quanjude%20peking%20duck%20beijing"
+      },
+      "description": "Savor the crispy skin and tender meat of authentic Peking Duck at China's most famous heritage restaurant chain."
+    },
+    {
+      "id": "activity_china_7",
+      "name": "Zhangjiajie National Forest Park",
+      "place_id": "place_china_7",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "mountains",
+          "hiking",
+          "scenic"
+        ],
+        "budget": "$35",
+        "energy_level": "high",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?zhangjiajie%20avatar%20mountains"
+      },
+      "description": "Wander among the towering sandstone pillars that inspired the floating mountains in the movie Avatar."
+    },
+    {
+      "id": "activity_china_8",
+      "name": "Li River Cruise",
+      "place_id": "place_china_8",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "river",
+          "relaxing",
+          "photography"
+        ],
+        "budget": "$60",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?li%20river%20cruise%20guilin"
+      },
+      "description": "Drift past dramatic limestone karst mountains and sleepy villages on a scenic boat ride from Guilin to Yangshuo."
+    },
+    {
+      "id": "activity_china_9",
+      "name": "Temple of Heaven",
+      "place_id": "place_china_9",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "religious",
+          "architecture",
+          "park",
+          "spiritual"
+        ],
+        "budget": "$5",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?temple%20of%20heaven%20beijing"
+      },
+      "description": "Visit this architectural masterpiece where emperors prayed for good harvests, surrounded by a lively park full of locals practicing tai chi."
+    },
+    {
+      "id": "activity_china_10",
+      "name": "Impression Sanjie Liu",
+      "place_id": "place_china_10",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "show",
+          "performance",
+          "lights",
+          "outdoor"
+        ],
+        "budget": "$40",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?impression%20sanjie%20liu%20yangshuo"
+      },
+      "description": "Watch a spectacular night show set directly on the Li River, featuring hundreds of performers and dramatic light effects."
     }
   ],
   "interactions": [
@@ -709,6 +1099,83 @@
       "item_type": "place",
       "rating": -1,
       "timestamp": "2026-01-10T19:34:35.928506"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-0",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-10T23:32:23.895856"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-0",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T23:32:25.497131"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-1",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-10T23:32:28.598613"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-10T23:32:29.392311"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-10T23:32:31.227108"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-4",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T23:32:32.920841"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-5",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T23:32:35.039961"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-6",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T23:32:36.158180"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-10T23:32:37.449869"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-8",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T23:32:38.983395"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "fallback-barcelona-9",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-10T23:32:40.684408"
     }
   ]
 }

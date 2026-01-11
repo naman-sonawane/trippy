@@ -13,16 +13,21 @@ export const POST = async (req: Request) => {
     }
 
     const body = await req.json();
-    const { tripId } = body;
+    const { tripId, tripCode } = body;
 
-    if (!tripId) {
-      return NextResponse.json({ error: 'Trip ID required' }, { status: 400 });
+    if (!tripId && !tripCode) {
+      return NextResponse.json({ error: 'Trip ID or Trip Code required' }, { status: 400 });
     }
 
     await connectDB();
 
-    // Find the trip
-    const trip = await Trip.findById(tripId);
+    // Find the trip by ID or code
+    let trip;
+    if (tripCode) {
+      trip = await Trip.findOne({ tripCode });
+    } else {
+      trip = await Trip.findById(tripId);
+    }
 
     if (!trip) {
       return NextResponse.json({ error: 'Trip not found' }, { status: 404 });
@@ -40,8 +45,9 @@ export const POST = async (req: Request) => {
     }
 
     // Add user to participantIds
+    const actualTripId = trip._id;
     const updatedTrip = await Trip.findByIdAndUpdate(
-      tripId,
+      actualTripId,
       { $addToSet: { participantIds: session.user.id } },
       { new: true }
     );

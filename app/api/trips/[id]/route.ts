@@ -4,7 +4,7 @@ import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import Trip from '@/models/Trip';
 
-export const GET = async (req: Request, { params }: { params: { id: string } }) => {
+export const GET = async (req: Request, { params }: { params: Promise<{ id: string }> }) => {
   try {
     const session = await getServerSession(authOptions);
 
@@ -14,8 +14,10 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
 
     await connectDB();
 
+    const { id } = await params;
+
     const trip = await Trip.findOne({
-      _id: params.id,
+      _id: id,
       $or: [
         { userId: session.user.id },
         { participantIds: session.user.id }
@@ -33,7 +35,7 @@ export const GET = async (req: Request, { params }: { params: { id: string } }) 
   }
 };
 
-export const PUT = async (req: Request, { params }: { params: { id: string } }) => {
+export const PUT = async (req: Request, { params }: { params: Promise<{ id: string }> }) => {
   try {
     const session = await getServerSession(authOptions);
 
@@ -45,8 +47,10 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
 
     await connectDB();
 
+    const { id } = await params;
+
     const trip = await Trip.findOneAndUpdate(
-      { _id: params.id, userId: session.user.id },
+      { _id: id, userId: session.user.id },
       body,
       { new: true }
     );
@@ -62,7 +66,7 @@ export const PUT = async (req: Request, { params }: { params: { id: string } }) 
   }
 };
 
-export const DELETE = async (req: Request, { params }: { params: { id: string } }) => {
+export const DELETE = async (req: Request, { params }: { params: Promise<{ id: string }> }) => {
   try {
     const session = await getServerSession(authOptions);
 
@@ -72,7 +76,9 @@ export const DELETE = async (req: Request, { params }: { params: { id: string } 
 
     await connectDB();
 
-    const trip = await Trip.findOneAndDelete({ _id: params.id, userId: session.user.id });
+    const { id } = await params;
+
+    const trip = await Trip.findOneAndDelete({ _id: id, userId: session.user.id });
 
     if (!trip) {
       return NextResponse.json({ error: 'Trip not found' }, { status: 404 });

@@ -1,73 +1,97 @@
-"""Web scraper for activities using RapidAPI with Gemini parsing."""
-import re
-import time
-import random
+"""Activity data generator using Gemini AI."""
 import os
 import json
+import pickle
+import time
+from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 import requests
 from models import Place, Activity
 
-try:
-    import google.generativeai as genai
-    GEMINI_AVAILABLE = True
-except ImportError:
-    GEMINI_AVAILABLE = False
 
-
-class RapidAPIScraper:
-    """Scraper for activities using RapidAPI (Foursquare Places API)."""
+class ActivityGenerator:
+    """Generate activities using Gemini AI through Hack Club endpoint."""
     
-    def __init__(self, api_key: str = None):
-        """Initialize scraper with RapidAPI key."""
-        self.api_key = api_key or os.getenv("RAPIDAPI_KEY", "4e260aebc6mshdb19f055d84393fp172533jsn4d079431bff5")
-        self.base_url = "https://foursquare-com.p.rapidapi.com/v3/places/search"
-        self.headers = {
-            "X-RapidAPI-Key": self.api_key,
-            "X-RapidAPI-Host": "foursquare-com.p.rapidapi.com",
-            "Accept": "application/json"
-        }
+    def __init__(self):
+        """Initialize generator with Gemini."""
+        self.cache_dir = Path("cache")
+        self.cache_dir.mkdir(exist_ok=True)
+        self.cache_ttl = 7 * 24 * 60 * 60  # 7 days in seconds
         
-        # Initialize Gemini
-        if GEMINI_AVAILABLE:
-            gemini_key = os.getenv("GEMINI_API_KEY")
-            if gemini_key:
-                genai.configure(api_key=gemini_key)
-                self.model = genai.GenerativeModel('gemini-1.5-pro')
-            else:
-                self.model = None
-        else:
+        # Use Hack Club AI endpoint
+        self.api_url = "https://ai.hackclub.com/proxy/v1/chat/completions"
+        self.api_key = "sk-hc-v1-0980dcafe29d477fa757a2c1c7f0e2200ccad811c41549f592e8219f20bc7c32"
+        
+        if not self.api_key:
+            print("Warning: AI_API_KEY not set. Using fallback data generation.")
             self.model = None
+        else:
+            self.model = True  # Flag to indicate API is available
     
     def _normalize_location(self, location: str) -> str:
         """Normalize location name for consistent lookups."""
         return location.strip().title()
     
-    def _parse_with_gemini(self, scraped_items: List[Dict[str, Any]], location: str) -> List[Dict[str, Any]]:
-        """Parse scraped data using Gemini to extract structured information."""
+    def _get_unsplash_image(self, query: str) -> str:
+        """Get image URL from Unsplash."""
+        try:
+            # Use Unsplash Source API for random images
+            encoded_query = query.replace(" ", "%20")
+            return f"https://source.unsplash.com/800x600/?{encoded_query}"
+        except Exception:
+            return ""
+    
+    def _call_gemini(self, prompt: str) -> str:
+        """Call Gemini API through Hack Club endpoint."""
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+        
+        payload = {
+            "model": "google/gemini-3-pro-preview",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            "temperature": 0.7
+        }
+        
+        response = requests.post(self.api_url, headers=headers, json=payload, timeout=30)
+        response.raise_for_status()
+        data = response.json()
+        
+        return data["choices"][0]["message"]["content"]
+    
+    def _generate_with_gemini(self, location: str, num_activities: int = 10) -> List[Dict[str, Any]]:
+        """Generate activities using Gemini AI."""
         if not self.model:
-            # Fallback: use basic parsing if Gemini not available
-            return self._parse_basic(scraped_items, location)
+            return self._generate_fallback(location, num_activities)
         
         try:
-            # Prepare prompt for Gemini
-            prompt = f"""You are a travel activity data parser. Parse the following scraped activity data from {location} into a structured JSON format.
+            prompt = f"""Generate {num_activities} real, popular tourist activities and attractions in {location}.
 
-For each activity, extract and structure:
-- name: The activity name
-- description: A concise description (max 200 chars)
+For each activity, provide:
+- name: Actual name of the place/activity (e.g., "Eiffel Tower", "Louvre Museum")
+- description: Engaging 1-2 sentence description (max 150 chars)
 - category: One of: Tour, Museum, Park, Entertainment, Restaurant, Landmark, Temple, Wellness, Workshop, Recreation, Attraction
-- tags: List of 3-5 relevant tags (e.g., ["scenic", "cultural", "outdoor"])
-- energy_level: One of: "low", "medium", "high"
-- age_suitability_profile: One of: "cultural", "family-friendly", "nightlife", "educational"
-- image_url: The image URL if provided
+- tags: 3-5 relevant descriptive tags (e.g., ["iconic", "architecture", "scenic"])
+- energy_level: "low", "medium", or "high" based on physical activity required
+- age_suitability_profile: "cultural", "family-friendly", "nightlife", or "educational"
+- budget: estimated cost in USD (e.g., "free", "$10", "$25", "$50", "$100+")
+- search_term: A short search term for finding images (e.g., "eiffel tower paris")
 
-Return ONLY a valid JSON array of objects, no markdown, no explanation.
+Include a mix of:
+- Famous landmarks and monuments
+- Museums and cultural sites
+- Parks and outdoor spaces
+- Restaurants and cafes
+- Entertainment venues
+- Tours and experiences
 
-Scraped data:
-{self._format_scraped_data(scraped_items)}
-
-Return JSON array format:
+Return ONLY valid JSON array, no markdown formatting:
 [
   {{
     "name": "...",
@@ -76,29 +100,32 @@ Return JSON array format:
     "tags": ["...", "..."],
     "energy_level": "...",
     "age_suitability_profile": "...",
-    "image_url": "..."
-  }},
-  ...
+    "budget": "...",
+    "search_term": "..."
+  }}
 ]
 """
             
-            # Call Gemini
-            response = self.model.generate_content(prompt)
-            text = response.text.strip()
+            response_text = self._call_gemini(prompt)
             
-            # Extract JSON from response
-            json_match = re.search(r'\[[\s\S]*\]', text)
-            if json_match:
-                json_text = json_match.group(0)
+            # Clean up markdown if present
+            text = response_text.strip()
+            text = text.replace("```json", "").replace("```", "").strip()
+            
+            # Extract JSON
+            start = text.find("[")
+            end = text.rfind("]") + 1
+            if start != -1 and end > start:
+                json_text = text[start:end]
             else:
                 json_text = text
             
-            # Parse JSON
             parsed_data = json.loads(json_text)
             
-            # Validate and format
+            # Add images and format
             structured_items = []
             for item in parsed_data:
+                search_term = item.get("search_term", f"{item.get('name', '')} {location}").strip()
                 structured_item = {
                     "name": item.get("name", ""),
                     "description": item.get("description", ""),
@@ -106,268 +133,146 @@ Return JSON array format:
                     "tags": item.get("tags", []),
                     "energy_level": item.get("energy_level", "medium"),
                     "age_suitability_profile": item.get("age_suitability_profile", "cultural"),
-                    "image_url": item.get("image_url", ""),
+                    "budget": item.get("budget", "$25"),
+                    "image_url": self._get_unsplash_image(search_term),
                     "location": location
                 }
                 structured_items.append(structured_item)
             
+            print(f"Generated {len(structured_items)} activities for {location} using Gemini")
             return structured_items
             
         except Exception as e:
-            print(f"Error parsing with Gemini: {e}")
-            # Fallback to basic parsing
-            return self._parse_basic(scraped_items, location)
+            print(f"Error generating with Gemini: {e}")
+            return self._generate_fallback(location, num_activities)
     
-    def _format_scraped_data(self, scraped_items: List[Dict[str, Any]]) -> str:
-        """Format scraped data for Gemini prompt."""
-        formatted = []
-        for i, item in enumerate(scraped_items[:50], 1):
-            formatted.append(f"Activity {i}:")
-            formatted.append(f"  Name: {item.get('name', 'N/A')}")
-            formatted.append(f"  Description: {item.get('description', 'N/A')}")
-            formatted.append(f"  Category: {item.get('category', 'N/A')}")
-            formatted.append(f"  Image URL: {item.get('image_url', 'N/A')}")
-            formatted.append("")
-        return "\n".join(formatted)
-    
-    def _parse_basic(self, scraped_items: List[Dict[str, Any]], location: str) -> List[Dict[str, Any]]:
-        """Basic parsing fallback without Gemini."""
+    def _generate_fallback(self, location: str, num_activities: int) -> List[Dict[str, Any]]:
+        """Generate fallback activities when Gemini is unavailable."""
+        print(f"Using fallback data generation for {location}")
+        
+        templates = [
+            {"name": f"Historic {location} Walking Tour", "category": "Tour", "tags": ["walking", "history", "cultural"], "energy": "medium", "age": "cultural", "budget": "$25", "search": f"historic {location}"},
+            {"name": f"{location} City Museum", "category": "Museum", "tags": ["indoor", "art", "history"], "energy": "low", "age": "educational", "budget": "$15", "search": f"museum {location}"},
+            {"name": f"Central {location} Park", "category": "Park", "tags": ["outdoor", "relaxing", "nature"], "energy": "low", "age": "family-friendly", "budget": "free", "search": f"park {location}"},
+            {"name": f"{location} Main Cathedral", "category": "Temple", "tags": ["architecture", "spiritual", "historic"], "energy": "low", "age": "cultural", "budget": "free", "search": f"cathedral {location}"},
+            {"name": f"Local {location} Market", "category": "Attraction", "tags": ["shopping", "food", "local"], "energy": "medium", "age": "cultural", "budget": "$20", "search": f"market {location}"},
+            {"name": f"Traditional {location} Restaurant", "category": "Restaurant", "tags": ["dining", "authentic", "food"], "energy": "low", "age": "cultural", "budget": "$40", "search": f"restaurant {location}"},
+            {"name": f"{location} Art Gallery", "category": "Museum", "tags": ["art", "indoor", "cultural"], "energy": "low", "age": "educational", "budget": "$12", "search": f"art gallery {location}"},
+            {"name": f"{location} Riverfront Cruise", "category": "Tour", "tags": ["scenic", "relaxing", "water"], "energy": "low", "age": "family-friendly", "budget": "$35", "search": f"river cruise {location}"},
+            {"name": f"{location} Night Entertainment", "category": "Entertainment", "tags": ["nightlife", "music", "social"], "energy": "high", "age": "nightlife", "budget": "$50", "search": f"nightlife {location}"},
+            {"name": f"{location} Viewpoint Tower", "category": "Landmark", "tags": ["scenic", "views", "iconic"], "energy": "medium", "age": "cultural", "budget": "$18", "search": f"viewpoint {location}"},
+        ]
+        
         structured_items = []
-        for item in scraped_items:
-            name = item.get("name", f"Activity in {location}")
-            description = item.get("description", "")
-            category = item.get("category", "")
-            
-            structured_item = {
-                "name": name,
-                "description": description or f"Popular activity in {location}",
-                "category": self._infer_category(name, description) if not category else category,
-                "tags": self._infer_tags(name, description, category),
-                "energy_level": self._infer_energy_level(name, description, category),
-                "age_suitability_profile": self._infer_age_suitability(name, description, category, "medium"),
-                "image_url": item.get("image_url", ""),
+        for i, template in enumerate(templates[:num_activities]):
+            structured_items.append({
+                "name": template["name"],
+                "description": f"Popular {template['category'].lower()} attraction in {location}",
+                "category": template["category"],
+                "tags": template["tags"],
+                "energy_level": template["energy"],
+                "age_suitability_profile": template["age"],
+                "budget": template["budget"],
+                "image_url": self._get_unsplash_image(template["search"]),
                 "location": location
-            }
-            structured_items.append(structured_item)
+            })
         
         return structured_items
     
-    def _infer_category(self, name: str, description: str) -> str:
-        """Infer category from name and description."""
-        text = (name + " " + (description or "")).lower()
-        
-        category_keywords = {
-            "Tour": ["tour", "walking tour", "guided tour", "cruise", "sightseeing"],
-            "Museum": ["museum", "gallery", "art", "exhibition", "collection"],
-            "Park": ["park", "garden", "nature reserve", "botanical"],
-            "Entertainment": ["show", "theater", "concert", "entertainment", "performance", "karaoke", "nightlife"],
-            "Restaurant": ["restaurant", "dining", "cafe", "bistro", "food"],
-            "Landmark": ["tower", "bridge", "monument", "statue", "landmark", "iconic"],
-            "Temple": ["temple", "church", "cathedral", "mosque", "shrine", "religious"],
-            "Wellness": ["spa", "wellness", "meditation", "yoga", "relaxation"],
-            "Workshop": ["workshop", "class", "lesson", "course"],
-            "Recreation": ["recreation", "activity", "adventure", "sport"],
-        }
-        
-        for category, keywords in category_keywords.items():
-            if any(keyword in text for keyword in keywords):
-                return category
-        
-        return "Attraction"
+    def _get_cache_path(self, location: str) -> Path:
+        """Get cache file path for a location."""
+        safe_location = location.lower().replace(" ", "_").replace("/", "_")
+        return self.cache_dir / f"{safe_location}_cache.pkl"
     
-    def _infer_energy_level(self, name: str, description: str, category: str) -> str:
-        """Infer energy level from activity data."""
-        text = (name + " " + (description or "")).lower()
+    def _load_from_cache(self, location: str) -> Optional[List[Dict[str, Any]]]:
+        """Load cached data if available and not expired."""
+        cache_path = self._get_cache_path(location)
         
-        high_energy = ["nightlife", "party", "dance", "adventure", "sport", "hiking", "biking", 
-                      "climbing", "running", "active", "intense", "extreme", "karaoke", "bar crawl"]
-        low_energy = ["museum", "gallery", "spa", "relaxation", "meditation", "yoga", "sitting", 
-                     "cruise", "show", "theater", "restaurant", "cafe", "peaceful", "calm"]
-        
-        if any(keyword in text for keyword in high_energy):
-            return "high"
-        elif any(keyword in text for keyword in low_energy):
-            return "low"
-        else:
-            return "medium"
-    
-    def _infer_age_suitability(self, name: str, description: str, category: str, energy_level: str) -> str:
-        """Infer age suitability profile."""
-        text = (name + " " + (description or "")).lower()
-        
-        nightlife_keywords = ["nightlife", "bar", "club", "party", "karaoke", "pub", "night", "drinks"]
-        if any(keyword in text for keyword in nightlife_keywords) or energy_level == "high":
-            return "nightlife"
-        
-        family_keywords = ["family", "kids", "children", "playground", "picnic"]
-        if any(keyword in text for keyword in family_keywords):
-            return "family-friendly"
-        
-        educational_keywords = ["workshop", "class", "lesson", "course", "learn", "educational"]
-        if any(keyword in text for keyword in educational_keywords):
-            return "educational"
-        
-        return "cultural"
-    
-    def _infer_tags(self, name: str, description: str, category: str) -> List[str]:
-        """Infer tags from activity data."""
-        text = (name + " " + (description or "")).lower()
-        tags = []
-        
-        tag_keywords = {
-            "iconic": ["iconic", "famous", "landmark", "must-see"],
-            "scenic": ["scenic", "view", "panoramic", "vista", "beautiful"],
-            "outdoor": ["outdoor", "outside", "open air", "nature"],
-            "indoor": ["indoor", "inside", "museum", "gallery"],
-            "architecture": ["architecture", "architectural", "building", "structure"],
-            "art": ["art", "artistic", "gallery", "exhibition"],
-            "history": ["history", "historical", "ancient", "heritage"],
-            "culture": ["culture", "cultural", "traditional", "local"],
-            "relaxing": ["relaxing", "peaceful", "calm", "spa"],
-            "educational": ["educational", "learn", "museum", "tour"],
-            "entertainment": ["entertainment", "show", "performance", "fun"],
-            "food": ["food", "dining", "restaurant", "cafe", "cuisine"],
-            "walking": ["walking", "walk", "stroll"],
-            "views": ["view", "views", "panoramic", "vista"],
-            "spiritual": ["spiritual", "temple", "church", "religious"],
-        }
-        
-        for tag, keywords in tag_keywords.items():
-            if any(keyword in text for keyword in keywords):
-                tags.append(tag)
-        
-        if len(tags) < 2:
-            tags.extend(["attraction", "tourist"])
-        
-        return tags[:5]
-    
-    def _geocode_location(self, location: str) -> Optional[Tuple[float, float]]:
-        """Geocode location to get coordinates using RapidAPI geocoding."""
-        try:
-            # Use a simple geocoding approach - you might want to use a geocoding API
-            # For now, return None and let the search API handle location by name
+        if not cache_path.exists():
             return None
-        except Exception:
-            return None
-    
-    def scrape_activities(self, location: str, max_activities: int = 50) -> List[Dict[str, Any]]:
-        """Scrape activities using RapidAPI (Foursquare Places API)."""
-        location = self._normalize_location(location)
-        scraped_items = []
         
         try:
-            # Search for places using Foursquare Places API via RapidAPI
-            url = self.base_url
+            # Check if cache is expired
+            cache_age = time.time() - cache_path.stat().st_mtime
+            if cache_age > self.cache_ttl:
+                print(f"Cache expired for {location} (age: {cache_age / 3600:.1f} hours)")
+                cache_path.unlink()
+                return None
             
-            params = {
-                "query": location,
-                "limit": min(max_activities, 50),  # API typically limits to 50
-                "near": location,
-                "fields": "fsq_id,name,description,categories,location,photos,rating"
-            }
+            # Load cached data
+            with open(cache_path, 'rb') as f:
+                cached_data = pickle.load(f)
             
-            response = requests.get(url, headers=self.headers, params=params, timeout=15)
-            response.raise_for_status()
-            data = response.json()
-            
-            # Parse Foursquare API response (adjust structure based on actual API response)
-            results = data.get("results", [])
-            if not results and isinstance(data, list):
-                results = data
-            
-            for result in results[:max_activities]:
-                try:
-                    name = result.get("name", "")
-                    if not name:
-                        continue
-                    
-                    # Get description
-                    description = result.get("description", "")
-                    if not description:
-                        # Try to get from categories
-                        categories = result.get("categories", [])
-                        if categories:
-                            description = categories[0].get("name", "")
-                    
-                    # Get category
-                    category_name = ""
-                    categories = result.get("categories", [])
-                    if categories:
-                        category_name = categories[0].get("name", "")
-                    
-                    # Get image URL
-                    image_url = ""
-                    photos = result.get("photos", [])
-                    if photos and len(photos) > 0:
-                        photo = photos[0]
-                        prefix = photo.get("prefix", "")
-                        suffix = photo.get("suffix", "")
-                        if prefix and suffix:
-                            image_url = f"{prefix}original{suffix}"
-                    
-                    scraped_items.append({
-                        "name": name,
-                        "description": description,
-                        "category": category_name,
-                        "image_url": image_url,
-                        "location": location
-                    })
-                    
-                except Exception as e:
-                    print(f"Error parsing result: {e}")
-                    continue
-            
-            # If we got some items, parse with Gemini
-            if scraped_items:
-                structured_items = self._parse_with_gemini(scraped_items, location)
-                return structured_items[:max_activities]
-            
-            return []
-            
+            print(f"Loaded {len(cached_data)} items from cache for {location}")
+            print(f"Cache data: {json.dumps(cached_data, indent=2)}")
+            return cached_data
         except Exception as e:
-            print(f"Error scraping activities from RapidAPI: {e}")
-            # If Foursquare doesn't work, try alternative approach
-            return self._try_alternative_api(location, max_activities)
+            print(f"Error loading cache: {e}")
+            return None
     
-    def _try_alternative_api(self, location: str, max_activities: int) -> List[Dict[str, Any]]:
-        """Try alternative RapidAPI endpoint if primary fails."""
+    def _save_to_cache(self, location: str, data: List[Dict[str, Any]]):
+        """Save scraped data to cache."""
+        cache_path = self._get_cache_path(location)
+        
         try:
-            # Try using Expedia Rapid Activities API or another service
-            # For now, return empty list - implement alternative if needed
-            return []
-        except Exception:
-            return []
+            with open(cache_path, 'wb') as f:
+                pickle.dump(data, f)
+            print(f"Saved {len(data)} items to cache for {location}")
+        except Exception as e:
+            print(f"Error saving cache: {e}")
+    
+    def generate_activities(self, location: str, max_activities: int = 10) -> List[Dict[str, Any]]:
+        """Generate activities using Gemini AI."""
+        location = self._normalize_location(location)
+        
+        # Try to load from cache first
+        cached_data = self._load_from_cache(location)
+        if cached_data:
+            return cached_data[:max_activities]
+        
+        # Generate with Gemini
+        structured_items = self._generate_with_gemini(location, max_activities)
+        
+        # Save to cache
+        if structured_items:
+            self._save_to_cache(location, structured_items)
+        
+        return structured_items[:max_activities]
+    
 
 
-def webscrape_location(database, location: str, max_activities: int = 50) -> Tuple[List[Place], List[Activity]]:
+def webscrape_location(database, location: str, max_activities: int = 10) -> Tuple[List[Place], List[Activity]]:
     """
-    Webscrape location: Check MongoDB -> Scrape via RapidAPI -> Parse with Gemini -> Save to MongoDB.
+    Generate location data: Check MongoDB -> Generate with Gemini -> Save to MongoDB.
     
     Args:
         database: Database instance
         location: Country/city name
-        max_activities: Maximum number of activities to scrape
+        max_activities: Maximum number of activities to generate
     
     Returns:
         Tuple of (places, activities) lists
     """
     location = location.strip().title()
     
-    # Step 1: Check MongoDB only (no JSON fallback)
-    places = database._get_places_from_mongodb(location)
-    activities = database._get_activities_from_mongodb(location)
+    # Step 1: Check if data already exists in new_db.json
+    places = database.get_places_by_destination(location)
+    activities = database.get_activities_by_destination(location)
     
     if places and activities:
+        print(f"Found {len(places)} places and {len(activities)} activities in new_db.json for {location}")
         return places, activities
     
-    # Step 2: Scrape if no data in MongoDB
-    scraper = RapidAPIScraper()
-    scraped_data = scraper.scrape_activities(location, max_activities)
+    print(f"No data in new_db.json for {location}, generating new data...")
     
-    if not scraped_data:
+    # Step 2: Generate with Gemini if no data in new_db.json
+    generator = ActivityGenerator()
+    generated_data = generator.generate_activities(location, max_activities)
+    
+    if not generated_data:
         return [], []
     
-    # Step 3: Convert scraped data to Place and Activity models
+    # Step 3: Convert generated data to Place and Activity models
     places_dict = {}  # name -> Place
     activities_list = []
     
@@ -375,7 +280,7 @@ def webscrape_location(database, location: str, max_activities: int = 50) -> Tup
     place_counter = 1
     activity_counter = 1
     
-    for item in scraped_data:
+    for item in generated_data:
         # Create or get place
         place_name = item.get("name", f"Place in {location}")
         
@@ -399,6 +304,7 @@ def webscrape_location(database, location: str, max_activities: int = 50) -> Tup
                 features={
                     "tags": item.get("tags", []),
                     "price_range": "medium",
+                    "budget": item.get("budget", "$25"),
                     "energy_level": item.get("energy_level", "medium"),
                     "age_suitability_profile": item.get("age_suitability_profile", "cultural"),
                     "image_url": item.get("image_url", "")
@@ -418,6 +324,7 @@ def webscrape_location(database, location: str, max_activities: int = 50) -> Tup
             category=item.get("category", "Attraction"),
             features={
                 "tags": item.get("tags", []),
+                "budget": item.get("budget", "$25"),
                 "energy_level": item.get("energy_level", "medium"),
                 "age_suitability_profile": item.get("age_suitability_profile", "cultural"),
                 "image_url": item.get("image_url", "")
@@ -428,10 +335,12 @@ def webscrape_location(database, location: str, max_activities: int = 50) -> Tup
     
     places_list = list(places_dict.values())
     
-    # Step 4: Save to MongoDB only (no JSON)
+    # Step 4: Save to new_db.json
+    print(f"Saving {len(places_list)} places and {len(activities_list)} activities to new_db.json...")
     if places_list:
         database.save_places(places_list)
     if activities_list:
         database.save_activities(activities_list)
+    print(f"Data saved successfully to new_db.json!")
     
     return places_list, activities_list

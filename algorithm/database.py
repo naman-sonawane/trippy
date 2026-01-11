@@ -16,19 +16,14 @@ class Database:
     """Database interface supporting MongoDB only."""
     
     def __init__(self, db_path: str = None):
-        """Initialize database with path to JSON file and MongoDB connection."""
+        """Initialize database with path to JSON file only."""
         if db_path is None:
-            # Default to data/mock_db.json relative to this file
+            # Default to data/new_db.json relative to this file
             script_dir = os.path.dirname(os.path.abspath(__file__))
-            db_path = os.path.join(script_dir, "data", "mock_db.json")
+            db_path = os.path.join(script_dir, "data", "new_db.json")
         self.db_path = db_path
         self._ensure_data_dir()
         self._load_db()
-        
-        # Initialize MongoDB connection
-        self.mongo_client = None
-        self.mongo_db = None
-        self._init_mongodb()
     
     def _init_mongodb(self):
         """Initialize MongoDB connection if available."""
@@ -96,7 +91,7 @@ class Database:
     
     def _get_places_from_mongodb(self, destination: str) -> List[Place]:
         """Get places from MongoDB by destination."""
-        if not self.mongo_db:
+        if self.mongo_db is None:
             return []
         
         try:
@@ -113,7 +108,7 @@ class Database:
     
     def _get_activities_from_mongodb(self, destination: str) -> List[Activity]:
         """Get activities from MongoDB by destination."""
-        if not self.mongo_db:
+        if self.mongo_db is None:
             return []
         
         try:
@@ -137,7 +132,7 @@ class Database:
     
     def _save_places_to_mongodb(self, places: List[Place]):
         """Save places to MongoDB."""
-        if not self.mongo_db:
+        if self.mongo_db is None:
             return
         
         try:
@@ -162,7 +157,7 @@ class Database:
     
     def _save_activities_to_mongodb(self, activities: List[Activity]):
         """Save activities to MongoDB."""
-        if not self.mongo_db:
+        if self.mongo_db is None:
             return
         
         try:
@@ -186,20 +181,80 @@ class Database:
             pass  # Fail silently
     
     def get_places_by_destination(self, destination: str) -> List[Place]:
-        """Get all places in a destination from MongoDB only."""
-        return self._get_places_from_mongodb(destination)
+        """Get all places in a destination from JSON only."""
+        return [
+            Place(**place_data)
+            for place_data in self.db["places"]
+            if place_data.get("location", "").lower() == destination.lower()
+        ]
     
     def get_activities_by_destination(self, destination: str) -> List[Activity]:
-        """Get all activities in places within a destination from MongoDB only."""
-        return self._get_activities_from_mongodb(destination)
+        """Get all activities in places within a destination from JSON only."""
+        places = self.get_places_by_destination(destination)
+        place_ids = {place.id for place in places}
+        
+        if not place_ids:
+            return []
+        
+        return [
+            Activity(**activity_data)
+            for activity_data in self.db["activities"]
+            if activity_data.get("place_id") in place_ids
+        ]
     
     def save_places(self, places: List[Place]):
-        """Save places to MongoDB only."""
-        self._save_places_to_mongodb(places)
+        """Save places to JSON file only."""
+        for place in places:
+            place_dict = {
+                "id": place.id,
+                "name": place.name,
+                "location": place.location,
+                "category": place.category,
+                "features": place.features,
+                "description": place.description
+            }
+            
+            # Check if place already exists in JSON
+            existing_index = None
+            for i, existing_place in enumerate(self.db["places"]):
+                if existing_place["id"] == place.id:
+                    existing_index = i
+                    break
+            
+            if existing_index is not None:
+                self.db["places"][existing_index] = place_dict
+            else:
+                self.db["places"].append(place_dict)
+        
+        self._save_db()
+        print(f"Saved {len(places)} places to new_db.json")
     
     def save_activities(self, activities: List[Activity]):
-        """Save activities to MongoDB only."""
-        self._save_activities_to_mongodb(activities)
+        """Save activities to JSON file only."""
+        for activity in activities:
+            activity_dict = {
+                "id": activity.id,
+                "name": activity.name,
+                "place_id": activity.place_id,
+                "category": activity.category,
+                "features": activity.features,
+                "description": activity.description
+            }
+            
+            # Check if activity already exists in JSON
+            existing_index = None
+            for i, existing_activity in enumerate(self.db["activities"]):
+                if existing_activity["id"] == activity.id:
+                    existing_index = i
+                    break
+            
+            if existing_index is not None:
+                self.db["activities"][existing_index] = activity_dict
+            else:
+                self.db["activities"].append(activity_dict)
+        
+        self._save_db()
+        print(f"Saved {len(activities)} activities to new_db.json")
     
     def get_user_interactions(self, user_id: str) -> List[Interaction]:
         """Get all interactions for a user."""

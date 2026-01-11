@@ -32,7 +32,7 @@ class PineconeService:
             return
         
         # Initialize Pinecone
-        api_key = os.getenv("PINECONE_API_KEY")
+        api_key = "pcsk_6wk65_4PueTtzvsPVtSLL6tTYYug9EqwXRAYZ3NWT7151PfdZUFzWuYexihB2DFk81Xgj"
         if api_key:
             try:
                 pc = Pinecone(api_key=api_key)

@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import Trip from '@/models/Trip';
+import mongoose from 'mongoose';
 
 export const GET = async (req: Request) => {
   try {
@@ -21,8 +22,19 @@ export const GET = async (req: Request) => {
 
     await connectDB();
 
+    // Convert tripId to ObjectId if it's a string
+    let tripObjectId;
+    try {
+      tripObjectId = mongoose.Types.ObjectId.isValid(tripId) 
+        ? new mongoose.Types.ObjectId(tripId)
+        : tripId;
+    } catch (error) {
+      console.error('Invalid tripId format in GET:', tripId, error);
+      return NextResponse.json({ error: 'Invalid trip ID format' }, { status: 400 });
+    }
+
     const trip = await Trip.findOne({
-      _id: tripId,
+      _id: tripObjectId,
       $or: [
         { userId: session.user.id },
         { participantIds: session.user.id }
@@ -30,8 +42,18 @@ export const GET = async (req: Request) => {
     });
 
     if (!trip) {
+      console.error('Trip not found in GET /api/schedule:', {
+        tripId: tripObjectId,
+        userId: session.user.id
+      });
       return NextResponse.json({ error: 'Trip not found or access denied' }, { status: 404 });
     }
+
+    console.log('Retrieved itinerary:', {
+      tripId: trip._id,
+      itineraryCount: trip.itinerary?.length || 0,
+      status: trip.status
+    });
 
     return NextResponse.json({ itinerary: trip.itinerary || [] }, { status: 200 });
   } catch (error) {
@@ -57,21 +79,41 @@ export const POST = async (req: Request) => {
 
     await connectDB();
 
+    // Convert tripId to ObjectId if it's a string
+    let tripObjectId;
+    try {
+      tripObjectId = mongoose.Types.ObjectId.isValid(tripId) 
+        ? new mongoose.Types.ObjectId(tripId)
+        : tripId;
+    } catch (error) {
+      console.error('Invalid tripId format in POST:', tripId, error);
+      return NextResponse.json({ error: 'Invalid trip ID format' }, { status: 400 });
+    }
+
     const trip = await Trip.findOneAndUpdate(
       {
-        _id: tripId,
+        _id: tripObjectId,
         $or: [
           { userId: session.user.id },
           { participantIds: session.user.id }
         ]
       },
-      { itinerary },
+      { $set: { itinerary } },
       { new: true }
     );
 
     if (!trip) {
+      console.error('Failed to save itinerary - trip not found or access denied:', {
+        tripId: tripObjectId,
+        userId: session.user.id
+      });
       return NextResponse.json({ error: 'Trip not found or access denied' }, { status: 404 });
     }
+
+    console.log('Itinerary saved successfully:', {
+      tripId: trip._id,
+      itineraryCount: trip.itinerary?.length || 0
+    });
 
     return NextResponse.json({ itinerary: trip.itinerary }, { status: 200 });
   } catch (error) {

@@ -1,0 +1,3611 @@
+{
+  "users": [
+    {
+      "id": "6962bd45f4cc10683cd0a346",
+      "age": 25,
+      "preferences": [
+        "place_8",
+        "fallback-barcelona-0",
+        "fallback-barcelona-1",
+        "fallback-barcelona-2",
+        "fallback-barcelona-3",
+        "fallback-barcelona-7"
+      ],
+      "travel_history": [
+        "china"
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "place_china_1",
+      "name": "Great Wall of China (Mutianyu)",
+      "location": "China",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "history",
+          "hiking",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "high",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?mutianyu%20great%20wall%20beijing"
+      },
+      "description": "Hike the restored watchtowers of this ancient wonder, offering breathtaking mountain views and fewer crowds than other sections."
+    },
+    {
+      "id": "place_china_2",
+      "name": "The Palace Museum (Forbidden City)",
+      "location": "China",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "imperial",
+          "architecture",
+          "history",
+          "unesco"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?forbidden%20city%20beijing"
+      },
+      "description": "Explore the colossal imperial palace complex that served as the home of emperors and their households for almost 500 years."
+    },
+    {
+      "id": "place_china_3",
+      "name": "Chengdu Research Base of Giant Panda Breeding",
+      "location": "China",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "animals",
+          "nature",
+          "cute",
+          "conservation"
+        ],
+        "price_range": "medium",
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?chengdu%20panda%20base"
+      },
+      "description": "Watch adorable giant pandas and red pandas play in their natural habitat at this world-famous conservation center."
+    },
+    {
+      "id": "place_china_4",
+      "name": "The Bund",
+      "location": "China",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "skyline",
+          "architecture",
+          "waterfront",
+          "night view"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?the%20bund%20shanghai%20skyline"
+      },
+      "description": "Stroll along the waterfront promenade to see historic colonial architecture contrasting with the futuristic Pudong skyline."
+    },
+    {
+      "id": "place_china_5",
+      "name": "Emperor Qinshihuang's Mausoleum Site Museum",
+      "location": "China",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "archaeology",
+          "history",
+          "ancient",
+          "unesco"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?terracotta%20warriors%20xian"
+      },
+      "description": "Marvel at the thousands of life-sized clay soldiers, horses, and chariots buried to protect the first emperor of China."
+    },
+    {
+      "id": "place_china_6",
+      "name": "Quanjude Roast Duck Restaurant",
+      "location": "China",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "culinary",
+          "dining",
+          "traditional"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?quanjude%20peking%20duck%20beijing"
+      },
+      "description": "Savor the crispy skin and tender meat of authentic Peking Duck at China's most famous heritage restaurant chain."
+    },
+    {
+      "id": "place_china_7",
+      "name": "Zhangjiajie National Forest Park",
+      "location": "China",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "mountains",
+          "hiking",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "$35",
+        "energy_level": "high",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?zhangjiajie%20avatar%20mountains"
+      },
+      "description": "Wander among the towering sandstone pillars that inspired the floating mountains in the movie Avatar."
+    },
+    {
+      "id": "place_china_8",
+      "name": "Li River Cruise",
+      "location": "China",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "river",
+          "relaxing",
+          "photography"
+        ],
+        "price_range": "medium",
+        "budget": "$60",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?li%20river%20cruise%20guilin"
+      },
+      "description": "Drift past dramatic limestone karst mountains and sleepy villages on a scenic boat ride from Guilin to Yangshuo."
+    },
+    {
+      "id": "place_china_9",
+      "name": "Temple of Heaven",
+      "location": "China",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "religious",
+          "architecture",
+          "park",
+          "spiritual"
+        ],
+        "price_range": "medium",
+        "budget": "$5",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?temple%20of%20heaven%20beijing"
+      },
+      "description": "Visit this architectural masterpiece where emperors prayed for good harvests, surrounded by a lively park full of locals practicing tai chi."
+    },
+    {
+      "id": "place_china_10",
+      "name": "Impression Sanjie Liu",
+      "location": "China",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "show",
+          "performance",
+          "lights",
+          "outdoor"
+        ],
+        "price_range": "medium",
+        "budget": "$40",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?impression%20sanjie%20liu%20yangshuo"
+      },
+      "description": "Watch a spectacular night show set directly on the Li River, featuring hundreds of performers and dramatic light effects."
+    },
+    {
+      "id": "place_toronto_1",
+      "name": "Historic Toronto Walking Tour",
+      "location": "Toronto",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "walking",
+          "history",
+          "cultural"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?historic%20Toronto"
+      },
+      "description": "Popular tour attraction in Toronto"
+    },
+    {
+      "id": "place_toronto_2",
+      "name": "Toronto City Museum",
+      "location": "Toronto",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "indoor",
+          "art",
+          "history"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?museum%20Toronto"
+      },
+      "description": "Popular museum attraction in Toronto"
+    },
+    {
+      "id": "place_toronto_3",
+      "name": "Central Toronto Park",
+      "location": "Toronto",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "outdoor",
+          "relaxing",
+          "nature"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?park%20Toronto"
+      },
+      "description": "Popular park attraction in Toronto"
+    },
+    {
+      "id": "place_toronto_4",
+      "name": "Toronto Main Cathedral",
+      "location": "Toronto",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "architecture",
+          "spiritual",
+          "historic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?cathedral%20Toronto"
+      },
+      "description": "Popular temple attraction in Toronto"
+    },
+    {
+      "id": "place_toronto_5",
+      "name": "Local Toronto Market",
+      "location": "Toronto",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "shopping",
+          "food",
+          "local"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?market%20Toronto"
+      },
+      "description": "Popular attraction attraction in Toronto"
+    },
+    {
+      "id": "place_toronto_6",
+      "name": "Traditional Toronto Restaurant",
+      "location": "Toronto",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dining",
+          "authentic",
+          "food"
+        ],
+        "price_range": "medium",
+        "budget": "$40",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?restaurant%20Toronto"
+      },
+      "description": "Popular restaurant attraction in Toronto"
+    },
+    {
+      "id": "place_toronto_7",
+      "name": "Toronto Art Gallery",
+      "location": "Toronto",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "indoor",
+          "cultural"
+        ],
+        "price_range": "medium",
+        "budget": "$12",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?art%20gallery%20Toronto"
+      },
+      "description": "Popular museum attraction in Toronto"
+    },
+    {
+      "id": "place_toronto_8",
+      "name": "Toronto Riverfront Cruise",
+      "location": "Toronto",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "relaxing",
+          "water"
+        ],
+        "price_range": "medium",
+        "budget": "$35",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?river%20cruise%20Toronto"
+      },
+      "description": "Popular tour attraction in Toronto"
+    },
+    {
+      "id": "place_toronto_9",
+      "name": "Toronto Night Entertainment",
+      "location": "Toronto",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "nightlife",
+          "music",
+          "social"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?nightlife%20Toronto"
+      },
+      "description": "Popular entertainment attraction in Toronto"
+    },
+    {
+      "id": "place_toronto_10",
+      "name": "Toronto Viewpoint Tower",
+      "location": "Toronto",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "scenic",
+          "views",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "$18",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?viewpoint%20Toronto"
+      },
+      "description": "Popular landmark attraction in Toronto"
+    },
+    {
+      "id": "place_france_1",
+      "name": "Eiffel Tower",
+      "location": "France",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "architecture",
+          "views",
+          "romance"
+        ],
+        "price_range": "medium",
+        "budget": "$30",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?eiffel%20tower%20paris"
+      },
+      "description": "Ascend the Iron Lady for breathtaking panoramic views of Paris, especially magical when sparkling at night."
+    },
+    {
+      "id": "place_france_2",
+      "name": "Louvre Museum",
+      "location": "France",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "masterpieces",
+          "culture"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?louvre%20museum%20pyramid"
+      },
+      "description": "Explore the world's largest art museum, home to the Mona Lisa and thousands of historical masterpieces."
+    },
+    {
+      "id": "place_france_3",
+      "name": "Palace of Versailles",
+      "location": "France",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "royalty",
+          "history",
+          "gold",
+          "gardens"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?palace%20of%20versailles%20hall%20of%20mirrors"
+      },
+      "description": "Step back into royal history with opulent halls, the Hall of Mirrors, and vast manicured gardens."
+    },
+    {
+      "id": "place_france_4",
+      "name": "Seine River Cruise",
+      "location": "France",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "boat",
+          "romantic",
+          "sightseeing"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?seine%20river%20cruise%20paris"
+      },
+      "description": "Glide past Paris's glowing monuments on a relaxing boat tour, perfect for sightseeing without the crowds."
+    },
+    {
+      "id": "place_france_5",
+      "name": "Moulin Rouge",
+      "location": "France",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "cabaret",
+          "dance",
+          "nightlife",
+          "show"
+        ],
+        "price_range": "medium",
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?moulin%20rouge%20paris%20exterior"
+      },
+      "description": "Experience the glitz and glamour of the world's most famous cabaret featuring the iconic can-can dance."
+    },
+    {
+      "id": "place_france_6",
+      "name": "Mont Saint-Michel",
+      "location": "France",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "medieval",
+          "island",
+          "history",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "high",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?mont%20saint%20michel%20aerial"
+      },
+      "description": "Wander through a medieval abbey perched on a rocky island surrounded by sweeping tidal waters."
+    },
+    {
+      "id": "place_france_7",
+      "name": "Jardin du Luxembourg",
+      "location": "France",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxing",
+          "flowers",
+          "picnic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?jardin%20du%20luxembourg%20paris"
+      },
+      "description": "Relax in these classic French formal gardens featuring statues, fountains, and vintage toy sailboats."
+    },
+    {
+      "id": "place_france_8",
+      "name": "Les Deux Magots",
+      "location": "France",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "coffee",
+          "history",
+          "literary",
+          "dining"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?les%20deux%20magots%20cafe%20paris"
+      },
+      "description": "Sip coffee at this historic Saint-Germain caf\u00e9 once frequented by Hemingway, Picasso, and Sartre."
+    },
+    {
+      "id": "place_france_9",
+      "name": "Chamonix-Mont-Blanc",
+      "location": "France",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "mountains",
+          "snow",
+          "sports",
+          "nature"
+        ],
+        "price_range": "medium",
+        "budget": "$70",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?chamonix%20mont%20blanc%20skiing"
+      },
+      "description": "Hit the slopes or take the cable car up the Aiguille du Midi for Alpine views at the roof of Europe."
+    },
+    {
+      "id": "place_france_10",
+      "name": "Carri\u00e8res de Lumi\u00e8res",
+      "location": "France",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "art",
+          "immersive",
+          "digital",
+          "provence"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?carrieres%20de%20lumieres%20provence"
+      },
+      "description": "Walk inside an old quarry transformed into an immersive digital art show with music and giant projections."
+    },
+    {
+      "id": "place_hong_kong_1",
+      "name": "Victoria Peak",
+      "location": "Hong Kong",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "skyline",
+          "scenic",
+          "photography"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?victoria%20peak%20hong%20kong%20skyline"
+      },
+      "description": "Take the historic tram to the city's highest point for breathtaking panoramic views of the skyline and harbor."
+    },
+    {
+      "id": "place_hong_kong_2",
+      "name": "Star Ferry",
+      "location": "Hong Kong",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "harbor",
+          "transport",
+          "history",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "$1",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?star%20ferry%20hong%20kong%20harbor"
+      },
+      "description": "Cross Victoria Harbour on these charming green-and-white vessels for an iconic and affordable city experience."
+    },
+    {
+      "id": "place_hong_kong_3",
+      "name": "Tian Tan Buddha",
+      "location": "Hong Kong",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "spiritual",
+          "monumental",
+          "culture",
+          "island"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?tian%20tan%20buddha%20lantau%20island"
+      },
+      "description": "Climb 268 steps to reach the massive bronze Buddha statue on Lantau Island, adjacent to the Po Lin Monastery."
+    },
+    {
+      "id": "place_hong_kong_4",
+      "name": "Temple Street Night Market",
+      "location": "Hong Kong",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "shopping",
+          "street food",
+          "lively",
+          "local"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?temple%20street%20night%20market%20hong%20kong"
+      },
+      "description": "Explore this bustling open-air market famous for street food, souvenirs, opera singers, and fortune tellers."
+    },
+    {
+      "id": "place_hong_kong_5",
+      "name": "M+ Museum",
+      "location": "Hong Kong",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "modern",
+          "architecture",
+          "design"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?m+%20museum%20hong%20kong%20exterior"
+      },
+      "description": "Visit Asia's first global museum of contemporary visual culture located in the West Kowloon Cultural District."
+    },
+    {
+      "id": "place_hong_kong_6",
+      "name": "Dragon's Back Hike",
+      "location": "Hong Kong",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "hiking",
+          "nature",
+          "outdoors",
+          "views"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?dragons%20back%20hike%20hong%20kong"
+      },
+      "description": "Hike this popular ridge trail to enjoy stunning views of the South China Sea and lush coastal scenery."
+    },
+    {
+      "id": "place_hong_kong_7",
+      "name": "Tim Ho Wan",
+      "location": "Hong Kong",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dim sum",
+          "foodie",
+          "michelin",
+          "dining"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?tim%20ho%20wan%20dim%20sum%20hong%20kong"
+      },
+      "description": "Dine at the famous 'world's cheapest Michelin-star restaurant' known for its crispy BBQ pork buns."
+    },
+    {
+      "id": "place_hong_kong_8",
+      "name": "Hong Kong Disneyland",
+      "location": "Hong Kong",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "theme park",
+          "disney",
+          "rides",
+          "fantasy"
+        ],
+        "price_range": "medium",
+        "budget": "$80+",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?hong%20kong%20disneyland%20castle"
+      },
+      "description": "Experience magical rides, meet beloved characters, and explore themed lands at this world-class theme park."
+    },
+    {
+      "id": "place_hong_kong_9",
+      "name": "Man Mo Temple",
+      "location": "Hong Kong",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "history",
+          "spiritual",
+          "incense",
+          "architecture"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?man%20mo%20temple%20hong%20kong%20interior"
+      },
+      "description": "Immerse yourself in history under large coiled incense cones at this atmospheric tribute to the gods of Literature and War."
+    },
+    {
+      "id": "place_hong_kong_10",
+      "name": "Nan Lian Garden",
+      "location": "Hong Kong",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "garden",
+          "peaceful",
+          "nature",
+          "traditional"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?nan%20lian%20garden%20hong%20kong%20gold%20pavilion"
+      },
+      "description": "Stroll through this serene, Tang Dynasty-style garden featuring wooden structures, water features, and bonsai trees."
+    },
+    {
+      "id": "place_new_york_1",
+      "name": "Statue of Liberty",
+      "location": "New York",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "history",
+          "monument",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?statue%20of%20liberty%20new%20york"
+      },
+      "description": "A colossal neoclassical sculpture on Liberty Island symbolizing freedom and democracy in the harbor."
+    },
+    {
+      "id": "place_new_york_2",
+      "name": "Central Park",
+      "location": "New York",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxing",
+          "outdoor",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?central%20park%20new%20york"
+      },
+      "description": "An urban oasis offering walking paths, a zoo, boat rentals, and lush green lawns in the center of Manhattan."
+    },
+    {
+      "id": "place_new_york_3",
+      "name": "The Metropolitan Museum of Art",
+      "location": "New York",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "culture",
+          "indoor"
+        ],
+        "price_range": "medium",
+        "budget": "$30",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?metropolitan%20museum%20of%20art%20nyc"
+      },
+      "description": "One of the world's largest art museums, featuring over 5,000 years of art from around the globe."
+    },
+    {
+      "id": "place_new_york_4",
+      "name": "Broadway Show",
+      "location": "New York",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "theater",
+          "music",
+          "performance",
+          "nightlife"
+        ],
+        "price_range": "medium",
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?broadway%20show%20times%20square"
+      },
+      "description": "Experience world-class theatrical performances, musicals, and plays in the famous Theater District."
+    },
+    {
+      "id": "place_new_york_5",
+      "name": "Empire State Building",
+      "location": "New York",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "skyline",
+          "views",
+          "architecture",
+          "cityscape"
+        ],
+        "price_range": "medium",
+        "budget": "$45",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?empire%20state%20building%20view"
+      },
+      "description": "An iconic Art Deco skyscraper offering breathtaking 360-degree views of the city from its observation decks."
+    },
+    {
+      "id": "place_new_york_6",
+      "name": "The High Line",
+      "location": "New York",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "walking",
+          "urban",
+          "architecture",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?the%20high%20line%20nyc"
+      },
+      "description": "A unique public park built on a historic freight rail line elevated above the streets of Manhattan."
+    },
+    {
+      "id": "place_new_york_7",
+      "name": "9/11 Memorial & Museum",
+      "location": "New York",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "memorial",
+          "emotional",
+          "educational"
+        ],
+        "price_range": "medium",
+        "budget": "$30",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?9/11%20memorial%20museum%20nyc"
+      },
+      "description": "A solemn tribute honoring the victims of the 2001 attacks, featuring twin reflecting pools and historical exhibits."
+    },
+    {
+      "id": "place_new_york_8",
+      "name": "Brooklyn Bridge",
+      "location": "New York",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "bridge",
+          "photography",
+          "walking",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?brooklyn%20bridge%20sunset"
+      },
+      "description": "Walk across this historic suspension bridge for stunning panoramic views of the Manhattan skyline."
+    },
+    {
+      "id": "place_new_york_9",
+      "name": "Chelsea Market",
+      "location": "New York",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "dining",
+          "shopping",
+          "indoor"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?chelsea%20market%20interior%20nyc"
+      },
+      "description": "An enclosed urban food court and shopping mall offering diverse gourmet cuisines and unique shops."
+    },
+    {
+      "id": "place_new_york_10",
+      "name": "Museum of Modern Art (MoMA)",
+      "location": "New York",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "modern",
+          "design",
+          "creativity"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?moma%20museum%20new%20york"
+      },
+      "description": "Home to an impressive collection of modern and contemporary art, including Van Gogh's Starry Night."
+    },
+    {
+      "id": "place_barcelona_1",
+      "name": "Historic Barcelona Walking Tour",
+      "location": "Barcelona",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "walking",
+          "history",
+          "cultural"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?historic%20Barcelona"
+      },
+      "description": "Popular tour attraction in Barcelona"
+    },
+    {
+      "id": "place_barcelona_2",
+      "name": "Barcelona City Museum",
+      "location": "Barcelona",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "indoor",
+          "art",
+          "history"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?museum%20Barcelona"
+      },
+      "description": "Popular museum attraction in Barcelona"
+    },
+    {
+      "id": "place_barcelona_3",
+      "name": "Central Barcelona Park",
+      "location": "Barcelona",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "outdoor",
+          "relaxing",
+          "nature"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?park%20Barcelona"
+      },
+      "description": "Popular park attraction in Barcelona"
+    },
+    {
+      "id": "place_barcelona_4",
+      "name": "Barcelona Main Cathedral",
+      "location": "Barcelona",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "architecture",
+          "spiritual",
+          "historic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?cathedral%20Barcelona"
+      },
+      "description": "Popular temple attraction in Barcelona"
+    },
+    {
+      "id": "place_barcelona_5",
+      "name": "Local Barcelona Market",
+      "location": "Barcelona",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "shopping",
+          "food",
+          "local"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?market%20Barcelona"
+      },
+      "description": "Popular attraction attraction in Barcelona"
+    },
+    {
+      "id": "place_barcelona_6",
+      "name": "Traditional Barcelona Restaurant",
+      "location": "Barcelona",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dining",
+          "authentic",
+          "food"
+        ],
+        "price_range": "medium",
+        "budget": "$40",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?restaurant%20Barcelona"
+      },
+      "description": "Popular restaurant attraction in Barcelona"
+    },
+    {
+      "id": "place_barcelona_7",
+      "name": "Barcelona Art Gallery",
+      "location": "Barcelona",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "indoor",
+          "cultural"
+        ],
+        "price_range": "medium",
+        "budget": "$12",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?art%20gallery%20Barcelona"
+      },
+      "description": "Popular museum attraction in Barcelona"
+    },
+    {
+      "id": "place_barcelona_8",
+      "name": "Barcelona Riverfront Cruise",
+      "location": "Barcelona",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "relaxing",
+          "water"
+        ],
+        "price_range": "medium",
+        "budget": "$35",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?river%20cruise%20Barcelona"
+      },
+      "description": "Popular tour attraction in Barcelona"
+    },
+    {
+      "id": "place_barcelona_9",
+      "name": "Barcelona Night Entertainment",
+      "location": "Barcelona",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "nightlife",
+          "music",
+          "social"
+        ],
+        "price_range": "medium",
+        "budget": "$50",
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?nightlife%20Barcelona"
+      },
+      "description": "Popular entertainment attraction in Barcelona"
+    },
+    {
+      "id": "place_barcelona_10",
+      "name": "Barcelona Viewpoint Tower",
+      "location": "Barcelona",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "scenic",
+          "views",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "$18",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?viewpoint%20Barcelona"
+      },
+      "description": "Popular landmark attraction in Barcelona"
+    },
+    {
+      "id": "place_montreal_1",
+      "name": "Notre-Dame Basilica of Montreal",
+      "location": "Montreal",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "architecture",
+          "history",
+          "religious",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?notre%20dame%20basilica%20montreal%20interior"
+      },
+      "description": "Witness a masterpiece of Gothic Revival architecture featuring dazzling blue interiors and intricate wood carvings."
+    },
+    {
+      "id": "place_montreal_2",
+      "name": "Mount Royal Park",
+      "location": "Montreal",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "hiking",
+          "views",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?mount%20royal%20park%20montreal%20lookout"
+      },
+      "description": "Hike or walk to the top of this urban mountain for panoramic city views and lush forest trails."
+    },
+    {
+      "id": "place_montreal_3",
+      "name": "Old Montreal",
+      "location": "Montreal",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "history",
+          "cobblestone",
+          "shopping",
+          "architecture"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?old%20montreal%20streets%20summer"
+      },
+      "description": "Wander through cobblestone streets filled with historic 17th-century charm, boutiques, and lively plazas."
+    },
+    {
+      "id": "place_montreal_4",
+      "name": "Montreal Museum of Fine Arts",
+      "location": "Montreal",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "culture",
+          "exhibitions",
+          "indoor"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?montreal%20museum%20of%20fine%20arts%20exterior"
+      },
+      "description": "Explore extensive collections of Canadian and international art in a sleek, multi-pavilion setting."
+    },
+    {
+      "id": "place_montreal_5",
+      "name": "Schwartz's Deli",
+      "location": "Montreal",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "iconic",
+          "smoked meat",
+          "casual"
+        ],
+        "price_range": "medium",
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?schwartz's%20deli%20montreal%20sandwich"
+      },
+      "description": "Taste the world-famous smoked meat sandwich at Canada's oldest deli, a true culinary institution."
+    },
+    {
+      "id": "place_montreal_6",
+      "name": "Montreal Botanical Garden",
+      "location": "Montreal",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "flowers",
+          "nature",
+          "gardens",
+          "scenic"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?montreal%20botanical%20garden%20sculptures"
+      },
+      "description": "Discover stunning themed gardens, from the peaceful Japanese garden to the impressive living plant sculptures."
+    },
+    {
+      "id": "place_montreal_7",
+      "name": "La Grande Roue de Montr\u00e9al",
+      "location": "Montreal",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "views",
+          "waterfront",
+          "family",
+          "iconic"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?la%20grande%20roue%20de%20montreal"
+      },
+      "description": "Ride Canada's tallest observation wheel for stunning 360-degree views of the St. Lawrence River and city."
+    },
+    {
+      "id": "place_montreal_8",
+      "name": "Jean-Talon Market",
+      "location": "Montreal",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "food",
+          "market",
+          "local",
+          "shopping"
+        ],
+        "price_range": "medium",
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?jean%20talon%20market%20montreal"
+      },
+      "description": "Sample fresh produce, cheeses, and local treats at one of North America's largest open-air markets."
+    },
+    {
+      "id": "place_montreal_9",
+      "name": "Saint Joseph's Oratory",
+      "location": "Montreal",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "religious",
+          "architecture",
+          "views",
+          "history"
+        ],
+        "price_range": "medium",
+        "budget": "$5",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?saint%20joseph's%20oratory%20montreal"
+      },
+      "description": "Visit Canada's largest church, perched on a hill with a massive majestic dome and beautiful gardens."
+    },
+    {
+      "id": "place_montreal_10",
+      "name": "Montreal Biodome",
+      "location": "Montreal",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "animals",
+          "nature",
+          "science",
+          "indoor"
+        ],
+        "price_range": "medium",
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?montreal%20biodome%20interior"
+      },
+      "description": "Walk through replicas of four distinct ecosystems, from tropical rainforests to polar ice caps."
+    }
+  ],
+  "activities": [
+    {
+      "id": "activity_china_1",
+      "name": "Great Wall of China (Mutianyu)",
+      "place_id": "place_china_1",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "history",
+          "hiking",
+          "scenic"
+        ],
+        "budget": "$25",
+        "energy_level": "high",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?mutianyu%20great%20wall%20beijing"
+      },
+      "description": "Hike the restored watchtowers of this ancient wonder, offering breathtaking mountain views and fewer crowds than other sections."
+    },
+    {
+      "id": "activity_china_2",
+      "name": "The Palace Museum (Forbidden City)",
+      "place_id": "place_china_2",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "imperial",
+          "architecture",
+          "history",
+          "unesco"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?forbidden%20city%20beijing"
+      },
+      "description": "Explore the colossal imperial palace complex that served as the home of emperors and their households for almost 500 years."
+    },
+    {
+      "id": "activity_china_3",
+      "name": "Chengdu Research Base of Giant Panda Breeding",
+      "place_id": "place_china_3",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "animals",
+          "nature",
+          "cute",
+          "conservation"
+        ],
+        "budget": "$10",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?chengdu%20panda%20base"
+      },
+      "description": "Watch adorable giant pandas and red pandas play in their natural habitat at this world-famous conservation center."
+    },
+    {
+      "id": "activity_china_4",
+      "name": "The Bund",
+      "place_id": "place_china_4",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "skyline",
+          "architecture",
+          "waterfront",
+          "night view"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?the%20bund%20shanghai%20skyline"
+      },
+      "description": "Stroll along the waterfront promenade to see historic colonial architecture contrasting with the futuristic Pudong skyline."
+    },
+    {
+      "id": "activity_china_5",
+      "name": "Emperor Qinshihuang's Mausoleum Site Museum",
+      "place_id": "place_china_5",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "archaeology",
+          "history",
+          "ancient",
+          "unesco"
+        ],
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?terracotta%20warriors%20xian"
+      },
+      "description": "Marvel at the thousands of life-sized clay soldiers, horses, and chariots buried to protect the first emperor of China."
+    },
+    {
+      "id": "activity_china_6",
+      "name": "Quanjude Roast Duck Restaurant",
+      "place_id": "place_china_6",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "culinary",
+          "dining",
+          "traditional"
+        ],
+        "budget": "$50",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?quanjude%20peking%20duck%20beijing"
+      },
+      "description": "Savor the crispy skin and tender meat of authentic Peking Duck at China's most famous heritage restaurant chain."
+    },
+    {
+      "id": "activity_china_7",
+      "name": "Zhangjiajie National Forest Park",
+      "place_id": "place_china_7",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "mountains",
+          "hiking",
+          "scenic"
+        ],
+        "budget": "$35",
+        "energy_level": "high",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?zhangjiajie%20avatar%20mountains"
+      },
+      "description": "Wander among the towering sandstone pillars that inspired the floating mountains in the movie Avatar."
+    },
+    {
+      "id": "activity_china_8",
+      "name": "Li River Cruise",
+      "place_id": "place_china_8",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "river",
+          "relaxing",
+          "photography"
+        ],
+        "budget": "$60",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?li%20river%20cruise%20guilin"
+      },
+      "description": "Drift past dramatic limestone karst mountains and sleepy villages on a scenic boat ride from Guilin to Yangshuo."
+    },
+    {
+      "id": "activity_china_9",
+      "name": "Temple of Heaven",
+      "place_id": "place_china_9",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "religious",
+          "architecture",
+          "park",
+          "spiritual"
+        ],
+        "budget": "$5",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?temple%20of%20heaven%20beijing"
+      },
+      "description": "Visit this architectural masterpiece where emperors prayed for good harvests, surrounded by a lively park full of locals practicing tai chi."
+    },
+    {
+      "id": "activity_china_10",
+      "name": "Impression Sanjie Liu",
+      "place_id": "place_china_10",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "show",
+          "performance",
+          "lights",
+          "outdoor"
+        ],
+        "budget": "$40",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?impression%20sanjie%20liu%20yangshuo"
+      },
+      "description": "Watch a spectacular night show set directly on the Li River, featuring hundreds of performers and dramatic light effects."
+    },
+    {
+      "id": "activity_toronto_1",
+      "name": "Historic Toronto Walking Tour",
+      "place_id": "place_toronto_1",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "walking",
+          "history",
+          "cultural"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?historic%20Toronto"
+      },
+      "description": "Popular tour attraction in Toronto"
+    },
+    {
+      "id": "activity_toronto_2",
+      "name": "Toronto City Museum",
+      "place_id": "place_toronto_2",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "indoor",
+          "art",
+          "history"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?museum%20Toronto"
+      },
+      "description": "Popular museum attraction in Toronto"
+    },
+    {
+      "id": "activity_toronto_3",
+      "name": "Central Toronto Park",
+      "place_id": "place_toronto_3",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "outdoor",
+          "relaxing",
+          "nature"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?park%20Toronto"
+      },
+      "description": "Popular park attraction in Toronto"
+    },
+    {
+      "id": "activity_toronto_4",
+      "name": "Toronto Main Cathedral",
+      "place_id": "place_toronto_4",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "architecture",
+          "spiritual",
+          "historic"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?cathedral%20Toronto"
+      },
+      "description": "Popular temple attraction in Toronto"
+    },
+    {
+      "id": "activity_toronto_5",
+      "name": "Local Toronto Market",
+      "place_id": "place_toronto_5",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "shopping",
+          "food",
+          "local"
+        ],
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?market%20Toronto"
+      },
+      "description": "Popular attraction attraction in Toronto"
+    },
+    {
+      "id": "activity_toronto_6",
+      "name": "Traditional Toronto Restaurant",
+      "place_id": "place_toronto_6",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dining",
+          "authentic",
+          "food"
+        ],
+        "budget": "$40",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?restaurant%20Toronto"
+      },
+      "description": "Popular restaurant attraction in Toronto"
+    },
+    {
+      "id": "activity_toronto_7",
+      "name": "Toronto Art Gallery",
+      "place_id": "place_toronto_7",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "indoor",
+          "cultural"
+        ],
+        "budget": "$12",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?art%20gallery%20Toronto"
+      },
+      "description": "Popular museum attraction in Toronto"
+    },
+    {
+      "id": "activity_toronto_8",
+      "name": "Toronto Riverfront Cruise",
+      "place_id": "place_toronto_8",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "relaxing",
+          "water"
+        ],
+        "budget": "$35",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?river%20cruise%20Toronto"
+      },
+      "description": "Popular tour attraction in Toronto"
+    },
+    {
+      "id": "activity_toronto_9",
+      "name": "Toronto Night Entertainment",
+      "place_id": "place_toronto_9",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "nightlife",
+          "music",
+          "social"
+        ],
+        "budget": "$50",
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?nightlife%20Toronto"
+      },
+      "description": "Popular entertainment attraction in Toronto"
+    },
+    {
+      "id": "activity_toronto_10",
+      "name": "Toronto Viewpoint Tower",
+      "place_id": "place_toronto_10",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "scenic",
+          "views",
+          "iconic"
+        ],
+        "budget": "$18",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?viewpoint%20Toronto"
+      },
+      "description": "Popular landmark attraction in Toronto"
+    },
+    {
+      "id": "activity_france_1",
+      "name": "Eiffel Tower",
+      "place_id": "place_france_1",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "architecture",
+          "views",
+          "romance"
+        ],
+        "budget": "$30",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?eiffel%20tower%20paris"
+      },
+      "description": "Ascend the Iron Lady for breathtaking panoramic views of Paris, especially magical when sparkling at night."
+    },
+    {
+      "id": "activity_france_2",
+      "name": "Louvre Museum",
+      "place_id": "place_france_2",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "masterpieces",
+          "culture"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?louvre%20museum%20pyramid"
+      },
+      "description": "Explore the world's largest art museum, home to the Mona Lisa and thousands of historical masterpieces."
+    },
+    {
+      "id": "activity_france_3",
+      "name": "Palace of Versailles",
+      "place_id": "place_france_3",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "royalty",
+          "history",
+          "gold",
+          "gardens"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?palace%20of%20versailles%20hall%20of%20mirrors"
+      },
+      "description": "Step back into royal history with opulent halls, the Hall of Mirrors, and vast manicured gardens."
+    },
+    {
+      "id": "activity_france_4",
+      "name": "Seine River Cruise",
+      "place_id": "place_france_4",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "boat",
+          "romantic",
+          "sightseeing"
+        ],
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?seine%20river%20cruise%20paris"
+      },
+      "description": "Glide past Paris's glowing monuments on a relaxing boat tour, perfect for sightseeing without the crowds."
+    },
+    {
+      "id": "activity_france_5",
+      "name": "Moulin Rouge",
+      "place_id": "place_france_5",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "cabaret",
+          "dance",
+          "nightlife",
+          "show"
+        ],
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?moulin%20rouge%20paris%20exterior"
+      },
+      "description": "Experience the glitz and glamour of the world's most famous cabaret featuring the iconic can-can dance."
+    },
+    {
+      "id": "activity_france_6",
+      "name": "Mont Saint-Michel",
+      "place_id": "place_france_6",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "medieval",
+          "island",
+          "history",
+          "scenic"
+        ],
+        "budget": "$15",
+        "energy_level": "high",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?mont%20saint%20michel%20aerial"
+      },
+      "description": "Wander through a medieval abbey perched on a rocky island surrounded by sweeping tidal waters."
+    },
+    {
+      "id": "activity_france_7",
+      "name": "Jardin du Luxembourg",
+      "place_id": "place_france_7",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxing",
+          "flowers",
+          "picnic"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?jardin%20du%20luxembourg%20paris"
+      },
+      "description": "Relax in these classic French formal gardens featuring statues, fountains, and vintage toy sailboats."
+    },
+    {
+      "id": "activity_france_8",
+      "name": "Les Deux Magots",
+      "place_id": "place_france_8",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "coffee",
+          "history",
+          "literary",
+          "dining"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?les%20deux%20magots%20cafe%20paris"
+      },
+      "description": "Sip coffee at this historic Saint-Germain caf\u00e9 once frequented by Hemingway, Picasso, and Sartre."
+    },
+    {
+      "id": "activity_france_9",
+      "name": "Chamonix-Mont-Blanc",
+      "place_id": "place_france_9",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "mountains",
+          "snow",
+          "sports",
+          "nature"
+        ],
+        "budget": "$70",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?chamonix%20mont%20blanc%20skiing"
+      },
+      "description": "Hit the slopes or take the cable car up the Aiguille du Midi for Alpine views at the roof of Europe."
+    },
+    {
+      "id": "activity_france_10",
+      "name": "Carri\u00e8res de Lumi\u00e8res",
+      "place_id": "place_france_10",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "art",
+          "immersive",
+          "digital",
+          "provence"
+        ],
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?carrieres%20de%20lumieres%20provence"
+      },
+      "description": "Walk inside an old quarry transformed into an immersive digital art show with music and giant projections."
+    },
+    {
+      "id": "activity_hong_kong_1",
+      "name": "Victoria Peak",
+      "place_id": "place_hong_kong_1",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "skyline",
+          "scenic",
+          "photography"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?victoria%20peak%20hong%20kong%20skyline"
+      },
+      "description": "Take the historic tram to the city's highest point for breathtaking panoramic views of the skyline and harbor."
+    },
+    {
+      "id": "activity_hong_kong_2",
+      "name": "Star Ferry",
+      "place_id": "place_hong_kong_2",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "harbor",
+          "transport",
+          "history",
+          "scenic"
+        ],
+        "budget": "$1",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?star%20ferry%20hong%20kong%20harbor"
+      },
+      "description": "Cross Victoria Harbour on these charming green-and-white vessels for an iconic and affordable city experience."
+    },
+    {
+      "id": "activity_hong_kong_3",
+      "name": "Tian Tan Buddha",
+      "place_id": "place_hong_kong_3",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "spiritual",
+          "monumental",
+          "culture",
+          "island"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?tian%20tan%20buddha%20lantau%20island"
+      },
+      "description": "Climb 268 steps to reach the massive bronze Buddha statue on Lantau Island, adjacent to the Po Lin Monastery."
+    },
+    {
+      "id": "activity_hong_kong_4",
+      "name": "Temple Street Night Market",
+      "place_id": "place_hong_kong_4",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "shopping",
+          "street food",
+          "lively",
+          "local"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?temple%20street%20night%20market%20hong%20kong"
+      },
+      "description": "Explore this bustling open-air market famous for street food, souvenirs, opera singers, and fortune tellers."
+    },
+    {
+      "id": "activity_hong_kong_5",
+      "name": "M+ Museum",
+      "place_id": "place_hong_kong_5",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "modern",
+          "architecture",
+          "design"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?m+%20museum%20hong%20kong%20exterior"
+      },
+      "description": "Visit Asia's first global museum of contemporary visual culture located in the West Kowloon Cultural District."
+    },
+    {
+      "id": "activity_hong_kong_6",
+      "name": "Dragon's Back Hike",
+      "place_id": "place_hong_kong_6",
+      "category": "Recreation",
+      "features": {
+        "tags": [
+          "hiking",
+          "nature",
+          "outdoors",
+          "views"
+        ],
+        "budget": "free",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?dragons%20back%20hike%20hong%20kong"
+      },
+      "description": "Hike this popular ridge trail to enjoy stunning views of the South China Sea and lush coastal scenery."
+    },
+    {
+      "id": "activity_hong_kong_7",
+      "name": "Tim Ho Wan",
+      "place_id": "place_hong_kong_7",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dim sum",
+          "foodie",
+          "michelin",
+          "dining"
+        ],
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?tim%20ho%20wan%20dim%20sum%20hong%20kong"
+      },
+      "description": "Dine at the famous 'world's cheapest Michelin-star restaurant' known for its crispy BBQ pork buns."
+    },
+    {
+      "id": "activity_hong_kong_8",
+      "name": "Hong Kong Disneyland",
+      "place_id": "place_hong_kong_8",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "theme park",
+          "disney",
+          "rides",
+          "fantasy"
+        ],
+        "budget": "$80+",
+        "energy_level": "high",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?hong%20kong%20disneyland%20castle"
+      },
+      "description": "Experience magical rides, meet beloved characters, and explore themed lands at this world-class theme park."
+    },
+    {
+      "id": "activity_hong_kong_9",
+      "name": "Man Mo Temple",
+      "place_id": "place_hong_kong_9",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "history",
+          "spiritual",
+          "incense",
+          "architecture"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?man%20mo%20temple%20hong%20kong%20interior"
+      },
+      "description": "Immerse yourself in history under large coiled incense cones at this atmospheric tribute to the gods of Literature and War."
+    },
+    {
+      "id": "activity_hong_kong_10",
+      "name": "Nan Lian Garden",
+      "place_id": "place_hong_kong_10",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "garden",
+          "peaceful",
+          "nature",
+          "traditional"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?nan%20lian%20garden%20hong%20kong%20gold%20pavilion"
+      },
+      "description": "Stroll through this serene, Tang Dynasty-style garden featuring wooden structures, water features, and bonsai trees."
+    },
+    {
+      "id": "activity_new_york_1",
+      "name": "Statue of Liberty",
+      "place_id": "place_new_york_1",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "iconic",
+          "history",
+          "monument",
+          "scenic"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?statue%20of%20liberty%20new%20york"
+      },
+      "description": "A colossal neoclassical sculpture on Liberty Island symbolizing freedom and democracy in the harbor."
+    },
+    {
+      "id": "activity_new_york_2",
+      "name": "Central Park",
+      "place_id": "place_new_york_2",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "relaxing",
+          "outdoor",
+          "scenic"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?central%20park%20new%20york"
+      },
+      "description": "An urban oasis offering walking paths, a zoo, boat rentals, and lush green lawns in the center of Manhattan."
+    },
+    {
+      "id": "activity_new_york_3",
+      "name": "The Metropolitan Museum of Art",
+      "place_id": "place_new_york_3",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "history",
+          "culture",
+          "indoor"
+        ],
+        "budget": "$30",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?metropolitan%20museum%20of%20art%20nyc"
+      },
+      "description": "One of the world's largest art museums, featuring over 5,000 years of art from around the globe."
+    },
+    {
+      "id": "activity_new_york_4",
+      "name": "Broadway Show",
+      "place_id": "place_new_york_4",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "theater",
+          "music",
+          "performance",
+          "nightlife"
+        ],
+        "budget": "$100+",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?broadway%20show%20times%20square"
+      },
+      "description": "Experience world-class theatrical performances, musicals, and plays in the famous Theater District."
+    },
+    {
+      "id": "activity_new_york_5",
+      "name": "Empire State Building",
+      "place_id": "place_new_york_5",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "skyline",
+          "views",
+          "architecture",
+          "cityscape"
+        ],
+        "budget": "$45",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?empire%20state%20building%20view"
+      },
+      "description": "An iconic Art Deco skyscraper offering breathtaking 360-degree views of the city from its observation decks."
+    },
+    {
+      "id": "activity_new_york_6",
+      "name": "The High Line",
+      "place_id": "place_new_york_6",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "walking",
+          "urban",
+          "architecture",
+          "scenic"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?the%20high%20line%20nyc"
+      },
+      "description": "A unique public park built on a historic freight rail line elevated above the streets of Manhattan."
+    },
+    {
+      "id": "activity_new_york_7",
+      "name": "9/11 Memorial & Museum",
+      "place_id": "place_new_york_7",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "history",
+          "memorial",
+          "emotional",
+          "educational"
+        ],
+        "budget": "$30",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?9/11%20memorial%20museum%20nyc"
+      },
+      "description": "A solemn tribute honoring the victims of the 2001 attacks, featuring twin reflecting pools and historical exhibits."
+    },
+    {
+      "id": "activity_new_york_8",
+      "name": "Brooklyn Bridge",
+      "place_id": "place_new_york_8",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "bridge",
+          "photography",
+          "walking",
+          "scenic"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?brooklyn%20bridge%20sunset"
+      },
+      "description": "Walk across this historic suspension bridge for stunning panoramic views of the Manhattan skyline."
+    },
+    {
+      "id": "activity_new_york_9",
+      "name": "Chelsea Market",
+      "place_id": "place_new_york_9",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "dining",
+          "shopping",
+          "indoor"
+        ],
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?chelsea%20market%20interior%20nyc"
+      },
+      "description": "An enclosed urban food court and shopping mall offering diverse gourmet cuisines and unique shops."
+    },
+    {
+      "id": "activity_new_york_10",
+      "name": "Museum of Modern Art (MoMA)",
+      "place_id": "place_new_york_10",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "modern",
+          "design",
+          "creativity"
+        ],
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?moma%20museum%20new%20york"
+      },
+      "description": "Home to an impressive collection of modern and contemporary art, including Van Gogh's Starry Night."
+    },
+    {
+      "id": "activity_barcelona_1",
+      "name": "Historic Barcelona Walking Tour",
+      "place_id": "place_barcelona_1",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "walking",
+          "history",
+          "cultural"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?historic%20Barcelona"
+      },
+      "description": "Popular tour attraction in Barcelona"
+    },
+    {
+      "id": "activity_barcelona_2",
+      "name": "Barcelona City Museum",
+      "place_id": "place_barcelona_2",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "indoor",
+          "art",
+          "history"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?museum%20Barcelona"
+      },
+      "description": "Popular museum attraction in Barcelona"
+    },
+    {
+      "id": "activity_barcelona_3",
+      "name": "Central Barcelona Park",
+      "place_id": "place_barcelona_3",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "outdoor",
+          "relaxing",
+          "nature"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?park%20Barcelona"
+      },
+      "description": "Popular park attraction in Barcelona"
+    },
+    {
+      "id": "activity_barcelona_4",
+      "name": "Barcelona Main Cathedral",
+      "place_id": "place_barcelona_4",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "architecture",
+          "spiritual",
+          "historic"
+        ],
+        "budget": "free",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?cathedral%20Barcelona"
+      },
+      "description": "Popular temple attraction in Barcelona"
+    },
+    {
+      "id": "activity_barcelona_5",
+      "name": "Local Barcelona Market",
+      "place_id": "place_barcelona_5",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "shopping",
+          "food",
+          "local"
+        ],
+        "budget": "$20",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?market%20Barcelona"
+      },
+      "description": "Popular attraction attraction in Barcelona"
+    },
+    {
+      "id": "activity_barcelona_6",
+      "name": "Traditional Barcelona Restaurant",
+      "place_id": "place_barcelona_6",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "dining",
+          "authentic",
+          "food"
+        ],
+        "budget": "$40",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?restaurant%20Barcelona"
+      },
+      "description": "Popular restaurant attraction in Barcelona"
+    },
+    {
+      "id": "activity_barcelona_7",
+      "name": "Barcelona Art Gallery",
+      "place_id": "place_barcelona_7",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "indoor",
+          "cultural"
+        ],
+        "budget": "$12",
+        "energy_level": "low",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?art%20gallery%20Barcelona"
+      },
+      "description": "Popular museum attraction in Barcelona"
+    },
+    {
+      "id": "activity_barcelona_8",
+      "name": "Barcelona Riverfront Cruise",
+      "place_id": "place_barcelona_8",
+      "category": "Tour",
+      "features": {
+        "tags": [
+          "scenic",
+          "relaxing",
+          "water"
+        ],
+        "budget": "$35",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?river%20cruise%20Barcelona"
+      },
+      "description": "Popular tour attraction in Barcelona"
+    },
+    {
+      "id": "activity_barcelona_9",
+      "name": "Barcelona Night Entertainment",
+      "place_id": "place_barcelona_9",
+      "category": "Entertainment",
+      "features": {
+        "tags": [
+          "nightlife",
+          "music",
+          "social"
+        ],
+        "budget": "$50",
+        "energy_level": "high",
+        "age_suitability_profile": "nightlife",
+        "image_url": "https://source.unsplash.com/800x600/?nightlife%20Barcelona"
+      },
+      "description": "Popular entertainment attraction in Barcelona"
+    },
+    {
+      "id": "activity_barcelona_10",
+      "name": "Barcelona Viewpoint Tower",
+      "place_id": "place_barcelona_10",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "scenic",
+          "views",
+          "iconic"
+        ],
+        "budget": "$18",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?viewpoint%20Barcelona"
+      },
+      "description": "Popular landmark attraction in Barcelona"
+    },
+    {
+      "id": "activity_montreal_1",
+      "name": "Notre-Dame Basilica of Montreal",
+      "place_id": "place_montreal_1",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "architecture",
+          "history",
+          "religious",
+          "iconic"
+        ],
+        "budget": "$15",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?notre%20dame%20basilica%20montreal%20interior"
+      },
+      "description": "Witness a masterpiece of Gothic Revival architecture featuring dazzling blue interiors and intricate wood carvings."
+    },
+    {
+      "id": "activity_montreal_2",
+      "name": "Mount Royal Park",
+      "place_id": "place_montreal_2",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "nature",
+          "hiking",
+          "views",
+          "scenic"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?mount%20royal%20park%20montreal%20lookout"
+      },
+      "description": "Hike or walk to the top of this urban mountain for panoramic city views and lush forest trails."
+    },
+    {
+      "id": "activity_montreal_3",
+      "name": "Old Montreal",
+      "place_id": "place_montreal_3",
+      "category": "Landmark",
+      "features": {
+        "tags": [
+          "history",
+          "cobblestone",
+          "shopping",
+          "architecture"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?old%20montreal%20streets%20summer"
+      },
+      "description": "Wander through cobblestone streets filled with historic 17th-century charm, boutiques, and lively plazas."
+    },
+    {
+      "id": "activity_montreal_4",
+      "name": "Montreal Museum of Fine Arts",
+      "place_id": "place_montreal_4",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "art",
+          "culture",
+          "exhibitions",
+          "indoor"
+        ],
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?montreal%20museum%20of%20fine%20arts%20exterior"
+      },
+      "description": "Explore extensive collections of Canadian and international art in a sleek, multi-pavilion setting."
+    },
+    {
+      "id": "activity_montreal_5",
+      "name": "Schwartz's Deli",
+      "place_id": "place_montreal_5",
+      "category": "Restaurant",
+      "features": {
+        "tags": [
+          "food",
+          "iconic",
+          "smoked meat",
+          "casual"
+        ],
+        "budget": "$20",
+        "energy_level": "low",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?schwartz's%20deli%20montreal%20sandwich"
+      },
+      "description": "Taste the world-famous smoked meat sandwich at Canada's oldest deli, a true culinary institution."
+    },
+    {
+      "id": "activity_montreal_6",
+      "name": "Montreal Botanical Garden",
+      "place_id": "place_montreal_6",
+      "category": "Park",
+      "features": {
+        "tags": [
+          "flowers",
+          "nature",
+          "gardens",
+          "scenic"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?montreal%20botanical%20garden%20sculptures"
+      },
+      "description": "Discover stunning themed gardens, from the peaceful Japanese garden to the impressive living plant sculptures."
+    },
+    {
+      "id": "activity_montreal_7",
+      "name": "La Grande Roue de Montr\u00e9al",
+      "place_id": "place_montreal_7",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "views",
+          "waterfront",
+          "family",
+          "iconic"
+        ],
+        "budget": "$25",
+        "energy_level": "low",
+        "age_suitability_profile": "family-friendly",
+        "image_url": "https://source.unsplash.com/800x600/?la%20grande%20roue%20de%20montreal"
+      },
+      "description": "Ride Canada's tallest observation wheel for stunning 360-degree views of the St. Lawrence River and city."
+    },
+    {
+      "id": "activity_montreal_8",
+      "name": "Jean-Talon Market",
+      "place_id": "place_montreal_8",
+      "category": "Attraction",
+      "features": {
+        "tags": [
+          "food",
+          "market",
+          "local",
+          "shopping"
+        ],
+        "budget": "free",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?jean%20talon%20market%20montreal"
+      },
+      "description": "Sample fresh produce, cheeses, and local treats at one of North America's largest open-air markets."
+    },
+    {
+      "id": "activity_montreal_9",
+      "name": "Saint Joseph's Oratory",
+      "place_id": "place_montreal_9",
+      "category": "Temple",
+      "features": {
+        "tags": [
+          "religious",
+          "architecture",
+          "views",
+          "history"
+        ],
+        "budget": "$5",
+        "energy_level": "medium",
+        "age_suitability_profile": "cultural",
+        "image_url": "https://source.unsplash.com/800x600/?saint%20joseph's%20oratory%20montreal"
+      },
+      "description": "Visit Canada's largest church, perched on a hill with a massive majestic dome and beautiful gardens."
+    },
+    {
+      "id": "activity_montreal_10",
+      "name": "Montreal Biodome",
+      "place_id": "place_montreal_10",
+      "category": "Museum",
+      "features": {
+        "tags": [
+          "animals",
+          "nature",
+          "science",
+          "indoor"
+        ],
+        "budget": "$25",
+        "energy_level": "medium",
+        "age_suitability_profile": "educational",
+        "image_url": "https://source.unsplash.com/800x600/?montreal%20biodome%20interior"
+      },
+      "description": "Walk through replicas of four distinct ecosystems, from tropical rainforests to polar ice caps."
+    }
+  ],
+  "interactions": [
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_china_1",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:42.273595"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_china_1",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:44.177654"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_china_7",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T00:31:45.580189"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_china_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:56.508169"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_china_10",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:57.265952"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_china_10",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:57.428189"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_china_10",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:57.595780"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_china_10",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:57.730352"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_china_3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:57.852651"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_china_3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:58.015181"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_china_3",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:58.172845"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_china_3",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:58.335972"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_china_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:58.461775"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_china_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:58.564021"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_china_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:58.858883"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_china_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:58.944403"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_china_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:59.154860"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_china_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:31:59.378762"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_toronto_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:33:08.229412"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_toronto_9",
+      "item_type": "activity",
+      "rating": -1,
+      "timestamp": "2026-01-11T00:33:09.199543"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_toronto_6",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T00:33:11.070492"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:41:10.853679"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_france_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:41:11.722069"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_10",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:41:12.220159"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_10",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:41:12.424863"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_france_10",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:41:12.601695"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:00.640170"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_france_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:01.284658"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_france_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:01.475485"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:01.626690"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_france_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:01.872174"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_france_7",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:02.105135"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:02.272962"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:02.455181"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_france_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:02.706269"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_france_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:02.866698"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_france_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:03.181691"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_france_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:03.275545"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:03.446891"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:03.609942"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:03.835781"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_france_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:48:03.987240"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:19.125095"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_hong_kong_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:19.928935"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_hong_kong_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:20.595286"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_hong_kong_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:20.722550"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:21.052366"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:21.146374"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:21.247255"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_hong_kong_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:21.517169"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_hong_kong_5",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:21.661403"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:21.788497"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_5",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:21.924758"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_hong_kong_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:22.027864"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_hong_kong_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:22.234265"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_hong_kong_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:22.382570"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:22.482492"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_hong_kong_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:24.798496"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_hong_kong_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:24.990688"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:25.199826"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:25.368633"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_1",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:25.569436"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_hong_kong_1",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T00:55:25.746624"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:57.531630"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:57.818082"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:58.043287"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:58.142086"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:58.280212"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:58.441082"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:58.464512"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:58.612377"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:58.762901"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:58.844615"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:58.929451"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:59.232904"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:59.393700"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:59.416726"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:59.463769"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:59.568661"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:59.698725"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:59.832165"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:00:59.980526"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_new_york_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:01:00.126734"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:01:00.249816"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_new_york_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:01:00.316332"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_barcelona_9",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:54.217495"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:55.642247"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_9",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:55.843656"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_3",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:56.100282"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_3",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:56.235086"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_barcelona_3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:56.415112"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_barcelona_3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:56.580309"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_barcelona_3",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:56.688134"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_barcelona_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:56.733989"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_barcelona_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:56.868238"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:57.005198"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_8",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:57.114892"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:57.268178"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:57.374788"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:57.530686"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_barcelona_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:57.610204"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_barcelona_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:57.763842"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_barcelona_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:57.870291"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_barcelona_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:58.002865"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:58.125084"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:58.360873"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_barcelona_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:16:58.441451"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_montreal_6",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:17.558355"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:17.844733"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:17.933477"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_6",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:18.064051"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_montreal_2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:18.290806"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_montreal_2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:18.381773"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_montreal_2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:18.587982"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:18.675567"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:19.052481"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:19.079040"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:19.148052"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_2",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:19.233475"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_montreal_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:19.421486"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_montreal_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:19.515845"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "activity_montreal_4",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:19.599990"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:19.728859"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:19.894189"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_4",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:20.050936"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:20.088923"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:20.219836"
+    },
+    {
+      "user_id": "6962bd45f4cc10683cd0a346",
+      "item_id": "place_montreal_7",
+      "item_type": "place",
+      "rating": 1,
+      "timestamp": "2026-01-11T01:20:20.355995"
+    }
+  ]
+}

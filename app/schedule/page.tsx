@@ -1,12 +1,13 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useCallback, useEffect } from "react";
 import { ScheduleItem, TimeSelection } from "./types";
 import ScheduleGrid from "./components/ScheduleGrid";
 import AddItemModal from "./components/AddItemModal";
 
 export default function SchedulePage() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const daysParam = searchParams.get("days");
   const tripId = searchParams.get("tripId");
@@ -194,9 +195,20 @@ export default function SchedulePage() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-semibold text-gray-900 dark:text-zinc-50 mb-2">
-              Itinerary
-            </h1>
+            <div className="flex items-center gap-3 mb-2">
+              <button
+                onClick={() => router.push('/dashboard')}
+                className="p-2 text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-zinc-50 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-md transition-colors"
+                title="Back to Dashboard"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+              </button>
+              <h1 className="text-3xl font-semibold text-gray-900 dark:text-zinc-50">
+                Itinerary
+              </h1>
+            </div>
             <p className="text-gray-600 dark:text-zinc-400">
               {days === 1 ? "Single Day View" : `${days} Day View`}
               {isSaving && <span className="ml-2 text-sm">Saving...</span>}
