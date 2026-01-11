@@ -9286,6 +9286,27 @@
       "item_type": "activity",
       "rating": -1,
       "timestamp": "2026-01-11T10:57:17.279791"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_delhi_8",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:59:18.740334"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "activity_delhi_2",
+      "item_type": "activity",
+      "rating": 1,
+      "timestamp": "2026-01-11T10:59:23.684923"
+    },
+    {
+      "user_id": "6963a4ff90209ad2d09f9de0",
+      "item_id": "place_delhi_6",
+      "item_type": "place",
+      "rating": -1,
+      "timestamp": "2026-01-11T10:59:52.716545"
     }
   ]
 }
