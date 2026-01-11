@@ -14,3 +14,9 @@ export interface TimeSelection {
   day: number;
 }
 
+export interface Location {
+  name: string;
+  lat: number;
+  lng: number;
+}
+
